@@ -12,3 +12,33 @@ export const NavContainer = styled.nav`
   color: ${({ theme }) => theme.color.textNormal};
   user-select: none;
 `;
+
+export const HomeContainer = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.4rem;
+  width: 2.4rem;
+  cursor: pointer;
+  border-right: 1px solid ${({ theme }) => theme.color.borderLight};
+
+  &:hover path {
+    fill: ${({ theme }) => theme.color.primaryAccent};
+  }
+`;
+
+export const ProjectNav = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-grow: 1;
+  font-size: 0.85rem;
+  padding: 0.8rem;
+`;
+
+export const ProjectName = styled.div`
+  max-width: 16rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;

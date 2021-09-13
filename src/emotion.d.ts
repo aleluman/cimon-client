@@ -14,6 +14,7 @@ declare module "@emotion/react" {
       neutralLighter: string;
       neutralLightest: string;
       neutralFull: string;
+      neutralContrast: string;
       textNormal: string;
       textImportant: string;
       textDull: string;

@@ -13,6 +13,7 @@ export const darkTheme: Theme = {
     neutralLighter: "#313131",
     neutralLightest: "#3d3d3d",
     neutralFull: "#414141",
+    neutralContrast: "#4d4d4d",
     textNormal: "#d5d6db",
     textImportant: "#eff0f7",
     textDull: "#969696",

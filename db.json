@@ -57,8 +57,8 @@
   "roles": [
     {
       "id": "1",
-      "x": 106,
-      "y": 57,
+      "x": 852,
+      "y": 290,
       "name": "asdf",
       "description": "",
       "role": "human",
@@ -69,8 +69,8 @@
     },
     {
       "id": "2",
-      "x": 341,
-      "y": 202,
+      "x": 507,
+      "y": 420,
       "name": "asdf",
       "description": "",
       "role": "human",
@@ -81,8 +81,8 @@
     },
     {
       "id": "3",
-      "x": 671,
-      "y": 65,
+      "x": 506,
+      "y": 158,
       "name": "asdf",
       "description": "",
       "role": "human",
