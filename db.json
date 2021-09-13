@@ -1,0 +1,95 @@
+{
+  "graph": [
+    {
+      "id": 1,
+      "nodes": [
+        {
+          "id": "1",
+          "x": 100,
+          "y": 100,
+          "name": "asdf",
+          "description": "",
+          "role": "human",
+          "numberOfActors": "0..N",
+          "solutionUse": "internal",
+          "abstract": false,
+          "connectedNodesIds": []
+        },
+        {
+          "id": "2",
+          "x": 300,
+          "y": 300,
+          "name": "asdf",
+          "description": "",
+          "role": "human",
+          "numberOfActors": "0..N",
+          "solutionUse": "internal",
+          "abstract": true,
+          "connectedNodesIds": []
+        },
+        {
+          "id": "3",
+          "x": 600,
+          "y": 100,
+          "name": "asdf",
+          "description": "",
+          "role": "human",
+          "numberOfActors": "0..N",
+          "solutionUse": "internal",
+          "abstract": false,
+          "connectedNodesIds": []
+        }
+      ],
+      "edges": [
+        {
+          "id": "s",
+          "source": "1",
+          "target": "2"
+        },
+        {
+          "id": "f",
+          "source": "1",
+          "target": "3"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "1",
+      "x": 437,
+      "y": 202,
+      "name": "asdf",
+      "description": "",
+      "role": "human",
+      "numberOfActors": "0..N",
+      "solutionUse": "internal",
+      "abstract": false,
+      "connectedNodesIds": []
+    },
+    {
+      "id": "2",
+      "x": 783,
+      "y": 373,
+      "name": "asdf",
+      "description": "",
+      "role": "human",
+      "numberOfActors": "0..N",
+      "solutionUse": "internal",
+      "abstract": true,
+      "connectedNodesIds": []
+    },
+    {
+      "id": "3",
+      "x": 795,
+      "y": 114,
+      "name": "asdf",
+      "description": "",
+      "role": "human",
+      "numberOfActors": "0..N",
+      "solutionUse": "internal",
+      "abstract": false,
+      "connectedNodesIds": []
+    }
+  ]
+}
