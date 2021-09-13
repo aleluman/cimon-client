@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Graph, Role } from "../types/editor";
+import { Graph, RoleType } from "../../types/editor";
 
 export const cimonApi = createApi({
   reducerPath: "cimonApi",
@@ -11,9 +11,9 @@ export const cimonApi = createApi({
     getGraphbyId: builder.query<Graph, string>({
       query: (id) => `graph/${id}`,
     }),
-    updateRole: builder.mutation<Role, Partial<Role> & Pick<Role, "id">>({
+    updateRole: builder.mutation<RoleType, Partial<RoleType> & Pick<RoleType, "id">>({
       query: ({ id, ...update }) => ({
-        url: `nodes/${id}`,
+        url: `roles/${id}`,
         method: "PATCH",
         body: update,
       }),

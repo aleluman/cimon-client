@@ -2,7 +2,7 @@
   "graph": [
     {
       "id": 1,
-      "nodes": [
+      "roles": [
         {
           "id": "1",
           "x": 100,
@@ -13,7 +13,7 @@
           "numberOfActors": "0..N",
           "solutionUse": "internal",
           "abstract": false,
-          "connectedNodesIds": []
+          "connectedRolesIds": []
         },
         {
           "id": "2",
@@ -25,7 +25,7 @@
           "numberOfActors": "0..N",
           "solutionUse": "internal",
           "abstract": true,
-          "connectedNodesIds": []
+          "connectedRolesIds": []
         },
         {
           "id": "3",
@@ -37,10 +37,10 @@
           "numberOfActors": "0..N",
           "solutionUse": "internal",
           "abstract": false,
-          "connectedNodesIds": []
+          "connectedRolesIds": []
         }
       ],
-      "edges": [
+      "interactions": [
         {
           "id": "s",
           "source": "1",
@@ -54,42 +54,42 @@
       ]
     }
   ],
-  "nodes": [
+  "roles": [
     {
       "id": "1",
-      "x": 437,
+      "x": 106,
+      "y": 57,
+      "name": "asdf",
+      "description": "",
+      "role": "human",
+      "numberOfActors": "0..N",
+      "solutionUse": "internal",
+      "abstract": false,
+      "connectedRolesIds": []
+    },
+    {
+      "id": "2",
+      "x": 341,
       "y": 202,
       "name": "asdf",
       "description": "",
       "role": "human",
       "numberOfActors": "0..N",
       "solutionUse": "internal",
-      "abstract": false,
-      "connectedNodesIds": []
-    },
-    {
-      "id": "2",
-      "x": 783,
-      "y": 373,
-      "name": "asdf",
-      "description": "",
-      "role": "human",
-      "numberOfActors": "0..N",
-      "solutionUse": "internal",
       "abstract": true,
-      "connectedNodesIds": []
+      "connectedRolesIds": []
     },
     {
       "id": "3",
-      "x": 795,
-      "y": 114,
+      "x": 671,
+      "y": 65,
       "name": "asdf",
       "description": "",
       "role": "human",
       "numberOfActors": "0..N",
       "solutionUse": "internal",
       "abstract": false,
-      "connectedNodesIds": []
+      "connectedRolesIds": []
     }
   ]
 }

@@ -22,7 +22,7 @@ export type Services = {
   communicationLog: boolean;
 };
 
-export type Role = {
+export type RoleType = {
   id: string;
   name: string;
   description: string;
@@ -30,18 +30,18 @@ export type Role = {
   numberOfActors: "0..N" | "1..N" | "0..1" | "1" | "?";
   solutionUse: "internal" | "external" | "both";
   abstract: boolean;
-  connectedNodesIds: { edgeId: string; nodeId: string }[];
+  connectedRolesIds: { interactionId: string; roleId: string }[];
   x: number;
   y: number;
 };
 
-export type NodePosition = {
+export type RolePosition = {
   id: string;
   x: number;
   y: number;
 };
 
-export type Interaction = {
+export type InteractionType = {
   id: string;
   source: string;
   target: string;
@@ -60,39 +60,8 @@ export type Size = {
   height: number;
 };
 
-type ActiveRole = {
-  type: "Role";
-  id: string;
-  new?: boolean;
-};
-
-type ActveInteraction = {
-  type: "Interaction";
-  id: string;
-  new?: boolean;
-};
-
-export type ActiveItemType =
-  | { type: "None"; new?: boolean }
-  | ActiveRole
-  | ActveInteraction;
-
-export type Cursor = "default" | "grabbing" | "move" | "pointer" | "grab";
-
 export type Graph = {
-  nodes: Role[];
-  edges: Interaction[];
-  positions: NodePosition[];
-};
-
-export type PlaceholderEdge = {
-  startNodeId: string;
-  start: Position;
-  end: Position;
-  color?: string;
-};
-
-export type PlaceholderNode = {
-  type: "human" | "service" | "repository";
-  position: Position;
+  roles: RoleType[];
+  interactions: InteractionType[];
+  positions: RolePosition[];
 };

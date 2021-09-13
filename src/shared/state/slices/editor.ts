@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Position } from "../types/editor";
+import { Position } from "../../types/editor";
 
 type EditorState = {
   zoom: number;
@@ -23,10 +23,7 @@ export const editorSlice = createSlice({
     setZoom: (state, action: PayloadAction<number>) => {
       state.zoom = action.payload;
     },
-    setTranslations: (
-      state,
-      action: PayloadAction<{ x: number; y: number }>
-    ) => {
+    setTranslations: (state, action: PayloadAction<{ x: number; y: number }>) => {
       state.translations = action.payload;
     },
     setActiveItem: (state, action: PayloadAction<string | null>) => {

@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = matchMedia("(prefers-color-scheme: dark)").matches
-  ? "dark"
-  : "light";
+const initialState = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
 export const themeSlice = createSlice({
   name: "theme",

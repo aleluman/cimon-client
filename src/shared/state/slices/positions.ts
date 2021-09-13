@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { NodePosition } from "../types/editor";
+import { RolePosition } from "../../types/editor";
 
-const initialState: Record<NodePosition["id"], NodePosition> = {};
+const initialState: Record<RolePosition["id"], RolePosition> = {};
 
 export const positionsSlice = createSlice({
   name: "positions",
   initialState,
   reducers: {
-    addAll: (state, action: PayloadAction<NodePosition[]>) => {
+    addAll: (state, action: PayloadAction<RolePosition[]>) => {
       action.payload.forEach((position) => {
         state[position.id] = position;
       });
     },
-    updatePosition: (state, action: PayloadAction<NodePosition>) => {
+    updatePosition: (state, action: PayloadAction<RolePosition>) => {
       const { id, x, y } = action.payload;
       state[id] = { id, x, y };
     },
@@ -25,7 +25,6 @@ export const positionsSlice = createSlice({
   },
 });
 
-export const { addAll, updatePosition, deletePosition, clear } =
-  positionsSlice.actions;
+export const { addAll, updatePosition, deletePosition, clear } = positionsSlice.actions;
 
 export default positionsSlice.reducer;

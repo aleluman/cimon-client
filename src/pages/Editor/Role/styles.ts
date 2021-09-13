@@ -21,8 +21,7 @@ export const Container = styled.div<ContainerProps>`
   user-select: none;
   transform: ${({ x, y }) => `translate3d(${x}px, ${y}px, 0)`};
 
-  ${({ active, theme }) =>
-    active && `box-shadow: 0 0 0 3px ${theme.color.primaryAccent};`}
+  ${({ active, theme }) => active && `box-shadow: 0 0 0 3px ${theme.color.primaryAccent};`}
 `;
 
 export const Title = styled.span`

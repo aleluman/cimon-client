@@ -1,12 +1,12 @@
 import React from "react";
 import { Stage } from "../Stage/Stage";
-import { Node } from "../Node/Node";
-import { Edge } from "../Edge/Edge";
+import { Interaction } from "../Interaction/Interaction";
 import { useAppDispatch } from "../../../shared/hooks/redux";
-import { addAll } from "../../../shared/state/positions";
-import { useGetGraphbyIdQuery } from "@/shared/state/api";
+import { addAll } from "../../../shared/state/slices/positions";
+import { useGetGraphbyIdQuery } from "@/shared/state/slices/api";
 import { Graph } from "@/shared/types/editor";
 import { SvgStage } from "./styles";
+import { Role } from "../Role/Role";
 
 export const Canvas = () => {
   const { data, error, isLoading } = useGetGraphbyIdQuery("1");
@@ -16,17 +16,17 @@ export const Canvas = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  const { nodes, edges } = data as Graph;
-  dispatchPositions(addAll(nodes));
+  const { roles, interactions } = data as Graph;
+  dispatchPositions(addAll(roles));
 
   return (
     <Stage>
-      {nodes.map((node) => (
-        <Node node={node} key={node.id} />
+      {roles.map((role) => (
+        <Role role={role} key={role.id} />
       ))}
       <SvgStage>
-        {edges.map((edge) => (
-          <Edge edge={edge} key={edge.id} />
+        {interactions.map((interaction) => (
+          <Interaction interaction={interaction} key={interaction.id} />
         ))}
       </SvgStage>
     </Stage>
