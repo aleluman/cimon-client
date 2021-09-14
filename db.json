@@ -1,4 +1,38 @@
 {
+  "processes": [
+    {
+      "id": "1",
+      "name": "Elderly Care",
+      "ambits": [
+        {
+          "id": "1",
+          "name": "Home Care"
+        },
+        {
+          "id": "2",
+          "name": "Emergencies"
+        },
+        {
+          "id": "3",
+          "name": "Contact"
+        }
+      ],
+      "roles": [
+        {
+          "name": "Doctor",
+          "type": "Human"
+        },
+        {
+          "name": "Emergency",
+          "type": "Service"
+        },
+        {
+          "name": "Caretaker",
+          "type": "Human"
+        }
+      ]
+    }
+  ],
   "graph": [
     {
       "id": 1,
@@ -57,8 +91,8 @@
   "roles": [
     {
       "id": "1",
-      "x": 852,
-      "y": 290,
+      "x": 690.7403448486589,
+      "y": 317.9129593759913,
       "name": "asdf",
       "description": "",
       "role": "human",
@@ -69,8 +103,8 @@
     },
     {
       "id": "2",
-      "x": 507,
-      "y": 420,
+      "x": 138.88899685945665,
+      "y": 77.95598926143064,
       "name": "asdf",
       "description": "",
       "role": "human",
@@ -81,8 +115,8 @@
     },
     {
       "id": "3",
-      "x": 506,
-      "y": 158,
+      "x": 835,
+      "y": 211,
       "name": "asdf",
       "description": "",
       "role": "human",

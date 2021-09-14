@@ -3,7 +3,7 @@ import { Stage } from "../Stage/Stage";
 import { Interaction } from "../Interaction/Interaction";
 import { useAppDispatch } from "../../../shared/hooks/redux";
 import { addAll } from "../../../shared/state/slices/positions";
-import { useGetGraphbyIdQuery } from "@/shared/state/slices/api";
+import { useGetGraphbyIdQuery } from "@/shared/state/apis/graphApi";
 import { Graph } from "@/shared/types/editor";
 import { SvgStage } from "./styles";
 import { Role } from "../Role/Role";

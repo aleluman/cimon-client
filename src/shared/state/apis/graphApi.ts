@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Graph, RoleType } from "../../types/editor";
 
-export const cimonApi = createApi({
-  reducerPath: "cimonApi",
+export const graphApi = createApi({
+  reducerPath: "graphApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8080/api/",
   }),
@@ -21,4 +21,4 @@ export const cimonApi = createApi({
   }),
 });
 
-export const { useGetGraphbyIdQuery, useUpdateRoleMutation } = cimonApi;
+export const { useGetGraphbyIdQuery, useUpdateRoleMutation } = graphApi;

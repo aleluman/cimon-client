@@ -6,7 +6,7 @@ import { Abstract, Body, Container, Title } from "./styles";
 import { RoleType } from "@/shared/types/editor";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { roleDimentions } from "@/shared/constants/editorConfigs";
-import { useUpdateRoleMutation } from "@/shared/state/slices/api";
+import { useUpdateRoleMutation } from "@/shared/state/apis/graphApi";
 import { setActiveItem } from "@/shared/state/slices/editor";
 import { activeItemSelector, positionSelector, zoomSelector } from "@/shared/state/selectors";
 
