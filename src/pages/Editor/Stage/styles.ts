@@ -28,8 +28,7 @@ export const ChildContainer = styled.div<StageProps>`
   height: 0px;
   transform-origin: 0% 0%;
   touch-action: none;
-  transform: ${({ x, y, zoom }) =>
-    `translate3d(${x}px,${y}px,0) scale3d(${zoom},${zoom},${zoom})`};
+  transform: ${({ x, y, zoom }) => `translate3d(${x}px,${y}px,0) scale3d(${zoom},${zoom},${zoom})`};
 
   & > * {
     position: absolute;
