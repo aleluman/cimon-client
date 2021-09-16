@@ -9,6 +9,7 @@ import { roleDimentions } from "@/shared/constants/editorConfigs";
 import { useUpdateRoleMutation } from "@/shared/state/apis/graphApi";
 import { setActiveItem } from "@/shared/state/slices/editor";
 import { activeItemSelector, positionSelector, zoomSelector } from "@/shared/state/selectors";
+import { RoleMenu } from "../RoleMenu/RoleMenu";
 
 type RoleProps = {
   role: RoleType;
@@ -20,6 +21,8 @@ export const Role = ({ role }: RoleProps) => {
   const activeItemId = useAppSelector(activeItemSelector);
   const [updateRole] = useUpdateRoleMutation();
   const dispatch = useAppDispatch();
+
+  const isActive = activeItemId === role.id;
 
   const roleHandlers = useGesture(
     {
@@ -44,7 +47,7 @@ export const Role = ({ role }: RoleProps) => {
       {...roleHandlers()}
       height={roleDimentions.height}
       width={roleDimentions.width}
-      active={activeItemId === role.id}
+      active={isActive}
       x={x}
       y={y}
     >
@@ -54,6 +57,7 @@ export const Role = ({ role }: RoleProps) => {
         {role.numberOfActors}
       </Title>
       <Body>{role.name}</Body>
+      {isActive && <RoleMenu zoom={zoom} />}
     </Container>
   );
 };

@@ -4,7 +4,7 @@ type ProcessType = {
   id: string;
   name: string;
   ambits: { id: string; name: string }[];
-  roles: { name: string; type: "Human" | "Service" | "Repository" }[];
+  roles: { id: string; name: string; type: "human" | "service" | "repository" }[];
 };
 
 export const processApi = createApi({

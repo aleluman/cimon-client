@@ -19,16 +19,19 @@
       ],
       "roles": [
         {
+          "id": "1",
           "name": "Doctor",
-          "type": "Human"
+          "type": "human"
         },
         {
-          "name": "Emergency",
-          "type": "Service"
+          "id": "2",
+          "name": "Emergencysdfgsdfgsdfg",
+          "type": "service"
         },
         {
+          "id": "3",
           "name": "Caretaker",
-          "type": "Human"
+          "type": "human"
         }
       ]
     }
@@ -91,8 +94,8 @@
   "roles": [
     {
       "id": "1",
-      "x": 912.6803259165927,
-      "y": 136.11789584680102,
+      "x": 158,
+      "y": 27,
       "name": "asdf",
       "description": "",
       "role": "human",
@@ -103,8 +106,8 @@
     },
     {
       "id": "2",
-      "x": 361.13163868601487,
-      "y": 238.17724908730017,
+      "x": 479,
+      "y": 381,
       "name": "asdf",
       "description": "",
       "role": "human",
@@ -115,8 +118,8 @@
     },
     {
       "id": "3",
-      "x": 518.9333475781161,
-      "y": 75.77318433369015,
+      "x": 697,
+      "y": 150,
       "name": "asdf",
       "description": "",
       "role": "human",
