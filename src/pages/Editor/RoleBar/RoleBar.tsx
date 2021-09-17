@@ -7,11 +7,12 @@ import {
   ListItem,
   ListItemText,
   RoleBarContainer,
-  RoleDragIcon,
+  RoleSpan,
   Subtitle,
   Title,
 } from "./styles";
 import { useGetProcessByIdQuery } from "@/shared/state/apis/processApi";
+import { DragIcon } from "../DragIcon/DragIcon";
 
 export const RoleBar = () => {
   const { data } = useGetProcessByIdQuery("1");
@@ -24,15 +25,15 @@ export const RoleBar = () => {
     <RoleBarContainer>
       <Title>Roles</Title>
       <DragIconContainer>
-        <RoleDragIcon {...handlers("human", "")}>
-          <Icon type="human-internal" />
-        </RoleDragIcon>
-        <RoleDragIcon {...handlers("service", "")}>
-          <Icon type="service-internal" />
-        </RoleDragIcon>
-        <RoleDragIcon {...handlers("repository", "")}>
-          <Icon type="repository-internal" />
-        </RoleDragIcon>
+        <RoleSpan {...handlers("human", "")}>
+          <DragIcon type="human" />
+        </RoleSpan>
+        <RoleSpan {...handlers("service", "")}>
+          <DragIcon type="service" />
+        </RoleSpan>
+        <RoleSpan {...handlers("repository", "")}>
+          <DragIcon type="repository" />
+        </RoleSpan>
       </DragIconContainer>
       {data && (
         <>

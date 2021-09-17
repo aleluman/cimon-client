@@ -2,7 +2,8 @@ import React from "react";
 import { useTooltipState } from "reakit/Tooltip";
 import { iconPaths } from "../Icon/Icons";
 import { Icon } from "../Icon/Icon";
-import { Arrow, ButtonContainer, IconButton, IconTooltip } from "./styles";
+import { ButtonContainer, IconButton } from "./styles";
+import { Tooltip } from "../Tooltip/Tooltip";
 
 type IconOnlyButtonProps = {
   handler: (event: React.MouseEvent) => void;
@@ -31,10 +32,7 @@ export const IconOnlyButton = ({
           <Icon type={icon} />
         </IconButton>
       </ButtonContainer>
-      <IconTooltip {...tooltip}>
-        <Arrow {...tooltip} />
-        {text}
-      </IconTooltip>
+      <Tooltip tooltipProps={tooltip}>{text}</Tooltip>
     </>
   );
 };

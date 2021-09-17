@@ -1,29 +1,9 @@
 import styled from "@emotion/styled";
-import { Tooltip, TooltipArrow, TooltipReference } from "reakit/Tooltip";
+import { TooltipReference } from "reakit/Tooltip";
 import { Button } from "reakit/Button";
 import { css } from "@emotion/react";
 
 export const ButtonContainer = styled(TooltipReference)``;
-
-export const Arrow = styled(TooltipArrow)`
-  & path {
-    fill: ${({ theme }) => theme.color.primaryAccent};
-  }
-`;
-
-export const IconTooltip = styled(Tooltip)`
-  background-color: ${({ theme }) => theme.color.primaryAccent};
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.color.primaryAccent};
-  box-shadow: 0 0 22px ${({ theme }) => theme.color.shadow};
-  font-size: 0.75rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 0.4rem;
-  transition: opacity 0.3s;
-  z-index: 9999;
-`;
 
 type IconButtonProps = {
   working: boolean | undefined;

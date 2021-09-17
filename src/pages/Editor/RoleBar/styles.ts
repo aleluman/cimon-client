@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { TooltipReference } from "reakit/Tooltip";
 
 export const RoleBarContainer = styled.div`
   display: flex;
@@ -38,7 +39,11 @@ export const DragIconContainer = styled.div`
   gap: 0.3rem;
 `;
 
-export const RoleDragIcon = styled.button`
+export const RoleSpan = styled.span`
+  touch-action: none;
+`;
+
+export const RoleDragIcon = styled(TooltipReference)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,6 +85,7 @@ export const ListItem = styled.li`
   border: 1px solid ${({ theme }) => theme.color.popoverBorder};
   margin-top: -1px;
   cursor: grab;
+  touch-action: none;
   transition: all 0.25s ease;
 
   &:hover {
