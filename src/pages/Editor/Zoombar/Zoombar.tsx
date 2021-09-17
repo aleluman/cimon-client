@@ -1,4 +1,3 @@
-import React from "react";
 import { IconOnlyButton } from "@/shared/components/IconOnlyButton/IconOnlyButton";
 import { Divider, ZoomBarContainer } from "./styles";
 

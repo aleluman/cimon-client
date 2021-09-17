@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from "react";
+import { ReactNode, useRef } from "react";
 import { useGesture } from "@use-gesture/react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import { Container, Background, ChildContainer } from "./styles";

@@ -1,4 +1,3 @@
-import React from "react";
 import { ActionsToolbar } from "./ActionsToolbar/ActionsToolbar";
 import { Canvas } from "./Canvas/Canvas";
 import { RoleBar } from "./RoleBar/RoleBar";

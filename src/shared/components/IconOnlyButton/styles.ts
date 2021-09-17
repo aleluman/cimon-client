@@ -1,16 +1,12 @@
 import styled from "@emotion/styled";
-import { TooltipReference } from "reakit/Tooltip";
-import { Button } from "reakit/Button";
 import { css } from "@emotion/react";
-
-export const ButtonContainer = styled(TooltipReference)``;
 
 type IconButtonProps = {
   working: boolean | undefined;
   disabled: boolean | undefined;
 };
 
-export const IconButton = styled(Button)<IconButtonProps>`
+export const IconButton = styled.button<IconButtonProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;

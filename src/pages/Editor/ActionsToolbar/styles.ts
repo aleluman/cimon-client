@@ -1,5 +1,6 @@
+import { css, Theme } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Menu, MenuItem, MenuButton } from "reakit/Menu";
+// import { Menu, MenuItem, MenuButton } from "reakit/Menu";
 
 export const Container = styled.div`
   display: flex;
@@ -65,38 +66,36 @@ export const Divider = styled.span`
   margin: 0 0.3rem;
 `;
 
-export const ExportButton = styled(MenuButton)`
+export const ExportButton = (theme: Theme) => css`
   position: relative;
   display: flex;
   gap: 0.3rem;
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.color.popoverBorder};
+  border: 1px solid ${theme.color.popoverBorder};
   padding: 0.3rem;
-  color: ${({ theme }) => theme.color.textNormal};
+  color: ${theme.color.textNormal};
   border-radius: 4px;
   margin-right: 0.2rem;
   cursor: pointer;
   transition: all ease 0.3s;
 
   &:hover {
-    box-shadow: 0 0 10px ${({ theme }) => theme.color.shadow};
+    box-shadow: 0 0 10px ${theme.color.shadow};
   }
 `;
 
-export const ExportMenu = styled(Menu)`
+export const ExportMenu = (theme: Theme) => css`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 2.2rem;
-  left: 11.8rem;
   padding: 0.2rem;
-  background: ${({ theme }) => theme.color.neutralFull};
+  background: ${theme.color.neutralFull};
   border-radius: 4px;
-  border: 1px solid ${({ theme }) => theme.color.popoverBorder};
-  box-shadow: 0 0 12px -4px ${({ theme }) => theme.color.shadow};
+  border: 1px solid ${theme.color.popoverBorder};
+  box-shadow: 0 0 12px -4px ${theme.color.shadow};
 `;
 
-export const ExportItem = styled(MenuItem)`
+export const ExportItem = (theme: Theme) => css`
   display: flex;
   align-items: center;
   margin: 0.1rem 0;
@@ -105,10 +104,10 @@ export const ExportItem = styled(MenuItem)`
   background: transparent;
   border-radius: 4px;
   border: none;
-  color: ${({ theme }) => theme.color.textNormal};
+  color: ${theme.color.textNormal};
   cursor: pointer;
 
   &:hover {
-    background: ${({ theme }) => theme.color.popoverSelect};
+    background: ${theme.color.popoverSelect};
   }
 `;

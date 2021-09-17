@@ -1,5 +1,5 @@
-import React from "react";
-import { useMenuState } from "reakit/Menu";
+import { Menu } from "@headlessui/react";
+import { Icon } from "@/shared/components/Icon/Icon";
 import { IconOnlyButton } from "@/shared/components/IconOnlyButton/IconOnlyButton";
 import {
   Container,
@@ -11,11 +11,8 @@ import {
   ToggleContainer,
   ToggleInactive,
 } from "./styles";
-import { Icon } from "@/shared/components/Icon/Icon";
 
 export const ActionsToolbar = () => {
-  const exportMenu = useMenuState();
-
   return (
     <Container>
       <ToggleContainer>
@@ -26,20 +23,22 @@ export const ActionsToolbar = () => {
       <IconOnlyButton icon="undo" text="Undo" handler={() => {}} disabled={false} />
       <IconOnlyButton icon="redo" text="Redo" handler={() => {}} disabled={false} />
       <Divider />
-      <ExportButton {...exportMenu}>
-        Export <Icon type="arrow-down" />
-      </ExportButton>
-      <ExportMenu {...exportMenu} aria-label="Exports">
-        <ExportItem {...exportMenu}>
-          <Icon type="download" /> As JSON
-        </ExportItem>
-        <ExportItem {...exportMenu}>
-          <Icon type="image" /> As image
-        </ExportItem>
-        <ExportItem {...exportMenu}>
-          <Icon type="pdf" /> As PDF
-        </ExportItem>
-      </ExportMenu>
+      <Menu as="div">
+        <Menu.Button css={ExportButton}>
+          Export <Icon type="arrow-down" />
+        </Menu.Button>
+        <Menu.Items css={ExportMenu}>
+          <Menu.Item as="button" css={ExportItem}>
+            <Icon type="download" /> As JSON
+          </Menu.Item>
+          <Menu.Item as="button" css={ExportItem}>
+            <Icon type="image" /> As image
+          </Menu.Item>
+          <Menu.Item as="button" css={ExportItem}>
+            <Icon type="pdf" /> As PDF
+          </Menu.Item>
+        </Menu.Items>
+      </Menu>
       <IconOnlyButton icon="upload" text="Upload JSON" handler={() => {}} />
       <Divider />
       <IconOnlyButton icon="help" text="Help" handler={() => {}} />

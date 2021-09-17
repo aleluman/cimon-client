@@ -1,18 +1,18 @@
-import { ThemeProvider } from "@emotion/react";
-import React from "react";
 import ReactDOM from "react-dom";
+import { ThemeProvider } from "@emotion/react";
+import { StrictMode } from "react";
 import { Provider } from "react-redux";
 import { App } from "./App";
 import { store } from "./shared/state/store";
 import { darkTheme } from "./shared/themes/dark";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={darkTheme}>
         <App />
       </ThemeProvider>
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );

@@ -1,4 +1,3 @@
-import React from "react";
 import { Stage } from "../Stage/Stage";
 import { Interaction } from "../Interaction/Interaction";
 import { useAppDispatch } from "../../../shared/hooks/redux";

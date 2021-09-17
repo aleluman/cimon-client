@@ -1,19 +1,35 @@
-import React from "react";
-import { TooltipStateReturn } from "reakit/ts";
-import { Arrow, CommonTooltip } from "./styles";
+import { ReactElement, cloneElement } from "react";
+import ReactDOM from "react-dom";
+import { Placement } from "@popperjs/core";
+import { usePopperTooltip } from "react-popper-tooltip";
+import { Arrow, TooltipContainer } from "./styles";
 
 type TooltipProps = {
-  tooltipProps: TooltipStateReturn;
-  children: React.ReactNode;
+  children: ReactElement;
+  text: string;
+  tooltipPlacement?: Placement;
+  isVisible?: boolean;
+  offset?: [number, number];
 };
 
-export const Tooltip = ({ children, tooltipProps }: TooltipProps) => {
+export const Tooltip = ({ children, text, tooltipPlacement, isVisible, offset }: TooltipProps) => {
+  const { setTooltipRef, setTriggerRef, getArrowProps, getTooltipProps, visible } =
+    usePopperTooltip({
+      placement: tooltipPlacement ?? "right",
+      visible: isVisible,
+      offset,
+    });
   return (
     <>
-      <CommonTooltip {...tooltipProps}>
-        <Arrow {...tooltipProps} />
-        {children}
-      </CommonTooltip>
+      {cloneElement(children, { ref: setTriggerRef })}
+      {visible &&
+        ReactDOM.createPortal(
+          <TooltipContainer ref={setTooltipRef} {...getTooltipProps()}>
+            <Arrow {...getArrowProps()} />
+            {text}
+          </TooltipContainer>,
+          document.getElementById("tooltips") as HTMLDivElement
+        )}
     </>
   );
 };

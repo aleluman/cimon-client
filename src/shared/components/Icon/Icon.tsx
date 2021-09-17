@@ -1,4 +1,3 @@
-import React from "react";
 import { iconPaths } from "./Icons";
 import { Path } from "./styles";
 

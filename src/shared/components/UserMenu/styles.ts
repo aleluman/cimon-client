@@ -1,13 +1,13 @@
+import { css, Theme } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Popover, PopoverDisclosure } from "reakit/Popover";
 
-export const UserNameContainer = styled(PopoverDisclosure)`
+export const UserNameContainer = (theme: Theme) => css`
   display: flex;
   gap: 0.2rem;
   padding: 0.4rem;
   background: transparent;
   border: none;
-  color: ${({ theme }) => theme.color.textNormal};
+  color: ${theme.color.textNormal};
   cursor: pointer;
 
   & p {
@@ -20,14 +20,14 @@ export const UserNameContainer = styled(PopoverDisclosure)`
   }
 `;
 
-export const MenuContainer = styled(Popover)`
+export const MenuContainer = (theme: Theme) => css`
   backdrop-filter: blur(12px);
   z-index: 1;
   padding: 0.2rem;
   border-radius: 4px;
-  border: 1px solid ${({ theme }) => theme.color.popoverBorder};
-  box-shadow: 0 0 16px ${({ theme }) => theme.color.shadow};
-  background: ${({ theme }) => theme.color.popoverBackground};
+  border: 1px solid ${theme.color.popoverBorder};
+  box-shadow: 0 0 16px ${theme.color.shadow};
+  background: ${theme.color.popoverBackground};
 `;
 
 export const UserMenuItem = styled.button`

@@ -1,4 +1,3 @@
-import React from "react";
 import { useGetProcessByIdQuery } from "@/shared/state/apis/processApi";
 import { AmbitSelector } from "../AmbitSelector/AmbitSelector";
 import { Icon } from "../Icon/Icon";

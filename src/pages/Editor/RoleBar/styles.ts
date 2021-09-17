@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { TooltipReference } from "reakit/Tooltip";
 
 export const RoleBarContainer = styled.div`
   display: flex;
@@ -43,7 +42,7 @@ export const RoleSpan = styled.span`
   touch-action: none;
 `;
 
-export const RoleDragIcon = styled(TooltipReference)`
+export const RoleDragIcon = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,11 +94,11 @@ export const ListItem = styled.li`
     box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primaryAccent};
   }
 
-  &:first-child {
+  &:first-of-type {
     border-radius: 4px 4px 0 0;
   }
 
-  &:last-child {
+  &:last-of-type {
     border-radius: 0 0 4px 4px;
   }
 

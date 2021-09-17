@@ -1,4 +1,3 @@
-import React from "react";
 import { useGesture } from "@use-gesture/react";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
@@ -7,12 +6,12 @@ import {
   ListItem,
   ListItemText,
   RoleBarContainer,
-  RoleSpan,
+  RoleDragIcon,
   Subtitle,
   Title,
 } from "./styles";
 import { useGetProcessByIdQuery } from "@/shared/state/apis/processApi";
-import { DragIcon } from "../DragIcon/DragIcon";
+import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 
 export const RoleBar = () => {
   const { data } = useGetProcessByIdQuery("1");
@@ -25,15 +24,21 @@ export const RoleBar = () => {
     <RoleBarContainer>
       <Title>Roles</Title>
       <DragIconContainer>
-        <RoleSpan {...handlers("human", "")}>
-          <DragIcon type="human" />
-        </RoleSpan>
-        <RoleSpan {...handlers("service", "")}>
-          <DragIcon type="service" />
-        </RoleSpan>
-        <RoleSpan {...handlers("repository", "")}>
-          <DragIcon type="repository" />
-        </RoleSpan>
+        <Tooltip text="Human">
+          <RoleDragIcon {...handlers("human", "")}>
+            <Icon type="human-internal" />
+          </RoleDragIcon>
+        </Tooltip>
+        <Tooltip text="Service">
+          <RoleDragIcon {...handlers("service", "")}>
+            <Icon type="service-internal" />
+          </RoleDragIcon>
+        </Tooltip>
+        <Tooltip text="Repository">
+          <RoleDragIcon {...handlers("repository", "")}>
+            <Icon type="repository-internal" />
+          </RoleDragIcon>
+        </Tooltip>
       </DragIconContainer>
       {data && (
         <>

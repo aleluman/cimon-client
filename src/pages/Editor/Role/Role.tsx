@@ -1,4 +1,3 @@
-import React from "react";
 import { useGesture } from "@use-gesture/react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import { updatePosition } from "@/shared/state/slices/positions";

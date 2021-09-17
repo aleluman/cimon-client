@@ -1,29 +1,50 @@
-import React from "react";
-import { usePopoverState } from "reakit/Popover";
+import React, { useState } from "react";
+import { usePopper } from "react-popper";
+import { Popover } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { MenuContainer, UserMenuItem, UserNameContainer } from "./styles";
 
-type UserMenuProps = {
-  username: string;
-};
+type UserMenuProps = { username: string };
 
 export const UserMenu = ({ username }: UserMenuProps) => {
-  const popover = usePopoverState({ placement: "bottom", unstable_offset: [-4, 6] });
+  const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+  const {
+    styles: { popper },
+    attributes,
+  } = usePopper(referenceElement, popperElement, {
+    modifiers: [
+      { name: "preventOverflow", enabled: true, options: { padding: 4 } },
+      {
+        name: "offset",
+        options: {
+          offset: [0, 9],
+        },
+      },
+    ],
+  });
+
   return (
-    <>
-      <UserNameContainer {...popover}>
-        <p>{username}</p>
+    <Popover>
+      <Popover.Button ref={setReferenceElement} css={UserNameContainer}>
+        {username}
         <Icon type="arrow-down" />
-      </UserNameContainer>
-      <MenuContainer {...popover} aria-label="User menu">
-        <UserMenuItem onClick={popover.hide}>
-          <Icon type="logout" /> Logout
+      </Popover.Button>
+      <Popover.Panel
+        style={popper}
+        ref={setPopperElement}
+        css={MenuContainer}
+        {...attributes.popper}
+      >
+        <UserMenuItem role="button" tabIndex={0}>
+          <Icon type="logout" />
+          Logout
         </UserMenuItem>
-        <UserMenuItem onClick={popover.hide}>
+        <UserMenuItem role="button" tabIndex={0}>
           <Icon type="help" />
           About
         </UserMenuItem>
-      </MenuContainer>
-    </>
+      </Popover.Panel>
+    </Popover>
   );
 };

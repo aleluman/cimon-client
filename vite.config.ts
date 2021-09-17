@@ -5,10 +5,9 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
-  css: {
-    modules: {
-      localsConvention: "camelCaseOnly",
-    },
+  esbuild: {
+    jsxFactory: `jsx`,
+    jsxInject: `import React from 'react'; import { jsx } from '@emotion/react'`,
   },
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],

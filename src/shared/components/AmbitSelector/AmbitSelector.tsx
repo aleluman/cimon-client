@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useTheme } from "@emotion/react";
-import React, { useState } from "react";
-import { useMenuState } from "reakit/Menu";
+import { Listbox } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { AmbitButton, AmbitItem, AmbitMenu } from "./styles";
 
@@ -14,33 +14,25 @@ type AmbitSelectorProps = {
 export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
   const [selected, setSelected] = useState(ambits[0]);
   const theme = useTheme();
-  const menu = useMenuState({ gutter: 4 });
-
-  const handleSelect = (ambit: typeof ambits[0]) => {
-    setSelected(ambit);
-    menu.hide();
-  };
 
   return (
-    <>
-      <AmbitButton {...menu}>
-        <p>{selected.name}</p> <Icon type="arrow-down" />
-      </AmbitButton>
-      <AmbitMenu {...menu} aria-label="Ambit menu">
+    <Listbox value={selected} onChange={setSelected} as="div">
+      <Listbox.Button css={AmbitButton}>
+        {selected.name}
+        <Icon type="arrow-down" />
+      </Listbox.Button>
+      <Listbox.Options css={AmbitMenu}>
         {ambits.map((ambit) => (
-          <AmbitItem
-            {...menu}
+          <Listbox.Option
             key={ambit.id}
-            selected={ambit.id === selected.id}
-            onClick={() => handleSelect(ambit)}
+            value={ambit}
+            css={AmbitItem(theme, selected.id === ambit.id)}
           >
-            <p>{ambit.name}</p>
-            {ambit.id === selected.id && (
-              <Icon type="check" size={12} color={theme.color.textImportant} />
-            )}
-          </AmbitItem>
+            {`${ambit.id}. ${ambit.name}`}
+            {selected.id === ambit.id && <Icon type="check" size={12} />}
+          </Listbox.Option>
         ))}
-      </AmbitMenu>
-    </>
+      </Listbox.Options>
+    </Listbox>
   );
 };
