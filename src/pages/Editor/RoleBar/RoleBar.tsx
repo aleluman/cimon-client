@@ -10,11 +10,11 @@ import {
   Subtitle,
   Title,
 } from "./styles";
-import { useGetProcessByIdQuery } from "@/shared/state/apis/processApi";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
+import { useProcess } from "@/shared/api/process";
 
 export const RoleBar = () => {
-  const { data } = useGetProcessByIdQuery("1");
+  const { data } = useProcess();
 
   const handlers = useGesture({
     onDrag: ({ args: [type, name] }) => {},

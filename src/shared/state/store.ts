@@ -1,24 +1,33 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { graphApi } from "./apis/graphApi";
-import { processApi } from "./apis/processApi";
-import positionsReducer from "./slices/positions";
-import themeReducer from "./slices/theme";
-import editorReducer from "./slices/editor";
+import create from "zustand";
+import { produce } from "immer";
+import { QueryClient } from "react-query";
+import { Position, RolePosition } from "../types/editor";
 
-export const store = configureStore({
-  reducer: {
-    positions: positionsReducer,
-    theme: themeReducer,
-    editor: editorReducer,
-    [processApi.reducerPath]: processApi.reducer,
-    [graphApi.reducerPath]: graphApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(graphApi.middleware).concat(processApi.middleware),
-});
+export const queryClient = new QueryClient();
 
-setupListeners(store.dispatch);
+type StoreType = {
+  rolePositions: Record<RolePosition["id"], RolePosition>;
+  zoom: number;
+  activeItemId: string;
+  translations: Position;
+  setPosition: (position: RolePosition) => void;
+  setZoom: (newZoom: number) => void;
+  setActiveItemId: (newId: string) => void;
+  setTranslations: (newTranslations: Position) => void;
+};
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const useStore = create<StoreType>((set) => ({
+  rolePositions: {},
+  zoom: 1,
+  activeItemId: "",
+  translations: { x: 0, y: 0 },
+  setPosition: (position) =>
+    set(
+      produce((state) => {
+        state.rolePositions[position.id] = position;
+      })
+    ),
+  setZoom: (newZoom: number) => set(() => ({ zoom: newZoom })),
+  setActiveItemId: (newId: string) => set(() => ({ activeItemId: newId })),
+  setTranslations: (newTranslations) => set(() => ({ translations: newTranslations })),
+}));

@@ -1,18 +1,19 @@
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@emotion/react";
 import { StrictMode } from "react";
-import { Provider } from "react-redux";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClientProvider } from "react-query";
 import { App } from "./App";
-import { store } from "./shared/state/store";
 import { darkTheme } from "./shared/themes/dark";
+import { queryClient } from "./shared/state/store";
 
 ReactDOM.render(
   <StrictMode>
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
-        <App />
+        <App /> <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
-    </Provider>
+    </QueryClientProvider>
   </StrictMode>,
   document.getElementById("root")
 );

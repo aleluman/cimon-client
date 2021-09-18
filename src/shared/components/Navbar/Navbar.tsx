@@ -1,11 +1,11 @@
-import { useGetProcessByIdQuery } from "@/shared/state/apis/processApi";
+import { useProcess } from "@/shared/api/process";
 import { AmbitSelector } from "../AmbitSelector/AmbitSelector";
 import { Icon } from "../Icon/Icon";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { HomeContainer, NavContainer, ProjectName, ProjectNav } from "./styles";
 
 export const Navbar = () => {
-  const { data, isLoading, isError } = useGetProcessByIdQuery("1");
+  const { data, isLoading, isError } = useProcess();
 
   return (
     <NavContainer>

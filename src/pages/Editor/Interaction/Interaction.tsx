@@ -1,25 +1,23 @@
 import { useGesture } from "@use-gesture/react";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 import { getPath } from "../../../shared/utils/curves";
-import { InteractionType } from "@/shared/types/editor";
 import { Path } from "./styles";
-import { setActiveItem } from "@/shared/state/slices/editor";
-import { activeItemSelector, positionSelector } from "@/shared/state/selectors";
 import { roleDimentions } from "@/shared/constants/editorConfigs";
+import { InteractionType } from "@/shared/types/editor";
+import { useStore } from "@/shared/state/store";
 
 type InteractionProps = {
   interaction: InteractionType;
 };
 
 export const Interaction = ({ interaction }: InteractionProps) => {
-  const startPosition = useAppSelector(positionSelector(interaction.source));
-  const endPosition = useAppSelector(positionSelector(interaction.target));
-  const activeItemId = useAppSelector(activeItemSelector);
-  const dispatch = useAppDispatch();
+  const startPosition = useStore((state) => state.rolePositions[interaction.source]);
+  const endPosition = useStore((state) => state.rolePositions[interaction.target]);
+  const activeItemId = useStore((state) => state.activeItemId);
+  const setActiveItemId = useStore((state) => state.setActiveItemId);
 
   const pathHandlers = useGesture({
     onClick: () => {
-      dispatch(setActiveItem(interaction.id));
+      setActiveItemId(interaction.id);
     },
   });
 

@@ -3,6 +3,7 @@ import { Canvas } from "./Canvas/Canvas";
 import { RoleBar } from "./RoleBar/RoleBar";
 import { Container } from "./Stage/styles";
 import { Zoombar } from "./Zoombar/Zoombar";
+import { Sidebar } from "./Sidebar/Sidebar";
 
 export const Editor = () => {
   return (
@@ -11,6 +12,7 @@ export const Editor = () => {
       <ActionsToolbar />
       <RoleBar />
       <Zoombar />
+      <Sidebar />
     </Container>
   );
 };

@@ -1,42 +1,33 @@
 import { useGesture } from "@use-gesture/react";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
-import { updatePosition } from "@/shared/state/slices/positions";
 import { Abstract, Body, Container, Title } from "./styles";
 import { RoleType } from "@/shared/types/editor";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { roleDimentions } from "@/shared/constants/editorConfigs";
-import { useUpdateRoleMutation } from "@/shared/state/apis/graphApi";
-import { setActiveItem } from "@/shared/state/slices/editor";
-import { activeItemSelector, positionSelector, zoomSelector } from "@/shared/state/selectors";
 import { RoleMenu } from "../RoleMenu/RoleMenu";
+import { useUpdateRole } from "@/shared/api/role";
+import { useStore } from "@/shared/state/store";
 
 type RoleProps = {
   role: RoleType;
 };
 
 export const Role = ({ role }: RoleProps) => {
-  const { x, y } = useAppSelector(positionSelector(role.id));
-  const zoom = useAppSelector(zoomSelector);
-  const activeItemId = useAppSelector(activeItemSelector);
-  const [updateRole] = useUpdateRoleMutation();
-  const dispatch = useAppDispatch();
+  const { x, y } = useStore((state) => state.rolePositions[role.id]);
+  const zoom = useStore((state) => state.zoom);
+  const activeItemId = useStore((state) => state.activeItemId);
+  const setActiveItem = useStore((state) => state.setActiveItemId);
+  const setPosition = useStore((state) => state.setPosition);
+  const updateRole = useUpdateRole(role.id);
 
   const isActive = activeItemId === role.id;
 
   const roleHandlers = useGesture(
     {
-      onDrag: ({ delta: [dx, dy] }) => {
-        dispatch(updatePosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }));
-      },
-      onDragEnd: () => {
-        updateRole({ id: role.id, x, y });
-      },
-      onClick: () => {
-        dispatch(setActiveItem(role.id));
-      },
-      onContextMenu: ({ event }) => {
-        event.preventDefault();
-      },
+      onDrag: ({ delta: [dx, dy] }) =>
+        setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
+      onDragEnd: () => updateRole.mutate({ id: role.id, x, y, role: "repository" }),
+      onClick: () => setActiveItem(role.id),
+      onContextMenu: ({ event }) => event.preventDefault(),
     },
     { drag: { filterTaps: true } }
   );
