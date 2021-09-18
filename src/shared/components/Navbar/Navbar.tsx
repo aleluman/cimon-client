@@ -1,11 +1,11 @@
-import { useProcess } from "@/shared/api/process";
+import { useGetProcess } from "@/shared/api/process";
 import { AmbitSelector } from "../AmbitSelector/AmbitSelector";
 import { Icon } from "../Icon/Icon";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { HomeContainer, NavContainer, ProjectName, ProjectNav } from "./styles";
 
 export const Navbar = () => {
-  const { data, isLoading, isError } = useProcess();
+  const { data, isLoading, isError } = useGetProcess();
 
   return (
     <NavContainer>

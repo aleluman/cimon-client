@@ -65,3 +65,9 @@ export type Graph = {
   interactions: InteractionType[];
   positions: RolePosition[];
 };
+
+export type ActiveItem = {
+  id: string;
+  type: "role" | "interaction" | "none";
+  new?: boolean;
+};

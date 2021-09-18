@@ -3,6 +3,12 @@ import { useMutation } from "react-query";
 import { queryClient } from "../state/store";
 import { Graph, RoleType } from "../types/editor";
 
+export const getRole = (id: string) => {
+  const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
+  const currentRole = graph.roles.find((role) => role.id === id) as RoleType;
+  return currentRole;
+};
+
 export const useUpdateRole = (id: string) => {
   const mutation = useMutation(
     (updatedRole: Partial<RoleType>) =>

@@ -14,7 +14,7 @@ export const Stage = ({ children }: StageProps) => {
   const zoom = useStore((state) => state.zoom);
   const setZoom = useStore((state) => state.setZoom);
   const setTranslations = useStore((state) => state.setTranslations);
-  const setActiveItemId = useStore((state) => state.setActiveItemId);
+  const setActiveItem = useStore((state) => state.setActiveItem);
   const backgroundRef = useRef<HTMLDivElement>(null);
 
   const stageHandlers = useGesture(
@@ -35,7 +35,7 @@ export const Stage = ({ children }: StageProps) => {
       },
       onClick: ({ event }) => {
         if (event.currentTarget === event.target) {
-          setActiveItemId("");
+          setActiveItem({ id: "", type: "none" });
         }
       },
       onContextMenu: ({ event }) => {

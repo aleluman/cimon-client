@@ -12,12 +12,12 @@ type InteractionProps = {
 export const Interaction = ({ interaction }: InteractionProps) => {
   const startPosition = useStore((state) => state.rolePositions[interaction.source]);
   const endPosition = useStore((state) => state.rolePositions[interaction.target]);
-  const activeItemId = useStore((state) => state.activeItemId);
-  const setActiveItemId = useStore((state) => state.setActiveItemId);
+  const activeItem = useStore((state) => state.activeItem);
+  const setActiveItem = useStore((state) => state.setActiveItem);
 
   const pathHandlers = useGesture({
     onClick: () => {
-      setActiveItemId(interaction.id);
+      setActiveItem({ id: interaction.id, type: "interaction" });
     },
   });
 
@@ -25,7 +25,7 @@ export const Interaction = ({ interaction }: InteractionProps) => {
 
   return (
     <g {...pathHandlers()}>
-      <Path d={curve} active={activeItemId === interaction.id} />
+      <Path d={curve} active={activeItem.id === interaction.id} />
     </g>
   );
 };

@@ -8,7 +8,7 @@ type ProcessType = {
   roles: { id: string; name: string; type: "human" | "service" | "repository" }[];
 };
 
-export const useProcess = () => {
+export const useGetProcess = () => {
   const id = "1";
   const queryData = useQuery(
     ["process", id],

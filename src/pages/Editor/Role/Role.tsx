@@ -14,19 +14,19 @@ type RoleProps = {
 export const Role = ({ role }: RoleProps) => {
   const { x, y } = useStore((state) => state.rolePositions[role.id]);
   const zoom = useStore((state) => state.zoom);
-  const activeItemId = useStore((state) => state.activeItemId);
-  const setActiveItem = useStore((state) => state.setActiveItemId);
+  const activeItem = useStore((state) => state.activeItem);
+  const setActiveItem = useStore((state) => state.setActiveItem);
   const setPosition = useStore((state) => state.setPosition);
   const updateRole = useUpdateRole(role.id);
 
-  const isActive = activeItemId === role.id;
+  const isActive = activeItem.id === role.id;
 
   const roleHandlers = useGesture(
     {
       onDrag: ({ delta: [dx, dy] }) =>
         setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
       onDragEnd: () => updateRole.mutate({ id: role.id, x, y, role: "repository" }),
-      onClick: () => setActiveItem(role.id),
+      onClick: () => setActiveItem({ id: role.id, type: "role" }),
       onContextMenu: ({ event }) => event.preventDefault(),
     },
     { drag: { filterTaps: true } }

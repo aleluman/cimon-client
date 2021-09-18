@@ -11,10 +11,10 @@ import {
   Title,
 } from "./styles";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
-import { useProcess } from "@/shared/api/process";
+import { useGetProcess } from "@/shared/api/process";
 
 export const RoleBar = () => {
-  const { data } = useProcess();
+  const { data } = useGetProcess();
 
   const handlers = useGesture({
     onDrag: ({ args: [type, name] }) => {},

@@ -94,8 +94,8 @@
   "roles": [
     {
       "id": "1",
-      "x": 403,
-      "y": 100,
+      "x": 317,
+      "y": 53,
       "name": "asdf",
       "description": "",
       "role": "repository",
@@ -106,8 +106,8 @@
     },
     {
       "id": "2",
-      "x": 129,
-      "y": 241,
+      "x": 347,
+      "y": 352,
       "name": "asdf",
       "description": "",
       "role": "repository",
@@ -118,8 +118,8 @@
     },
     {
       "id": "3",
-      "x": 750,
-      "y": 271,
+      "x": 583,
+      "y": 143,
       "name": "asdf",
       "description": "",
       "role": "repository",

@@ -1,33 +1,13 @@
-import create from "zustand";
-import { produce } from "immer";
+import create, { SetState } from "zustand";
 import { QueryClient } from "react-query";
-import { Position, RolePosition } from "../types/editor";
+import { createEditorSlice, EditorSlice } from "./editor";
+import { createRolePositionsSlice, RolePositionsSlice } from "./rolePositions";
 
 export const queryClient = new QueryClient();
 
-type StoreType = {
-  rolePositions: Record<RolePosition["id"], RolePosition>;
-  zoom: number;
-  activeItemId: string;
-  translations: Position;
-  setPosition: (position: RolePosition) => void;
-  setZoom: (newZoom: number) => void;
-  setActiveItemId: (newId: string) => void;
-  setTranslations: (newTranslations: Position) => void;
-};
+export type StoreType = EditorSlice & RolePositionsSlice;
 
 export const useStore = create<StoreType>((set) => ({
-  rolePositions: {},
-  zoom: 1,
-  activeItemId: "",
-  translations: { x: 0, y: 0 },
-  setPosition: (position) =>
-    set(
-      produce((state) => {
-        state.rolePositions[position.id] = position;
-      })
-    ),
-  setZoom: (newZoom: number) => set(() => ({ zoom: newZoom })),
-  setActiveItemId: (newId: string) => set(() => ({ activeItemId: newId })),
-  setTranslations: (newTranslations) => set(() => ({ translations: newTranslations })),
+  ...createEditorSlice(set as unknown as SetState<EditorSlice>),
+  ...createRolePositionsSlice(set as unknown as SetState<RolePositionsSlice>),
 }));
