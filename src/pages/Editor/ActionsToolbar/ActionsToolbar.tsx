@@ -1,4 +1,5 @@
 import { Menu } from "@headlessui/react";
+import { css } from "@stitches/react";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { IconOnlyButton } from "@/shared/components/IconOnlyButton/IconOnlyButton";
 import {
@@ -24,17 +25,17 @@ export const ActionsToolbar = () => {
       <IconOnlyButton icon="redo" text="Redo" handler={() => {}} disabled={false} />
       <Divider />
       <Menu as="div">
-        <Menu.Button css={ExportButton}>
+        <Menu.Button className={css(ExportButton)}>
           Export <Icon type="arrow-down" />
         </Menu.Button>
-        <Menu.Items css={ExportMenu}>
-          <Menu.Item as="button" css={ExportItem}>
+        <Menu.Items className={css(ExportMenu)}>
+          <Menu.Item as="button" className={css(ExportItem)}>
             <Icon type="download" /> As JSON
           </Menu.Item>
-          <Menu.Item as="button" css={ExportItem}>
+          <Menu.Item as="button" className={css(ExportItem)}>
             <Icon type="image" /> As image
           </Menu.Item>
-          <Menu.Item as="button" css={ExportItem}>
+          <Menu.Item as="button" className={css(ExportItem)}>
             <Icon type="pdf" /> As PDF
           </Menu.Item>
         </Menu.Items>

@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
+import { styled } from "@/shared/constants/stitches.config";
 
-export const container = styled.div`
-  background: ${({ theme }) => theme.color.neutralDarker};
-  color: ${({ theme }) => theme.color.textNormal};
-  height: 100%;
-`;
+export const container = styled("div", {
+  background: "$neutralDarker",
+  color: "$textNormal",
+  height: "100%",
+});

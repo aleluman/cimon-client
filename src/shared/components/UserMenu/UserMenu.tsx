@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { usePopper } from "react-popper";
 import { Popover } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { MenuContainer, UserMenuItem, UserNameContainer } from "./styles";
+import { css } from "@/shared/constants/stitches.config";
 
 type UserMenuProps = { username: string };
 
@@ -26,14 +27,14 @@ export const UserMenu = ({ username }: UserMenuProps) => {
 
   return (
     <Popover>
-      <Popover.Button ref={setReferenceElement} css={UserNameContainer}>
+      <Popover.Button ref={setReferenceElement} className={css(UserNameContainer)}>
         {username}
         <Icon type="arrow-down" />
       </Popover.Button>
       <Popover.Panel
         style={popper}
         ref={setPopperElement}
-        css={MenuContainer}
+        className={css(MenuContainer)}
         {...attributes.popper}
       >
         <UserMenuItem role="button" tabIndex={0}>

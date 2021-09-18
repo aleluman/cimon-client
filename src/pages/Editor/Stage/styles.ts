@@ -1,36 +1,29 @@
-import styled from "@emotion/styled";
+import { styled } from "@/shared/constants/stitches.config";
 
-export const Container = styled.div`
-  width: 100vw;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  touch-action: none;
-`;
+export const Container = styled("div", {
+  width: "100vw",
+  height: "100%",
+  position: "relative",
+  overflow: "hidden",
+  touchAction: "none",
+});
 
-export const Background = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  touch-action: none;
-  background: ${({ theme }) => theme.color.neutralDarker};
-`;
+export const Background = styled("div", {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  touchAction: "none",
+  background: "$neutralDarker",
+});
 
-type StageProps = {
-  x: number;
-  y: number;
-  zoom: number;
-};
+export const ChildContainer = styled("div", {
+  position: "relative",
+  width: 0,
+  height: 0,
+  transformOrigin: "0% 0%",
+  touchAction: "none",
 
-export const ChildContainer = styled.div<StageProps>`
-  position: relative;
-  width: 0px;
-  height: 0px;
-  transform-origin: 0% 0%;
-  touch-action: none;
-  transform: ${({ x, y, zoom }) => `translate3d(${x}px,${y}px,0) scale3d(${zoom},${zoom},${zoom})`};
-
-  & > * {
-    position: absolute;
-  }
-`;
+  "& > *": {
+    position: "absolute",
+  },
+});

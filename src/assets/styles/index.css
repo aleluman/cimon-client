@@ -31,71 +31,15 @@ body {
 }
 
 .light {
-  --primary: #4883d2;
-  --primary-accent: #3080eb;
-  --primary-light: #d8e5f5;
-  --yellow: #f1c410;
-  --red: #e04545;
   --neutral-darker: #e9eef9;
-  --neutral-dark: #e6edf8;
-  --neutral-light: #f4f7fd;
-  --neutral-lighter: #f5f9ff;
-  --neutral-lightest: #fafcfd;
   --neutral-full: #ffffff;
-  --text-normal: #364f77;
-  --text-important: #222d55;
-  --text-dull: #58739b;
-  --border: #d8e5f5;
-  --border-light: #d8e5f5;
-  --border-dark: #d8e5f5;
-  --text-reverse: #fafcff;
-  --icon-normal: #86a1c9;
-  --icon-gray: #96aac7;
-  --icon-disabled: #d0dde9;
-  --text-error: #cb2222;
-  --toast-background: #ffffff33;
-  --dialog-background: #ffffff59;
-  --popover-background: #ffffffb6;
-  --popover-select: #ccd6f09c;
   --popover-border: #ccdcff;
-  --subtle-shadow: rgba(14, 21, 46, 0.06);
-  --shadow: rgba(14, 21, 46, 0.25);
-  --strong-shadow: rgba(14, 21, 46, 0.6);
-  --red-shadow: rgb(231, 169, 169);
 }
 
 .dark {
-  --primary: #3d72b8;
-  --primary-accent: #3080eb;
-  --primary-light: #1f1f1f;
-  --yellow: #f1c410;
-  --red: #a30808;
   --neutral-darker: #222222;
-  --neutral-dark: #242424;
-  --neutral-light: #2e2e2e;
-  --neutral-lighter: #313131;
-  --neutral-lightest: #3d3d3d;
   --neutral-full: #414141;
-  --text-normal: #d5d6db;
-  --text-important: #eff0f7;
-  --text-dull: #969696;
-  --text-reverse: #fafcff;
-  --border: #2e2e2e;
-  --border-light: #363636;
-  --border-dark: #242424;
-  --icon-normal: #acacac;
-  --icon-gray: #d3d3d3;
-  --icon-disabled: #585858;
-  --text-error: #cb2222;
-  --toast-background: #44444477;
-  --dialog-background: #44444493;
-  --popover-background: #4e4e4e9c;
-  --popover-select: #66666652;
   --popover-border: #313131;
-  --subtle-shadow: rgba(11, 11, 12, 0.4);
-  --shadow: rgba(11, 11, 12, 0.5);
-  --strong-shadow: rgb(11, 11, 12);
-  --red-shadow: rgb(90, 14, 14);
 }
 
 ::-webkit-scrollbar {
@@ -112,20 +56,4 @@ body {
   background: var(--neutral-full);
   border: 1px solid var(--popover-border);
   border-radius: 50px;
-}
-
-@supports not (backdrop-filter: blur(12px)) {
-  .light {
-    --popover-background: #fffffff3;
-    --popover-select: #ccd6f0f3;
-    --dialog-background: #ffffffde;
-    --toast-background: #fffffff3;
-  }
-
-  .dark {
-    --dialog-background: #444444ef;
-    --popover-background: #4e4e4ef8;
-    --popover-select: #666666f8;
-    --toast-background: #444444ef;
-  }
 }

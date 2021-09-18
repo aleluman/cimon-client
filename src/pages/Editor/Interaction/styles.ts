@@ -1,11 +1,18 @@
-import styled from "@emotion/styled";
+import { styled } from "@/shared/constants/stitches.config";
 
-type PathProps = { active: boolean };
+export const Path = styled("path", {
+  stroke: "$iconNormal",
+  fill: "none",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  pointerEvents: "auto",
 
-export const Path = styled.path<PathProps>`
-  stroke: ${({ active, theme }) => (active ? theme.color.primaryAccent : theme.color.iconNormal)};
-  fill: none;
-  stroke-width: ${({ active }) => (active ? 3 : 2)}px;
-  stroke-linecap: round;
-  pointer-events: auto;
-`;
+  variants: {
+    active: {
+      true: {
+        stroke: "$primaryAccent",
+        strokeWidth: 3,
+      },
+    },
+  },
+});

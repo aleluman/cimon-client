@@ -1,9 +1,5 @@
-import styled from "@emotion/styled";
+import { styled } from "@/shared/constants/stitches.config";
 
-type PathProps = {
-  color?: string;
-};
-
-export const Path = styled.path<PathProps>`
-  fill: ${({ color, theme }) => color || theme.color.iconNormal};
-`;
+export const Path = styled("path", {
+  fill: "$iconNormal",
+});

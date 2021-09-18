@@ -1,76 +1,79 @@
-import { css, Theme } from "@emotion/react";
+import { styled } from "@/shared/constants/stitches.config";
 
-export const AmbitButton = (theme: Theme) => css`
-  display: flex;
-  max-width: 16rem;
-  gap: 0.4rem;
-  padding: 0.4rem 0.6rem;
-  background: transparent;
-  border: 1px solid ${theme.color.popoverBorder};
-  border-radius: 8px;
-  color: ${theme.color.textImportant};
-  cursor: pointer;
-  transition: box-shadow ease 0.25s;
+export const AmbitButton = styled("button", {
+  display: "flex",
+  maxWidth: "16rem",
+  gap: "0.4rem",
+  padding: "0.4rem 0.6rem",
+  background: "transparent",
+  border: "1px solid $popoverBorder",
+  borderRadius: "8px",
+  color: "$textImportant",
+  cursor: "pointer",
+  transition: "box-shadow ease 0.25s",
 
-  &:hover {
-    box-shadow: 0 2px 16px -4px ${theme.color.shadow};
-  }
+  "&:hover": {
+    boxShadow: "$hoverShadowSmall",
+  },
 
-  & p {
-    margin: 0;
-    display: block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-`;
+  "& p": {
+    margin: 0,
+    display: "block",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+  },
+});
 
-export const AmbitMenu = (theme: Theme) => css`
-  display: flex;
-  position: absolute;
-  margin-top: 0px;
-  max-width: 16rem;
-  max-height: 22rem;
-  backdrop-filter: blur(12px);
-  padding: 0.2rem;
-  background: ${theme.color.popoverBackground};
-  flex-direction: column;
-  border-radius: 8px;
-  border: 1px solid ${theme.color.popoverBorder};
-  box-shadow: 0 0 16px ${theme.color.shadow};
-  overflow: auto;
-  z-index: 1;
-`;
+export const AmbitMenu = styled("div", {
+  display: "flex",
+  position: "absolute",
+  marginTop: "0px",
+  maxWidth: "16rem",
+  maxHeight: "22rem",
+  backdropFilter: "blur(12px)",
+  padding: "0.2rem",
+  background: "$popoverBackground",
+  flexDirection: "column",
+  borderRadius: "8px",
+  border: "1px solid $popoverBorder",
+  boxShadow: "$hoverShadowLarge",
+  overflow: "auto",
+  zIndex: 1,
+});
 
-export const AmbitItem = (theme: Theme, selected: boolean) => css`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
-  gap: 1rem;
-  background: transparent;
-  color: ${theme.color.textNormal};
-  border: none;
-  padding: 0.4rem;
-  padding-right: 0.4rem;
-  border-radius: 4px;
-  cursor: pointer;
+export const AmbitItem = styled("button", {
+  display: "flex",
+  justifyContent: "space-between",
+  width: "100%",
+  alignItems: "center",
+  gap: "1rem",
+  background: "transparent",
+  color: "$textNormal",
+  border: "none",
+  padding: "0.4rem",
+  paddingRight: "0.4rem",
+  borderRadius: "4px",
+  cursor: "pointer",
 
-  & p {
-    margin: 0;
-    display: block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+  "& p": {
+    margin: 0,
+    display: "block",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+  },
 
-  &:hover {
-    background: ${theme.color.popoverSelect};
-  }
+  "&:hover": {
+    background: "$popoverSelect",
+  },
 
-  ${selected &&
-  css`
-    font-weight: 800;
-    color: ${theme.color.textImportant};
-  `}
-`;
+  variants: {
+    selected: {
+      true: {
+        fontWeight: 700,
+        color: "$textImportant",
+      },
+    },
+  },
+});

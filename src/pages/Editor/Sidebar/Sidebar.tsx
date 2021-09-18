@@ -11,6 +11,8 @@ import {
   TitleName,
 } from "./styles";
 import { useStore } from "@/shared/state/store";
+import { RoleSidebar } from "./RoleSidebar";
+import { InteractionSidebar } from "./InteractionSidebar";
 
 export const Sidebar = () => {
   const [hidden, setHidden] = useState(false);
@@ -19,6 +21,8 @@ export const Sidebar = () => {
   return (
     <SidebarContainer hidden={hidden}>
       <SidebarWrapper>
+        {activeItem.type === "role" && <RoleSidebar roleId={activeItem.id} />}
+        {activeItem.type === "interaction" && <InteractionSidebar />}
         {activeItem.type === "none" && (
           <>
             <Title>
@@ -31,11 +35,11 @@ export const Sidebar = () => {
               placeholder="Add a description here..."
             />
             <Help>Select a role or an interaction to view and edit its details.</Help>
-            <HideButton onClick={() => setHidden((prev) => !prev)}>
-              <Icon type={hidden ? "arrow-left" : "arrow-right"} color="var(--white)" />
-            </HideButton>
           </>
         )}
+        <HideButton onClick={() => setHidden((prev) => !prev)}>
+          <Icon type={hidden ? "arrow-left" : "arrow-right"} color="var(--white)" />
+        </HideButton>
       </SidebarWrapper>
     </SidebarContainer>
   );

@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
+import { styled } from "@stitches/react";
 
-export const SvgStage = styled.svg`
-  overflow: visible;
-  z-index: -1;
-  pointer-events: none;
-`;
+export const SvgStage = styled("svg", {
+  overflow: "visible",
+  zIndex: -1,
+  pointerRvents: "none",
+});

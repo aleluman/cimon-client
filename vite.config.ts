@@ -1,14 +1,11 @@
 import { defineConfig } from "vite";
 import reactRefresh from "@vitejs/plugin-react-refresh";
+import reactJsx from "vite-react-jsx";
 import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [reactRefresh()],
-  esbuild: {
-    jsxFactory: `jsx`,
-    jsxInject: `import React from 'react'; import { jsx } from '@emotion/react'`,
-  },
+  plugins: [reactRefresh(), reactJsx()],
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
   },

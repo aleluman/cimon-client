@@ -32,5 +32,5 @@
     ],
     "no-param-reassign": "off"
   },
-  "ignorePatterns": ["vite.config.ts"]
+  "ignorePatterns": ["vite.config.ts", "stitches.config.ts"]
 }

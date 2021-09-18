@@ -11,7 +11,12 @@ export const RoleMenu = memo(({ zoom }: RoleMenuProps) => {
   const displacement = 4.1 + 1 / (zoom / 1.5);
 
   return (
-    <RoleMenuContainer displacement={displacement} zoom={zoom}>
+    <RoleMenuContainer
+      css={{
+        transform: `translateX(-50%) scale(${1 / zoom})`,
+        top: `${displacement}rem`,
+      }}
+    >
       <IconOnlyButton icon="edit" text="Edit name" handler={() => {}} />
       <IconOnlyButton icon="delete" text="Delete" handler={() => {}} />
       <Divider />

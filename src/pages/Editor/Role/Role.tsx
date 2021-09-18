@@ -2,7 +2,6 @@ import { useGesture } from "@use-gesture/react";
 import { Abstract, Body, Container, Title } from "./styles";
 import { RoleType } from "@/shared/types/editor";
 import { Icon } from "@/shared/components/Icon/Icon";
-import { roleDimentions } from "@/shared/constants/editorConfigs";
 import { RoleMenu } from "../RoleMenu/RoleMenu";
 import { useUpdateRole } from "@/shared/api/role";
 import { useStore } from "@/shared/state/store";
@@ -25,7 +24,7 @@ export const Role = ({ role }: RoleProps) => {
     {
       onDrag: ({ delta: [dx, dy] }) =>
         setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
-      onDragEnd: () => updateRole.mutate({ id: role.id, x, y, role: "repository" }),
+      onDragEnd: () => updateRole.mutate({ x, y }),
       onClick: () => setActiveItem({ id: role.id, type: "role" }),
       onContextMenu: ({ event }) => event.preventDefault(),
     },
@@ -35,15 +34,12 @@ export const Role = ({ role }: RoleProps) => {
   return (
     <Container
       {...roleHandlers()}
-      height={roleDimentions.height}
-      width={roleDimentions.width}
       active={isActive}
-      x={x}
-      y={y}
+      css={{ transform: `translate3d(${x}px,${y}px,0)` }}
     >
       <Title>
         <Icon type={`${role.role}-${role.solutionUse}`} />
-        {role.abstract && <Abstract>Abstract</Abstract>}
+        {role.abstract && <Abstract />}
         {role.numberOfActors}
       </Title>
       <Body>{role.name}</Body>

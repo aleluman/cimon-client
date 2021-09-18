@@ -10,7 +10,7 @@ type IconProps = {
 export const Icon = ({ type, size = 16, color }: IconProps) => {
   return (
     <svg viewBox="0 0 28 28" style={{ width: `${size}px` }}>
-      <Path color={color} d={`${iconPaths[type]}`} />
+      <Path css={{ color }} d={`${iconPaths[type]}`} />
     </svg>
   );
 };
