@@ -94,8 +94,8 @@
   "roles": [
     {
       "id": "1",
-      "x": 316,
-      "y": 144,
+      "x": -28.3679104006658,
+      "y": 36.937803162402474,
       "name": "lol",
       "description": "",
       "role": "repository",
@@ -106,8 +106,8 @@
     },
     {
       "id": "2",
-      "x": 286,
-      "y": 386,
+      "x": 349,
+      "y": 398,
       "name": "lol",
       "description": "",
       "role": "repository",
@@ -118,13 +118,13 @@
     },
     {
       "id": "3",
-      "x": 627,
-      "y": 221,
+      "x": 600,
+      "y": 100,
       "name": "lol",
       "description": "",
-      "role": "repository",
-      "numberOfActors": "0..N",
-      "solutionUse": "internal",
+      "role": "human",
+      "numberOfActors": "1..N",
+      "solutionUse": "both",
       "abstract": false,
       "connectedRolesIds": []
     }

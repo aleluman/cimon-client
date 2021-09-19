@@ -1,4 +1,4 @@
-import { styled } from "@/shared/constants/stitches.config";
+import { styled } from "@/shared/configs/stitches";
 
 export const UserNameContainer = styled("button", {
   display: "flex",
@@ -23,7 +23,7 @@ export const MenuContainer = styled("div", {
   backdropFilter: "blur(12px)",
   zIndex: 9,
   padding: "0.2rem",
-  borderRadius: "4px",
+  borderRadius: "8px",
   border: "1px solid $popoverBorder",
   boxShadow: "$hoverShadowLarge",
   background: "$popoverBackground",
@@ -43,4 +43,10 @@ export const UserMenuItem = styled("button", {
   "&:hover": {
     background: "$popoverSelect",
   },
+});
+
+export const ThemeContainer = styled("div", {
+  padding: "0.4rem",
+  paddingBottom: 0,
+  borderBottom: "1px solid $popoverBorder",
 });

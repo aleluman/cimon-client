@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Listbox } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { AmbitButton, AmbitItem, AmbitMenu } from "./styles";
-import { css } from "@/shared/constants/stitches.config";
+import { css } from "@/shared/configs/stitches";
 
 type AmbitSelectorProps = {
   ambits: {

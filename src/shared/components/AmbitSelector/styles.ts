@@ -1,4 +1,4 @@
-import { styled } from "@/shared/constants/stitches.config";
+import { styled } from "@/shared/configs/stitches";
 
 export const AmbitButton = styled("button", {
   display: "flex",

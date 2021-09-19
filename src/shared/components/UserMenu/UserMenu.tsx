@@ -2,8 +2,10 @@ import { useState } from "react";
 import { usePopper } from "react-popper";
 import { Popover } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
-import { MenuContainer, UserMenuItem, UserNameContainer } from "./styles";
-import { css } from "@/shared/constants/stitches.config";
+import { MenuContainer, ThemeContainer, UserMenuItem, UserNameContainer } from "./styles";
+import { css } from "@/shared/configs/stitches";
+import { Toggle } from "../Toggle/Toggle";
+import { ToggleOption } from "../ToggleOption/ToggleOption";
 
 type UserMenuProps = { username: string };
 
@@ -37,6 +39,18 @@ export const UserMenu = ({ username }: UserMenuProps) => {
         className={css(MenuContainer)}
         {...attributes.popper}
       >
+        <ThemeContainer>
+          <Toggle value="dark" label="Theme" onChange={() => {}}>
+            <ToggleOption value="light">
+              <Icon type="sun" />
+              Light
+            </ToggleOption>
+            <ToggleOption value="dark">
+              <Icon type="moon" />
+              Dark
+            </ToggleOption>
+          </Toggle>
+        </ThemeContainer>
         <UserMenuItem role="button" tabIndex={0}>
           <Icon type="logout" />
           Logout

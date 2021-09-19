@@ -1,4 +1,4 @@
-import { styled } from "@/shared/constants/stitches.config";
+import { styled } from "@/shared/configs/stitches";
 
 export const SidebarContainer = styled("aside", {
   display: "flex",
@@ -26,7 +26,6 @@ export const SidebarContainer = styled("aside", {
 });
 
 export const SidebarWrapper = styled("div", {
-  overflowY: "auto",
   height: "100%",
 });
 
@@ -59,6 +58,7 @@ export const Title = styled("h1", {
   color: "$textImportant",
   fontSize: "1rem",
   fontWeight: 500,
+  marginBottom: "0.8rem",
 });
 
 export const TitleName = styled("span", {
@@ -97,4 +97,10 @@ export const Description = styled("textarea", {
   fontSize: "0.85rem",
   padding: "0.5rem",
   background: "$neutralFull",
+
+  "&:focus": {
+    border: "1px solid $primary",
+    boxShadow: "$borderedPrimarySmall",
+    outline: "none",
+  },
 });

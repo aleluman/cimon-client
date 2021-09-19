@@ -1,5 +1,5 @@
-import { styled } from "@/shared/constants/stitches.config";
-import { roleDimentions } from "@/shared/constants/editorConfigs";
+import { styled } from "@/shared/configs/stitches";
+import { roleDimentions } from "@/shared/configs/editorConfigs";
 
 export const Container = styled("div", {
   display: "flex",

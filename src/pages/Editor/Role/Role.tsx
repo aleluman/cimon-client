@@ -20,22 +20,19 @@ export const Role = ({ role }: RoleProps) => {
 
   const isActive = activeItem.id === role.id;
 
-  const roleHandlers = useGesture(
-    {
-      onDrag: ({ delta: [dx, dy] }) =>
-        setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
-      onDragEnd: () => updateRole.mutate({ x, y }),
-      onClick: () => setActiveItem({ id: role.id, type: "role" }),
-      onContextMenu: ({ event }) => event.preventDefault(),
-    },
-    { drag: { filterTaps: true } }
-  );
+  const roleHandlers = useGesture({
+    onDrag: ({ delta: [dx, dy] }) =>
+      setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
+    onDragEnd: () => updateRole.mutate({ x, y }),
+    onClick: () => setActiveItem({ id: role.id, type: "role" }),
+    onContextMenu: ({ event }) => event.preventDefault(),
+  });
 
   return (
     <Container
-      {...roleHandlers()}
       active={isActive}
       css={{ transform: `translate3d(${x}px,${y}px,0)` }}
+      {...roleHandlers()}
     >
       <Title>
         <Icon type={`${role.role}-${role.solutionUse}`} />

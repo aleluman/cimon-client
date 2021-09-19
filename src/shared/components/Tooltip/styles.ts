@@ -1,4 +1,4 @@
-import { styled } from "@/shared/constants/stitches.config";
+import { styled } from "@/shared/configs/stitches";
 
 export const TooltipContainer = styled("div", {
   backgroundColor: "$primaryAccent",
