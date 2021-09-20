@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import { getPath } from "../../../shared/utils/curves";
-import { Path } from "./styles";
+import { ClickPath, Path } from "./styles";
 import { roleDimentions } from "@/shared/configs/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
 import { useStore } from "@/shared/state/store";
@@ -26,6 +26,7 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   return (
     <g {...pathHandlers()}>
       <Path d={curve} active={activeItem.id === interaction.id} />
+      <ClickPath d={curve} />
     </g>
   );
 };

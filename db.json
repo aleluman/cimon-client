@@ -38,95 +38,95 @@
   ],
   "graph": [
     {
-      "id": 1,
-      "roles": [
-        {
-          "id": "1",
-          "x": 100,
-          "y": 100,
-          "name": "asdf",
-          "description": "",
-          "role": "human",
-          "numberOfActors": "0..N",
-          "solutionUse": "internal",
-          "abstract": false,
-          "connectedRolesIds": []
-        },
-        {
-          "id": "2",
-          "x": 300,
-          "y": 300,
-          "name": "asdf",
-          "description": "",
-          "role": "human",
-          "numberOfActors": "0..N",
-          "solutionUse": "internal",
-          "abstract": true,
-          "connectedRolesIds": []
-        },
-        {
-          "id": "3",
-          "x": 600,
-          "y": 100,
-          "name": "asdf",
-          "description": "",
-          "role": "human",
-          "numberOfActors": "0..N",
-          "solutionUse": "internal",
-          "abstract": false,
-          "connectedRolesIds": []
-        }
-      ],
-      "interactions": [
-        {
-          "id": "s",
-          "source": "1",
-          "target": "2"
-        },
-        {
-          "id": "f",
-          "source": "1",
-          "target": "3"
-        }
-      ]
+      "id": "1"
     }
   ],
   "roles": [
     {
       "id": "1",
-      "x": -28.3679104006658,
-      "y": 36.937803162402474,
-      "name": "lol",
+      "x": 221,
+      "y": 473,
+      "name": "asdf",
       "description": "",
-      "role": "repository",
+      "role": "human",
       "numberOfActors": "0..N",
       "solutionUse": "internal",
       "abstract": false,
-      "connectedRolesIds": []
+      "connectedRolesIds": [],
+      "graphId": "1"
     },
     {
       "id": "2",
-      "x": 349,
-      "y": 398,
-      "name": "lol",
+      "x": 568,
+      "y": 439,
+      "name": "asdf",
       "description": "",
-      "role": "repository",
+      "role": "human",
       "numberOfActors": "0..N",
       "solutionUse": "internal",
       "abstract": true,
-      "connectedRolesIds": []
+      "connectedRolesIds": [],
+      "graphId": "1"
     },
     {
       "id": "3",
-      "x": 600,
-      "y": 100,
-      "name": "lol",
+      "x": 378,
+      "y": 220,
+      "name": "asdf",
       "description": "",
       "role": "human",
-      "numberOfActors": "1..N",
-      "solutionUse": "both",
+      "numberOfActors": "0..N",
+      "solutionUse": "internal",
       "abstract": false,
-      "connectedRolesIds": []
+      "connectedRolesIds": [],
+      "graphId": "1"
+    }
+  ],
+  "interactions": [
+    {
+      "id": "Bc-Mz3BQCMpv6efZTRaM3",
+      "source": "2",
+      "target": "3",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "1"
+    },
+    {
+      "id": "D2-wDhYjzSNUbxUNt-8FG",
+      "source": "2",
+      "target": "1",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "1"
+    },
+    {
+      "id": "aG_-sdH5I4xI-weZepjYC",
+      "source": "1",
+      "target": "3",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "1"
+    },
+    {
+      "id": "5bBDGV05seeszuHSHQ-S0",
+      "source": "3",
+      "target": "3",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "1"
+    },
+    {
+      "id": "GJCwBmLAeTqOr2rtc02BI",
+      "source": "2",
+      "target": "2",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "1"
     }
   ]
 }

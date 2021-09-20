@@ -16,3 +16,9 @@ export const Path = styled("path", {
     },
   },
 });
+
+export const ClickPath = styled("path", {
+  strokeWidth: "16px",
+  stroke: "transparent",
+  fill: "none",
+});

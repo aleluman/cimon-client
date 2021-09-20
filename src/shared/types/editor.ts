@@ -45,8 +45,8 @@ export type InteractionType = {
   id: string;
   source: string;
   target: string;
-  sourceServices: Services;
-  targetServices: Services;
+  sourceServices: (keyof Services)[];
+  targetServices: (keyof Services)[];
   inherit: boolean;
 };
 
@@ -70,4 +70,11 @@ export type ActiveItem = {
   id: string;
   type: "role" | "interaction" | "none";
   new?: boolean;
+};
+
+export type PlaceholderInteraction = {
+  startNodeId: string;
+  start: Position;
+  end: Position;
+  color?: string;
 };

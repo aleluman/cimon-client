@@ -86,7 +86,6 @@ export const Help = styled("p", {
 });
 
 export const Description = styled("textarea", {
-  marginTop: "0.5rem",
   borderRadius: "8px",
   fontFamily: "inherit",
   color: "$textNormal",
@@ -103,4 +102,11 @@ export const Description = styled("textarea", {
     boxShadow: "$borderedPrimarySmall",
     outline: "none",
   },
+});
+
+export const Divider = styled("hr", {
+  marginTop: "1.4rem",
+  width: "calc(100%+2rem)",
+  border: "none",
+  borderTop: "1px solid $borderDark",
 });

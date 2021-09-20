@@ -1,5 +1,5 @@
 import { getRole, useUpdateRole } from "@/shared/api/role";
-import { SubTitle, Title, TitleName, Description } from "./styles";
+import { SubTitle, Title, TitleName, Description, Divider } from "./styles";
 import { Toggle } from "@/shared/components/Toggle/Toggle";
 import { ToggleOption } from "@/shared/components/ToggleOption/ToggleOption";
 import { Icon } from "@/shared/components/Icon/Icon";
@@ -60,6 +60,7 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
           Both
         </ToggleOption>
       </Toggle>
+      <Divider />
       <SubTitle>Description</SubTitle>
       <Description placeholder="Add a description here..." defaultValue={role.description} />
     </>

@@ -12,11 +12,18 @@ export const Container = styled("div", {
   borderRadius: "2px",
   touchAction: "none",
   userSelect: "none",
+  transition: "box-shadow ease 0.2s",
 
   variants: {
     active: {
       true: {
         boxShadow: "$borderedPrimary",
+        zIndex: 99,
+      },
+    },
+    beingHovered: {
+      true: {
+        boxShadow: "$borderedPrimary, 0 0 12px 6px $colors$primary",
         zIndex: 99,
       },
     },

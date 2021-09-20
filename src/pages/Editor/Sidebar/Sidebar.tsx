@@ -38,7 +38,7 @@ export const Sidebar = () => {
           </>
         )}
         <HideButton onClick={() => setHidden((prev) => !prev)}>
-          <Icon type={hidden ? "arrow-left" : "arrow-right"} color="var(--white)" />
+          <Icon type={hidden ? "arrow-left" : "arrow-right"} color="var(--white)" size={12} />
         </HideButton>
       </SidebarWrapper>
     </SidebarContainer>

@@ -28,3 +28,36 @@ export const useUpdateRole = (id: string) => {
 
   return mutation;
 };
+
+export const useCreateRole = () => {
+  const mutation = useMutation(
+    (newRole: RoleType) => axios.post<RoleType>(`http://localhost:8080/graph/1/roles/`, newRole),
+    {
+      onMutate: async (newRole) => {
+        const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
+        queryClient.setQueryData(["graph", "1"], {
+          ...graph,
+          roles: [...graph.roles, newRole],
+        });
+      },
+    }
+  );
+  return mutation;
+};
+
+export const useDeleteRole = () => {
+  const mutation = useMutation(
+    (roleId: string) => axios.delete<RoleType>(`http://localhost:8080/roles/${roleId}`),
+    {
+      onMutate: async (roleId) => {
+        const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
+        const filteredRoles = graph.roles.filter((role) => role.id !== roleId);
+        queryClient.setQueryData(["graph", "1"], {
+          ...graph,
+          roles: filteredRoles,
+        });
+      },
+    }
+  );
+  return mutation;
+};

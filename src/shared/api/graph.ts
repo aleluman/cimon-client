@@ -10,7 +10,9 @@ export const useGetGraph = () => {
   const queryData = useQuery(
     ["graph", id],
     async () => {
-      const graph = await axios.get<Graph>(`http://localhost:8080/graph/${id}`);
+      const graph = await axios.get<Graph>(
+        `http://localhost:8080/graph/${id}?_embed=interactions&_embed=roles`
+      );
       return graph.data;
     },
     {

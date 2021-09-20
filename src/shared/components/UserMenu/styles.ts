@@ -48,5 +48,6 @@ export const UserMenuItem = styled("button", {
 export const ThemeContainer = styled("div", {
   padding: "0.4rem",
   paddingBottom: 0,
+  marginBottom: "0.2rem",
   borderBottom: "1px solid $popoverBorder",
 });
