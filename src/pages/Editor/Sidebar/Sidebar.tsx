@@ -10,13 +10,13 @@ import {
   Title,
   TitleName,
 } from "./styles";
-import { useStore } from "@/shared/state/store";
+import { useEditor } from "@/shared/state/store";
 import { RoleSidebar } from "./RoleSidebar";
 import { InteractionSidebar } from "./InteractionSidebar";
 
 export const Sidebar = () => {
   const [hidden, setHidden] = useState(false);
-  const activeItem = useStore((state) => state.activeItem);
+  const activeItem = useEditor((state) => state.activeItem);
 
   return (
     <SidebarContainer hidden={hidden}>

@@ -3,18 +3,18 @@ import { useGesture } from "@use-gesture/react";
 import { Container, Background, ChildContainer } from "./styles";
 import { calcZoom, getMousePosition } from "@/shared/utils/zoom";
 import { zoomLimits } from "@/shared/configs/editorConfigs";
-import { useStore } from "@/shared/state/store";
+import { useEditor } from "@/shared/state/store";
 
 type StageProps = {
   children: ReactNode;
 };
 
 export const Stage = ({ children }: StageProps) => {
-  const { x, y } = useStore((state) => state.translations);
-  const zoom = useStore((state) => state.zoom);
-  const setZoom = useStore((state) => state.setZoom);
-  const setTranslations = useStore((state) => state.setTranslations);
-  const setActiveItem = useStore((state) => state.setActiveItem);
+  const { x, y } = useEditor((state) => state.translations);
+  const zoom = useEditor((state) => state.zoom);
+  const setZoom = useEditor((state) => state.setZoom);
+  const setTranslations = useEditor((state) => state.setTranslations);
+  const setActiveItem = useEditor((state) => state.setActiveItem);
   const backgroundRef = useRef<HTMLDivElement>(null);
 
   const stageHandlers = useGesture({

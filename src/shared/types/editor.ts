@@ -78,3 +78,10 @@ export type PlaceholderInteraction = {
   end: Position;
   color?: string;
 };
+
+export type PlaceholderRoleType = {
+  name: string;
+  role: RoleType["role"];
+  x: number;
+  y: number;
+};

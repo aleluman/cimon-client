@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Graph } from "../types/editor";
-import { useStore } from "../state/store";
+import { useEditor } from "../state/store";
 
 export const useGetGraph = () => {
-  const setPosition = useStore((state) => state.setPosition);
+  const setPosition = useEditor((state) => state.setPosition);
 
   const id = "1";
   const queryData = useQuery(

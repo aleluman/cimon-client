@@ -4,10 +4,12 @@ import { SvgStage } from "./styles";
 import { Role } from "../Role/Role";
 import { useGetGraph } from "@/shared/api/graph";
 import { PlaceHolderInteraction } from "../PlaceholderInteraction/PlaceholderInteraction";
-import { useStore } from "@/shared/state/store";
+import { useEditor } from "@/shared/state/store";
+import { PlaceholderRole } from "../PlaceholderRole/PlaceHolderRode";
 
 export const Canvas = () => {
-  const showPlaceholderInteraction = useStore((state) => state.showPlaceholderInteraction);
+  const showPlaceholderInteraction = useEditor((state) => state.showPlaceholderInteraction);
+  const placeholderRole = useEditor((state) => state.placeholderRole !== null);
   const { data, error, isLoading } = useGetGraph();
 
   if (error) return <div>Error</div>;
@@ -17,6 +19,7 @@ export const Canvas = () => {
   return (
     <Stage>
       {data?.roles && data.roles.map((role) => <Role role={role} key={role.id} />)}
+      {placeholderRole && <PlaceholderRole />}
       <SvgStage>
         {data?.interactions &&
           data.interactions.map((interaction) => (

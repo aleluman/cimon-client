@@ -46,15 +46,20 @@ export const useCreateRole = () => {
 };
 
 export const useDeleteRole = () => {
+  // todo: propagate delete on backend
   const mutation = useMutation(
     (roleId: string) => axios.delete<RoleType>(`http://localhost:8080/roles/${roleId}`),
     {
       onMutate: async (roleId) => {
         const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
         const filteredRoles = graph.roles.filter((role) => role.id !== roleId);
+        const filteredInteractions = graph.interactions.filter((interaction) => {
+          return interaction.source !== roleId && interaction.target !== roleId;
+        });
         queryClient.setQueryData(["graph", "1"], {
           ...graph,
           roles: filteredRoles,
+          interactions: filteredInteractions,
         });
       },
     }

@@ -3,28 +3,36 @@ import { getPath } from "../../../shared/utils/curves";
 import { ClickPath, Path } from "./styles";
 import { roleDimentions } from "@/shared/configs/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
-import { useStore } from "@/shared/state/store";
+import { useEditor } from "@/shared/state/store";
+import { useDeleteInteraction } from "@/shared/api/interaction";
 
 type InteractionProps = {
   interaction: InteractionType;
 };
 
 export const Interaction = ({ interaction }: InteractionProps) => {
-  const startPosition = useStore((state) => state.rolePositions[interaction.source]);
-  const endPosition = useStore((state) => state.rolePositions[interaction.target]);
-  const activeItem = useStore((state) => state.activeItem);
-  const setActiveItem = useStore((state) => state.setActiveItem);
+  const startPosition = useEditor((state) => state.rolePositions[interaction.source]);
+  const endPosition = useEditor((state) => state.rolePositions[interaction.target]);
+  const activeItem = useEditor((state) => state.activeItem);
+  const setActiveItem = useEditor((state) => state.setActiveItem);
+  const deleteInteraction = useDeleteInteraction();
 
   const pathHandlers = useGesture({
     onClick: () => {
       setActiveItem({ id: interaction.id, type: "interaction" });
+    },
+    onKeyDown: ({ event }) => {
+      const { key } = event;
+      if (key === "Delete") {
+        deleteInteraction.mutate(interaction.id);
+      }
     },
   });
 
   const curve = getPath(roleDimentions.width, roleDimentions.height, startPosition, endPosition);
 
   return (
-    <g {...pathHandlers()}>
+    <g {...pathHandlers()} tabIndex={0}>
       <Path d={curve} active={activeItem.id === interaction.id} />
       <ClickPath d={curve} />
     </g>

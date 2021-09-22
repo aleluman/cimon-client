@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useGesture } from "@use-gesture/react";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
@@ -12,12 +13,41 @@ import {
 } from "./styles";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 import { useGetProcess } from "@/shared/api/process";
+import { useEditor } from "@/shared/state/store";
+import { getMousePositionInCanvas } from "@/shared/utils/mousePosition";
+import { createRole } from "@/shared/utils/createItems";
+import { PlaceholderRoleType } from "@/shared/types/editor";
+import { useCreateRole } from "@/shared/api/role";
 
-export const RoleBar = () => {
+export const RoleBar = memo(() => {
+  const setPlaceholderRole = useEditor((state) => state.setPlaceholderRole);
+  const postRole = useCreateRole();
+
   const { data } = useGetProcess();
 
   const handlers = useGesture({
-    onDrag: ({ args: [type, name] }) => {},
+    onDragStart: ({ args: [role, name], values: [x, y] }) => {
+      const { translations, zoom } = useEditor.getState();
+      const position = getMousePositionInCanvas(zoom, translations, { x, y });
+      setPlaceholderRole({ name, role, x: position.x, y: position.y });
+    },
+    onDrag: ({ args: [role, name], delta: [dx, dy] }) => {
+      const { placeholderRole, zoom } = useEditor.getState();
+      if (placeholderRole) {
+        const position = {
+          x: placeholderRole.x + dx / zoom,
+          y: placeholderRole.y + dy / zoom,
+        };
+        setPlaceholderRole({ name, role, x: position.x, y: position.y });
+      }
+    },
+    onDragEnd: ({ args: [role, name] }) => {
+      const { placeholderRole } = useEditor.getState();
+      const { x, y } = placeholderRole as PlaceholderRoleType;
+      const newRole = createRole(name, role, x, y);
+      postRole.mutate(newRole);
+      setPlaceholderRole(null);
+    },
   });
 
   return (
@@ -55,4 +85,4 @@ export const RoleBar = () => {
       )}
     </RoleBarContainer>
   );
-};
+});

@@ -42,11 +42,22 @@ export const Title = styled("span", {
 
 export const Body = styled("div", {
   display: "flex",
-  alignItems: "center",
   justifyContent: "center",
-  width: "100%",
+  alignItems: "center",
+  padding: "0.2rem",
   height: "100%",
-  fontSize: "0.85rem",
+  fontSize: "0.8rem",
+});
+
+export const Name = styled("span", {
+  textAlign: "center",
+  "-webkit-line-clamp": 3,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  minWidth: 0,
+  display: "-webkit-box",
+  "-webkit-box-orient": "vertical",
+  wordWrap: "break-word",
 });
 
 export const Abstract = styled("p", {

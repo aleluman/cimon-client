@@ -6,9 +6,9 @@ import { createTemporaryItemsSlice, TemporaryItemsSlice } from "./temporaryItems
 
 export const queryClient = new QueryClient();
 
-export type StoreType = EditorSlice & RolePositionsSlice & TemporaryItemsSlice;
+export type EditorStoreType = EditorSlice & RolePositionsSlice & TemporaryItemsSlice;
 
-export const useStore = create<StoreType>((set) => ({
+export const useEditor = create<EditorStoreType>((set) => ({
   ...createEditorSlice(set as unknown as SetState<EditorSlice>),
   ...createRolePositionsSlice(set as unknown as SetState<RolePositionsSlice>),
   ...createTemporaryItemsSlice(set as unknown as SetState<TemporaryItemsSlice>),

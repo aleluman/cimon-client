@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useGesture } from "@use-gesture/react";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
-import { useStore } from "@/shared/state/store";
+import { useEditor } from "@/shared/state/store";
 import { ButtonConnector } from "./styles";
 import { Position } from "@/shared/types/editor";
 import { getConnectedNodesIds } from "@/shared/utils/connectedNodes";
@@ -11,7 +11,7 @@ import { createInteraction } from "@/shared/utils/createItems";
 import { theme } from "@/shared/configs/stitches";
 
 const calculateHoverNode = (update: Position) => {
-  const rolesPositionsRecord = useStore.getState().rolePositions;
+  const rolesPositionsRecord = useEditor.getState().rolePositions;
   const rolesPositions = Object.values(rolesPositionsRecord);
   const isHovering = rolesPositions.some((position) => {
     if (
@@ -20,12 +20,12 @@ const calculateHoverNode = (update: Position) => {
       update.y >= position.y &&
       update.y <= position.y + 16 * 5
     ) {
-      useStore.setState({ roleBeingHovered: position.id });
+      useEditor.setState({ roleBeingHovered: position.id });
       return true;
     }
     return false;
   });
-  if (!isHovering) useStore.setState({ roleBeingHovered: "" });
+  if (!isHovering) useEditor.setState({ roleBeingHovered: "" });
 };
 
 type RoleConnectorProps = {
@@ -39,11 +39,11 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [using, setUsing] = useState(false);
   const [hover, setHover] = useState(false);
-  const currentZoom = useStore((state) => state.zoom);
-  const hoveringNodeId = useStore((state) => state.roleBeingHovered);
-  const setRoleBeingHovered = useStore((state) => state.setRoleBeingHovered);
-  const setShowPlaceholderInteraction = useStore((state) => state.setShowPlaceholderInteraction);
-  const setPlaceholderInteraction = useStore((state) => state.setPlaceholderInteraction);
+  const currentZoom = useEditor((state) => state.zoom);
+  const hoveringNodeId = useEditor((state) => state.roleBeingHovered);
+  const setRoleBeingHovered = useEditor((state) => state.setRoleBeingHovered);
+  const setShowPlaceholderInteraction = useEditor((state) => state.setShowPlaceholderInteraction);
+  const setPlaceholderInteraction = useEditor((state) => state.setPlaceholderInteraction);
   const postInteraction = useCreateInteraction();
 
   const connectedNodes = getConnectedNodesIds(roleId).map((item) => item.roleId);

@@ -23,3 +23,23 @@ export const useCreateInteraction = () => {
   );
   return mutation;
 };
+
+export const useDeleteInteraction = () => {
+  const mutation = useMutation(
+    (interactionId: string) =>
+      axios.delete<InteractionType>(`http://localhost:8080/interactions/${interactionId}`),
+    {
+      onMutate: async (interactionId) => {
+        const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
+        const filteredInteractions = graph.interactions.filter(
+          (interaction) => interaction.id !== interactionId
+        );
+        queryClient.setQueryData(["graph", "1"], {
+          ...graph,
+          interactions: filteredInteractions,
+        });
+      },
+    }
+  );
+  return mutation;
+};
