@@ -1,8 +1,8 @@
 import create, { SetState } from "zustand";
 import { QueryClient } from "react-query";
-import { createEditorSlice, EditorSlice } from "./editor";
-import { createRolePositionsSlice, RolePositionsSlice } from "./rolePositions";
-import { createTemporaryItemsSlice, TemporaryItemsSlice } from "./temporaryItems";
+import { createEditorSlice, EditorSlice } from "./slices/editor";
+import { createRolePositionsSlice, RolePositionsSlice } from "./slices/rolePositions";
+import { createTemporaryItemsSlice, TemporaryItemsSlice } from "./slices/temporaryItems";
 
 export const queryClient = new QueryClient();
 

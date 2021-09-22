@@ -1,6 +1,6 @@
 import produce from "immer";
 import { SetState } from "zustand";
-import { RolePosition } from "../types/editor";
+import { RolePosition } from "../../types/editor";
 
 export type RolePositionsSlice = {
   rolePositions: Record<RolePosition["id"], RolePosition>;

@@ -42,7 +42,6 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
   const currentZoom = useEditor((state) => state.zoom);
   const hoveringNodeId = useEditor((state) => state.roleBeingHovered);
   const setRoleBeingHovered = useEditor((state) => state.setRoleBeingHovered);
-  const setShowPlaceholderInteraction = useEditor((state) => state.setShowPlaceholderInteraction);
   const setPlaceholderInteraction = useEditor((state) => state.setPlaceholderInteraction);
   const postInteraction = useCreateInteraction();
 
@@ -56,7 +55,6 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
         x: position.x + dx / currentZoom,
         y: position.y + dy / currentZoom,
       });
-      setShowPlaceholderInteraction(true);
       setPlaceholderInteraction({
         startNodeId: roleId,
         start: { x: nodeX + 16 * 4, y: nodeY + 16 * 2.5 },
@@ -73,7 +71,7 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
     onDragEnd: () => {
       setPosition({ x: 0, y: 0 });
       setUsing(false);
-      setShowPlaceholderInteraction(false);
+      setPlaceholderInteraction(null);
       setRoleBeingHovered("");
       if (hoveringNodeId) {
         if (connectedNodes?.includes(hoveringNodeId)) {

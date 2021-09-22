@@ -1,5 +1,11 @@
 import { styled } from "@/shared/configs/stitches";
 
+export const PathContainer = styled("g", {
+  "&:focus": {
+    outline: "none",
+  },
+});
+
 export const Path = styled("path", {
   stroke: "$iconNormal",
   fill: "none",
@@ -21,4 +27,5 @@ export const ClickPath = styled("path", {
   strokeWidth: "16px",
   stroke: "transparent",
   fill: "none",
+  pointerEvents: "auto",
 });

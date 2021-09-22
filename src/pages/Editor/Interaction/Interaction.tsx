@@ -1,6 +1,6 @@
 import { useGesture } from "@use-gesture/react";
 import { getPath } from "../../../shared/utils/curves";
-import { ClickPath, Path } from "./styles";
+import { ClickPath, Path, PathContainer } from "./styles";
 import { roleDimentions } from "@/shared/configs/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
@@ -32,9 +32,9 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const curve = getPath(roleDimentions.width, roleDimentions.height, startPosition, endPosition);
 
   return (
-    <g {...pathHandlers()} tabIndex={0}>
+    <PathContainer tabIndex={0}>
       <Path d={curve} active={activeItem.id === interaction.id} />
-      <ClickPath d={curve} />
-    </g>
+      <ClickPath d={curve} {...pathHandlers()} />
+    </PathContainer>
   );
 };

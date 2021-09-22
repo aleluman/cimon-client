@@ -7,7 +7,7 @@ import { Sidebar } from "./Sidebar/Sidebar";
 
 export const Editor = () => {
   return (
-    <Container>
+    <Container id="editor">
       <Canvas />
       <ActionsToolbar />
       <RoleBar />
