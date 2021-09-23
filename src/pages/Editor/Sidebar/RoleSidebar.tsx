@@ -1,28 +1,31 @@
-import { getRole, useUpdateRole } from "@/shared/api/role";
+import { useParams } from "react-router-dom";
+import { getRole, useRole } from "@/shared/api/role";
 import { SubTitle, Title, TitleName, Description, Divider } from "./styles";
 import { Toggle } from "@/shared/components/Toggle/Toggle";
 import { ToggleOption } from "@/shared/components/ToggleOption/ToggleOption";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleType } from "@/shared/types/editor";
+import { EditorRouteParams } from "@/shared/types/routes";
 
 type RoleSidebarProps = {
   roleId: string;
 };
 
 export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
-  const role = getRole(roleId);
-  const updateRole = useUpdateRole(roleId);
+  const { ambitId } = useParams<EditorRouteParams>();
+  const role = getRole(roleId, ambitId);
+  const { updateRole } = useRole();
 
   const updateRoleType = (value: string) => {
-    updateRole.mutate({ role: value as RoleType["role"] });
+    updateRole.mutate({ id: roleId, role: value as RoleType["role"] });
   };
 
   const updateRoleActors = (value: string) => {
-    updateRole.mutate({ numberOfActors: value as RoleType["numberOfActors"] });
+    updateRole.mutate({ id: roleId, numberOfActors: value as RoleType["numberOfActors"] });
   };
 
   const updateRoleUse = (value: string) => {
-    updateRole.mutate({ solutionUse: value as RoleType["solutionUse"] });
+    updateRole.mutate({ id: roleId, solutionUse: value as RoleType["solutionUse"] });
   };
 
   return (

@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useGesture } from "@use-gesture/react";
@@ -6,9 +7,10 @@ import { useEditor } from "@/shared/state/store";
 import { ButtonConnector } from "./styles";
 import { Position } from "@/shared/types/editor";
 import { getConnectedNodesIds } from "@/shared/utils/connectedNodes";
-import { useCreateInteraction } from "@/shared/api/interaction";
-import { createInteraction } from "@/shared/utils/createItems";
+import { useInteraction } from "@/shared/api/interaction";
+import { createNewInteraction } from "@/shared/utils/createItems";
 import { theme } from "@/shared/configs/stitches";
+import { EditorRouteParams } from "@/shared/types/routes";
 
 const calculateHoverNode = (update: Position) => {
   const rolesPositionsRecord = useEditor.getState().rolePositions;
@@ -43,9 +45,10 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
   const hoveringNodeId = useEditor((state) => state.roleBeingHovered);
   const setRoleBeingHovered = useEditor((state) => state.setRoleBeingHovered);
   const setPlaceholderInteraction = useEditor((state) => state.setPlaceholderInteraction);
-  const postInteraction = useCreateInteraction();
+  const { createInteraction } = useInteraction();
+  const { ambitId } = useParams<EditorRouteParams>();
 
-  const connectedNodes = getConnectedNodesIds(roleId).map((item) => item.roleId);
+  const connectedNodes = getConnectedNodesIds(roleId, ambitId).map((item) => item.roleId);
 
   const handlers = useGesture({
     onDrag: ({ event, delta: [dx, dy] }) => {
@@ -77,8 +80,8 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
         if (connectedNodes?.includes(hoveringNodeId)) {
           toast.warning("Cannot create a link to an already linked role.");
         } else {
-          const newInteraction = createInteraction({ source: roleId, target: hoveringNodeId });
-          postInteraction.mutate(newInteraction);
+          const newInteraction = createNewInteraction({ source: roleId, target: hoveringNodeId });
+          createInteraction.mutate(newInteraction);
         }
       }
     },

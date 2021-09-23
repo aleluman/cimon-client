@@ -1,17 +1,23 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AppContainer, MainContent } from "./styles";
 import { Editor } from "./pages/Editor/Editor";
 import { Navbar } from "./shared/components/Navbar/Navbar";
-import "react-toastify/dist/ReactToastify.css";
 
 export const App = () => {
   return (
     <AppContainer>
-      <Navbar />
-      <MainContent>
-        <Editor />
-      </MainContent>
-      <ToastContainer />
+      <Router>
+        <Navbar />
+        <MainContent>
+          <Switch>
+            <Route path="/ambits/:ambitId/editor">
+              <Editor />
+            </Route>
+          </Switch>
+        </MainContent>
+        <ToastContainer />
+      </Router>
     </AppContainer>
   );
 };

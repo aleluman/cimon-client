@@ -1,24 +1,42 @@
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import { queryClient } from "../state/store";
 import { Graph, RoleType } from "../types/editor";
+import { EditorRouteParams } from "../types/routes";
 
-export const getRole = (id: string) => {
-  const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
+export const getRole = (id: string, ambitId: string) => {
+  const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
   const currentRole = graph.roles.find((role) => role.id === id) as RoleType;
   return currentRole;
 };
 
-export const useUpdateRole = (id: string) => {
-  const mutation = useMutation(
-    (updatedRole: Partial<RoleType>) =>
-      axios.patch<RoleType>(`http://localhost:8080/roles/${id}`, updatedRole),
+export const useRole = () => {
+  const { ambitId } = useParams<EditorRouteParams>();
+
+  const createRole = useMutation(
+    (newRole: RoleType) =>
+      axios.post<RoleType>(`http://localhost:8080/graph/${ambitId}/roles/`, newRole),
+    {
+      onMutate: async (newRole) => {
+        const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
+        queryClient.setQueryData(["graph", ambitId], {
+          ...graph,
+          roles: [...graph.roles, newRole],
+        });
+      },
+    }
+  );
+
+  const updateRole = useMutation(
+    (updatedRole: Partial<RoleType> & Pick<RoleType, "id">) =>
+      axios.patch<RoleType>(`http://localhost:8080/roles/${updatedRole.id}`, updatedRole),
     {
       onMutate: async (updatedRole) => {
-        const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
-        const filteredRoles = graph.roles.filter((role) => role.id !== id);
-        const currentRole = graph.roles.find((role) => role.id === id) as RoleType;
-        queryClient.setQueryData(["graph", "1"], {
+        const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
+        const filteredRoles = graph.roles.filter((role) => role.id !== updatedRole.id);
+        const currentRole = graph.roles.find((role) => role.id === updatedRole.id) as RoleType;
+        queryClient.setQueryData(["graph", ambitId], {
           ...graph,
           roles: [...filteredRoles, { ...currentRole, ...updatedRole }],
         });
@@ -26,37 +44,18 @@ export const useUpdateRole = (id: string) => {
     }
   );
 
-  return mutation;
-};
-
-export const useCreateRole = () => {
-  const mutation = useMutation(
-    (newRole: RoleType) => axios.post<RoleType>(`http://localhost:8080/graph/1/roles/`, newRole),
-    {
-      onMutate: async (newRole) => {
-        const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
-        queryClient.setQueryData(["graph", "1"], {
-          ...graph,
-          roles: [...graph.roles, newRole],
-        });
-      },
-    }
-  );
-  return mutation;
-};
-
-export const useDeleteRole = () => {
   // todo: propagate delete on backend
-  const mutation = useMutation(
+
+  const deleteRole = useMutation(
     (roleId: string) => axios.delete<RoleType>(`http://localhost:8080/roles/${roleId}`),
     {
       onMutate: async (roleId) => {
-        const graph = queryClient.getQueryData(["graph", "1"]) as Graph;
+        const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
         const filteredRoles = graph.roles.filter((role) => role.id !== roleId);
         const filteredInteractions = graph.interactions.filter((interaction) => {
           return interaction.source !== roleId && interaction.target !== roleId;
         });
-        queryClient.setQueryData(["graph", "1"], {
+        queryClient.setQueryData(["graph", ambitId], {
           ...graph,
           roles: filteredRoles,
           interactions: filteredInteractions,
@@ -64,5 +63,5 @@ export const useDeleteRole = () => {
       },
     }
   );
-  return mutation;
+  return { createRole, updateRole, deleteRole };
 };

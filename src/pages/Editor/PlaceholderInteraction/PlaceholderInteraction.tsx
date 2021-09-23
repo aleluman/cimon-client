@@ -1,8 +1,9 @@
 import { useEditor } from "@/shared/state/store";
+import { PlaceholderInteraction } from "@/shared/types/editor";
 import { Circle, PlaceholderPath } from "./styles";
 
 export const PlaceHolderInteraction = () => {
-  const interaction = useEditor((state) => state.placeholderInteraction);
+  const interaction = useEditor((state) => state.placeholderInteraction as PlaceholderInteraction);
 
   return (
     <g>

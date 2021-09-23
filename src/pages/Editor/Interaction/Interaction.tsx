@@ -4,7 +4,7 @@ import { ClickPath, Path, PathContainer } from "./styles";
 import { roleDimentions } from "@/shared/configs/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
-import { useDeleteInteraction } from "@/shared/api/interaction";
+import { useInteraction } from "@/shared/api/interaction";
 
 type InteractionProps = {
   interaction: InteractionType;
@@ -15,7 +15,7 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const endPosition = useEditor((state) => state.rolePositions[interaction.target]);
   const activeItem = useEditor((state) => state.activeItem);
   const setActiveItem = useEditor((state) => state.setActiveItem);
-  const deleteInteraction = useDeleteInteraction();
+  const { deleteInteraction } = useInteraction();
 
   const pathHandlers = useGesture({
     onClick: () => {
@@ -32,9 +32,9 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const curve = getPath(roleDimentions.width, roleDimentions.height, startPosition, endPosition);
 
   return (
-    <PathContainer tabIndex={0}>
+    <PathContainer tabIndex={0} {...pathHandlers()}>
       <Path d={curve} active={activeItem.id === interaction.id} />
-      <ClickPath d={curve} {...pathHandlers()} />
+      <ClickPath d={curve} />
     </PathContainer>
   );
 };

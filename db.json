@@ -38,48 +38,73 @@
   ],
   "graph": [
     {
-      "id": "1"
+      "id": "1",
+      "name": "Home Care",
+      "description": ""
+    },
+    {
+      "id": "2",
+      "name": "Emergencies",
+      "description": ""
+    },
+    {
+      "id": "3",
+      "name": "Contact",
+      "description": ""
     }
   ],
   "roles": [
     {
-      "id": "LBifSwaQ4y2uqrP3BV_Na",
-      "name": "Caretaker",
-      "role": "human",
-      "x": 416.8372421693051,
-      "y": -19.687150646474567,
-      "numberOfActors": "?",
-      "solutionUse": "internal",
-      "abstract": false,
-      "description": "",
-      "connectedRolesIds": [],
-      "graphId": "1"
-    },
-    {
-      "id": "eEmZSUMCqHkSZcE4ivthA",
-      "name": "Emergencysdfgsdfgsdfg",
-      "role": "service",
-      "x": 768.5888457115983,
-      "y": 311.95330948514174,
-      "numberOfActors": "?",
-      "solutionUse": "internal",
-      "abstract": false,
-      "description": "",
-      "connectedRolesIds": [],
-      "graphId": "1"
-    },
-    {
       "id": "-4PhDj2XiUKYBLEOzd29Z",
       "name": "Doctor asdf asdfadsbfgbae4rg asdfvsd g srg sdhrth",
-      "role": "human",
-      "x": 853.7100675783922,
-      "y": 61.22156910791298,
-      "numberOfActors": "?",
+      "role": "service",
+      "x": 277.571856713697,
+      "y": 316.3434232717211,
+      "numberOfActors": "1..N",
       "solutionUse": "internal",
       "abstract": false,
       "description": "",
       "connectedRolesIds": [],
       "graphId": "1"
+    },
+    {
+      "id": "VV3qInBj8fKtJixLUiH7b",
+      "name": "Doctor",
+      "role": "repository",
+      "x": 499,
+      "y": 364,
+      "numberOfActors": "?",
+      "solutionUse": "both",
+      "abstract": false,
+      "description": "",
+      "connectedRolesIds": [],
+      "graphId": "2"
+    },
+    {
+      "id": "tXeTcsJcrhH2NiYPm5DMj",
+      "name": "Caretaker",
+      "role": "human",
+      "x": 790,
+      "y": 174,
+      "numberOfActors": "?",
+      "solutionUse": "internal",
+      "abstract": false,
+      "description": "",
+      "connectedRolesIds": [],
+      "graphId": "2"
+    },
+    {
+      "id": "i7HVj_09gmcO8hyA9oypY",
+      "name": "Emergencysdfgsdfgsdfg",
+      "role": "service",
+      "x": 783,
+      "y": 492,
+      "numberOfActors": "?",
+      "solutionUse": "internal",
+      "abstract": false,
+      "description": "",
+      "connectedRolesIds": [],
+      "graphId": "2"
     }
   ],
   "interactions": [
@@ -147,15 +172,6 @@
       "graphId": "1"
     },
     {
-      "id": "4S5vETRZHj-XKAuVCxeR_",
-      "source": "-4PhDj2XiUKYBLEOzd29Z",
-      "target": "LBifSwaQ4y2uqrP3BV_Na",
-      "inherit": false,
-      "sourceServices": [],
-      "targetServices": [],
-      "graphId": "1"
-    },
-    {
       "id": "jg9wJ20DRw5mciyNZlqXS",
       "source": "eEmZSUMCqHkSZcE4ivthA",
       "target": "LBifSwaQ4y2uqrP3BV_Na",
@@ -190,6 +206,60 @@
       "sourceServices": [],
       "targetServices": [],
       "graphId": "1"
+    },
+    {
+      "id": "Lh1qRvFpxoXVCWamJSdOJ",
+      "source": "LBifSwaQ4y2uqrP3BV_Na",
+      "target": "-4PhDj2XiUKYBLEOzd29Z",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "1"
+    },
+    {
+      "id": "1LImmy7OiMEY5exvRdgE9",
+      "source": "VV3qInBj8fKtJixLUiH7b",
+      "target": "tXeTcsJcrhH2NiYPm5DMj",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "2"
+    },
+    {
+      "id": "e7_KM9dcCvZy4_5d8bbjg",
+      "source": "i7HVj_09gmcO8hyA9oypY",
+      "target": "tXeTcsJcrhH2NiYPm5DMj",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "2"
+    },
+    {
+      "id": "ijNdRjqfaneFQe9KmMww6",
+      "source": "VV3qInBj8fKtJixLUiH7b",
+      "target": "VV3qInBj8fKtJixLUiH7b",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "2"
+    },
+    {
+      "id": "Bdlq0ms6Az4eDIB6l2Ang",
+      "source": "i7HVj_09gmcO8hyA9oypY",
+      "target": "i7HVj_09gmcO8hyA9oypY",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "2"
+    },
+    {
+      "id": "nr-jXWqqX3XoyctkvrqtB",
+      "source": "tXeTcsJcrhH2NiYPm5DMj",
+      "target": "tXeTcsJcrhH2NiYPm5DMj",
+      "inherit": false,
+      "sourceServices": [],
+      "targetServices": [],
+      "graphId": "2"
     }
   ]
 }

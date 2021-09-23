@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { InteractionType, RoleType } from "../types/editor";
 
-export const createInteraction = ({
+export const createNewInteraction = ({
   source,
   target,
 }: {
@@ -12,7 +12,7 @@ export const createInteraction = ({
   return { id, source, target, inherit: false, sourceServices: [], targetServices: [] };
 };
 
-export const createRole = (
+export const createNewRole = (
   name: string,
   role: RoleType["role"],
   x: number,

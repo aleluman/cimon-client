@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClientProvider } from "react-query";
 import { App } from "./App";
 import { queryClient } from "./shared/state/store";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <StrictMode>

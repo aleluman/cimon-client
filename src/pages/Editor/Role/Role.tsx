@@ -4,7 +4,7 @@ import { Abstract, Body, Container, Name, Title } from "./styles";
 import { RoleType } from "@/shared/types/editor";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleMenu } from "../RoleMenu/RoleMenu";
-import { useDeleteRole, useUpdateRole } from "@/shared/api/role";
+import { useRole } from "@/shared/api/role";
 import { useEditor } from "@/shared/state/store";
 import { RoleConnector } from "../RoleConnector/RoleConnector";
 
@@ -22,8 +22,7 @@ export const Role = ({ role }: RoleProps) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const setPosition = useEditor((state) => state.setPosition);
   const setDoingAction = useEditor((state) => state.setDoingAction);
-  const updateRole = useUpdateRole(role.id);
-  const deleteRole = useDeleteRole();
+  const { updateRole, deleteRole } = useRole();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +38,7 @@ export const Role = ({ role }: RoleProps) => {
       setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
     onDragEnd: ({ tap }) => {
       if (tap) setActiveItem({ id: role.id, type: "role" });
-      else updateRole.mutate({ x, y });
+      else updateRole.mutate({ id: role.id, x, y });
       setDoingAction(false);
     },
     onHover: ({ active }) => setIsHovering(active),

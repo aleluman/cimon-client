@@ -1,3 +1,9 @@
+export type AmbitType = {
+  id: string;
+  name: string;
+  description: string;
+};
+
 export type Services = {
   audioconference: boolean;
   videoconference: boolean;
@@ -60,7 +66,7 @@ export type Size = {
   height: number;
 };
 
-export type Graph = {
+export type Graph = AmbitType & {
   roles: RoleType[];
   interactions: InteractionType[];
   positions: RolePosition[];

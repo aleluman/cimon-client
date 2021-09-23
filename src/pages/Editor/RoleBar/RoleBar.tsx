@@ -15,13 +15,13 @@ import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 import { useGetProcess } from "@/shared/api/process";
 import { useEditor } from "@/shared/state/store";
 import { getMousePositionInCanvas } from "@/shared/utils/mousePosition";
-import { createRole } from "@/shared/utils/createItems";
+import { createNewRole } from "@/shared/utils/createItems";
 import { PlaceholderRoleType } from "@/shared/types/editor";
-import { useCreateRole } from "@/shared/api/role";
+import { useRole } from "@/shared/api/role";
 
 export const RoleBar = memo(() => {
   const setPlaceholderRole = useEditor((state) => state.setPlaceholderRole);
-  const postRole = useCreateRole();
+  const { createRole } = useRole();
 
   const { data } = useGetProcess();
 
@@ -44,8 +44,8 @@ export const RoleBar = memo(() => {
     onDragEnd: ({ args: [role, name] }) => {
       const { placeholderRole } = useEditor.getState();
       const { x, y } = placeholderRole as PlaceholderRoleType;
-      const newRole = createRole(name, role, x, y);
-      postRole.mutate(newRole);
+      const newRole = createNewRole(name, role, x, y);
+      createRole.mutate(newRole);
       setPlaceholderRole(null);
     },
   });
