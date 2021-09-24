@@ -4,7 +4,7 @@ export const TooltipContainer = styled("div", {
   backgroundColor: "$primaryAccent",
   borderRadius: "10px",
   border: "1px solid $primaryAccent",
-  boxShadow: "$hoverShadowLarge",
+  boxShadow: "$subtlerShadow",
   fontSize: "0.75rem",
   color: "white",
   display: "flex",

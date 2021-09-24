@@ -33,6 +33,7 @@ export const OptionButton = styled("button", {
 
         "&:hover": {
           boxShadow: "none",
+          color: "white",
         },
 
         "& path": {

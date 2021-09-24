@@ -6,12 +6,15 @@ import { MenuContainer, ThemeContainer, UserMenuItem, UserNameContainer } from "
 import { css } from "@/shared/configs/stitches";
 import { Toggle } from "../Toggle/Toggle";
 import { ToggleOption } from "../ToggleOption/ToggleOption";
+import { usePreferences } from "@/shared/state/store";
 
 type UserMenuProps = { username: string };
 
 export const UserMenu = ({ username }: UserMenuProps) => {
   const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+  const theme = usePreferences((state) => state.theme);
+  const setTheme = usePreferences((state) => state.setTheme);
   const {
     styles: { popper },
     attributes,
@@ -40,7 +43,11 @@ export const UserMenu = ({ username }: UserMenuProps) => {
         {...attributes.popper}
       >
         <ThemeContainer>
-          <Toggle value="dark" label="Theme" onChange={() => {}}>
+          <Toggle
+            value={theme}
+            label="Theme"
+            onChange={(value) => setTheme(value as "light" | "dark")}
+          >
             <ToggleOption value="light">
               <Icon type="sun" />
               Light

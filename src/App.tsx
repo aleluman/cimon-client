@@ -5,10 +5,18 @@ import { Editor } from "./pages/Editor/Editor";
 import { Navbar } from "./shared/components/Navbar/Navbar";
 import { Mockup } from "./pages/Mockup/Mockup";
 import { Processes } from "./pages/Processes/Processes";
+import { usePreferences } from "./shared/state/store";
+import { theme } from "./shared/configs/stitches";
+import { lightTheme } from "./shared/configs/lightTheme";
 
 export const App = () => {
+  const themeObject = usePreferences((state) => {
+    if (state.theme === "dark") return theme;
+    return lightTheme;
+  });
+
   return (
-    <AppContainer>
+    <AppContainer className={themeObject}>
       <Router>
         <Navbar />
         <MainContent>
@@ -20,6 +28,7 @@ export const App = () => {
         </MainContent>
         <ToastContainer />
       </Router>
+      <div id="tooltips" />
     </AppContainer>
   );
 };
