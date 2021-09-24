@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
   Description,
@@ -10,13 +9,14 @@ import {
   Title,
   TitleName,
 } from "./styles";
-import { useEditor } from "@/shared/state/store";
+import { useEditor, usePreferences } from "@/shared/state/store";
 import { RoleSidebar } from "./RoleSidebar";
 import { InteractionSidebar } from "./InteractionSidebar";
 import { useGetGraph } from "@/shared/api/graph";
 
 export const Sidebar = () => {
-  const [hidden, setHidden] = useState(false);
+  const hidden = usePreferences((state) => state.showSidebar);
+  const setHidden = usePreferences((state) => state.setShowSidebar);
   const activeItem = useEditor((state) => state.activeItem);
   const { data, isError, isLoading } = useGetGraph();
 
@@ -44,7 +44,7 @@ export const Sidebar = () => {
                 <Help>Select a role or an interaction to view and edit its details.</Help>
               </>
             )}
-            <HideButton onClick={() => setHidden((prev) => !prev)}>
+            <HideButton onClick={() => setHidden(!hidden)}>
               <Icon type={hidden ? "arrow-left" : "arrow-right"} color="var(--white)" size={12} />
             </HideButton>
           </>

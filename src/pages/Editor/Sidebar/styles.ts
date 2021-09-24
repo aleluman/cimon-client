@@ -102,6 +102,10 @@ export const Description = styled("textarea", {
     boxShadow: "$borderedPrimarySmall",
     outline: "none",
   },
+
+  "&::placeholder": {
+    color: "$textDull",
+  },
 });
 
 export const Divider = styled("hr", {

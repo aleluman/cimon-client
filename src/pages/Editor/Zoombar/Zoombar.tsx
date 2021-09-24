@@ -1,9 +1,12 @@
 import { IconOnlyButton } from "@/shared/components/IconOnlyButton/IconOnlyButton";
+import { usePreferences } from "@/shared/state/store";
 import { Divider, ZoomBarContainer } from "./styles";
 
 export const Zoombar = () => {
+  const isSidebarPresent = usePreferences((state) => state.showSidebar);
+
   return (
-    <ZoomBarContainer>
+    <ZoomBarContainer tilted={isSidebarPresent}>
       <IconOnlyButton icon="minus" text="Zoom out" tooltipPlacement="top" handler={() => {}} />
       <IconOnlyButton icon="fit" text="Fit screen" tooltipPlacement="top" handler={() => {}} />
       <IconOnlyButton icon="plus" text="Zoom in" tooltipPlacement="top" handler={() => {}} />

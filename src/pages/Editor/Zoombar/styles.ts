@@ -17,6 +17,14 @@ export const ZoomBarContainer = styled("div", {
   boxShadow: "$subtleShadow",
   transition: "transform ease 0.5s",
   userSelect: "none",
+
+  variants: {
+    tilted: {
+      true: {
+        transform: "translateX(-50%)",
+      },
+    },
+  },
 });
 
 export const Divider = styled("span", {
