@@ -1,4 +1,4 @@
-import { ActionsToolbar } from "./ActionsToolbar/ActionsToolbar";
+import { ActionsToolbar } from "../../shared/components/ActionsToolbar/ActionsToolbar";
 import { Canvas } from "./Canvas/Canvas";
 import { RoleBar } from "./RoleBar/RoleBar";
 import { Container } from "./Stage/styles";

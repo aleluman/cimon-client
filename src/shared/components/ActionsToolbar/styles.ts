@@ -12,9 +12,20 @@ export const Container = styled("div", {
   padding: "0.3rem",
   borderRadius: "8px",
   boxShadow: "$subtleShadow",
+
+  variants: {
+    inMockup: {
+      true: {
+        background: "$neutralFull",
+        boxShadow: "none",
+        border: "1px solid $borderDark",
+        backdropFilter: "none",
+      },
+    },
+  },
 });
 
-export const ToggleContainer = styled("span", {
+export const ModesContainer = styled("span", {
   display: "flex",
   alignItems: "center",
   width: "7rem",
@@ -22,7 +33,7 @@ export const ToggleContainer = styled("span", {
   marginRight: "0.2rem",
 });
 
-export const ToggleActive = styled("button", {
+export const Mode = styled("button", {
   display: "flex",
   alignItems: "center",
   background: "$primary",
@@ -37,23 +48,19 @@ export const ToggleActive = styled("button", {
     background: "primaryAccent",
     boxShadow: "$hoverShadowSmall",
   },
-});
 
-export const ToggleInactive = styled("button", {
-  display: "flex",
-  alignItems: "center",
-  outline: "none",
-  border: "none",
-  background: "transparent",
-  color: "$textNormal",
-  cursor: "pointer",
-  transition: "all ease 0.3s",
-  padding: "0.4rem",
-  borderRadius: "4px",
+  variants: {
+    inactive: {
+      true: {
+        background: "transparent",
+        color: "$textNormal",
 
-  "&:hover": {
-    color: "$textImportant",
-    boxShadow: "$hoverShadowSmall",
+        "&:hover": {
+          color: "$textImportant",
+          boxShadow: "$hoverShadowSmall",
+        },
+      },
+    },
   },
 });
 

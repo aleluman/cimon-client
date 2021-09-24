@@ -12,7 +12,6 @@ export const Navbar = () => {
       <HomeContainer tabIndex={0}>
         <Icon type="home" size={20} />
       </HomeContainer>
-
       <ProjectNav>
         {isLoading && <p>Loading...</p>}
         {isError && <p>Error</p>}

@@ -6,7 +6,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
       colors: {
         primary: "#3d72b8",
         primaryAccent: "#3080eb",
-        primaryLight: "#1f1f1f",
+        primaryLight: "#5085cb66",
         yellow: "#f1c410",
         red: "#a30808",
         neutralDarker: "#222222",
@@ -39,6 +39,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
       },
       shadows: {
         subtleShadow: "0 0 12px #0b0b0c66",
+        subtlerShadow: "0 0 8px #0b0b0c33",
         borderedPrimary: "0 0 0 3px #3080eb",
         borderedPrimarySmall: "0 0 0 1px #3080eb",
         hoverShadowSmall: "0 0 8px #0b0b0c80",
