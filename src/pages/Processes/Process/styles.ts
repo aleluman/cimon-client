@@ -21,10 +21,6 @@ export const ProcessContainer = styled("button", {
     active: {
       true: {
         background: "$primaryLight",
-        "&:hover": {
-          filter: "brightness(1.1)",
-          background: "$primary",
-        },
       },
     },
   },
@@ -33,7 +29,8 @@ export const ProcessContainer = styled("button", {
 export const ProcessName = styled("span", {
   flex: 1,
   textAlign: "left",
-  fontSize: "0.9rem",
+  fontSize: "0.95rem",
+  fontWeight: 600,
 });
 
 export const RoleCounter = styled("span", {
@@ -45,4 +42,5 @@ export const RoleCounter = styled("span", {
   background: "$neutralFull",
   borderRadius: "4px",
   boxShadow: "$subtlerShadow",
+  fontWeight: 700,
 });

@@ -7,18 +7,49 @@ export const Zoombar = () => {
 
   return (
     <ZoomBarContainer tilted={isSidebarPresent}>
-      <IconOnlyButton icon="minus" text="Zoom out" tooltipPlacement="top" handler={() => {}} />
-      <IconOnlyButton icon="fit" text="Fit screen" tooltipPlacement="top" handler={() => {}} />
-      <IconOnlyButton icon="plus" text="Zoom in" tooltipPlacement="top" handler={() => {}} />
+      <IconOnlyButton
+        icon="minus"
+        text="Zoom out"
+        tooltipPlacement="top"
+        handler={() => {}}
+        color="$iconGray"
+      />
+      <IconOnlyButton
+        icon="fit"
+        text="Fit screen"
+        tooltipPlacement="top"
+        handler={() => {}}
+        color="$iconGray"
+      />
+      <IconOnlyButton
+        icon="plus"
+        text="Zoom in"
+        tooltipPlacement="top"
+        handler={() => {}}
+        color="$iconGray"
+      />
       <Divider />
-      <IconOnlyButton icon="layout" text="Auto layout" tooltipPlacement="top" handler={() => {}} />
+      <IconOnlyButton
+        icon="layout"
+        text="Auto layout"
+        tooltipPlacement="top"
+        handler={() => {}}
+        color="$iconGray"
+      />
       <IconOnlyButton
         icon="stakeholder"
         text="Stakeholder mode"
         tooltipPlacement="top"
         handler={() => {}}
+        color="$iconGray"
       />
-      <IconOnlyButton icon="selected" text="Focus mode" tooltipPlacement="top" handler={() => {}} />
+      <IconOnlyButton
+        icon="selected"
+        text="Focus mode"
+        tooltipPlacement="top"
+        handler={() => {}}
+        color="$iconGray"
+      />
     </ZoomBarContainer>
   );
 };

@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
-import { InteractionType, RoleType } from "../types/editor";
+import { queryClient } from "../state/store";
+import { Graph, InteractionType, RoleType } from "../types/editor";
 
 export const createNewInteraction = ({
   source,
@@ -31,4 +32,18 @@ export const createNewRole = (
     description: "",
     connectedRolesIds: [],
   };
+};
+
+export const createName = (type: string, graphId: string) => {
+  const capType = type.charAt(0).toUpperCase() + type.slice(1);
+  const graph = queryClient.getQueryData<Graph>(["graph", graphId]) as Graph;
+  const roleNames = graph.roles.map((role) => role.name);
+
+  const getName = (number: number): string => {
+    const name = `${capType} ${number}`;
+    if (roleNames.includes(name)) return getName(number + 1);
+    return name;
+  };
+
+  return getName(1);
 };

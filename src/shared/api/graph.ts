@@ -16,12 +16,14 @@ export const useGetGraph = () => {
       const graph = await axios.get<Graph>(
         `http://localhost:8080/graph/${ambitId}?_embed=interactions&_embed=roles`
       );
-      const { roles } = graph.data;
-      roles.forEach((role) => setPosition({ id: role.id, x: role.x, y: role.y }));
-      setSelectedAmbit(graph.data);
       return graph.data;
     },
     {
+      onSuccess: (graph) => {
+        const { roles } = graph;
+        roles.forEach((role) => setPosition({ id: role.id, x: role.x, y: role.y }));
+        setSelectedAmbit(graph);
+      },
       refetchOnWindowFocus: false,
     }
   );

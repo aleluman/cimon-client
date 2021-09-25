@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
-import { queryClient } from "../state/store";
+import { queryClient, useEditor } from "../state/store";
 import { Graph, RoleType } from "../types/editor";
 import { EditorRouteParams } from "../types/routes";
 
@@ -13,17 +13,19 @@ export const getRole = (id: string, ambitId: string) => {
 
 export const useRole = () => {
   const { ambitId } = useParams<EditorRouteParams>();
+  const setActiveItem = useEditor((state) => state.setActiveItem);
 
   const createRole = useMutation(
-    (newRole: RoleType) =>
+    ({ newRole }: { newRole: RoleType; newName: boolean }) =>
       axios.post<RoleType>(`http://localhost:8080/graph/${ambitId}/roles/`, newRole),
     {
-      onMutate: async (newRole) => {
+      onMutate: async (variables) => {
         const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
         queryClient.setQueryData(["graph", ambitId], {
           ...graph,
-          roles: [...graph.roles, newRole],
+          roles: [...graph.roles, variables.newRole],
         });
+        setActiveItem({ id: variables.newRole.id, type: "role", new: variables.newName });
       },
     }
   );
@@ -55,6 +57,7 @@ export const useRole = () => {
         const filteredInteractions = graph.interactions.filter((interaction) => {
           return interaction.source !== roleId && interaction.target !== roleId;
         });
+        setActiveItem({ id: "", type: "none" });
         queryClient.setQueryData(["graph", ambitId], {
           ...graph,
           roles: filteredRoles,

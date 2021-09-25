@@ -62,10 +62,10 @@ export const Title = styled("h1", {
 });
 
 export const TitleName = styled("span", {
+  flex: 1,
   display: "inline-block",
   fontWeight: 700,
   gap: "0.4rem",
-  maxWidth: "10rem",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",

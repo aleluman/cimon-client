@@ -15,7 +15,7 @@ type TooltipProps = {
 export const Tooltip = ({ children, text, tooltipPlacement, isVisible, offset }: TooltipProps) => {
   const { setTooltipRef, setTriggerRef, getArrowProps, getTooltipProps, visible } =
     usePopperTooltip({
-      placement: tooltipPlacement ?? "right",
+      placement: tooltipPlacement ?? "bottom",
       visible: isVisible,
       offset,
     });

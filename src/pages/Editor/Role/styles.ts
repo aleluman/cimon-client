@@ -12,7 +12,11 @@ export const Container = styled("div", {
   borderRadius: "2px",
   touchAction: "none",
   userSelect: "none",
-  transition: "box-shadow ease 0.2s",
+  transition: "box-shadow ease 0.25s",
+
+  "&:focus": {
+    outline: "none",
+  },
 
   variants: {
     active: {
@@ -69,5 +73,21 @@ export const Abstract = styled("p", {
   color: "$textDull",
   "&::before": {
     content: "«Abstract»",
+  },
+});
+
+export const NameInput = styled("input", {
+  textAlign: "center",
+  maxWidth: "90%",
+  padding: "0.2rem",
+  color: "$textNormal",
+  borderRadius: "4px",
+  boxShadow: "$borderedPrimarySmall",
+  background: "$neutralDarker",
+  border: "1px solid $primaryAccent",
+  fontSize: "inherit",
+
+  "&:focus": {
+    outline: "none",
   },
 });

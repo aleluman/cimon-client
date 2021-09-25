@@ -3,7 +3,6 @@ import { styled } from "@/shared/configs/stitches";
 export const RoleMenuContainer = styled("div", {
   display: "flex",
   gap: "0.2rem",
-  marginTop: "0.6rem",
   padding: "0.3rem",
   backdropFilter: "blur(12px)",
   background: "$popoverBackground",

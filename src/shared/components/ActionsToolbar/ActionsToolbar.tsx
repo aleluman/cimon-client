@@ -35,8 +35,20 @@ export const ActionsToolbar = ({ inMockup }: ActionsToolbarProps) => {
       {!inMockup && (
         <>
           <Divider />
-          <IconOnlyButton icon="undo" text="Undo" handler={() => {}} disabled={false} />
-          <IconOnlyButton icon="redo" text="Redo" handler={() => {}} disabled={false} />
+          <IconOnlyButton
+            icon="undo"
+            text="Undo"
+            handler={() => {}}
+            disabled={false}
+            color="$iconGray"
+          />
+          <IconOnlyButton
+            icon="redo"
+            text="Redo"
+            handler={() => {}}
+            disabled={false}
+            color="$iconGray"
+          />
           <Divider />
           <Menu as="div">
             <Menu.Button className={css(ExportButton)}>
@@ -54,9 +66,9 @@ export const ActionsToolbar = ({ inMockup }: ActionsToolbarProps) => {
               </Menu.Item>
             </Menu.Items>
           </Menu>
-          <IconOnlyButton icon="upload" text="Upload JSON" handler={() => {}} />
+          <IconOnlyButton icon="upload" text="Upload JSON" handler={() => {}} color="$iconGray" />
           <Divider />
-          <IconOnlyButton icon="help" text="Help" handler={() => {}} />
+          <IconOnlyButton icon="help" text="Help" handler={() => {}} color="$iconGray" />
         </>
       )}
     </Container>

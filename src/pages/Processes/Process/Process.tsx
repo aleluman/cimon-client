@@ -8,7 +8,7 @@ type ProcessProps = {
 export const Process = ({ active }: ProcessProps) => {
   return (
     <ProcessContainer active={active}>
-      <Icon type="download" color="red" />
+      <Icon type="download" color="$primary" />
       <ProcessName>Elderly Care</ProcessName>
       <RoleCounter>1</RoleCounter>
     </ProcessContainer>

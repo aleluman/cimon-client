@@ -7,6 +7,7 @@ type IconOnlyButtonProps = {
   handler: (event: React.MouseEvent) => void;
   text: string;
   icon: keyof typeof iconPaths;
+  color?: string;
   working?: boolean;
   disabled?: boolean;
   tooltipPlacement?: "top" | "right" | "bottom" | "left";
@@ -15,6 +16,7 @@ type IconOnlyButtonProps = {
 export const IconOnlyButton = ({
   handler,
   icon,
+  color,
   text,
   tooltipPlacement,
   working,
@@ -23,7 +25,7 @@ export const IconOnlyButton = ({
   return (
     <Tooltip text={text} tooltipPlacement={tooltipPlacement}>
       <IconButton working={working} disabled={disabled} onClick={handler}>
-        <Icon type={icon} />
+        <Icon type={icon} color={color} />
       </IconButton>
     </Tooltip>
   );

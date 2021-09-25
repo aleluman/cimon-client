@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { useGesture } from "@use-gesture/react";
+import { useParams } from "react-router-dom";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
   DragIconContainer,
@@ -15,12 +16,14 @@ import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 import { useGetProcess } from "@/shared/api/process";
 import { useEditor } from "@/shared/state/store";
 import { getMousePositionInCanvas } from "@/shared/utils/mousePosition";
-import { createNewRole } from "@/shared/utils/createItems";
+import { createName, createNewRole } from "@/shared/utils/createItems";
 import { PlaceholderRoleType } from "@/shared/types/editor";
 import { useRole } from "@/shared/api/role";
+import { EditorRouteParams } from "@/shared/types/routes";
 
 export const RoleBar = memo(() => {
   const setPlaceholderRole = useEditor((state) => state.setPlaceholderRole);
+  const { ambitId } = useParams<EditorRouteParams>();
   const { createRole } = useRole();
 
   const { data } = useGetProcess();
@@ -44,8 +47,9 @@ export const RoleBar = memo(() => {
     onDragEnd: ({ args: [role, name] }) => {
       const { placeholderRole } = useEditor.getState();
       const { x, y } = placeholderRole as PlaceholderRoleType;
-      const newRole = createNewRole(name, role, x, y);
-      createRole.mutate(newRole);
+      const newName = createName(role, ambitId);
+      const newRole = createNewRole(name === "" ? newName : name, role, x, y);
+      createRole.mutate({ newRole, newName: name === "" });
       setPlaceholderRole(null);
     },
   });
@@ -54,17 +58,17 @@ export const RoleBar = memo(() => {
     <RoleBarContainer>
       <Title>Roles</Title>
       <DragIconContainer>
-        <Tooltip text="Human">
+        <Tooltip text="Human" tooltipPlacement="right">
           <RoleDragIcon {...handlers("human", "")}>
             <Icon type="human-internal" />
           </RoleDragIcon>
         </Tooltip>
-        <Tooltip text="Service">
+        <Tooltip text="Service" tooltipPlacement="right">
           <RoleDragIcon {...handlers("service", "")}>
             <Icon type="service-internal" />
           </RoleDragIcon>
         </Tooltip>
-        <Tooltip text="Repository">
+        <Tooltip text="Repository" tooltipPlacement="right">
           <RoleDragIcon {...handlers("repository", "")}>
             <Icon type="repository-internal" />
           </RoleDragIcon>
