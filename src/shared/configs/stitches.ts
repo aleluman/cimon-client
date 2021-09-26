@@ -8,7 +8,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         primaryAccent: "#3080eb",
         primaryLight: "#434957",
         yellow: "#f1c410",
-        red: "#a30808",
+        red: "#6F1C1C",
         neutralDarker: "#222222",
         neutralDark: "#242424",
         neutralLight: "#2e2e2e",

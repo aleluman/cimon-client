@@ -113,3 +113,10 @@ export const getAngle = (cx: number, cy: number, ex: number, ey: number) => {
   const theta = Math.atan2(dy, dx);
   return theta;
 };
+
+export const getMarkerAngle = (path: SVGPathElement) => {
+  const pathLength = path.getTotalLength();
+  const endPoint = path.getPointAtLength(pathLength);
+  const beforeEndPoint = path.getPointAtLength(pathLength - 12);
+  return getAngle(beforeEndPoint.x, beforeEndPoint.y, endPoint.x, endPoint.y);
+};

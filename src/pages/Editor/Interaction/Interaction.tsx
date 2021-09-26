@@ -1,10 +1,12 @@
+import { useMemo, useRef } from "react";
 import { useGesture } from "@use-gesture/react";
-import { getPath } from "../../../shared/utils/curves";
+import { getMarkerAngle, getPath } from "../../../shared/utils/curves";
 import { ClickPath, Path, PathContainer } from "./styles";
 import { roleDimentions } from "@/shared/configs/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
 import { useInteraction } from "@/shared/api/interaction";
+import { Marker } from "../Marker/Marker";
 
 type InteractionProps = {
   interaction: InteractionType;
@@ -16,6 +18,19 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const activeItem = useEditor((state) => state.activeItem);
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const { deleteInteraction } = useInteraction();
+  const pathRef = useRef<SVGPathElement>(null);
+
+  const isActive = activeItem.type === "interaction" && activeItem.id === interaction.id;
+
+  const startArrow = useMemo(
+    () => interaction.targetServices.length > 0,
+    [interaction.targetServices]
+  );
+
+  const endArrow = useMemo(
+    () => interaction.sourceServices.length > 0 || interaction.inherit,
+    [interaction.sourceServices, interaction.inherit]
+  );
 
   const pathHandlers = useGesture({
     onClick: () => {
@@ -29,11 +44,26 @@ export const Interaction = ({ interaction }: InteractionProps) => {
     },
   });
 
+  const markerAngle =
+    pathRef.current && startPosition && endPosition ? getMarkerAngle(pathRef.current) : 0;
+
   const curve = getPath(roleDimentions.width, roleDimentions.height, startPosition, endPosition);
 
   return (
     <PathContainer tabIndex={0} {...pathHandlers()}>
-      <Path d={curve} active={activeItem.id === interaction.id} />
+      <Marker
+        id={interaction.id}
+        active={isActive}
+        inherit={interaction.inherit}
+        angle={markerAngle}
+      />
+      <Path
+        d={curve}
+        active={activeItem.id === interaction.id}
+        ref={pathRef}
+        markerEnd={endArrow ? `url(#endMarker${interaction.id})` : "none"}
+        markerStart={startArrow ? `url(#startMarker${interaction.id})` : "none"}
+      />
       <ClickPath d={curve} />
     </PathContainer>
   );

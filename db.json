@@ -151,88 +151,32 @@
       "description": ""
     }
   ],
-  "roles": [
-    {
-      "id": "7U_DO_V83U0WAfAaJqd-x",
-      "name": "Emergency",
-      "role": "human",
-      "x": 724.9319824686318,
-      "y": 333.89547526735635,
-      "numberOfActors": "0..N",
-      "solutionUse": "both",
-      "abstract": false,
-      "description": "",
-      "connectedRolesIds": [],
-      "graphId": "1"
-    },
-    {
-      "id": "e0nJT-ZpwZdYZPVF7q1fW",
-      "name": "Emergenc",
-      "role": "service",
-      "x": 565.6389251353917,
-      "y": 163.11251500311528,
-      "numberOfActors": "?",
-      "solutionUse": "internal",
-      "abstract": false,
-      "description": "",
-      "connectedRolesIds": [],
-      "graphId": "1"
-    },
-    {
-      "id": "CVuXAE7sPfbTND7KNbxlA",
-      "name": "Emergencyd",
-      "role": "service",
-      "x": 260.9909294194182,
-      "y": 319.66099783019934,
-      "numberOfActors": "?",
-      "solutionUse": "internal",
-      "abstract": false,
-      "description": "",
-      "connectedRolesIds": [],
-      "graphId": "1"
-    }
-  ],
+  "roles": [],
   "interactions": [
     {
-      "id": "Xz_TuXN_Ihm155IvwkmxW",
-      "source": "EErL4lh7c4UmKQyw0a7-B",
-      "target": "7U_DO_V83U0WAfAaJqd-x",
+      "id": "NYNgE71E9ZMDa147wQxdj",
+      "source": "0QKjmOvLA-7yKd1hDoq6U",
+      "target": "pbsFKa7F2jxEdzcfobEsi",
+      "inherit": false,
+      "sourceServices": [
+        "call"
+      ],
+      "targetServices": [],
+      "graphId": "1"
+    },
+    {
+      "id": "kQ-7HdxgpCMGhzHgb8MBN",
+      "source": "8DXB8HC2ueQ5l58Q2H475",
+      "target": "0QKjmOvLA-7yKd1hDoq6U",
       "inherit": false,
       "sourceServices": [],
       "targetServices": [],
       "graphId": "1"
     },
     {
-      "id": "MoOkAco9Q9m0VL3kyMOpl",
-      "source": "e0nJT-ZpwZdYZPVF7q1fW",
-      "target": "7U_DO_V83U0WAfAaJqd-x",
-      "inherit": false,
-      "sourceServices": [],
-      "targetServices": [],
-      "graphId": "1"
-    },
-    {
-      "id": "UEllZj8j8Rt0cSvG1pAlj",
-      "source": "EErL4lh7c4UmKQyw0a7-B",
-      "target": "e0nJT-ZpwZdYZPVF7q1fW",
-      "inherit": false,
-      "sourceServices": [],
-      "targetServices": [],
-      "graphId": "1"
-    },
-    {
-      "id": "TSr1HvjcinTB_pTsAjo_e",
-      "source": "CVuXAE7sPfbTND7KNbxlA",
-      "target": "e0nJT-ZpwZdYZPVF7q1fW",
-      "inherit": false,
-      "sourceServices": [],
-      "targetServices": [],
-      "graphId": "1"
-    },
-    {
-      "id": "lu6DThVc4b5_BAopll5_K",
-      "source": "CVuXAE7sPfbTND7KNbxlA",
-      "target": "7U_DO_V83U0WAfAaJqd-x",
+      "id": "bJr9CtU26ESDMMH9NDkgV",
+      "source": "pbsFKa7F2jxEdzcfobEsi",
+      "target": "8DXB8HC2ueQ5l58Q2H475",
       "inherit": false,
       "sourceServices": [],
       "targetServices": [],

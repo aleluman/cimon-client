@@ -20,6 +20,7 @@ import { createName, createNewRole } from "@/shared/utils/createItems";
 import { PlaceholderRoleType } from "@/shared/types/editor";
 import { useRole } from "@/shared/api/role";
 import { EditorRouteParams } from "@/shared/types/routes";
+import { useGetGraph } from "@/shared/api/graph";
 
 export const RoleBar = memo(() => {
   const setPlaceholderRole = useEditor((state) => state.setPlaceholderRole);
@@ -27,6 +28,12 @@ export const RoleBar = memo(() => {
   const { createRole } = useRole();
 
   const { data } = useGetProcess();
+
+  const { data: graph } = useGetGraph();
+  const names = graph?.roles.map((role) => role.name);
+  const isNameAvailable = !data?.roles.every((role) =>
+    graph?.roles.some((node) => node.name === role.name)
+  );
 
   const handlers = useGesture({
     onDragStart: ({ args: [role, name], values: [x, y] }) => {
@@ -74,15 +81,19 @@ export const RoleBar = memo(() => {
           </RoleDragIcon>
         </Tooltip>
       </DragIconContainer>
-      {data && (
+      {data && isNameAvailable && (
         <>
           <Subtitle>Existing roles</Subtitle>
           <ListContainer>
             {data.roles.map((role) => (
-              <ListItem key={role.id} {...handlers(role.type, role.name)}>
-                <Icon type={`${role.type}-internal`} size={12} />
-                <ListItemText>{role.name}</ListItemText>
-              </ListItem>
+              <>
+                {names?.includes(role.name) ? null : (
+                  <ListItem key={role.id} {...handlers(role.type, role.name)}>
+                    <Icon type={`${role.type}-internal`} size={12} />
+                    <ListItemText>{role.name}</ListItemText>
+                  </ListItem>
+                )}
+              </>
             ))}
           </ListContainer>
         </>

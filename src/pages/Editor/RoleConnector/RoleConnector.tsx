@@ -63,7 +63,7 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
         start: { x: nodeX + 16 * 4, y: nodeY + 16 * 2.5 },
         end: { x: position.x + nodeX + 16 * 8, y: position.y + nodeY + 16 * 2.5 },
         color: `${
-          hoveringNodeId && connectedNodes?.includes(hoveringNodeId) ? theme.colors.yellow : ""
+          hoveringNodeId && connectedNodes?.includes(hoveringNodeId) ? theme.colors.red : ""
         }`,
       });
       calculateHoverNode({ x: position.x + nodeX + 16 * 8, y: position.y + nodeY + 16 * 2.5 });
