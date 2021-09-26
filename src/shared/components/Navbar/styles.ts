@@ -36,9 +36,7 @@ export const ProjectNav = styled("div", {
   padding: "0.8rem",
 });
 
-export const ProjectName = styled("div", {
-  maxWidth: "16rem",
-  textOverflow: "ellipsis",
-  overflow: "hidden",
-  whiteSpace: "nowrap",
+export const AppTitle = styled("span", {
+  fontWeight: 550,
+  color: "$textDull",
 });

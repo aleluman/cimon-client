@@ -3,7 +3,7 @@ import { styled } from "@/shared/configs/stitches";
 export const ProcessContainer = styled("button", {
   padding: "1rem",
   width: "100%",
-  color: "$textImportant",
+  color: "$textNormal",
   background: "transparent",
   border: "none",
   display: "flex",

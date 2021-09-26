@@ -2,7 +2,9 @@
   "processes": [
     {
       "id": "1",
-      "name": "Elderly Care",
+      "name": "Process 1",
+      "description": "",
+      "category": "generic",
       "ambits": [
         {
           "id": "1",
@@ -37,27 +39,99 @@
     },
     {
       "id": "2",
-      "name": "Elderly Care",
+      "name": "Travel planning",
+      "category": "travel",
+      "description": "",
       "ambits": [],
-      "roles": []
+      "roles": [
+        {
+          "id": "1",
+          "name": "Doctor",
+          "type": "human"
+        },
+        {
+          "id": "2",
+          "name": "Emergency",
+          "type": "service"
+        },
+        {
+          "id": "3",
+          "name": "Caretaker",
+          "type": "human"
+        }
+      ]
     },
     {
       "id": "3",
-      "name": "Elderly Care",
+      "name": "Grocery shopping",
+      "description": "",
+      "category": "shopping",
       "ambits": [],
-      "roles": []
+      "roles": [
+        {
+          "id": "1",
+          "name": "Doctor",
+          "type": "human"
+        },
+        {
+          "id": "2",
+          "name": "Emergency",
+          "type": "service"
+        },
+        {
+          "id": "3",
+          "name": "Caretaker",
+          "type": "human"
+        }
+      ]
     },
     {
       "id": "4",
-      "name": "Elderly Care",
+      "name": "Process 2",
+      "description": "",
+      "category": "generic",
       "ambits": [],
-      "roles": []
+      "roles": [
+        {
+          "id": "1",
+          "name": "Doctor",
+          "type": "human"
+        },
+        {
+          "id": "2",
+          "name": "Emergency",
+          "type": "service"
+        },
+        {
+          "id": "3",
+          "name": "Caretaker",
+          "type": "human"
+        }
+      ]
     },
     {
       "id": "5",
       "name": "Elderly Care",
+      "description": "",
+      "category": "health",
       "ambits": [],
-      "roles": []
+      "roles": [
+        {
+          "id": "1",
+          "name": "Doctor",
+          "type": "human"
+        },
+        {
+          "id": "2",
+          "name": "Emergency",
+          "type": "service"
+        },
+        {
+          "id": "3",
+          "name": "Caretaker",
+          "type": "human"
+        }
+      ]
     }
   ],
   "graph": [
@@ -82,8 +156,8 @@
       "id": "EErL4lh7c4UmKQyw0a7-B",
       "name": "Doctor",
       "role": "human",
-      "x": 366,
-      "y": 343,
+      "x": 358.0966033350011,
+      "y": 385.480757074369,
       "numberOfActors": "?",
       "solutionUse": "internal",
       "abstract": false,
@@ -95,8 +169,8 @@
       "id": "7U_DO_V83U0WAfAaJqd-x",
       "name": "Emergency",
       "role": "service",
-      "x": 811.4928324912435,
-      "y": 344.9879245831248,
+      "x": 797.6618883274956,
+      "y": 434.8890616474876,
       "numberOfActors": "?",
       "solutionUse": "internal",
       "abstract": false,
@@ -108,8 +182,8 @@
       "id": "e0nJT-ZpwZdYZPVF7q1fW",
       "name": "Emergency",
       "role": "service",
-      "x": 589,
-      "y": 190,
+      "x": 650.2513241537416,
+      "y": 165.30188542187832,
       "numberOfActors": "?",
       "solutionUse": "internal",
       "abstract": false,

@@ -2,11 +2,8 @@ import { styled } from "@/shared/configs/stitches";
 
 export const SidebarContainer = styled("aside", {
   display: "flex",
-  position: "absolute",
-  top: 0,
-  left: 0,
   flexDirection: "column",
-  width: "20rem",
+  minWidth: "20rem",
   padding: "1rem",
   height: "100%",
   background: "$neutralLight",

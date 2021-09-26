@@ -1,12 +1,10 @@
 import { useHistory, useLocation } from "react-router-dom";
-import { useGetProcess } from "@/shared/api/process";
-import { AmbitSelector } from "../AmbitSelector/AmbitSelector";
 import { Icon } from "../Icon/Icon";
 import { UserMenu } from "../UserMenu/UserMenu";
-import { HomeContainer, NavContainer, ProjectName, ProjectNav } from "./styles";
+import { AppTitle, HomeContainer, NavContainer, ProjectNav } from "./styles";
+import { NavbarNavigation } from "../NavbarNavigation/NavBarNavigation";
 
 export const Navbar = () => {
-  const { data, isLoading, isError } = useGetProcess();
   const location = useLocation();
   const history = useHistory();
 
@@ -16,13 +14,10 @@ export const Navbar = () => {
         <Icon type="home" size={20} />
       </HomeContainer>
       <ProjectNav>
-        {isLoading && <p>Loading...</p>}
-        {isError && <p>Error</p>}
-        {data && location.pathname !== "/processes" && (
-          <>
-            <ProjectName> {data.name}</ProjectName> <Icon type="arrow-right" />
-            <AmbitSelector ambits={data.ambits} />
-          </>
+        {!location.pathname.includes("processes") ? (
+          <NavbarNavigation />
+        ) : (
+          <AppTitle>CIMoN Manager</AppTitle>
         )}
       </ProjectNav>
       <UserMenu username="John Doe" />
