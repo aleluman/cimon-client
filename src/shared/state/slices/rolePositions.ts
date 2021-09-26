@@ -5,6 +5,7 @@ import { RolePosition } from "../../types/editor";
 export type RolePositionsSlice = {
   rolePositions: Record<RolePosition["id"], RolePosition>;
   setPosition: (position: RolePosition) => void;
+  deletePosition: (id: string) => void;
 };
 
 export const createRolePositionsSlice = (
@@ -15,6 +16,12 @@ export const createRolePositionsSlice = (
     set(
       produce((state) => {
         state.rolePositions[position.id] = position;
+      })
+    ),
+  deletePosition: (id) =>
+    set(
+      produce((state) => {
+        delete state.rolePositions[id];
       })
     ),
 });

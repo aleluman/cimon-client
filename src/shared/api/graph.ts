@@ -6,8 +6,10 @@ import { useEditor } from "../state/store";
 import { EditorRouteParams } from "../types/routes";
 
 export const useGetGraph = () => {
+  const rolesPosition = useEditor((state) => state.rolePositions);
   const setPosition = useEditor((state) => state.setPosition);
   const setSelectedAmbit = useEditor((state) => state.setSelectedAmbit);
+  const deletePosition = useEditor((state) => state.deletePosition);
   const { ambitId } = useParams<EditorRouteParams>();
 
   const queryData = useQuery(
@@ -21,6 +23,10 @@ export const useGetGraph = () => {
     {
       onSuccess: (graph) => {
         const { roles } = graph;
+        const roleIds = roles.map((role) => role.id);
+        Object.keys(rolesPosition).forEach((key) => {
+          if (!roleIds.includes(key)) deletePosition(key);
+        });
         roles.forEach((role) => setPosition({ id: role.id, x: role.x, y: role.y }));
         setSelectedAmbit(graph);
       },

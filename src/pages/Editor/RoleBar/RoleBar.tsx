@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import { useGesture } from "@use-gesture/react";
 import { useParams } from "react-router-dom";
 import { Icon } from "@/shared/components/Icon/Icon";
@@ -85,16 +85,17 @@ export const RoleBar = memo(() => {
         <>
           <Subtitle>Existing roles</Subtitle>
           <ListContainer>
-            {data.roles.map((role) => (
-              <>
-                {names?.includes(role.name) ? null : (
+            {data.roles.map((role) => {
+              if (!names?.includes(role.name)) {
+                return (
                   <ListItem key={role.id} {...handlers(role.type, role.name)}>
                     <Icon type={`${role.type}-internal`} size={12} />
                     <ListItemText>{role.name}</ListItemText>
                   </ListItem>
-                )}
-              </>
-            ))}
+                );
+              }
+              return null;
+            })}
           </ListContainer>
         </>
       )}
