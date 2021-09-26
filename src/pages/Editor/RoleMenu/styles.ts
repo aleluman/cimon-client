@@ -11,11 +11,13 @@ export const RoleMenuContainer = styled("div", {
   maxHeight: "3rem",
 });
 
-export const IconSelect = styled("div", {
+export const IconSelect = styled("button", {
   display: "flex",
+  background: "transparent",
   alignItems: "center",
   justifyContent: "center",
   width: "1.9rem",
+  height: "100%",
   color: "$textNormal",
   fontSize: "0.75rem",
   cursor: "pointer",
@@ -34,4 +36,61 @@ export const Divider = styled("span", {
   width: 0,
   borderLeft: "1px solid $popoverBorder",
   margin: "0 0.1rem",
+});
+
+export const SelectMenu = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  background: "$neutralFull",
+  position: "absolute",
+  padding: "0.4rem",
+  border: "1px solid $popoverBorder",
+  borderRadius: "4px",
+  boxShadow: "$hoverShadowLarge",
+});
+
+export const SelectMenuText = styled("p", {
+  margin: "0 0 0.2rem 0.2rem",
+  color: "$textNormal",
+  fontSize: "0.75rem",
+});
+
+export const IconContainer = styled("div", {
+  display: "flex",
+  gap: "0.2rem",
+});
+
+export const MenuDivider = styled("span", {
+  width: "100%",
+  height: 0,
+  borderBottom: "1px solid $popoverBorder",
+  margin: "0.3rem 0",
+});
+
+export const ActorsButton = styled("button", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "transparent",
+  width: "1.9rem",
+  height: "1.9rem",
+  border: "none",
+  borderRadius: "4px",
+  color: "$textNormal",
+  fontSize: "0.75rem",
+  fontWeight: 500,
+  cursor: "pointer",
+
+  "&:hover": {
+    background: "$neutralDarker",
+  },
+
+  variants: {
+    working: {
+      true: {
+        boxShadow: "inset 0 0 5px $colors$primary, $borderedPrimarySmall",
+        background: "$neutralLight",
+      },
+    },
+  },
 });

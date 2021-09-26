@@ -117,7 +117,7 @@ export const Role = ({ role }: RoleProps) => {
         )}
       </Container>
       {isActive && !doingAction && (
-        <RoleMenu parentRef={containerRef} roleId={role.id} setEditing={setIsEditingName} />
+        <RoleMenu parentRef={containerRef} role={role} setEditing={setIsEditingName} />
       )}
     </>
   );

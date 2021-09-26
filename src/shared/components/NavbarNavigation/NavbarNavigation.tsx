@@ -4,7 +4,7 @@ import { Icon } from "../Icon/Icon";
 import { ProjectName } from "./styles";
 
 export const NavbarNavigation = () => {
-  const { data, isLoading, isError } = useGetProcess();
+  const { data } = useGetProcess();
 
   return (
     <>

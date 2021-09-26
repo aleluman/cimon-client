@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AppContainer, MainContent } from "./styles";
 import { Editor } from "./pages/Editor/Editor";
@@ -24,6 +24,9 @@ export const App = () => {
             <Route path="/processes" component={Processes} />
             <Route path="/ambits/:ambitId/editor" component={Editor} />
             <Route path="/ambits/:ambitId/mockup" component={Mockup} />
+            <Route exact path="/">
+              <Redirect to="/processes" />
+            </Route>
           </Switch>
         </MainContent>
         <ToastContainer />
