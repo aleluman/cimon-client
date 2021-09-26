@@ -18,6 +18,7 @@ export const Tooltip = ({ children, text, tooltipPlacement, isVisible, offset }:
       placement: tooltipPlacement ?? "bottom",
       visible: isVisible,
       offset,
+      delayShow: 500,
     });
   return (
     <>

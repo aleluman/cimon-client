@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import { AppContainer, MainContent } from "./styles";
+import { Slide } from "react-toastify";
+import { AppContainer, MainContent, Toast } from "./styles";
 import { Editor } from "./pages/Editor/Editor";
 import { Navbar } from "./shared/components/Navbar/Navbar";
 import { Mockup } from "./pages/Mockup/Mockup";
@@ -29,7 +29,7 @@ export const App = () => {
             </Route>
           </Switch>
         </MainContent>
-        <ToastContainer />
+        <Toast position="top-center" transition={Slide} autoClose={3000} />
       </Router>
       <div id="tooltips" />
     </AppContainer>
