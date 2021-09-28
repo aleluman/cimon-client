@@ -1,4 +1,5 @@
 import { Icon } from "@/shared/components/Icon/Icon";
+import { Ambit } from "../Ambit/Ambit";
 import {
   LastEditedText,
   MatrixContainer,
@@ -24,36 +25,46 @@ export const Matrix = () => {
       </MatrixTitleContainer>
       <TableContainer>
         <Table>
-          <TableRow>
-            <TableHead css={{ color: "$textImportant", fontWeight: 700, width: "12rem" }}>
-              Ambits
-            </TableHead>
-            <TableHead>Phase 1</TableHead>
-            <TableHead>Phase 2</TableHead>
-            <TableHead>Phase 3</TableHead>
-            <TableHead>Phase 4</TableHead>
-          </TableRow>
-          <TableRow>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-          </TableRow>
-          <TableRow>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-          </TableRow>
-          <TableRow>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-            <TableData>asdfasdf</TableData>
-          </TableRow>
+          <thead>
+            <TableRow>
+              <TableHead css={{ color: "$textImportant", fontWeight: 700, width: "12rem" }}>
+                Ambits
+              </TableHead>
+              <TableHead>Phase 1</TableHead>
+              <TableHead>Phase 2</TableHead>
+              <TableHead>Phase 3</TableHead>
+              <TableHead>Phase 4</TableHead>
+            </TableRow>
+          </thead>
+          <tbody>
+            <TableRow>
+              <TableData>
+                <Ambit id="1" name="Home Care" />
+              </TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+            </TableRow>
+            <TableRow>
+              <TableData>
+                <Ambit id="2" name="Emergencies" />
+              </TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+            </TableRow>
+            <TableRow>
+              <TableData>
+                <Ambit id="3" name="Contact" />
+              </TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+              <TableData>asdfasdf</TableData>
+            </TableRow>
+          </tbody>
         </Table>
       </TableContainer>
     </MatrixContainer>

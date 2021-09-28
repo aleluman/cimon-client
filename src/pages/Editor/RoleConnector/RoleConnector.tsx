@@ -12,9 +12,9 @@ import { createNewInteraction } from "@/shared/utils/createItems";
 import { theme } from "@/shared/configs/stitches";
 import { EditorRouteParams } from "@/shared/types/routes";
 
-const calculateHoverNode = (update: Position) => {
+const calculateHoverNode = (update: Position, ambitId: string) => {
   const rolesPositionsRecord = useEditor.getState().rolePositions;
-  const rolesPositions = Object.values(rolesPositionsRecord);
+  const rolesPositions = Object.values(rolesPositionsRecord[ambitId]);
   const isHovering = rolesPositions.some((position) => {
     if (
       update.x >= position.x &&
@@ -66,7 +66,10 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
           hoveringNodeId && connectedNodes?.includes(hoveringNodeId) ? theme.colors.red : ""
         }`,
       });
-      calculateHoverNode({ x: position.x + nodeX + 16 * 8, y: position.y + nodeY + 16 * 2.5 });
+      calculateHoverNode(
+        { x: position.x + nodeX + 16 * 8, y: position.y + nodeY + 16 * 2.5 },
+        ambitId
+      );
     },
     onDragStart: () => {
       setUsing(true);

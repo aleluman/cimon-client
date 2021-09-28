@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { useMemo, useRef } from "react";
 import { useGesture } from "@use-gesture/react";
 import { getMarkerAngle, getPath } from "../../../shared/utils/curves";
@@ -7,14 +8,16 @@ import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
 import { useInteraction } from "@/shared/api/interaction";
 import { Marker } from "../Marker/Marker";
+import { EditorRouteParams } from "@/shared/types/routes";
 
 type InteractionProps = {
   interaction: InteractionType;
 };
 
 export const Interaction = ({ interaction }: InteractionProps) => {
-  const startPosition = useEditor((state) => state.rolePositions[interaction.source]);
-  const endPosition = useEditor((state) => state.rolePositions[interaction.target]);
+  const { ambitId } = useParams<EditorRouteParams>();
+  const startPosition = useEditor((state) => state.rolePositions[ambitId][interaction.source]);
+  const endPosition = useEditor((state) => state.rolePositions[ambitId][interaction.target]);
   const activeItem = useEditor((state) => state.activeItem);
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const { deleteInteraction } = useInteraction();

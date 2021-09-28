@@ -30,7 +30,7 @@ export const IconButton = styled("div", {
     },
     working: {
       true: {
-        boxShadow: "inset 0 0 5px $colors$primary, $borderedPrimarySmall",
+        boxShadow: "inset 0 0 8px $colors$primaryLight, $borderedPrimarySmall",
         background: "$neutralLight",
       },
     },

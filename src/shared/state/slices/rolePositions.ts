@@ -3,25 +3,25 @@ import { SetState } from "zustand";
 import { RolePosition } from "../../types/editor";
 
 export type RolePositionsSlice = {
-  rolePositions: Record<RolePosition["id"], RolePosition>;
-  setPosition: (position: RolePosition) => void;
-  deletePosition: (id: string) => void;
+  rolePositions: Record<string, Record<RolePosition["id"], RolePosition>>;
+  addAmbit: (ambitId: string) => void;
+  setPosition: (position: RolePosition, ambitId: string) => void;
 };
 
 export const createRolePositionsSlice = (
   set: SetState<RolePositionsSlice>
 ): RolePositionsSlice => ({
   rolePositions: {},
-  setPosition: (position: RolePosition) =>
+  addAmbit: (ambitId) =>
     set(
       produce((state) => {
-        state.rolePositions[position.id] = position;
+        state.rolePositions[ambitId] = {};
       })
     ),
-  deletePosition: (id) =>
+  setPosition: (position, ambitId) =>
     set(
       produce((state) => {
-        delete state.rolePositions[id];
+        state.rolePositions[ambitId][position.id] = position;
       })
     ),
 });

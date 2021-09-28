@@ -16,8 +16,9 @@ type RoleProps = {
 };
 
 export const Role = ({ role }: RoleProps) => {
+  const { ambitId } = useParams<EditorRouteParams>();
   const [isHovering, setIsHovering] = useState(false);
-  const { x, y } = useEditor((state) => state.rolePositions[role.id]);
+  const { x, y } = useEditor((state) => state.rolePositions[ambitId][role.id]);
   const zoom = useEditor((state) => state.zoom);
   const activeItem = useEditor((state) => state.activeItem);
   const [isEditingName, setIsEditingName] = useState(activeItem.new);
@@ -27,7 +28,6 @@ export const Role = ({ role }: RoleProps) => {
   const setPosition = useEditor((state) => state.setPosition);
   const setDoingAction = useEditor((state) => state.setDoingAction);
   const { updateRole, deleteRole } = useRole();
-  const { ambitId } = useParams<EditorRouteParams>();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ export const Role = ({ role }: RoleProps) => {
       setActiveItem({ id: role.id, type: "role" });
     },
     onDrag: ({ delta: [dx, dy] }) =>
-      setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }),
+      setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }, ambitId),
     onDragEnd: ({ tap }) => {
       if (!tap) updateRole.mutate({ id: role.id, x, y });
       setDoingAction(false);

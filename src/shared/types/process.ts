@@ -14,4 +14,6 @@ export type ProcessType = {
   description: string;
   roles: ProcessRoleType[];
   category: ProcessCategory;
+  ambits: { id: string; name: string }[];
+  phases: { name: string }[];
 };

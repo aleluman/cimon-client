@@ -1,10 +1,9 @@
 import { styled } from "@/shared/configs/stitches";
 
 export const Container = styled("div", {
-  display: "flex",
-  width: "100vw",
-  height: "100%",
-  overflow: "hidden",
-  position: "relative",
+  width: "100%",
+  height: "47rem",
+  borderRadius: "8px",
   background: "$neutralDarker",
+  boxShadow: "inset $subtleShadow",
 });

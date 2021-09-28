@@ -40,6 +40,7 @@ export const TableContainer = styled("div", {
   background: "$neutralLight",
   borderRadius: "8px",
   boxShadow: "$subtleShadow",
+  padding: "0.4rem",
 });
 
 export const Table = styled("table", {
@@ -48,10 +49,6 @@ export const Table = styled("table", {
 
 export const TableRow = styled("tr", {
   borderRadius: "8px",
-
-  "&:first-of-type": {
-    lineHeight: "2rem",
-  },
 });
 
 export const TableHead = styled("th", {
@@ -59,10 +56,15 @@ export const TableHead = styled("th", {
   fontWeight: 600,
   padding: "0.6rem",
   width: "8rem",
+  fontSize: "0.85rem",
+
+  "&:first-of-type": {
+    fontSize: "1rem",
+  },
 });
 
 export const TableData = styled("td", {
   color: "$textNormal",
   textAlign: "center",
-  padding: "0.6rem",
+  padding: "0.3rem",
 });
