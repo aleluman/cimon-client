@@ -9,6 +9,7 @@ export const RoleMenuContainer = styled("div", {
   border: "2px solid $primaryAccent",
   borderRadius: "8px",
   maxHeight: "3rem",
+  boxShadow: "$hoverShadowLarge",
 });
 
 export const IconSelect = styled("button", {

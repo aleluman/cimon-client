@@ -11,7 +11,7 @@ export const SidebarContainer = styled("aside", {
   height: "100%",
   background: "$neutralLight",
   boxShadow: "$subtleShadow",
-  transition: "transform ease 0.5s",
+  transition: "transform ease 0.5s, width ease 0.3s",
   userSelect: "none",
   overflow: "visible",
   willChange: "transform",
@@ -20,6 +20,11 @@ export const SidebarContainer = styled("aside", {
     hidden: {
       true: {
         transform: "translateX(100%)",
+      },
+    },
+    mockup: {
+      true: {
+        width: "26rem",
       },
     },
   },
@@ -38,7 +43,7 @@ export const HideButton = styled("button", {
   padding: 0,
   borderRadius: "4px 0 0 4px",
   boxShadow: "$subtleShadow",
-  top: "4.5rem",
+  top: "50%",
   left: "-0.8rem",
   background: "$primary",
   border: "none",

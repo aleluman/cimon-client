@@ -63,8 +63,9 @@ export const Interaction = ({ interaction }: InteractionProps) => {
       <Path
         d={curve}
         active={activeItem.id === interaction.id}
+        dashed={interaction.inherit}
         ref={pathRef}
-        markerEnd={endArrow ? `url(#endMarker${interaction.id})` : "none"}
+        markerEnd={endArrow ? `url(#endMarkerInherit${interaction.id})` : "none"}
         markerStart={startArrow ? `url(#startMarker${interaction.id})` : "none"}
       />
       <ClickPath d={curve} />

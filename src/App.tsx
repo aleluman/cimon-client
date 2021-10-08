@@ -3,7 +3,6 @@ import { Slide } from "react-toastify";
 import { AppContainer, MainContent, Toast } from "./styles";
 import { Editor } from "./pages/Editor/Editor";
 import { Navbar } from "./shared/components/Navbar/Navbar";
-import { Mockup } from "./pages/Mockup/Mockup";
 import { Processes } from "./pages/Processes/Processes";
 import { usePreferences } from "./shared/state/store";
 import { theme } from "./shared/configs/stitches";
@@ -23,7 +22,6 @@ export const App = () => {
           <Switch>
             <Route path="/processes" component={Processes} />
             <Route path="/ambits/:ambitId/editor" component={Editor} />
-            <Route path="/ambits/:ambitId/mockup" component={Mockup} />
             <Route exact path="/">
               <Redirect to="/processes" />
             </Route>

@@ -20,6 +20,11 @@ export const Path = styled("path", {
         strokeWidth: 3,
       },
     },
+    dashed: {
+      true: {
+        strokeDasharray: "8 8",
+      },
+    },
   },
 });
 

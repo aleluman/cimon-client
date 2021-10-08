@@ -6,22 +6,21 @@ export const ZoomBarContainer = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   position: "absolute",
-  bottom: "0.4rem",
+  top: "0.4rem",
   backdropFilter: "blur(10px)",
-  left: "50%",
-  transform: "translateX(calc(-50% - 10rem))",
+  right: "20.4rem",
   background: "$popoverBackground",
   padding: "0.3rem",
   borderRadius: "8px",
   border: "1px solid $popoverBorder",
   boxShadow: "$subtleShadow",
-  transition: "transform ease 0.5s",
+  transition: "right ease 0.5s",
   userSelect: "none",
 
   variants: {
     tilted: {
       true: {
-        transform: "translateX(-50%)",
+        right: "0.4rem",
       },
     },
   },

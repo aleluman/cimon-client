@@ -41,28 +41,28 @@ export const Matrix = () => {
               <TableData>
                 <Ambit id="1" name="Home Care" />
               </TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
             </TableRow>
             <TableRow>
               <TableData>
                 <Ambit id="2" name="Emergencies" />
               </TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
             </TableRow>
             <TableRow>
               <TableData>
                 <Ambit id="3" name="Contact" />
               </TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
-              <TableData>asdfasdf</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
+              <TableData>-</TableData>
             </TableRow>
           </tbody>
         </Table>

@@ -12,56 +12,6 @@ export const Container = styled("div", {
   padding: "0.3rem",
   borderRadius: "8px",
   boxShadow: "$subtleShadow",
-
-  variants: {
-    inMockup: {
-      true: {
-        background: "$neutralFull",
-        boxShadow: "none",
-        border: "1px solid $borderDark",
-        backdropFilter: "none",
-      },
-    },
-  },
-});
-
-export const ModesContainer = styled("span", {
-  display: "flex",
-  alignItems: "center",
-  width: "7rem",
-  gap: "0.2rem",
-  marginRight: "0.2rem",
-});
-
-export const Mode = styled("button", {
-  display: "flex",
-  alignItems: "center",
-  background: "$primary",
-  border: "none",
-  color: "white",
-  padding: "0.4rem",
-  borderRadius: "4px",
-  cursor: "pointer",
-  transition: "all ease 0.3s",
-
-  "&:hover": {
-    background: "primaryAccent",
-    boxShadow: "$hoverShadowSmall",
-  },
-
-  variants: {
-    inactive: {
-      true: {
-        background: "transparent",
-        color: "$textNormal",
-
-        "&:hover": {
-          color: "$textImportant",
-          boxShadow: "$hoverShadowSmall",
-        },
-      },
-    },
-  },
 });
 
 export const Divider = styled("span", {
