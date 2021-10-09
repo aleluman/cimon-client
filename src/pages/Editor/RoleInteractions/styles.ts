@@ -5,11 +5,13 @@ export const InteractionsContainer = styled("div", {
   position: "absolute",
   bottom: 0,
   width: "calc(100% - 20.8rem)",
+  height: "17rem",
   margin: "0.4rem",
   background: "$neutralLight",
   boxShadow: "$subtleShadow",
   padding: "0.4rem",
   borderRadius: "8px",
+  transition: "all 0.5s ease",
 
   variants: {
     extended: {
@@ -17,6 +19,34 @@ export const InteractionsContainer = styled("div", {
         width: "calc(100% - 0.8rem)",
       },
     },
+
+    hidden: {
+      true: {
+        transform: "translateY(calc(100% + 0.4rem))",
+      },
+    },
+  },
+});
+
+export const HideButton = styled("button", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  position: "absolute",
+  height: "0.8rem",
+  width: "4rem",
+  padding: 0,
+  borderRadius: "4px 4px 0 0",
+  boxShadow: "$subtleShadow",
+  top: "-0.8rem",
+  left: "50%",
+  background: "$primary",
+  border: "none",
+  borderRight: "1px solid $borderDark",
+  cursor: "pointer",
+
+  "& path": {
+    fill: "white",
   },
 });
 
@@ -73,7 +103,7 @@ export const TabItem = styled("button", {
 });
 
 export const Table = styled("table", {
-  background: "$neutralFull",
+  background: "$neutralLightest",
   borderRadius: "8px",
   border: "1px solid $borderDark",
   borderSpacing: 0,
@@ -85,6 +115,11 @@ export const THead = styled("thead", {});
 export const Tr = styled("tr", {
   "&:hover": {
     background: "$neutralLight",
+  },
+
+  "&:last-of-type": {
+    height: "100%",
+    verticalAlign: "top",
   },
 
   variants: {

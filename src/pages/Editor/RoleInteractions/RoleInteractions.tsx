@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Tab } from "@headlessui/react";
 import { useEditor, usePreferences } from "@/shared/state/store";
 import { css } from "@/shared/configs/stitches";
@@ -14,14 +14,18 @@ import {
   Tr,
   THead,
   Th,
+  HideButton,
 } from "./styles";
+import { Icon } from "@/shared/components/Icon/Icon";
+import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 
 export const RoleInteractions = () => {
+  const [hidden, setHidden] = useState(true);
   const activeItem = useEditor((state) => state.activeItem);
   const showSidebar = usePreferences((state) => state.showSidebar);
 
   return (
-    <InteractionsContainer extended={showSidebar}>
+    <InteractionsContainer extended={showSidebar} hidden={hidden}>
       <Tab.Group vertical className={css(InnerContainer)} as="div">
         <Tab.List className={css(TabList)}>
           <TabTitle>Interactions of role 1</TabTitle>
@@ -86,6 +90,9 @@ export const RoleInteractions = () => {
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
+      <HideButton onClick={() => setHidden(!hidden)}>
+        <Icon type={hidden ? "arrow-up" : "arrow-down"} size={12} />
+      </HideButton>
     </InteractionsContainer>
   );
 };
