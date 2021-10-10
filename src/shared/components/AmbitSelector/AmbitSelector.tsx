@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { Menu } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { AmbitButton, AmbitItem, AmbitMenu } from "./styles";
-import { css } from "@/shared/configs/stitches";
+import { css } from "@/shared/constants/stitches";
 import { useEditor } from "@/shared/state/store";
 
 type AmbitSelectorProps = {

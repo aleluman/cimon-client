@@ -1,6 +1,6 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { NoSelection } from "./NoSelection/NoSelection";
-import { ProcessDetails } from "./ProcessDetails/ProcessDetails";
+import { MainContent } from "./MainContent/MainContent";
 import { Sidebar } from "./Sidebar/Sidebar";
 import { Container } from "./styles";
 
@@ -15,7 +15,7 @@ export const Processes = () => {
           <NoSelection />
         </Route>
         <Route path={`${path}/:processId`}>
-          <ProcessDetails />
+          <MainContent />
         </Route>
       </Switch>
     </Container>

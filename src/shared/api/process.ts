@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import { ProcessRouteParams } from "../types/routes";
 
 type ProcessType = {
   id: string;
@@ -9,15 +11,12 @@ type ProcessType = {
 };
 
 export const useGetProcess = () => {
-  const id = "1";
-  const queryData = useQuery(
-    ["process", id],
-    async () => {
-      const graph = await axios.get<ProcessType>(`http://localhost:8080/processes/${id}`);
-      return graph.data;
-    },
-    { refetchOnWindowFocus: false }
-  );
+  const { processId } = useParams<ProcessRouteParams>();
+
+  const queryData = useQuery(["process", processId], async () => {
+    const graph = await axios.get<ProcessType>(`http://localhost:8080/processes/${processId}`);
+    return graph.data;
+  });
 
   return queryData;
 };

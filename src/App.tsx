@@ -5,8 +5,8 @@ import { Editor } from "./pages/Editor/Editor";
 import { Navbar } from "./shared/components/Navbar/Navbar";
 import { Processes } from "./pages/Processes/Processes";
 import { usePreferences } from "./shared/state/store";
-import { theme } from "./shared/configs/stitches";
-import { lightTheme } from "./shared/configs/lightTheme";
+import { theme } from "./shared/constants/stitches";
+import { lightTheme } from "./shared/constants/lightTheme";
 
 export const App = () => {
   const themeObject = usePreferences((state) => {

@@ -2,7 +2,7 @@ import { ReactNode, useRef } from "react";
 import { useGesture } from "@use-gesture/react";
 import { Container, Background, ChildContainer } from "./styles";
 import { calcZoom, getMousePosition } from "@/shared/utils/zoom";
-import { zoomLimits } from "@/shared/configs/editorConfigs";
+import { zoomLimits } from "@/shared/constants/editorConfigs";
 import { useEditor } from "@/shared/state/store";
 
 type StageProps = {

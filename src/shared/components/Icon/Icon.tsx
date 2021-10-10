@@ -1,4 +1,4 @@
-import { iconPaths } from "./Icons";
+import { iconPaths } from "../../constants/Icons";
 import { Path } from "./styles";
 
 type IconProps = {

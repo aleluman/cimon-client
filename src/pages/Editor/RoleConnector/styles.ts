@@ -1,4 +1,4 @@
-import { styled } from "@/shared/configs/stitches";
+import { styled } from "@/shared/constants/stitches";
 
 export const ButtonConnector = styled("button", {
   position: "absolute",

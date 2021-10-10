@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { RadioGroup } from "@headlessui/react";
 import { Label, ToggleContainer } from "./styles";
-import { css } from "@/shared/configs/stitches";
+import { css } from "@/shared/constants/stitches";
 
 type ToggleProps = {
   value: string;

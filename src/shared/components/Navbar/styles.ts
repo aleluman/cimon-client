@@ -1,4 +1,4 @@
-import { styled } from "@/shared/configs/stitches";
+import { styled } from "@/shared/constants/stitches";
 
 export const NavContainer = styled("nav", {
   height: "2.4rem",

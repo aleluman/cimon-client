@@ -3,7 +3,7 @@ import { usePopper } from "react-popper";
 import { Popover } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { MenuContainer, ThemeContainer, UserMenuItem, UserNameContainer } from "./styles";
-import { css } from "@/shared/configs/stitches";
+import { css } from "@/shared/constants/stitches";
 import { Toggle } from "../Toggle/Toggle";
 import { ToggleOption } from "../ToggleOption/ToggleOption";
 import { usePreferences } from "@/shared/state/store";

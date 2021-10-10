@@ -3,7 +3,7 @@ import { useMemo, useRef } from "react";
 import { useGesture } from "@use-gesture/react";
 import { getMarkerAngle, getPath } from "../../../shared/utils/curves";
 import { ClickPath, Path, PathContainer } from "./styles";
-import { roleDimentions } from "@/shared/configs/editorConfigs";
+import { roleDimentions } from "@/shared/constants/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
 import { useInteraction } from "@/shared/api/interaction";

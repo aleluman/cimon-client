@@ -9,7 +9,7 @@ import { Position } from "@/shared/types/editor";
 import { getConnectedNodesIds } from "@/shared/utils/connectedNodes";
 import { useInteraction } from "@/shared/api/interaction";
 import { createNewInteraction } from "@/shared/utils/createItems";
-import { theme } from "@/shared/configs/stitches";
+import { theme } from "@/shared/constants/stitches";
 import { EditorRouteParams } from "@/shared/types/routes";
 
 const calculateHoverNode = (update: Position, ambitId: string) => {

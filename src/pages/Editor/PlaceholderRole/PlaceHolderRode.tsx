@@ -1,5 +1,5 @@
 import { Icon } from "@/shared/components/Icon/Icon";
-import { theme } from "@/shared/configs/stitches";
+import { theme } from "@/shared/constants/stitches";
 import { useEditor } from "@/shared/state/store";
 import { PlaceholderRoleType } from "@/shared/types/editor";
 import { PlaceholderContainer } from "./styles";

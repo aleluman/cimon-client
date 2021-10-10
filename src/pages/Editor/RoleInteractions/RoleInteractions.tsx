@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
 import { Tab } from "@headlessui/react";
 import { useEditor, usePreferences } from "@/shared/state/store";
-import { css } from "@/shared/configs/stitches";
-import { awareness, communication, transmission } from "@/shared/configs/services";
+import { css } from "@/shared/constants/stitches";
+import { awareness, communication, transmission } from "@/shared/constants/services";
 import {
   InteractionsContainer,
   InnerContainer,

@@ -1,4 +1,4 @@
-import { iconPaths } from "../Icon/Icons";
+import { iconPaths } from "../../constants/Icons";
 import { Icon } from "../Icon/Icon";
 import { IconButton } from "./styles";
 import { Tooltip } from "../Tooltip/Tooltip";

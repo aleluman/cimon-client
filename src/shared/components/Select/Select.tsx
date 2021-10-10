@@ -1,10 +1,11 @@
 import { Listbox } from "@headlessui/react";
-import { css } from "@/shared/configs/stitches";
+import { css } from "@/shared/constants/stitches";
 import { SelectButton, SelectContainer, SelectMenu, SelectOption } from "./styles";
 import { Icon } from "../Icon/Icon";
+import { iconPaths } from "../../constants/Icons";
 
 type SelectProps = {
-  options: { id: string; value: string; name: string }[];
+  options: { id: string; value: string; name: string; icon?: keyof typeof iconPaths }[];
   handler: (value: string) => void;
   selectedValue: string;
 };
@@ -18,6 +19,7 @@ export const Select = ({ options, handler, selectedValue }: SelectProps) => {
       <Listbox.Options className={css(SelectMenu)}>
         {options.map((option) => (
           <Listbox.Option key={option.id} value={option.value} className={css(SelectOption)}>
+            {option.icon && <Icon type={option.icon} />}
             {option.name}
           </Listbox.Option>
         ))}
