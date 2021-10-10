@@ -1,20 +1,28 @@
 import { Listbox } from "@headlessui/react";
 import { css } from "@/shared/constants/stitches";
-import { SelectButton, SelectContainer, SelectMenu, SelectOption } from "./styles";
+import { SelectButton, SelectContainer, Selected, SelectMenu, SelectOption } from "./styles";
 import { Icon } from "../Icon/Icon";
-import { iconPaths } from "../../constants/Icons";
+import { ProcessCategory } from "@/shared/types/process";
 
 type SelectProps = {
-  options: { id: string; value: string; name: string; icon?: keyof typeof iconPaths }[];
+  options: ProcessCategory[];
   handler: (value: string) => void;
   selectedValue: string;
 };
 
 export const Select = ({ options, handler, selectedValue }: SelectProps) => {
+  const selectedOption = options.find(
+    (option) => option.value === selectedValue
+  ) as ProcessCategory;
+
   return (
     <Listbox value={selectedValue} onChange={handler} as="div" className={css(SelectContainer)}>
       <Listbox.Button className={css(SelectButton)}>
-        {selectedValue} <Icon type="arrow-down" />
+        <Selected>
+          {selectedOption.icon && <Icon type={selectedOption.icon} />}
+          {selectedOption.name}
+        </Selected>{" "}
+        <Icon type="arrow-down" />
       </Listbox.Button>
       <Listbox.Options className={css(SelectMenu)}>
         {options.map((option) => (

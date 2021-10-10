@@ -32,6 +32,7 @@ export const SelectMenu = styled("ul", {
 
 export const SelectOption = styled("li", {
   display: "flex",
+  gap: "0.4rem",
   fontSize: "0.8rem",
   listStyle: "none",
   color: "$textNormal",
@@ -42,4 +43,10 @@ export const SelectOption = styled("li", {
   "&:hover": {
     background: "$popoverSelect",
   },
+});
+
+export const Selected = styled("span", {
+  display: "flex",
+  gap: "0.4rem",
+  alignItems: "center",
 });

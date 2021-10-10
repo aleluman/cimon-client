@@ -11,10 +11,23 @@ export const ButtonContainer = styled("button", {
   transition: "all 0.25s ease",
   borderRadius: "4px",
 
+  "&:hover": {
+    boxShadow: "$hoverShadowSmall",
+  },
+
   variants: {
     color: {
       primary: {
         background: "$primary",
+        color: "$textReverse",
+
+        "& path": {
+          fill: "$textReverse",
+        },
+
+        "&:hover": {
+          background: "$primaryAccent",
+        },
       },
       success: {
         background: "Green",

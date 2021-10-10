@@ -5,6 +5,7 @@ export const ProcessContainer = styled("button", {
   width: "100%",
   color: "$textNormal",
   background: "transparent",
+  textDecoration: "none",
   border: "none",
   display: "flex",
   alignItems: "center",
@@ -43,4 +44,5 @@ export const RoleCounter = styled("span", {
   borderRadius: "4px",
   boxShadow: "$subtlerShadow",
   fontWeight: 700,
+  fontSize: "0.9rem",
 });

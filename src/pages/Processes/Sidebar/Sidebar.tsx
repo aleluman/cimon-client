@@ -1,4 +1,5 @@
 import { useGetAllProcesses } from "@/shared/api/processes";
+import { Button } from "@/shared/components/Button/Button";
 import { Process } from "../Process/Process";
 import { Searchbar } from "../Searchbar/Searchbar";
 import { ProcessesContainer, SidebarContainer, Title } from "./styles";
@@ -10,7 +11,12 @@ export const Sidebar = () => {
     <SidebarContainer>
       {data && (
         <>
-          <Title>My Processes</Title>
+          <Title>
+            My Processes
+            <Button icon="plus" variant="secondary" onClick={() => {}}>
+              Add process
+            </Button>
+          </Title>
           <Searchbar />
           <ProcessesContainer>
             {data.map((process) => (
