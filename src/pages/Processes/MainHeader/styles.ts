@@ -20,7 +20,7 @@ export const LastEditedText = styled("span", {
   fontSize: "0.8rem",
   fontStyle: "oblique",
   color: "$textDull",
-  borderRight: "1px solid $popoverBorder",
+  borderRight: "1px solid $borderLight",
   paddingRight: "1rem",
-  marginRight: "1rem",
+  marginRight: "0.5rem",
 });

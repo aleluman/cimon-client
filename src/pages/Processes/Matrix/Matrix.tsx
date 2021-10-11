@@ -1,5 +1,15 @@
+import { Checkbox } from "@/shared/components/Checkbox/Checkbox";
+import { Icon } from "@/shared/components/Icon/Icon";
 import { Ambit } from "../Ambit/Ambit";
-import { Table, TableContainer, TableData, TableHead, TableRow } from "./styles";
+import {
+  AddButton,
+  PhaseContainer,
+  Table,
+  TableContainer,
+  TableData,
+  TableHead,
+  TableRow,
+} from "./styles";
 
 export const Matrix = () => {
   return (
@@ -21,10 +31,18 @@ export const Matrix = () => {
             <TableData>
               <Ambit id="1" name="Home Care" />
             </TableData>
-            <TableData>-</TableData>
-            <TableData>-</TableData>
-            <TableData>-</TableData>
-            <TableData>-</TableData>
+            <TableData>
+              <Checkbox checked handler={() => {}} />
+            </TableData>
+            <TableData>
+              <Checkbox checked handler={() => {}} />
+            </TableData>
+            <TableData>
+              <Checkbox handler={() => {}} />
+            </TableData>
+            <TableData>
+              <Checkbox checked handler={() => {}} />
+            </TableData>
           </TableRow>
           <TableRow>
             <TableData>
@@ -46,6 +64,14 @@ export const Matrix = () => {
           </TableRow>
         </tbody>
       </Table>
+      <AddButton onClick={() => {}}>
+        <Icon type="plus" /> Add Ambit
+      </AddButton>
+      <PhaseContainer>
+        <AddButton onClick={() => {}} css={{ width: "7rem" }}>
+          <Icon type="plus" /> Add Phase
+        </AddButton>
+      </PhaseContainer>
     </TableContainer>
   );
 };

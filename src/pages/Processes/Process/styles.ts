@@ -22,6 +22,13 @@ export const ProcessContainer = styled("button", {
     active: {
       true: {
         background: "$primaryLight",
+        color: "$textImportant",
+        fontWeight: 500,
+
+        "&:hover": {
+          background: "$primaryLight",
+          boxShadow: "inset $subtleShadow",
+        },
       },
     },
   },

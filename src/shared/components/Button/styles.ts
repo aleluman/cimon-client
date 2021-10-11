@@ -48,7 +48,7 @@ export const ButtonContainer = styled("button", {
     size: {
       medium: {
         fontSize: "0.9rem",
-        padding: "0.4rem",
+        padding: "0.5rem",
       },
       large: {},
     },

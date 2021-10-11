@@ -30,6 +30,7 @@ export const Label = styled("label", {
 export const Textarea = styled("textarea", {
   flex: 1,
   appearance: "none",
+  background: "$neutralFull",
   height: "100%",
   border: "1px solid $popoverBorder",
   borderRadius: "8px",

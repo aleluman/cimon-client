@@ -1,6 +1,8 @@
 import { styled } from "@/shared/constants/stitches";
 
-export const SelectContainer = styled("div", {});
+export const SelectContainer = styled("div", {
+  position: "relative",
+});
 
 export const SelectButton = styled("button", {
   display: "flex",
@@ -21,6 +23,8 @@ export const SelectButton = styled("button", {
 });
 
 export const SelectMenu = styled("ul", {
+  position: "absolute",
+  width: "100%",
   background: "$popoverBackground",
   backdropFilter: "blur(12px)",
   borderRadius: "8px",

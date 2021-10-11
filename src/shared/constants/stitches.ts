@@ -31,7 +31,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         dialogBackground: "#44444493",
         popoverBackground: "#4e4e4e9c",
         popoverSelect: "#66666652",
-        popoverBorder: "#313131",
+        popoverBorder: "#212121",
         subtleShadow: "#0b0b0c66",
         shadow: "#0b0b0c80",
         strongShadow: "#0b0b0c",
