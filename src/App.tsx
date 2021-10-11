@@ -20,11 +20,11 @@ export const App = () => {
         <Navbar />
         <MainContent>
           <Switch>
-            <Route path="/processes" component={Processes} />
-            <Route path="/ambits/:ambitId/editor" component={Editor} />
             <Route exact path="/">
               <Redirect to="/processes" />
             </Route>
+            <Route path="/processes" component={Processes} />
+            <Route path="/ambits/:ambitId" component={Editor} />
           </Switch>
         </MainContent>
         <Toast position="top-center" transition={Slide} autoClose={3000} />

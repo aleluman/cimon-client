@@ -11,10 +11,13 @@ type ProcessProps = {
 export const Process = ({ process }: ProcessProps) => {
   const { pathname } = useLocation();
   const match = matchPath<ProcessRouteParams>(pathname, "/processes/:processId");
-  const { processId } = match?.params as ProcessRouteParams;
 
   return (
-    <ProcessContainer active={process.id === processId} as={Link} to={`/processes/${process.id}`}>
+    <ProcessContainer
+      active={match?.params.processId === process.id}
+      as={Link}
+      to={`/processes/${process.id}`}
+    >
       <Icon type={process.category} color="$primary" />
       <ProcessName>{process.name}</ProcessName>
       <RoleCounter>{process.roles.length}</RoleCounter>

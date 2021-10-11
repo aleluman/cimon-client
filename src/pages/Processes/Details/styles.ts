@@ -49,3 +49,16 @@ export const Textarea = styled("textarea", {
     color: "$textDull",
   },
 });
+
+export const TagContainer = styled("div", {
+  display: "flex",
+  gap: "1rem",
+  alignItems: "center",
+  justifyContent: "space-between",
+});
+
+export const RolesContainer = styled("div", {
+  color: "$textNormal",
+  fontSize: "0.85rem",
+  lineHeight: "140%",
+});

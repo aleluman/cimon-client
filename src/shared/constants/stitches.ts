@@ -18,6 +18,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         neutralContrast: "#4d4d4d",
         textNormal: "#d5d6db",
         textImportant: "#eff0f7",
+        textPrimary: "#BEC7E0",
         textDull: "#969696",
         textReverse: "#fafcff",
         border: "#2e2e2e",

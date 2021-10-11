@@ -11,13 +11,14 @@ export type ProcessCategory = {
 export type ProcessRoleType = {
   id: string;
   name: string;
-  role: RoleType["role"];
+  type: RoleType["role"];
 };
 
 export type ProcessType = {
   id: string;
   name: string;
   description: string;
+  objective: string;
   roles: ProcessRoleType[];
   category: "generic" | "health" | "travel" | "shopping";
   ambits: { id: string; name: string }[];

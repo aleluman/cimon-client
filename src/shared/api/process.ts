@@ -1,14 +1,8 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { ProcessType } from "../types/process";
 import { ProcessRouteParams } from "../types/routes";
-
-type ProcessType = {
-  id: string;
-  name: string;
-  ambits: { id: string; name: string }[];
-  roles: { id: string; name: string; type: "human" | "service" | "repository" }[];
-};
 
 export const useGetProcess = () => {
   const { processId } = useParams<ProcessRouteParams>();

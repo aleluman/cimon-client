@@ -65,5 +65,10 @@ export const AddButton = styled("button", {
   "&:hover": {
     background: "$primary",
     color: "$textReverse",
+
+    "& path": {
+      fill: "white",
+      transition: "all ease 0.25s",
+    },
   },
 });

@@ -13,10 +13,10 @@ export const Navbar = () => {
         <Icon type="home" size={20} />
       </HomeContainer>
       <ProjectNav>
-        {!location.pathname.includes("processes") ? (
-          <NavbarNavigation />
-        ) : (
+        {!location.pathname.includes("ambits") ? (
           <AppTitle>CIMoN Manager</AppTitle>
+        ) : (
+          <NavbarNavigation />
         )}
       </ProjectNav>
       <UserMenu username="John Doe" />

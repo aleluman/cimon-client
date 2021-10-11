@@ -4,6 +4,7 @@
       "id": "1",
       "name": "Process 1",
       "description": "",
+      "objective": "This is the objective",
       "category": "generic",
       "ambits": [
         {
@@ -42,6 +43,7 @@
       "name": "Travel planning",
       "category": "travel",
       "description": "",
+      "objective": "This is the objective",
       "ambits": [],
       "roles": [
         {
@@ -65,6 +67,7 @@
       "id": "3",
       "name": "Grocery shopping",
       "description": "",
+      "objective": "This is the objective",
       "category": "shopping",
       "ambits": [],
       "roles": [
@@ -89,6 +92,7 @@
       "id": "4",
       "name": "Process 2",
       "description": "",
+      "objective": "This is the objective",
       "category": "generic",
       "ambits": [],
       "roles": [
@@ -113,6 +117,7 @@
       "id": "5",
       "name": "Elderly Care",
       "description": "",
+      "objective": "This is the objective",
       "category": "health",
       "ambits": [],
       "roles": [

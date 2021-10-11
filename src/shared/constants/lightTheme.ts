@@ -16,6 +16,7 @@ export const lightTheme = createTheme({
     neutralContrast: "violet",
     textNormal: "#364f77",
     textImportant: "#222d55",
+    textPrimary: "#506BB0",
     textDull: "#58739b",
     textReverse: "#fafcff",
     border: "#d8e5f5",
