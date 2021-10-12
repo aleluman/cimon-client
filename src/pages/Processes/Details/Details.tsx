@@ -1,6 +1,7 @@
 import { Select } from "@/shared/components/Select/Select";
 import { Tag } from "@/shared/components/Tag/Tag";
 import { categories } from "@/shared/constants/categories";
+import { RoleType } from "@/shared/types/editor";
 import { ProcessType } from "@/shared/types/process";
 import {
   DetailsContainer,
@@ -16,6 +17,12 @@ type DetailsProps = {
 };
 
 export const Details = ({ process }: DetailsProps) => {
+  const getRolesByType = (type: RoleType["role"]) => {
+    const filteredRoles = process.roles.filter((role) => role.type === type);
+    if (filteredRoles.length === 0) return "no roles";
+    return filteredRoles.map((role) => role.name).join(", ");
+  };
+
   return (
     <DetailsContainer>
       <SectionContainer>
@@ -44,30 +51,15 @@ export const Details = ({ process }: DetailsProps) => {
         <Label>Roles </Label>
         <TagContainer>
           <Tag text="Human" icon="human-internal" />
-          <RolesContainer>
-            {process.roles
-              .filter((role) => role.type === "human")
-              .map((role) => role.name)
-              .join(", ")}
-          </RolesContainer>
+          <RolesContainer>{getRolesByType("human")}</RolesContainer>
         </TagContainer>
         <TagContainer>
           <Tag text="Service" icon="service-internal" />
-          <RolesContainer>
-            {process.roles
-              .filter((role) => role.type === "service")
-              .map((role) => role.name)
-              .join(", ")}
-          </RolesContainer>
+          <RolesContainer>{getRolesByType("service")}</RolesContainer>
         </TagContainer>
         <TagContainer>
           <Tag text="Repository" icon="repository-internal" />
-          <RolesContainer>
-            {process.roles
-              .filter((role) => role.type === "repository")
-              .map((role) => role.name)
-              .join(", ")}
-          </RolesContainer>
+          <RolesContainer>{getRolesByType("repository")}</RolesContainer>
         </TagContainer>
       </SectionContainer>
     </DetailsContainer>

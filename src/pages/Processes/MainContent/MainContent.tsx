@@ -11,9 +11,9 @@ export const MainContent = () => {
     <>
       {data && (
         <Container>
-          <MainHeader processName={data.name} category={data.category} />
+          <MainHeader process={data} />
           <Details process={data} />
-          <Matrix />
+          <Matrix process={data} />
         </Container>
       )}
     </>

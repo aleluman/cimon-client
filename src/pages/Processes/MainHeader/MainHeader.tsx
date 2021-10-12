@@ -1,24 +1,21 @@
 import { Button } from "@/shared/components/Button/Button";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { ProcessType } from "@/shared/types/process";
+import { getRelativeTime } from "@/shared/utils/relativeTime";
 import { LastEditedText, ContentTitle, ContentTitleContainer } from "./styles";
 
 type MainHeaderProps = {
-  processName: string;
-  lastEdited?: Date;
-  category: ProcessType["category"];
+  process: ProcessType;
 };
 
-export const MainHeader = ({ processName, lastEdited, category }: MainHeaderProps) => {
+export const MainHeader = ({ process }: MainHeaderProps) => {
   return (
     <ContentTitleContainer>
       <ContentTitle>
-        <Icon type={category} size={24} color="$primary" />
-        {processName}
+        <Icon type={process.category} size={24} color="$primary" />
+        {process.name}
       </ContentTitle>
-      <LastEditedText>
-        {lastEdited ? lastEdited.getTime() : "Last modified just now"}
-      </LastEditedText>
+      <LastEditedText>Last edited {getRelativeTime(new Date(process.lastEdited))}</LastEditedText>
       <Button variant="secondary" icon="delete" onClick={() => {}}>
         Delete
       </Button>

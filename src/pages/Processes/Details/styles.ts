@@ -54,7 +54,7 @@ export const TagContainer = styled("div", {
   display: "flex",
   gap: "1rem",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
 });
 
 export const RolesContainer = styled("div", {

@@ -9,16 +9,25 @@
       "ambits": [
         {
           "id": "1",
-          "name": "Home Care"
+          "name": "Home Care",
+          "phases": ["1", "2", "4"]
         },
         {
           "id": "2",
-          "name": "Emergencies"
+          "name": "Emergencies",
+          "phases": ["3", "4"]
         },
         {
           "id": "3",
-          "name": "Contact"
+          "name": "Contact",
+          "phases": ["1"]
         }
+      ],
+      "phases": [
+        { "id": "1", "name": "phase 1" },
+        { "id": "2", "name": "phase 2" },
+        { "id": "3", "name": "phase 3" },
+        { "id": "4", "name": "phase 4" }
       ],
       "roles": [
         {
@@ -36,107 +45,8 @@
           "name": "Caretaker",
           "type": "human"
         }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Travel planning",
-      "category": "travel",
-      "description": "",
-      "objective": "This is the objective",
-      "ambits": [],
-      "roles": [
-        {
-          "id": "1",
-          "name": "Doctor",
-          "type": "human"
-        },
-        {
-          "id": "2",
-          "name": "Emergency",
-          "type": "service"
-        },
-        {
-          "id": "3",
-          "name": "Caretaker",
-          "type": "human"
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "name": "Grocery shopping",
-      "description": "",
-      "objective": "This is the objective",
-      "category": "shopping",
-      "ambits": [],
-      "roles": [
-        {
-          "id": "1",
-          "name": "Doctor",
-          "type": "human"
-        },
-        {
-          "id": "2",
-          "name": "Emergency",
-          "type": "service"
-        },
-        {
-          "id": "3",
-          "name": "Caretaker",
-          "type": "human"
-        }
-      ]
-    },
-    {
-      "id": "4",
-      "name": "Process 2",
-      "description": "",
-      "objective": "This is the objective",
-      "category": "generic",
-      "ambits": [],
-      "roles": [
-        {
-          "id": "1",
-          "name": "Doctor",
-          "type": "human"
-        },
-        {
-          "id": "2",
-          "name": "Emergency",
-          "type": "service"
-        },
-        {
-          "id": "3",
-          "name": "Caretaker",
-          "type": "human"
-        }
-      ]
-    },
-    {
-      "id": "5",
-      "name": "Elderly Care",
-      "description": "",
-      "objective": "This is the objective",
-      "category": "health",
-      "ambits": [],
-      "roles": [
-        {
-          "id": "1",
-          "name": "Doctor",
-          "type": "human"
-        },
-        {
-          "id": "2",
-          "name": "Emergency",
-          "type": "service"
-        },
-        {
-          "id": "3",
-          "name": "Caretaker",
-          "type": "human"
-        }
-      ]
+      ],
+      "lastEdited": "2012-04-23T18:25:43.511Z"
     }
   ],
   "graph": [

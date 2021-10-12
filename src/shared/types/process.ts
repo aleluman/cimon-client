@@ -21,6 +21,7 @@ export type ProcessType = {
   objective: string;
   roles: ProcessRoleType[];
   category: "generic" | "health" | "travel" | "shopping";
-  ambits: { id: string; name: string }[];
-  phases: { name: string }[];
+  ambits: { id: string; name: string; phases: string[] }[];
+  phases: { id: string; name: string }[];
+  lastEdited: string;
 };
