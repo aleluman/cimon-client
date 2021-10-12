@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
-import { Fragment, memo, useState } from "react";
+import { memo, useState } from "react";
 import {
   ActorsButton,
   Divider,
