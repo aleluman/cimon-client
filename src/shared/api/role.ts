@@ -32,7 +32,10 @@ export const useRole = () => {
 
   const updateRole = useMutation(
     (updatedRole: Partial<RoleType> & Pick<RoleType, "id">) =>
-      axios.patch<RoleType>(`http://localhost:8080/roles/${updatedRole.id}`, updatedRole),
+      axios.patch<Partial<RoleType> & Pick<RoleType, "id">>(
+        `http://localhost:8080/roles/${updatedRole.id}`,
+        updatedRole
+      ),
     {
       onMutate: async (updatedRole) => {
         const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;

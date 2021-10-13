@@ -40,3 +40,64 @@ export const ProcessesContainer = styled("div", {
   gap: "0.2rem",
   width: "100%",
 });
+
+export const ModalLabel = styled("label", {
+  display: "flex",
+  flexDirection: "column",
+  fontSize: "0.8rem",
+  gap: "0.3rem",
+});
+
+export const ModalButtonContainer = styled("div", {
+  display: "flex",
+  justifyContent: "flex-end",
+  gap: "0.4rem",
+});
+
+export const ModalTitle = styled("h1", {
+  margin: 0,
+  fontSize: "0.95rem",
+});
+
+export const ModalInput = styled("input", {
+  appearance: "none",
+  width: "20rem",
+  background: "$neutralFull",
+  border: "1px solid $borderDark",
+  borderRadius: "8px",
+  padding: "0.4rem",
+  fontSize: "0.85rem",
+  color: "$textNormal",
+
+  "&:focus": {
+    border: "1px solid $primary",
+    boxShadow: "$borderedPrimarySmall",
+    outline: "none",
+  },
+
+  "&::placeholder": {
+    color: "$textDull",
+  },
+});
+
+export const ModalTextarea = styled("textarea", {
+  appearance: "none",
+  background: "$neutralFull",
+  height: "100%",
+  border: "1px solid $borderDark",
+  borderRadius: "8px",
+  padding: "0.4rem",
+  resize: "none",
+  fontSize: "0.85rem",
+  color: "$textNormal",
+
+  "&:focus": {
+    border: "1px solid $primary",
+    boxShadow: "$borderedPrimarySmall",
+    outline: "none",
+  },
+
+  "&::placeholder": {
+    color: "$textDull",
+  },
+});

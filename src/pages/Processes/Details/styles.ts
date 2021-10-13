@@ -23,6 +23,7 @@ export const Label = styled("label", {
   display: "flex",
   gap: "0.4rem",
   fontWeight: 500,
+  fontSize: "0.8rem",
   flexDirection: "column",
   color: "$textNormal",
 });
@@ -32,7 +33,7 @@ export const Textarea = styled("textarea", {
   appearance: "none",
   background: "$neutralFull",
   height: "100%",
-  border: "1px solid $popoverBorder",
+  border: "1px solid $borderDark",
   borderRadius: "8px",
   padding: "0.4rem",
   resize: "none",
