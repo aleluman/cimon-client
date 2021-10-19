@@ -4,6 +4,7 @@ export const Path = styled("path", {
   fill: "$iconNormal",
   stroke: "$iconNormal",
   strokeWidth: 0,
+  strokeLinejoin: "miter",
 
   variants: {
     active: {
@@ -19,4 +20,11 @@ export const Path = styled("path", {
       },
     },
   },
+  compoundVariants: [
+    {
+      active: true,
+      inherit: true,
+      css: { fill: "$neutralDarker", stroke: "$primaryAccent", strokeWidth: 3 },
+    },
+  ],
 });

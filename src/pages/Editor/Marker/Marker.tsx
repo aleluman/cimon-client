@@ -34,14 +34,14 @@ export const Marker = ({ id, angle, active, inherit }: MarkerProps) => {
       </marker>
       <marker
         id={`endMarkerInherit${id}`}
-        markerWidth="20"
-        markerHeight="16"
-        refX="20"
-        refY="8"
+        markerWidth="24"
+        markerHeight="24"
+        refX="15"
+        refY="9"
         orient={`${angle}rad`}
         markerUnits="userSpaceOnUse"
       >
-        <Path d="M20,8 C-4,23 0,8 4,8 M20,8 C-4,-7 0,8 4,8" active={active} inherit={inherit} />
+        <Path d="M2,2 L16,9 L2,16z" active={active} inherit={inherit} />
       </marker>
       <marker
         id={`startMarkerInherit${id}`}
@@ -52,7 +52,7 @@ export const Marker = ({ id, angle, active, inherit }: MarkerProps) => {
         orient={`${angle + Math.PI}rad`}
         markerUnits="userSpaceOnUse"
       >
-        <Path d="M16,8 Q20,-4 4,8 Q-4,-4 16,8" active={active} inherit={inherit} />
+        <Path d="M2,2 L16,9 L2,16z" active={active} inherit={inherit} />
       </marker>
     </defs>
   );

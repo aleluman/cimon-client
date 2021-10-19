@@ -6,7 +6,6 @@ import { NavbarNavigation } from "../NavbarNavigation/NavbarNavigation";
 
 export const Navbar = () => {
   const location = useLocation();
-
   return (
     <NavContainer>
       <HomeContainer tabIndex={0} as={Link} to="/processes">

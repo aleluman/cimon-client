@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useGesture } from "@use-gesture/react";
 import { getMarkerAngle, getPath } from "../../../shared/utils/curves";
 import { ClickPath, Path, PathContainer } from "./styles";
@@ -15,6 +15,7 @@ type InteractionProps = {
 };
 
 export const Interaction = ({ interaction }: InteractionProps) => {
+  const [angle, setAngle] = useState(0);
   const { ambitId } = useParams<EditorRouteParams>();
   const startPosition = useEditor((state) => state.rolePositions[ambitId][interaction.source]);
   const endPosition = useEditor((state) => state.rolePositions[ambitId][interaction.target]);
@@ -47,19 +48,19 @@ export const Interaction = ({ interaction }: InteractionProps) => {
     },
   });
 
-  const markerAngle =
-    pathRef.current && startPosition && endPosition ? getMarkerAngle(pathRef.current) : 0;
+  useEffect(
+    () =>
+      setAngle(
+        pathRef.current && startPosition && endPosition ? getMarkerAngle(pathRef.current) : 0
+      ),
+    [startPosition, endPosition, pathRef]
+  );
 
   const curve = getPath(roleDimentions.width, roleDimentions.height, startPosition, endPosition);
 
   return (
     <PathContainer tabIndex={0} {...pathHandlers()}>
-      <Marker
-        id={interaction.id}
-        active={isActive}
-        inherit={interaction.inherit}
-        angle={markerAngle}
-      />
+      <Marker id={interaction.id} active={isActive} inherit={interaction.inherit} angle={angle} />
       <Path
         d={curve}
         active={activeItem.id === interaction.id}

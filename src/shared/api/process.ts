@@ -7,8 +7,10 @@ import { ProcessRouteParams } from "../types/routes";
 export const useGetProcess = () => {
   const { processId } = useParams<ProcessRouteParams>();
 
-  const queryData = useQuery(["process", processId], async () => {
-    const graph = await axios.get<ProcessType>(`http://localhost:8080/processes/${processId}`);
+  const id = processId || "1";
+
+  const queryData = useQuery(["process", id], async () => {
+    const graph = await axios.get<ProcessType>(`http://localhost:8080/processes/${id}`);
     return graph.data;
   });
 

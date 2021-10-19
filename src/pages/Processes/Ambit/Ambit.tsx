@@ -9,7 +9,7 @@ type AmbitProps = {
 export const Ambit = ({ id, name }: AmbitProps) => {
   return (
     <AmbitContainer>
-      <AmbitText as={Link} to={`/ambits/${id}/editor`}>
+      <AmbitText as={Link} to={`/ambits/${id}`}>
         {name}
       </AmbitText>
     </AmbitContainer>

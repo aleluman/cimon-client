@@ -18,6 +18,7 @@ import {
 } from "./styles";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
+import { Checkbox } from "@/shared/components/Checkbox/Checkbox";
 
 export const RoleInteractions = () => {
   const [hidden, setHidden] = useState(true);
@@ -45,12 +46,20 @@ export const RoleInteractions = () => {
               <THead>
                 <Tr head>
                   <Th>Services</Th>
+                  <Th>Caretaker</Th>
+                  <Th>Doctor</Th>
                 </Tr>
               </THead>
               <tbody>
                 {communication.map((item) => (
-                  <Tr>
-                    <Td key={item}>{item}</Td>
+                  <Tr key={item}>
+                    <Td>{item}</Td>
+                    <Td>
+                      <Checkbox checked size="small" handler={() => {}} />
+                    </Td>
+                    <Td>
+                      <Checkbox checked={false} size="small" handler={() => {}} />
+                    </Td>
                   </Tr>
                 ))}
               </tbody>
@@ -60,13 +69,21 @@ export const RoleInteractions = () => {
             <Table>
               <THead>
                 <Tr head>
-                  <Th>asdf</Th>
+                  <Th>Services</Th>
+                  <Th>Caretaker</Th>
+                  <Th>Doctor</Th>
                 </Tr>
               </THead>
               <tbody>
                 {transmission.map((item) => (
-                  <Tr>
-                    <Td key={item}>{item}</Td>
+                  <Tr key={item}>
+                    <Td>{item}</Td>
+                    <Td>
+                      <Checkbox checked size="small" handler={() => {}} />
+                    </Td>
+                    <Td>
+                      <Checkbox checked={false} size="small" handler={() => {}} />
+                    </Td>
                   </Tr>
                 ))}
               </tbody>
@@ -76,13 +93,21 @@ export const RoleInteractions = () => {
             <Table>
               <THead>
                 <Tr head>
-                  <Th>asdf</Th>
+                  <Th>Services</Th>
+                  <Th>Caretaker</Th>
+                  <Th>Doctor</Th>
                 </Tr>
               </THead>
               <tbody>
                 {awareness.map((item) => (
-                  <Tr>
-                    <Td key={item}>{item}</Td>
+                  <Tr key={item}>
+                    <Td>{item}</Td>
+                    <Td>
+                      <Checkbox checked size="small" handler={() => {}} />
+                    </Td>
+                    <Td>
+                      <Checkbox checked="inherit" size="small" handler={() => {}} />
+                    </Td>
                   </Tr>
                 ))}
               </tbody>

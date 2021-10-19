@@ -5,7 +5,6 @@ import { ProjectName } from "./styles";
 
 export const NavbarNavigation = () => {
   const { data } = useGetProcess();
-
   return (
     <>
       {data && (

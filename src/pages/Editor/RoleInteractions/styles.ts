@@ -103,14 +103,16 @@ export const TabItem = styled("button", {
 });
 
 export const Table = styled("table", {
+  width: "100%",
   background: "$neutralLightest",
   borderRadius: "8px",
   border: "1px solid $borderDark",
   borderSpacing: 0,
-  flexGrow: 1,
 });
 
-export const THead = styled("thead", {});
+export const THead = styled("thead", {
+  paddingBottom: "0.3rem",
+});
 
 export const Tr = styled("tr", {
   "&:hover": {
@@ -134,15 +136,24 @@ export const Tr = styled("tr", {
 });
 
 export const Th = styled("th", {
-  borderBottom: "1px solid $borderLight",
+  display: "inline-block",
   color: "$textImportant",
   fontWeight: 550,
   fontSize: "0.85rem",
   padding: "0.2rem",
+  width: "8rem",
+  "&:first-of-type": {
+    width: "14rem",
+  },
 });
 
 export const Td = styled("td", {
+  display: "inline-block",
   color: "$textNormal",
   fontSize: "0.85rem",
-  padding: "0.3rem",
+  padding: "0.1rem 0.6rem",
+  width: "8rem",
+  "&:first-of-type": {
+    width: "14rem",
+  },
 });
