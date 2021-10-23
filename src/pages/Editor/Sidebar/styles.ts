@@ -11,10 +11,9 @@ export const SidebarContainer = styled("aside", {
   height: "100%",
   background: "$neutralLight",
   boxShadow: "$subtleShadow",
-  transition: "transform ease 0.5s, width ease 0.3s",
+  transition: "transform ease 0.5s, width ease 0.2s",
   userSelect: "none",
   overflow: "visible",
-  willChange: "transform",
 
   variants: {
     hidden: {
@@ -24,7 +23,7 @@ export const SidebarContainer = styled("aside", {
     },
     mockup: {
       true: {
-        width: "26rem",
+        width: "22rem",
       },
     },
   },
@@ -80,7 +79,8 @@ export const SubTitle = styled("h2", {
   fontWeight: 400,
   color: "$textNormal",
   fontSize: "0.85rem",
-  margin: "1rem 0 0.4rem 0",
+  margin: 0,
+  marginBottom: "0.4rem",
 });
 
 export const Help = styled("p", {
@@ -118,4 +118,42 @@ export const Divider = styled("hr", {
   width: "calc(100%+2rem)",
   border: "none",
   borderTop: "1px solid $borderDark",
+});
+
+export const PhoneContainer = styled("div", {
+  width: "100%",
+  height: "42rem",
+  background: "$neutralDarker",
+  boxShadow: "inset $subtleShadow",
+  borderRadius: "8px",
+  marginTop: "0.8rem",
+});
+
+export const MockupContainer = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "0.4rem",
+  paddingTop: "0.2rem",
+});
+
+export const TabContainer = styled("div", {
+  borderBottom: "1px solid $borderDark",
+  marginBottom: "0.6rem",
+});
+
+export const TabButton = styled("button", {
+  background: "transparent",
+  border: "none",
+  padding: "0.4rem",
+  cursor: "pointer",
+  color: "$textDull",
+
+  variants: {
+    active: {
+      true: {
+        borderBottom: "3px solid $primary",
+        color: "$textNormal",
+      },
+    },
+  },
 });

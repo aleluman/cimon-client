@@ -18,10 +18,15 @@ export const Sidebar = () => {
   const hidden = usePreferences((state) => state.showSidebar);
   const setHidden = usePreferences((state) => state.setShowSidebar);
   const activeItem = useEditor((state) => state.activeItem);
+  const mockupMode = useEditor((state) => state.mockupMode);
   const { data, isError, isLoading } = useGetGraph();
 
   return (
-    <SidebarContainer hidden={hidden}>
+    <SidebarContainer
+      hidden={hidden}
+      mockup={mockupMode && activeItem.type !== "none"}
+      css={{ paddingTop: activeItem.type === "role" ? "0.4rem" : "1rem" }}
+    >
       <SidebarWrapper>
         {isLoading && <Title>Loading...</Title>}
         {isError && <Title>Error</Title>}

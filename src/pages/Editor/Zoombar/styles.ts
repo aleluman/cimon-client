@@ -23,7 +23,14 @@ export const ZoomBarContainer = styled("div", {
         right: "0.4rem",
       },
     },
+    mockup: {
+      true: {
+        right: "22.4rem",
+      },
+    },
   },
+
+  compoundVariants: [{ tilted: true, mockup: true, css: { right: "0.4rem" } }],
 });
 
 export const Divider = styled("span", {

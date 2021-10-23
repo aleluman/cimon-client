@@ -14,18 +14,32 @@ export const InteractionsContainer = styled("div", {
   transition: "all 0.5s ease",
 
   variants: {
-    extended: {
-      true: {
-        width: "calc(100% - 0.8rem)",
-      },
-    },
-
     hidden: {
       true: {
         transform: "translateY(calc(100% + 0.4rem))",
       },
     },
+
+    mockup: {
+      true: {
+        width: "calc(100% - 22.8rem)",
+      },
+    },
+    extended: {
+      true: {
+        width: "calc(100% - 0.8rem)",
+      },
+    },
   },
+  compoundVariants: [
+    {
+      mockup: true,
+      extended: true,
+      css: {
+        width: "calc(100% - 0.8rem)",
+      },
+    },
+  ],
 });
 
 export const HideButton = styled("button", {

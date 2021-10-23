@@ -17,16 +17,20 @@ import {
   HideButton,
 } from "./styles";
 import { Icon } from "@/shared/components/Icon/Icon";
-import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 import { Checkbox } from "@/shared/components/Checkbox/Checkbox";
 
 export const RoleInteractions = () => {
   const [hidden, setHidden] = useState(true);
   const activeItem = useEditor((state) => state.activeItem);
   const showSidebar = usePreferences((state) => state.showSidebar);
+  const mockupMode = useEditor((state) => state.mockupMode);
 
   return (
-    <InteractionsContainer extended={showSidebar} hidden={hidden}>
+    <InteractionsContainer
+      extended={showSidebar}
+      hidden={hidden}
+      mockup={mockupMode && activeItem.type !== "none"}
+    >
       <Tab.Group vertical className={css(InnerContainer)} as="div">
         <Tab.List className={css(TabList)}>
           <TabTitle>Interactions of role 1</TabTitle>
