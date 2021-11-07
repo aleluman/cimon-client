@@ -1,15 +1,12 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { Graph } from "../types/editor";
 import { useEditor } from "../state/store";
-import { EditorRouteParams } from "../types/routes";
 
-export const useGetGraph = () => {
+export const useGetGraph = (ambitId: string) => {
   const addAmbit = useEditor((state) => state.addAmbit);
   const setPosition = useEditor((state) => state.setPosition);
   const setSelectedAmbit = useEditor((state) => state.setSelectedAmbit);
-  const { ambitId } = useParams<EditorRouteParams>();
 
   const queryData = useQuery(
     ["graph", ambitId],

@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Menu } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { AmbitButton, AmbitItem, AmbitMenu } from "./styles";
@@ -16,11 +16,11 @@ export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
   const selected = useEditor((state) => state.selectedAmbit);
   const setActiveItem = useEditor((state) => state.setActiveItem);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleChangeAmbit = (ambitId: string) => {
     setActiveItem({ type: "none", id: "" });
-    history.push(`/ambits/${ambitId}/editor`);
+    navigate(`/ambits/${ambitId}/editor`);
   };
 
   return (

@@ -30,7 +30,8 @@ export const ButtonContainer = styled("button", {
         },
       },
       success: {
-        background: "Green",
+        background: "#51B463",
+        color: "white",
       },
       danger: {
         background: "Red",
@@ -50,7 +51,11 @@ export const ButtonContainer = styled("button", {
         fontSize: "0.9rem",
         padding: "0.5rem",
       },
-      large: {},
+      large: {
+        marginTop: "0.6rem",
+        padding: "0.6rem",
+        fontSize: "1rem",
+      },
     },
     isWorking: {
       true: {

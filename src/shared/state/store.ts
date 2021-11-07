@@ -1,5 +1,5 @@
-import create, { SetState } from "zustand";
-import { persist } from "zustand/middleware";
+import create, { GetState, SetState } from "zustand";
+import { persist, StoreApiWithPersist } from "zustand/middleware";
 import { QueryClient } from "react-query";
 import { createEditorSlice, EditorSlice } from "./slices/editor";
 import { createRolePositionsSlice, RolePositionsSlice } from "./slices/rolePositions";
@@ -16,8 +16,13 @@ export const useEditor = create<EditorStoreType>((set) => ({
   ...createTemporaryItemsSlice(set as unknown as SetState<TemporaryItemsSlice>),
 }));
 
-export const usePreferences = create<PreferencesSlice>(
-  persist(
+export const usePreferences = create(
+  persist<
+    PreferencesSlice,
+    SetState<PreferencesSlice>,
+    GetState<PreferencesSlice>,
+    StoreApiWithPersist<PreferencesSlice>
+  >(
     (set) => ({
       ...createPreferencessSlice(set as unknown as SetState<PreferencesSlice>),
     }),

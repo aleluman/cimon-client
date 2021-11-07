@@ -8,6 +8,7 @@ type ButtonProps = {
   icon?: keyof typeof iconPaths;
   disabled?: boolean;
   isWorking?: boolean;
+  size?: "large" | "medium";
   onClick: () => void;
 };
 
@@ -17,6 +18,7 @@ export const Button = ({
   icon,
   disabled,
   isWorking,
+  size,
   onClick,
 }: ButtonProps) => {
   const handleClick = () => {
@@ -31,6 +33,7 @@ export const Button = ({
       color={variant}
       disabled={disabled}
       isWorking={isWorking}
+      size={size ?? "medium"}
     >
       {icon && <Icon type={icon} />}
       {children}

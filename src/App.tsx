@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Slide } from "react-toastify";
 import { AppContainer, MainContent, Toast } from "./styles";
 import { Editor } from "./pages/Editor/Editor";
@@ -7,6 +7,7 @@ import { Processes } from "./pages/Processes/Processes";
 import { usePreferences } from "./shared/state/store";
 import { theme } from "./shared/constants/stitches";
 import { lightTheme } from "./shared/constants/lightTheme";
+import { Login } from "./pages/Login/Login";
 
 export const App = () => {
   const themeObject = usePreferences((state) => {
@@ -16,19 +17,17 @@ export const App = () => {
 
   return (
     <AppContainer className={themeObject}>
-      <Router>
+      <BrowserRouter>
         <Navbar />
         <MainContent>
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/processes" />
-            </Route>
-            <Route path="/processes" component={Processes} />
-            <Route path="/ambits/:ambitId" component={Editor} />
-          </Switch>
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="processes/*" element={<Processes />} />
+            <Route path="processes/:processId/:ambitId" element={<Editor />} />
+          </Routes>
         </MainContent>
         <Toast position="top-center" transition={Slide} autoClose={3000} />
-      </Router>
+      </BrowserRouter>
       <div id="tooltips" />
     </AppContainer>
   );

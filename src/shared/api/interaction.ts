@@ -1,12 +1,9 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import { queryClient } from "../state/store";
 import { Graph, InteractionType } from "../types/editor";
-import { EditorRouteParams } from "../types/routes";
 
-export const useInteraction = () => {
-  const { ambitId } = useParams<EditorRouteParams>();
+export const useInteraction = (ambitId: string) => {
   const createInteraction = useMutation(
     (newInteraction: InteractionType) => {
       return axios.post<InteractionType>(

@@ -1,9 +1,7 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import { queryClient, useEditor } from "../state/store";
 import { Graph, RoleType } from "../types/editor";
-import { EditorRouteParams } from "../types/routes";
 
 export const getRole = (id: string, ambitId: string) => {
   const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
@@ -11,8 +9,7 @@ export const getRole = (id: string, ambitId: string) => {
   return currentRole;
 };
 
-export const useRole = () => {
-  const { ambitId } = useParams<EditorRouteParams>();
+export const useRole = (ambitId: string) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
 
   const createRole = useMutation(
