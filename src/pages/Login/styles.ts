@@ -4,6 +4,7 @@ export const LoginContainer = styled("main", {
   display: "flex",
   background: "$neutralDarker",
   height: "100%",
+  width: "100%",
 });
 
 export const LoginFormContainer = styled("div", {
@@ -38,14 +39,6 @@ export const RegisterContainer = styled("div", {
   gap: "0.6rem",
   justifyContent: "flex-end",
   alignItems: "center",
-});
-
-export const RegisterTitle = styled("h1", {
-  margin: 0,
-  fontSize: "1rem",
-  fontWeight: 600,
-  marginBottom: "0.4rem",
-  width: "20rem",
 });
 
 export const InfoText = styled("p", {

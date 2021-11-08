@@ -2,11 +2,9 @@ import { ToastContainer } from "react-toastify";
 import { styled } from "./shared/constants/stitches";
 
 export const AppContainer = styled("div", {
-  display: "grid",
   height: "100%",
   maxHeight: "100%",
-  gridTemplateAreas: '"navbar" "main"',
-  gridTemplateRows: "2.4rem 1fr",
+  width: "100%",
   scrollbarColor: "$neutralDarker $neutralFull",
 
   "::-webkit-scrollbar": {
@@ -24,11 +22,6 @@ export const AppContainer = styled("div", {
     border: "1px solid $popoverBorder",
     borderRadius: "50px",
   },
-});
-
-export const MainContent = styled("main", {
-  gridArea: "main",
-  height: "100%",
 });
 
 export const Toast = styled(ToastContainer, {
