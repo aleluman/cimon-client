@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { config } from "../constants/urls";
 import axios from "@/shared/constants/axios";
+import { useAuth } from "../state/store";
 
 type LoginData = {
   email: string;
@@ -17,6 +19,10 @@ type Tokens = {
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const setAccess = useAuth((state) => state.setAccess);
+  const setRefresh = useAuth((state) => state.setRefresh);
+  const setUsername = useAuth((state) => state.setUsername);
+
   const login = useMutation(
     (loginData: LoginData) => {
       return axios.post<Tokens>(`${config.API_URL}/token/`, loginData);
@@ -24,13 +30,16 @@ export const useLogin = () => {
     {
       onSuccess: (response) => {
         const { access, refresh, username } = response.data;
-        localStorage.setItem("access", access);
-        localStorage.setItem("refresh", refresh);
-        localStorage.setItem("username", username);
+        setAccess(access);
+        setRefresh(refresh);
+        setUsername(username);
         navigate("/processes");
       },
-      onError: () => {
-        toast("The provided email or password is incorrect.", { type: "error" });
+      onError: (error: AxiosError) => {
+        const message = error.response
+          ? "You have entered an invalid email or password."
+          : "Can't connect to the server. Check your connection.";
+        toast(message, { type: "error" });
       },
     }
   );

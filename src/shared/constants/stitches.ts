@@ -27,7 +27,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         iconNormal: "#acacac",
         iconGray: "#d3d3d3",
         iconDisabled: "#585858",
-        textError: "#cb2222",
+        textError: "#D45757",
         toastBackground: "#44444477",
         dialogBackground: "#44444493",
         popoverBackground: "#4e4e4e9c",

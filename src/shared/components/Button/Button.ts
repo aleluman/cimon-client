@@ -1,6 +1,11 @@
-import { styled } from "@/shared/constants/stitches";
+import { keyframes, styled } from "@/shared/constants/stitches";
 
-export const ButtonContainer = styled("button", {
+const rotate = keyframes({
+  from: { transform: "rotate(0turn)" },
+  to: { transform: "rotate(1turn)" },
+});
+
+export const Button = styled("button", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -10,9 +15,16 @@ export const ButtonContainer = styled("button", {
   cursor: "pointer",
   transition: "all 0.25s ease",
   borderRadius: "4px",
+  "-webkit-appearance": "none",
 
   "&:hover": {
     boxShadow: "$hoverShadowSmall",
+  },
+
+  "&:disabled": {
+    pointerEvents: "none",
+    opacity: 0.5,
+    filter: "grayscale(60%)",
   },
 
   variants: {
@@ -59,12 +71,21 @@ export const ButtonContainer = styled("button", {
     },
     isWorking: {
       true: {
-        border: "red",
+        "&:after": {
+          content: "",
+          width: "20px",
+          height: "20px",
+          border: "4px solid transparent",
+          borderTopColor: "white",
+          borderRadius: "50%",
+          animation: `${rotate} 1s ease infinite`,
+        },
       },
     },
   },
 
   defaultVariants: {
     size: "medium",
+    color: "primary",
   },
 });

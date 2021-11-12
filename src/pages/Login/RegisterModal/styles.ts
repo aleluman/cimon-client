@@ -1,5 +1,11 @@
 import { styled } from "@/shared/constants/stitches";
 
+export const FormContainer = styled("form", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+});
+
 export const RegisterTitle = styled("h1", {
   margin: 0,
   fontSize: "1rem",

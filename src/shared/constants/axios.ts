@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuth } from "../state/store";
 
 const instance = axios.create({
   headers: {
@@ -8,9 +9,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("access");
-    if (token) {
-      config.headers = { Authorization: `Bearer ${token}` };
+    const { access } = useAuth.getState();
+    if (access && !config.url?.includes("token") && !config.url?.includes("register")) {
+      config.headers = { Authorization: `Bearer ${access}` };
     }
     return config;
   },
@@ -24,14 +25,15 @@ instance.interceptors.response.use(
     return res;
   },
   async (err) => {
-    if (!err.config.url.includes("token") && err.response) {
+    if (!err.config.url.includes("token") && !err.config.url.includes("register") && err.response) {
       if (err.response.status === 401) {
         try {
+          const { refresh } = useAuth.getState();
           const rs = await instance.post("/auth/refreshtoken", {
-            refreshToken: localStorage.getItem("refresh"),
+            refresh,
           });
-          const { accessToken } = rs.data;
-          localStorage.setItem("access", accessToken);
+          const { access } = rs.data;
+          useAuth.setState({ access });
           return await instance(err.config);
         } catch (_error) {
           return Promise.reject(_error);

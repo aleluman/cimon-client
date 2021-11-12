@@ -2,11 +2,12 @@ import { useState } from "react";
 import { usePopper } from "react-popper";
 import { Popover } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
-import { MenuContainer, ThemeContainer, UserMenuItem, UserNameContainer } from "./styles";
 import { css } from "@/shared/constants/stitches";
 import { Toggle } from "../Toggle/Toggle";
 import { ToggleOption } from "../ToggleOption/ToggleOption";
 import { usePreferences } from "@/shared/state/store";
+import { useLogout } from "@/shared/api/logout";
+import { MenuContainer, ThemeContainer, UserMenuItem, UserNameContainer } from "./styles";
 
 type UserMenuProps = { username: string };
 
@@ -15,6 +16,7 @@ export const UserMenu = ({ username }: UserMenuProps) => {
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const theme = usePreferences((state) => state.theme);
   const setTheme = usePreferences((state) => state.setTheme);
+  const logout = useLogout();
   const {
     styles: { popper },
     attributes,
@@ -58,7 +60,7 @@ export const UserMenu = ({ username }: UserMenuProps) => {
             </ToggleOption>
           </Toggle>
         </ThemeContainer>
-        <UserMenuItem role="button" tabIndex={0}>
+        <UserMenuItem role="button" tabIndex={0} onClick={() => logout()}>
           <Icon type="logout" />
           Logout
         </UserMenuItem>

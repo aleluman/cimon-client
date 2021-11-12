@@ -7,12 +7,12 @@ export const LoginContainer = styled("main", {
   width: "100%",
 });
 
-export const LoginFormContainer = styled("div", {
+export const LoginFormContainer = styled("form", {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   padding: "10rem clamp(8rem, 8vw, 10rem)",
-  gap: "1rem",
+  gap: "1.2rem",
   width: "40%",
   minWidth: "30rem",
   background: "$neutralLight",

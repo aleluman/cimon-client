@@ -3,9 +3,11 @@ import { Icon } from "../Icon/Icon";
 import { UserMenu } from "../UserMenu/UserMenu";
 import { AppTitle, HomeContainer, NavContainer, ProjectNav } from "./styles";
 import { NavbarNavigation } from "../NavbarNavigation/NavbarNavigation";
+import { useAuth } from "@/shared/state/store";
 
 export const Navbar = () => {
   const location = useLocation();
+  const username = useAuth((state) => state.username);
   return (
     <NavContainer>
       <HomeContainer tabIndex={0} as={Link} to="/processes">
@@ -18,7 +20,7 @@ export const Navbar = () => {
           <NavbarNavigation />
         )}
       </ProjectNav>
-      <UserMenu username="John Doe" />
+      <UserMenu username={username ?? ""} />
     </NavContainer>
   );
 };

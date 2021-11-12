@@ -5,6 +5,7 @@ import { createEditorSlice, EditorSlice } from "./slices/editor";
 import { createRolePositionsSlice, RolePositionsSlice } from "./slices/rolePositions";
 import { createTemporaryItemsSlice, TemporaryItemsSlice } from "./slices/temporaryItems";
 import { createPreferencessSlice, PreferencesSlice } from "./slices/preferences";
+import { AuthSlice, createAuthSlice } from "./slices/auth";
 
 export const queryClient = new QueryClient();
 
@@ -27,5 +28,14 @@ export const usePreferences = create(
       ...createPreferencessSlice(set as unknown as SetState<PreferencesSlice>),
     }),
     { name: "preferences" }
+  )
+);
+
+export const useAuth = create(
+  persist<AuthSlice, SetState<AuthSlice>, GetState<AuthSlice>, StoreApiWithPersist<AuthSlice>>(
+    (set) => ({
+      ...createAuthSlice(set as unknown as SetState<AuthSlice>),
+    }),
+    { name: "auth" }
   )
 );
