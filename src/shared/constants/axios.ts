@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useAuth } from "../state/store";
+import { urls } from "./urls";
 
 const instance = axios.create({
   headers: {
@@ -29,13 +30,16 @@ instance.interceptors.response.use(
       if (err.response.status === 401) {
         try {
           const { refresh } = useAuth.getState();
-          const rs = await instance.post("/auth/refreshtoken", {
+          const rs = await instance.post(`${urls.API_URL}/token/refresh/`, {
             refresh,
           });
-          const { access } = rs.data;
-          useAuth.setState({ access });
+          const { access, refresh: newRefesh } = rs.data;
+          useAuth.setState({ access, refresh: newRefesh });
           return await instance(err.config);
         } catch (_error) {
+          window.history.pushState({}, "", "/login/");
+          useAuth.setState({ username: null, access: null, refresh: null });
+          window.location.reload();
           return Promise.reject(_error);
         }
       }

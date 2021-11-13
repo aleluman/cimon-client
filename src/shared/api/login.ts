@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { config } from "../constants/urls";
+import { urls } from "../constants/urls";
 import axios from "@/shared/constants/axios";
 import { useAuth } from "../state/store";
 
@@ -25,7 +25,7 @@ export const useLogin = () => {
 
   const login = useMutation(
     (loginData: LoginData) => {
-      return axios.post<Tokens>(`${config.API_URL}/token/`, loginData);
+      return axios.post<Tokens>(`${urls.API_URL}/token/`, loginData);
     },
     {
       onSuccess: (response) => {

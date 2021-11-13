@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { config } from "../constants/urls";
+import { urls } from "../constants/urls";
 import axios from "@/shared/constants/axios";
 import { useLogin } from "./login";
 
@@ -21,7 +21,7 @@ export const useRegister = () => {
   const login = useLogin();
   const register = useMutation(
     (registerData: RegisterData) => {
-      return axios.post<RegisterResponse>(`${config.API_URL}/register/`, registerData);
+      return axios.post<RegisterResponse>(`${urls.API_URL}/register/`, registerData);
     },
     {
       onSuccess: (_, requestData) => {
