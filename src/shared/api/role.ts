@@ -46,8 +46,6 @@ export const useRole = (ambitId: string) => {
     }
   );
 
-  // todo: propagate delete on backend
-
   const deleteRole = useMutation(
     (roleId: string) => axios.delete<RoleType>(`http://localhost:8080/roles/${roleId}`),
     {

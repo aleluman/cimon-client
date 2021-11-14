@@ -32,6 +32,7 @@ export const SelectMenu = styled("ul", {
   boxShadow: "$hoverShadowLarge",
   padding: "0.2rem",
   margin: 0,
+  zIndex: 99999,
 });
 
 export const SelectOption = styled("li", {

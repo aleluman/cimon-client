@@ -28,7 +28,11 @@ export const Details = ({ process }: DetailsProps) => {
       <SectionContainer>
         <Label>
           Type
-          <Select options={categories} handler={() => {}} selectedValue={process.category} />
+          <Select
+            options={categories}
+            handler={() => {}}
+            selectedValue={process.category.toLowerCase()}
+          />
         </Label>
         <Label css={{ height: "7rem" }}>
           Objective

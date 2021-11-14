@@ -14,6 +14,13 @@ export type ProcessRoleType = {
   type: RoleType["role"];
 };
 
+export type NewProcessType = {
+  name: string;
+  description: string;
+  objective: string;
+  category: "generic" | "health" | "travel" | "shopping";
+};
+
 export type ProcessType = {
   id: string;
   name: string;

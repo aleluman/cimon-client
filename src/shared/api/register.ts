@@ -26,6 +26,7 @@ export const useRegister = () => {
     {
       onSuccess: (_, requestData) => {
         login.mutate({ email: requestData.email, password: requestData.password });
+        toast("Account succesfully created.", { type: "success" });
       },
       onError: (error: AxiosError) => {
         const message = error.response?.data.email

@@ -2,12 +2,12 @@ import { Listbox } from "@headlessui/react";
 import { css } from "@/shared/constants/stitches";
 import { SelectButton, SelectContainer, Selected, SelectMenu, SelectOption } from "./styles";
 import { Icon } from "../Icon/Icon";
-import { ProcessCategory } from "@/shared/types/process";
+import { ProcessCategory, ProcessType } from "@/shared/types/process";
 
 type SelectProps = {
   options: ProcessCategory[];
-  handler: (value: string) => void;
-  selectedValue: string;
+  handler: (value: ProcessType["category"]) => void;
+  selectedValue: ProcessType["category"];
 };
 
 export const Select = ({ options, handler, selectedValue }: SelectProps) => {
