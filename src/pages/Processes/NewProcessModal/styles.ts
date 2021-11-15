@@ -16,4 +16,5 @@ export const ModalButtonContainer = styled("div", {
 export const ModalTitle = styled("h1", {
   margin: 0,
   fontSize: "0.95rem",
+  color: "$textImportant",
 });

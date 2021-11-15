@@ -46,7 +46,8 @@ export const Button = styled("button", {
         color: "white",
       },
       danger: {
-        background: "Red",
+        background: "#d45049",
+        color: "white",
       },
       secondary: {
         background: "transparent",

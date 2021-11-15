@@ -45,8 +45,18 @@ export const useProcess = () => {
       )
   );
 
-  const deleteProcess = useMutation((processId: string) =>
-    axios.delete<ProcessType>(`${urls.API_URL}/processes/${processId}`)
+  const deleteProcess = useMutation(
+    (processId: string) => axios.delete<ProcessType>(`${urls.API_URL}/processes/${processId}`),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("processes");
+        toast(`Process deleted correctly`, { type: "info" });
+        navigate(`/processes`);
+      },
+      onError: () => {
+        toast("Can't connect to the server. Check your connection.", { type: "error" });
+      },
+    }
   );
   return { createProcess, updateProcess, deleteProcess };
 };

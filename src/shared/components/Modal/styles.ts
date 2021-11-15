@@ -36,3 +36,23 @@ export const ModalContainer = styled("div", {
   border: "1px solid $popoverBorder",
   willChange: "transform, opacity",
 });
+
+export const ModalTitle = styled("h1", {
+  margin: 0,
+  fontSize: "0.95rem",
+  color: "$textImportant",
+});
+
+export const ModalText = styled("p", {
+  fontSize: "0.85rem",
+  margin: 0,
+});
+
+export const ModalFooterContainer = styled("div", {
+  display: "flex",
+  color: "$textDull",
+  fontSize: "0.8rem",
+  gap: "0.6rem",
+  justifyContent: "flex-end",
+  alignItems: "center",
+});
