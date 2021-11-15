@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
 import { useGesture } from "@use-gesture/react";
-import { Link, matchPath, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { ProcessType } from "@/shared/types/process";
 import { ProcessContainer, ProcessName, RoleCounter } from "./styles";
-import { ProcessRouteParams } from "@/shared/types/routes";
 import { Summary } from "../Summary/Summary";
 
 type ProcessProps = {
@@ -13,8 +12,7 @@ type ProcessProps = {
 
 export const Process = ({ process }: ProcessProps) => {
   const [summaryVisible, setSummaryVisible] = useState(false);
-  const { pathname } = useLocation();
-  const match = matchPath<ProcessRouteParams>(pathname, "/processes/:processId");
+  const params = useParams();
   const processRef = useRef<HTMLAnchorElement>(null);
 
   const handlers = useGesture({
@@ -28,7 +26,7 @@ export const Process = ({ process }: ProcessProps) => {
       <ProcessContainer
         {...handlers()}
         ref={processRef}
-        active={match?.params.processId === process.id}
+        active={params["*"] === process.id}
         as={Link}
         to={`/processes/${process.id}`}
       >

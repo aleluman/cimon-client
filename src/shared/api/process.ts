@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { useMutation, useQuery } from "react-query";
 import { urls } from "../constants/urls";
 import { NewProcessType, ProcessType } from "../types/process";
@@ -14,12 +17,22 @@ export const useGetProcess = (processId: string) => {
 };
 
 export const useProcess = () => {
+  const navigate = useNavigate();
+
   const createProcess = useMutation(
     (newProcess: NewProcessType) =>
       axios.post<ProcessType>(`${urls.API_URL}/processes/`, newProcess),
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
         queryClient.invalidateQueries("processes");
+        toast(`Process ${response.data.name} created.`, { type: "success" });
+        navigate(`/processes/${response.data.id}`);
+      },
+      onError: (error: AxiosError) => {
+        const message = error.response?.data.name
+          ? "There is already a process using this name."
+          : "Can't connect to the server. Check your connection.";
+        toast(message, { type: "error" });
       },
     }
   );

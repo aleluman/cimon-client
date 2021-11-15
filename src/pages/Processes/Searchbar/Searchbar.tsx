@@ -1,10 +1,14 @@
 import { Icon } from "@/shared/components/Icon/Icon";
 import { SearchButton, SearchContainer, SearchInput } from "./styles";
 
-export const Searchbar = () => {
+type SearchBarProps = {
+  handler: (value: string) => void;
+};
+
+export const Searchbar = ({ handler }: SearchBarProps) => {
   return (
     <SearchContainer>
-      <SearchInput placeholder="Search" />
+      <SearchInput placeholder="Search" onChange={(event) => handler(event.target.value)} />
       <SearchButton>
         <Icon type="search" />
       </SearchButton>

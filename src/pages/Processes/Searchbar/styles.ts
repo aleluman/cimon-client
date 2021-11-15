@@ -35,5 +35,4 @@ export const SearchButton = styled("button", {
   height: "80%",
   background: "$neutralFull",
   border: "none",
-  cursor: "pointer",
 });

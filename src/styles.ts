@@ -5,23 +5,6 @@ export const AppContainer = styled("div", {
   height: "100%",
   maxHeight: "100%",
   width: "100%",
-  scrollbarColor: "$neutralDarker $neutralFull",
-
-  "::-webkit-scrollbar": {
-    width: "12px",
-  },
-
-  "::-webkit-scrollbar-track": {
-    backgroundColor: "$neutralDarker",
-    borderRadius: "50px",
-    boxShadow: "inset 0 0 4px #0b0b0c66",
-  },
-
-  "::-webkit-scrollbar-thumb": {
-    background: "$neutralFull",
-    border: "1px solid $popoverBorder",
-    borderRadius: "50px",
-  },
 });
 
 export const Toast = styled(ToastContainer, {

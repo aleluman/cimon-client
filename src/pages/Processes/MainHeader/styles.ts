@@ -14,6 +14,9 @@ export const ContentTitle = styled("h1", {
   color: "$textNormal",
   fontSize: "1.5rem",
   margin: 0,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
 
 export const LastEditedText = styled("span", {

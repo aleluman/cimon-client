@@ -3,6 +3,7 @@ import { styled } from "@/shared/constants/stitches";
 export const ProcessContainer = styled("button", {
   padding: "1rem",
   width: "100%",
+  minHeight: "3.4rem",
   color: "$textNormal",
   background: "transparent",
   textDecoration: "none",
@@ -39,6 +40,9 @@ export const ProcessName = styled("span", {
   textAlign: "left",
   fontSize: "0.95rem",
   fontWeight: 600,
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
 
 export const RoleCounter = styled("span", {

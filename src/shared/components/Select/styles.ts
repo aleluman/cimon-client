@@ -2,6 +2,7 @@ import { styled } from "@/shared/constants/stitches";
 
 export const SelectContainer = styled("div", {
   position: "relative",
+  pointerEvents: "auto",
 });
 
 export const SelectButton = styled("button", {

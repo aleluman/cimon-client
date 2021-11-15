@@ -16,7 +16,8 @@ export const MainHeader = ({ process }: MainHeaderProps) => {
         {process.name}
       </ContentTitle>
       <LastEditedText>Last edited {getRelativeTime(new Date(process.lastEdited))}</LastEditedText>
-      <Button variant="secondary" icon="delete" onClick={() => {}}>
+      <Button color="secondary" onClick={() => {}}>
+        <Icon type="delete" />
         Delete
       </Button>
     </ContentTitleContainer>

@@ -9,6 +9,7 @@ import { Select } from "@/shared/components/Select/Select";
 import { categories } from "@/shared/constants/categories";
 import { ModalButtonContainer, ModalTitle, NewProcessForm } from "./styles";
 import { ProcessType } from "@/shared/types/process";
+import { ValidationError } from "@/shared/components/ValidationError/ValidationError";
 
 type NewProcessInputs = {
   name: string;
@@ -29,6 +30,7 @@ export const NewProcessModal = ({ show, handler }: NewProcessModalProps) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<NewProcessInputs>();
 
@@ -36,6 +38,7 @@ export const NewProcessModal = ({ show, handler }: NewProcessModalProps) => {
     await createProcess.mutateAsync({ ...data, category });
     setCategory("generic");
     handler(false);
+    reset();
   };
 
   return (
@@ -44,19 +47,38 @@ export const NewProcessModal = ({ show, handler }: NewProcessModalProps) => {
         <ModalTitle>Add process</ModalTitle>
         <Label>
           Name
-          <Input type="text" {...register("name")} />
+          <Input
+            type="text"
+            {...register("name", {
+              required: { value: true, message: "A name is required" },
+              maxLength: { value: 100, message: "Name is too long" },
+            })}
+          />
+          {errors.name && <ValidationError>{errors.name.message}</ValidationError>}
         </Label>
-        <Label>
-          Type
+        <div>
+          <Label css={{ marginBottom: "0.4rem" }}>Type</Label>
           <Select options={categories} handler={setCategory} selectedValue={category} />
-        </Label>
+        </div>
         <Label css={{ height: "6rem" }}>
           Objective
-          <Input as="textarea" {...register("objective")} />
+          <Input
+            as="textarea"
+            {...register("objective", {
+              maxLength: { value: 200, message: "Objective is too long" },
+            })}
+          />
+          {errors.objective && <ValidationError>{errors.objective.message}</ValidationError>}
         </Label>
         <Label css={{ height: "9rem" }}>
           Description
-          <Input as="textarea" {...register("description")} />
+          <Input
+            as="textarea"
+            {...register("description", {
+              maxLength: { value: 600, message: "Description is too long" },
+            })}
+          />
+          {errors.description && <ValidationError>{errors.description.message}</ValidationError>}
         </Label>
         <ModalButtonContainer>
           <Button type="button" color="secondary" onClick={() => handler(false)}>
@@ -66,6 +88,7 @@ export const NewProcessModal = ({ show, handler }: NewProcessModalProps) => {
             type="submit"
             disabled={createProcess.isLoading}
             isWorking={createProcess.isLoading}
+            css={{ width: "4rem", height: "2.1rem" }}
           >
             {createProcess.isLoading ? " " : "Create"}
           </Button>
