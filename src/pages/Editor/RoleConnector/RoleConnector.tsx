@@ -7,7 +7,7 @@ import { useEditor } from "@/shared/state/store";
 import { ButtonConnector } from "./styles";
 import { Position } from "@/shared/types/editor";
 import { getConnectedNodesIds } from "@/shared/utils/connectedNodes";
-import { useInteraction } from "@/shared/api/interaction";
+import { useInteraction } from "@/shared/hooks/interaction";
 import { createNewInteraction } from "@/shared/utils/createItems";
 import { theme } from "@/shared/constants/stitches";
 import { EditorRouteParams } from "@/shared/types/routes";

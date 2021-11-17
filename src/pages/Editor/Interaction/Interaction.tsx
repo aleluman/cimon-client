@@ -6,7 +6,7 @@ import { ClickPath, Path, PathContainer } from "./styles";
 import { roleDimentions } from "@/shared/constants/editorConfigs";
 import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
-import { useInteraction } from "@/shared/api/interaction";
+import { useInteraction } from "@/shared/hooks/interaction";
 import { Marker } from "../Marker/Marker";
 import { EditorRouteParams } from "@/shared/types/routes";
 

@@ -6,7 +6,7 @@ import { css } from "@/shared/constants/stitches";
 import { Toggle } from "../Toggle/Toggle";
 import { ToggleOption } from "../ToggleOption/ToggleOption";
 import { usePreferences } from "@/shared/state/store";
-import { useLogout } from "@/shared/api/logout";
+import { useLogout } from "@/shared/hooks/logout";
 import { MenuContainer, ThemeContainer, UserMenuItem, UserNameContainer } from "./styles";
 
 type UserMenuProps = { username: string };

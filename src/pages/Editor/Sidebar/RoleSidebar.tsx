@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
-import { getRole, useRole } from "@/shared/api/role";
+import { getRole, useRole } from "@/shared/hooks/role";
 import {
   SubTitle,
   Title,

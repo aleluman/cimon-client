@@ -14,7 +14,7 @@ import {
 } from "./styles";
 import { IconOnlyButton } from "@/shared/components/IconOnlyButton/IconOnlyButton";
 import { Icon } from "@/shared/components/Icon/Icon";
-import { useRole } from "@/shared/api/role";
+import { useRole } from "@/shared/hooks/role";
 import { css } from "@/shared/constants/stitches";
 import { RoleType } from "@/shared/types/editor";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";

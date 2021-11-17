@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGetAllProcesses } from "@/shared/api/processes";
+import { useGetAllProcesses } from "@/shared/hooks/processes";
 import { Button } from "@/shared/components/Button/Button";
 import { Process } from "../Process/Process";
 import { Searchbar } from "../Searchbar/Searchbar";

@@ -6,7 +6,7 @@ import { Abstract, Body, Container, Name, NameInput, Title } from "./styles";
 import { Graph, RoleType } from "@/shared/types/editor";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleMenu } from "../RoleMenu/RoleMenu";
-import { useRole } from "@/shared/api/role";
+import { useRole } from "@/shared/hooks/role";
 import { queryClient, useEditor } from "@/shared/state/store";
 import { RoleConnector } from "../RoleConnector/RoleConnector";
 import { EditorRouteParams } from "@/shared/types/routes";

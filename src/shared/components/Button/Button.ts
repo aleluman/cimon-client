@@ -42,11 +42,11 @@ export const Button = styled("button", {
         },
       },
       success: {
-        background: "#51B463",
+        background: "$green",
         color: "white",
       },
       danger: {
-        background: "#d45049",
+        background: "$red",
         color: "white",
       },
       secondary: {

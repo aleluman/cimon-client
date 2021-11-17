@@ -2,7 +2,7 @@ import { Stage } from "../Stage/Stage";
 import { Interaction } from "../Interaction/Interaction";
 import { SvgStage } from "./styles";
 import { Role } from "../Role/Role";
-import { useGetGraph } from "@/shared/api/graph";
+import { useGetGraph } from "@/shared/hooks/graph";
 import { PlaceHolderInteraction } from "../PlaceholderInteraction/PlaceholderInteraction";
 import { useEditor } from "@/shared/state/store";
 import { PlaceholderRole } from "../PlaceholderRole/PlaceHolderRode";

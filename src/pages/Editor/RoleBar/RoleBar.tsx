@@ -13,14 +13,14 @@ import {
   Title,
 } from "./styles";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
-import { useGetProcess } from "@/shared/api/process";
+import { useGetProcess } from "@/shared/hooks/process";
 import { useEditor } from "@/shared/state/store";
 import { getMousePositionInCanvas } from "@/shared/utils/mousePosition";
 import { createName, createNewRole } from "@/shared/utils/createItems";
 import { PlaceholderRoleType } from "@/shared/types/editor";
-import { useRole } from "@/shared/api/role";
+import { useRole } from "@/shared/hooks/role";
 import { EditorRouteParams } from "@/shared/types/routes";
-import { useGetGraph } from "@/shared/api/graph";
+import { useGetGraph } from "@/shared/hooks/graph";
 
 export const RoleBar = memo(() => {
   const setPlaceholderRole = useEditor((state) => state.setPlaceholderRole);

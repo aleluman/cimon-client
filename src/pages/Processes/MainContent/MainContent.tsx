@@ -3,7 +3,7 @@ import { MainHeader } from "../MainHeader/MainHeader";
 import { Container } from "./styles";
 import { Matrix } from "../Matrix/Matrix";
 import { Details } from "../Details/Details";
-import { useGetProcess } from "@/shared/api/process";
+import { useGetProcess } from "@/shared/hooks/process";
 
 export const MainContent = () => {
   const { processId } = useParams();

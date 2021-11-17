@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useProcess } from "@/shared/api/process";
+import { useProcess } from "@/shared/hooks/process";
 import { Button } from "@/shared/components/Button/Button";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { ProcessType } from "@/shared/types/process";

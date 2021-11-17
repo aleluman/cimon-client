@@ -13,7 +13,7 @@ import {
   LogoContainer,
 } from "./styles";
 import { Icon } from "@/shared/components/Icon/Icon";
-import { useLogin } from "@/shared/api/login";
+import { useLogin } from "@/shared/hooks/login";
 import { RegisterModal } from "./RegisterModal/RegisterModal";
 import { ValidationError } from "@/shared/components/ValidationError/ValidationError";
 

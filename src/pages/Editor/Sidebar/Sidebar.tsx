@@ -12,7 +12,7 @@ import {
 import { useEditor, usePreferences } from "@/shared/state/store";
 import { RoleSidebar } from "./RoleSidebar";
 import { InteractionSidebar } from "./InteractionSidebar";
-import { useGetGraph } from "@/shared/api/graph";
+import { useGetGraph } from "@/shared/hooks/graph";
 
 export const Sidebar = () => {
   const hidden = usePreferences((state) => state.showSidebar);
