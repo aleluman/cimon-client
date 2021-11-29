@@ -2,6 +2,10 @@ import { styled } from "@/shared/constants/stitches";
 
 export const TableContainer = styled("div", {
   width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexDirection: "column",
   maxHeight: "30rem",
   background: "$neutralLight",
   borderRadius: "8px",
@@ -71,4 +75,16 @@ export const AddButton = styled("button", {
       transition: "all ease 0.25s",
     },
   },
+});
+
+export const HelpText = styled("div", {
+  color: "$textDull",
+  fontSize: "0.9rem",
+  textAlign: "center",
+});
+
+export const ModalForm = styled("form", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
 });

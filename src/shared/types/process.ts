@@ -14,6 +14,16 @@ export type ProcessRoleType = {
   type: RoleType["role"];
 };
 
+export type NewPhaseType = {
+  name: string;
+  process: string;
+};
+
+export type PhaseType = {
+  name: string;
+  id: string;
+};
+
 export type NewProcessType = {
   name: string;
   description: string;
