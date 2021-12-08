@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useGesture } from "@use-gesture/react";
 import { Menu } from "@headlessui/react";
-import { Link } from "react-router-dom";
 import { Button } from "@/shared/components/Button/Button";
 import { Icon } from "@/shared/components/Icon/Icon";
-import { AmbitContainer, AmbitText, MenuButtonContainer, MenuContainer, MenuItem } from "./styles";
+import { MenuButtonContainer, MenuContainer, MenuItem, PhaseContainer, PhaseName } from "./styles";
 
-type AmbitProps = {
-  id: string;
+type PhaseProps = {
   name: string;
+  id: string;
+  processId: string;
 };
 
-export const Ambit = ({ id, name }: AmbitProps) => {
+export const Phase = ({ name, id, processId }: PhaseProps) => {
   const [hovering, setHovering] = useState(false);
 
   const handlers = useGesture({
@@ -21,30 +21,19 @@ export const Ambit = ({ id, name }: AmbitProps) => {
   });
 
   return (
-    <AmbitContainer {...handlers()}>
-      <AmbitText as={Link} to={`/ambits/${id}`}>
-        {name}
-      </AmbitText>
+    <PhaseContainer {...handlers()} hovering={hovering}>
+      <PhaseName>{name}</PhaseName>
       <Menu as={MenuButtonContainer}>
         {({ open }) => (
           <>
             <Menu.Button
               as={Button}
               color="secondary"
-              css={{
-                padding: "0.25rem",
-                visibility: hovering || open ? "visible" : "hidden",
-                marginRight: "0.2rem",
-              }}
+              css={{ padding: "0.25rem", visibility: hovering || open ? "visible" : "hidden" }}
             >
               <Icon type="dots" />
             </Menu.Button>
             <Menu.Items as={MenuContainer}>
-              <Menu.Item>
-                <MenuItem>
-                  <Icon type="generic" /> Edit graph
-                </MenuItem>
-              </Menu.Item>
               <Menu.Item>
                 <MenuItem>
                   <Icon type="edit" /> Rename
@@ -60,6 +49,6 @@ export const Ambit = ({ id, name }: AmbitProps) => {
           </>
         )}
       </Menu>
-    </AmbitContainer>
+    </PhaseContainer>
   );
 };

@@ -1,18 +1,12 @@
 import { Icon } from "@/shared/components/Icon/Icon";
 import { HelpText, NoSelectionContainer } from "./styles";
 
-type NoSelectionProps = {
-  noProcesses?: boolean;
-};
-
-export const NoSelection = ({ noProcesses }: NoSelectionProps) => {
+export const NoSelection = () => {
   return (
     <NoSelectionContainer>
       <Icon type="logo" size={56} color="$iconGray" />
       <HelpText>
-        {noProcesses
-          ? "Create a new process on the sidebar."
-          : "Select a process on the sidebar to see its details."}
+        Create a new process on the sidebar or select an existing one to see its details.
       </HelpText>
     </NoSelectionContainer>
   );

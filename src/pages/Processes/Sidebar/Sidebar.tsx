@@ -35,7 +35,7 @@ export const Sidebar = () => {
               <Process key={process.id} process={process} />
             ))}
             {data.length === 0 && <HelpText>You don&apos;t have any processes.</HelpText>}
-            {filteredProcesses?.length === 0 && (
+            {filteredProcesses?.length === 0 && data.length !== 0 && (
               <HelpText>No processes match your search.</HelpText>
             )}
           </ProcessesContainer>

@@ -5,6 +5,8 @@ export const ContentTitleContainer = styled("div", {
   width: "100%",
   alignItems: "center",
   justifyContent: "space-between",
+  maxWidth: "80rem",
+  minWidth: "50rem",
 });
 
 export const ContentTitle = styled("h1", {

@@ -39,14 +39,14 @@ export const Details = ({ process }: DetailsProps) => {
   return (
     <DetailsContainer>
       <SectionContainer>
-        <Label>
-          Type
+        <div>
+          <Label css={{ marginBottom: "0.4rem" }}>Type</Label>
           <Select
             options={categories}
             handler={(value) => updateProcess.mutate({ id: process.id, category: value })}
             selectedValue={process.category}
           />
-        </Label>
+        </div>
         <Label css={{ height: "7rem" }}>
           Objective
           <Textarea

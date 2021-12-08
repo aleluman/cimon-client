@@ -24,6 +24,20 @@ export type PhaseType = {
   id: string;
 };
 
+export type NewAmbitType = {
+  process: string;
+  name: string;
+};
+
+export type AmbitType = {
+  id: string;
+  name: string;
+  description: string;
+  graph: any;
+  phases: any;
+  last_edited: Date;
+};
+
 export type NewProcessType = {
   name: string;
   description: string;

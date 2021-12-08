@@ -13,7 +13,7 @@ export const Button = styled("button", {
   appearance: "none",
   border: "none",
   cursor: "pointer",
-  transition: "all 0.25s ease",
+  transition: "background 0.25s ease, boxShadow 0.25s ease",
   borderRadius: "4px",
   "-webkit-appearance": "none",
 
@@ -52,10 +52,12 @@ export const Button = styled("button", {
       secondary: {
         background: "transparent",
         color: "$textNormal",
+        border: "1px solid $popoverBorder",
 
         "&:hover": {
-          background: "$neutralLightest",
+          background: "$primaryLight",
           color: "$textImportant",
+          boxShadow: "inset 0 0 6px #00000012",
         },
       },
     },

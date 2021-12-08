@@ -1,35 +1,32 @@
 import { styled } from "@/shared/constants/stitches";
 
-export const AmbitText = styled("a", {
-  flex: 1,
-  textDecoration: "none",
-  color: "$textNormal",
-  fontWeight: 550,
-  fontSize: "0.9rem",
-  padding: "0.5rem 0.6rem",
+export const MenuButtonContainer = styled("div", {
+  position: "relative",
+});
 
+export const PhaseName = styled("span", {
+  marginLeft: "1.5rem",
+  flex: 1,
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-
-  "&:hover": {
-    boxShadow: "$subtleShadow",
-  },
 });
 
-export const AmbitContainer = styled("div", {
+export const PhaseContainer = styled("div", {
   display: "flex",
-  width: "100%",
-  position: "relative",
   alignItems: "center",
-  background: "$neutralFull",
-  transition: "box-shadow 0.25s ease",
-  border: "1px solid $popoverBorder",
-  borderRadius: "6px",
-});
+  padding: "0.15rem",
+  userSelect: "none",
 
-export const MenuButtonContainer = styled("div", {
-  position: "relative",
+  variants: {
+    hovering: {
+      true: {
+        background: "$neutralLightest",
+        borderRadius: "4px",
+        boxShadow: "0 0 1px 1px $colors$popoverBorder",
+      },
+    },
+  },
 });
 
 export const MenuContainer = styled("div", {
@@ -37,7 +34,6 @@ export const MenuContainer = styled("div", {
   right: 0,
   backdropFilter: "blur(12px)",
   zIndex: 9,
-  width: "7.4rem",
   padding: "0.2rem",
   borderRadius: "8px",
   border: "1px solid $popoverBorder",

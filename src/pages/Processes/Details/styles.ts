@@ -6,6 +6,8 @@ export const DetailsContainer = styled("div", {
   padding: "1rem",
   justifyContent: "space-between",
   background: "$neutralLight",
+  maxWidth: "80rem",
+  minWidth: "50rem",
   width: "100%",
   height: "13rem",
   borderRadius: "8px",

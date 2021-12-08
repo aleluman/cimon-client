@@ -44,7 +44,7 @@ export const Container = styled("span", {
         padding: "0.3rem",
       },
       large: {
-        pading: "0.5rem",
+        padding: "0.5rem",
       },
     },
   },

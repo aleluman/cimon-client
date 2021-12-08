@@ -57,6 +57,7 @@ export const useProcess = () => {
       },
       onSettled: (response) => {
         queryClient.invalidateQueries(["process", response?.data.id]);
+        queryClient.invalidateQueries("processes");
       },
     }
   );

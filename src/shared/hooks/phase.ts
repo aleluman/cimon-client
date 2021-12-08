@@ -17,7 +17,7 @@ export const usePhase = () => {
         toast(`Phase ${response.data.name} created.`, { type: "success" });
       },
       onError: (error: AxiosError) => {
-        const message = error.response?.data.name
+        const message = error.response?.data.nonFieldErrors
           ? "There is already a phase with that name on this process."
           : "Can't connect to the server. Check your connection.";
         toast(message, { type: "error" });
