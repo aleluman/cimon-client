@@ -5,6 +5,7 @@ import { urls } from "./urls";
 const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
+    Accept: "application/json",
   },
 });
 
@@ -12,7 +13,11 @@ instance.interceptors.request.use(
   (config) => {
     const { access } = useAuth.getState();
     if (access && !config.url?.includes("token") && !config.url?.includes("register")) {
-      config.headers = { Authorization: `Bearer ${access}` };
+      config.headers = {
+        Authorization: `Bearer ${access}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
     }
     return config;
   },
@@ -26,6 +31,7 @@ instance.interceptors.response.use(
     return res;
   },
   async (err) => {
+    const originalConfig = err.config;
     if (!err.config.url.includes("token") && !err.config.url.includes("register") && err.response) {
       if (err.response.status === 401) {
         try {
@@ -35,11 +41,10 @@ instance.interceptors.response.use(
           });
           const { access, refresh: newRefesh } = rs.data;
           useAuth.setState({ access, refresh: newRefesh });
-          return await instance(err.config);
+          return await instance(originalConfig);
         } catch (_error) {
           window.history.pushState({}, "", "/login/");
           useAuth.setState({ username: null, access: null, refresh: null });
-          window.location.reload();
           return Promise.reject(_error);
         }
       }

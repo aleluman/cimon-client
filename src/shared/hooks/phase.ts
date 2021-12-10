@@ -31,13 +31,22 @@ export const usePhase = () => {
     {
       onMutate: async (mutation) => {
         await queryClient.cancelQueries(["process", mutation.process]);
-        const process = queryClient.getQueryData<ProcessType>(["process", mutation.id]);
-        queryClient.setQueryData(["process", mutation.id], { ...process, ...mutation });
+        const process = queryClient.getQueryData<ProcessType>([
+          "process",
+          mutation.process,
+        ]) as ProcessType;
+        const newPhases = process?.phases.map((phase) =>
+          phase.id !== mutation.id ? phase : { id: phase.id, name: mutation.name }
+        );
+        queryClient.setQueryData(["process", mutation.process], { ...process, phases: newPhases });
+        return { process };
       },
-      onError: (error: AxiosError) => {
-        if (error.response?.data.name)
+      onError: (error: AxiosError, mutation, context) => {
+        if (error.response?.data.nonFieldErrors) {
+          const oldContext = context as { process: ProcessType };
           toast("There is already a phase using this name.", { type: "error" });
-        else setNetworkError(true);
+          queryClient.setQueryData(["process", mutation.process], oldContext.process);
+        } else setNetworkError(true);
       },
       onSettled: (response) => {
         queryClient.invalidateQueries(["process", response?.data.id]);
@@ -46,10 +55,23 @@ export const usePhase = () => {
   );
 
   const deletePhase = useMutation(
-    (phaseId: string) => axios.delete<PhaseType>(`${urls.API_URL}/phases/${phaseId}`),
+    ({ id, processId }: { id: string; processId: string }) =>
+      axios.delete<PhaseType>(`${urls.API_URL}/phases/${id}`),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries("processes");
+      onMutate: async (mutation) => {
+        await queryClient.cancelQueries(["process", mutation.processId]);
+        const process = queryClient.getQueryData<ProcessType>([
+          "process",
+          mutation.processId,
+        ]) as ProcessType;
+        const updatedProcess = {
+          ...process,
+          phases: process.phases.filter((phase) => phase.id !== mutation.id),
+        };
+        queryClient.setQueryData(["process", mutation.processId], updatedProcess);
+      },
+      onSuccess: (_, request) => {
+        queryClient.invalidateQueries(["process", request.processId]);
         toast(`Phase deleted correctly`, { type: "info" });
       },
       onError: () => {

@@ -9,8 +9,8 @@ import { queryClient, useEditor } from "../state/store";
 
 export const useGetProcess = (processId: string) => {
   const queryData = useQuery(["process", processId], async () => {
-    const graph = await axios.get<ProcessType>(`${urls.API_URL}/processes/${processId}`);
-    return graph.data;
+    const process = await axios.get<ProcessType>(`${urls.API_URL}/processes/${processId}`);
+    return process.data;
   });
 
   return queryData;

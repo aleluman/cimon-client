@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Icon } from "../Icon/Icon";
-import { Container, HiddenCheckbox } from "./styles";
+import { Container } from "./styles";
 
 type CheckboxProps = {
   checked?: boolean | "inherit";
@@ -8,14 +9,25 @@ type CheckboxProps = {
 };
 
 export const Checkbox = ({ checked, handler, size = "large" }: CheckboxProps) => {
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const clickHandler = () => {
+    setIsChecked((prev) => !prev);
+    handler();
+  };
+
   return (
-    <Container checked={!!checked} size={size} inherit={checked === "inherit"}>
-      {checked ? (
+    <Container
+      checked={!!isChecked}
+      size={size}
+      inherit={isChecked === "inherit"}
+      onClick={() => clickHandler()}
+    >
+      {isChecked ? (
         <Icon type="check" size={size === "large" ? 19 : 13} />
       ) : (
         <Icon type="line" size={size === "large" ? 19 : 13} />
       )}
-      <HiddenCheckbox type="checkbox" onChange={handler} checked={!!checked} />
     </Container>
   );
 };

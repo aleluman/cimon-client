@@ -33,16 +33,14 @@ export const MenuButtonContainer = styled("div", {
 });
 
 export const MenuContainer = styled("div", {
-  position: "absolute",
-  right: 0,
   backdropFilter: "blur(12px)",
-  zIndex: 9,
   width: "7.4rem",
   padding: "0.2rem",
   borderRadius: "8px",
   border: "1px solid $popoverBorder",
   boxShadow: "$hoverShadowLarge",
   background: "$popoverBackground",
+  zIndex: 9,
 });
 
 export const MenuItem = styled("button", {
@@ -55,8 +53,15 @@ export const MenuItem = styled("button", {
   borderRadius: "4px",
   color: "$textNormal",
   cursor: "pointer",
+  textDecoration: "none",
+  fontSize: "0.8rem",
 
   "&:hover": {
     background: "$popoverSelect",
   },
+});
+
+export const EditingContainer = styled("div", {
+  display: "flex",
+  alignItems: "center",
 });

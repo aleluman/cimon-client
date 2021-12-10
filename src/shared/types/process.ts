@@ -34,7 +34,7 @@ export type AmbitType = {
   name: string;
   description: string;
   graph: any;
-  phases: any;
+  phases: string[];
   last_edited: Date;
 };
 

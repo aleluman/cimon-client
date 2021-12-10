@@ -31,18 +31,14 @@ export const CreateModal = ({ isModalOpen, setIsModalOpen, type, processId }: Cr
   const { createPhase } = usePhase();
   const { createAmbit } = useAmbit();
 
+  const operation = type === "ambit" ? createAmbit : createPhase;
+
   const onSubmit: SubmitHandler<CreateWithName> = async (data) => {
-    if (type === "ambit") {
-      await createAmbit.mutateAsync({
-        process: processId,
-        name: data.name,
-      });
-    } else {
-      await createPhase.mutateAsync({
-        process: processId,
-        name: data.name,
-      });
-    }
+    await operation.mutateAsync({
+      process: processId,
+      name: data.name,
+    });
+
     setIsModalOpen(false);
     reset();
   };
@@ -70,11 +66,11 @@ export const CreateModal = ({ isModalOpen, setIsModalOpen, type, processId }: Cr
           </Button>
           <Button
             type="submit"
-            isWorking={createPhase.isLoading}
-            disabled={createPhase.isLoading}
+            isWorking={operation.isLoading}
+            disabled={operation.isLoading}
             css={{ width: "5.8rem", height: "2.1rem" }}
           >
-            {createPhase.isLoading ? " " : `Add ${type}`}
+            {operation.isLoading ? " " : `Add ${type}`}
           </Button>
         </ModalFooterContainer>
       </ModalForm>

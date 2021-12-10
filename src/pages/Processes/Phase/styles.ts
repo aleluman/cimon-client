@@ -17,6 +17,7 @@ export const PhaseContainer = styled("div", {
   alignItems: "center",
   padding: "0.15rem",
   userSelect: "none",
+  width: "100%",
 
   variants: {
     hovering: {
@@ -30,10 +31,7 @@ export const PhaseContainer = styled("div", {
 });
 
 export const MenuContainer = styled("div", {
-  position: "absolute",
-  right: 0,
   backdropFilter: "blur(12px)",
-  zIndex: 9,
   padding: "0.2rem",
   borderRadius: "8px",
   border: "1px solid $popoverBorder",
@@ -55,4 +53,10 @@ export const MenuItem = styled("button", {
   "&:hover": {
     background: "$popoverSelect",
   },
+});
+
+export const EditingContainer = styled("div", {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
 });

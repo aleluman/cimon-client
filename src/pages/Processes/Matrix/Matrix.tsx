@@ -4,6 +4,8 @@ import { Checkbox } from "@/shared/components/Checkbox/Checkbox";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { ProcessType } from "@/shared/types/process";
 import { Ambit } from "../Ambit/Ambit";
+import { CreateModal } from "../CreateModal/CreateModal";
+import { Phase } from "../Phase/Phase";
 import {
   HelpText,
   PhaseContainer,
@@ -17,8 +19,7 @@ import {
   AmbitsTitle,
   EmptyContainer,
 } from "./styles";
-import { CreateModal } from "../CreateModal/CreateModal";
-import { Phase } from "../Phase/Phase";
+import { useAmbit } from "@/shared/hooks/ambit";
 
 type MatrixProps = {
   process: ProcessType;
@@ -27,6 +28,15 @@ type MatrixProps = {
 export const Matrix = ({ process }: MatrixProps) => {
   const [isPhaseModalOpen, setIsPhaseModalOpen] = useState(false);
   const [isAmbitModalOpen, setIsAmbitModalOpen] = useState(false);
+
+  const { updateAmbitPhases } = useAmbit();
+
+  const checkerHandler = (ambitId: string, phaseId: string, phases: string[]) => {
+    const newPhases = phases.includes(phaseId)
+      ? phases.filter((phase) => phase !== phaseId)
+      : phases.concat(phaseId);
+    updateAmbitPhases.mutate({ id: ambitId, process: process.id, phases: newPhases });
+  };
 
   const isEmpty = process.phases.length === 0 && process.ambits.length === 0;
 
@@ -53,7 +63,7 @@ export const Matrix = ({ process }: MatrixProps) => {
               <AmbitsContainer>
                 <AmbitsTitle>Ambits</AmbitsTitle>
                 {process.ambits.map((ambit) => (
-                  <Ambit id={ambit.id} name={ambit.name} />
+                  <Ambit id={ambit.id} name={ambit.name} processId={process.id} key={ambit.id} />
                 ))}
               </AmbitsContainer>
               <Table>
@@ -71,7 +81,10 @@ export const Matrix = ({ process }: MatrixProps) => {
                     <TableRow key={ambit.id}>
                       {process.phases.map((phase) => (
                         <TableData key={phase.id}>
-                          <Checkbox checked={ambit.phases.includes(phase.id)} handler={() => {}} />
+                          <Checkbox
+                            checked={ambit.phases.includes(phase.id)}
+                            handler={() => checkerHandler(ambit.id, phase.id, ambit.phases)}
+                          />
                         </TableData>
                       ))}
                     </TableRow>

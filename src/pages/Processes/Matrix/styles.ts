@@ -45,10 +45,6 @@ export const TableHead = styled("th", {
   fontSize: "0.85rem",
   paddingBottom: "0.5rem",
   background: "$neutralLight",
-
-  "&:first-of-type": {
-    fontSize: "1rem",
-  },
 });
 
 export const TableData = styled("td", {
@@ -65,6 +61,7 @@ export const AmbitsContainer = styled("span", {
   position: "sticky",
   left: 0,
   minWidth: "13rem",
+  maxWidth: "13rem",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
