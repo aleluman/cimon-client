@@ -1,4 +1,4 @@
-import { styled } from "@/shared/constants/stitches";
+import { styled, css } from "@/shared/constants/stitches";
 
 export const Overlay = styled("div", {
   position: "fixed",
@@ -7,6 +7,14 @@ export const Overlay = styled("div", {
   bottom: 0,
   left: 0,
   right: 0,
+
+  variants: {
+    darker: {
+      true: {
+        boxShadow: "inset 0 0 300px 40px #000000",
+      },
+    },
+  },
 });
 
 export const DialogContainer = styled("div", {
@@ -55,4 +63,30 @@ export const ModalFooterContainer = styled("div", {
   gap: "0.6rem",
   justifyContent: "flex-end",
   alignItems: "center",
+});
+
+export const overlayTransition = css({
+  transition: "opacity 0.3s ease",
+});
+
+export const overlayStart = css({
+  opacity: 0,
+});
+
+export const overlayEnd = css({
+  opacity: 1,
+});
+
+export const transitionDialog = css({
+  transition: "transform 0.2s ease, opacity 0.2s ease",
+});
+
+export const dialogStart = css({
+  transform: "scale(0.9) translateY(50px) translateZ(0)",
+  opacity: 0,
+});
+
+export const dialogEnd = css({
+  transform: "scale(1) translateZ(0)",
+  opacity: 1,
 });

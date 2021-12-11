@@ -10,6 +10,7 @@ export const AppContainer = styled("div", {
 export const Toast = styled(ToastContainer, {
   ".Toastify__toast-container": {
     fontWeight: 400,
+    zIndex: 999999999,
   },
 
   ".Toastify__toast": {

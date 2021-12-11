@@ -103,13 +103,15 @@ export const Matrix = ({ process }: MatrixProps) => {
             </PhaseContainer>
           </>
         )}
-        <Button
-          onClick={() => setIsAmbitModalOpen((prev) => !prev)}
-          color="secondary"
-          css={{ width: "13rem", position: "absolute", bottom: "1rem" }}
-        >
-          <Icon type="plus" /> Add Ambit
-        </Button>
+        {!isEmpty && (
+          <Button
+            onClick={() => setIsAmbitModalOpen((prev) => !prev)}
+            color="secondary"
+            css={{ width: "13rem", position: "absolute", bottom: "1rem" }}
+          >
+            <Icon type="plus" /> Add Ambit
+          </Button>
+        )}
       </TableContainer>
       <CreateModal
         isModalOpen={isPhaseModalOpen}

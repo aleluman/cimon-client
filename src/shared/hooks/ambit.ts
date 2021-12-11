@@ -89,6 +89,7 @@ export const useAmbit = () => {
         );
         const updatedProcess = {
           ...process,
+          lastEdited: new Date().toISOString(),
           ambits: newAmbits,
         };
         queryClient.setQueryData(["process", mutation.process], updatedProcess);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProcess } from "@/shared/hooks/process";
 import { Button } from "@/shared/components/Button/Button";
 import { Icon } from "@/shared/components/Icon/Icon";
@@ -14,7 +14,18 @@ type MainHeaderProps = {
 
 export const MainHeader = ({ process }: MainHeaderProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [timeMessage, setTimeMessage] = useState(getRelativeTime(new Date(process.lastEdited)));
   const { deleteProcess } = useProcess();
+
+  useEffect(() => {
+    setTimeMessage(getRelativeTime(new Date(process.lastEdited)));
+    const updateInterval = setInterval(() => {
+      setTimeMessage(getRelativeTime(new Date(process.lastEdited)));
+    }, 60000);
+    return () => {
+      clearInterval(updateInterval);
+    };
+  }, [process.id, process.lastEdited]);
 
   return (
     <ContentTitleContainer>
@@ -22,7 +33,7 @@ export const MainHeader = ({ process }: MainHeaderProps) => {
         <Icon type={process.category} size={24} color="$primary" />
         {process.name}
       </ContentTitle>
-      <LastEditedText>Last edited {getRelativeTime(new Date(process.lastEdited))}</LastEditedText>
+      <LastEditedText>Last edited {timeMessage}</LastEditedText>
       <Button color="secondary" onClick={() => setShowDeleteModal(true)}>
         <Icon type="delete" />
         Delete

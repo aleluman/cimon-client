@@ -10,3 +10,12 @@ export const Container = styled("div", {
   overflowY: "auto",
   paddingBottom: "4rem",
 });
+
+export const ErrorText = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "100%",
+  height: "100%",
+  color: "$textNormal",
+});

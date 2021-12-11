@@ -4,7 +4,6 @@ const units = {
   day: 24 * 60 * 60 * 1000,
   hour: 60 * 60 * 1000,
   minute: 60 * 1000,
-  second: 1000,
 };
 
 const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
@@ -14,8 +13,8 @@ export const getRelativeTime = (d1: Date) => {
   const keys = Object.keys(units) as Array<keyof typeof units>;
 
   const unit = keys.find(
-    (currentUnit) => Math.abs(elapsed) > units[currentUnit] || currentUnit === "second"
+    (currentUnit) => Math.abs(elapsed) > units[currentUnit] || currentUnit === "minute"
   );
 
-  return unit ? rtf.format(Math.round(elapsed / units[unit]), unit) : "just now";
+  return unit ? rtf.format(Math.round(elapsed / units[unit]), unit) : "less than a minute ago";
 };

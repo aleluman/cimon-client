@@ -6,6 +6,7 @@ import { Searchbar } from "../Searchbar/Searchbar";
 import { HelpText, ProcessesContainer, SidebarContainer, Title } from "./styles";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { NewProcessModal } from "../NewProcessModal/NewProcessModal";
+import { Spinner } from "@/shared/components/Spinner/Spinner";
 
 export const Sidebar = () => {
   const [search, setSearch] = useState("");
@@ -18,9 +19,9 @@ export const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error</div>}
-      {data && (
+      {isLoading && <Spinner size={38} thickness={5} />}
+      {isError && <HelpText>There was an error loading the processes</HelpText>}
+      {!isLoading && !isError && data && (
         <>
           <Title>
             My Processes
