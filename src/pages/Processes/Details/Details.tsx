@@ -24,7 +24,7 @@ export const Details = ({ process }: DetailsProps) => {
   const [description, setDescription] = useState(process.description);
 
   const getRolesByType = (type: RoleType["role"]) => {
-    const filteredRoles = process.roles.filter((role) => role.type === type);
+    const filteredRoles = process.roles.filter((role) => role.role === type);
     if (filteredRoles.length === 0) return "no roles";
     return filteredRoles.map((role) => role.name).join(", ");
   };

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import { getRole, useRole } from "@/shared/hooks/role";
@@ -19,6 +20,7 @@ import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleType } from "@/shared/types/editor";
 import { EditorRouteParams } from "@/shared/types/routes";
 import { useEditor } from "@/shared/state/store";
+import { useDebounce } from "@/shared/hooks/debounce";
 
 type RoleSidebarProps = {
   roleId: string;
@@ -27,9 +29,12 @@ type RoleSidebarProps = {
 export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
   const { ambitId } = useParams<EditorRouteParams>();
   const role = getRole(roleId, ambitId as string);
+  const [description, setDescription] = useState(role.description);
   const { updateRole } = useRole(ambitId as string);
   const mockupMode = useEditor((state) => state.mockupMode);
   const setMockupMode = useEditor((state) => state.setMockupMode);
+
+  useDebounce(() => updateRole.mutate({ ...role, description }), 1000, [description]);
 
   const updateRoleType = (value: string) => {
     updateRole.mutate({ ...role, role: value as RoleType["role"] });
@@ -94,7 +99,12 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
           </Toggle>
           <Divider />
           <SubTitle>Description</SubTitle>
-          <Description placeholder="Add a description here..." defaultValue={role.description} />
+          <Description
+            placeholder="Add a description here..."
+            defaultValue={role.description}
+            onChange={(event) => setDescription(event.target.value)}
+            maxLength={250}
+          />
         </Tab.Panel>
         <Tab.Panel as={MockupContainer}>
           {role.role === "human" ? (

@@ -7,4 +7,5 @@ export const InnerText = styled("div", {
   justifyContent: "center",
   gap: "1rem",
   color: "$textNormal",
+  fontSize: "0.9rem",
 });

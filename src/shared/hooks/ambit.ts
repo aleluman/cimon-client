@@ -54,16 +54,11 @@ export const useAmbit = () => {
     (updatedAmbit: Partial<AmbitType> & Pick<AmbitType, "id"> & { process: string }) =>
       axios.patch<AmbitType>(`${urls.API_URL}/ambits/${updatedAmbit.id}/`, updatedAmbit),
     {
-      onSuccess: (response, request) => {
+      onSuccess: (_, request) => {
         queryClient.invalidateQueries(["process", request.process]);
       },
-      onError: (error: AxiosError) => {
-        if (error.response?.data.name)
-          toast("There is already an ambit using this name.", { type: "error" });
-        else setNetworkError(true);
-      },
-      onSettled: (response) => {
-        queryClient.invalidateQueries(["process", response?.data.id]);
+      onError: () => {
+        setNetworkError(true);
       },
     }
   );

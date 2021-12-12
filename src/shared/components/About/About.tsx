@@ -16,7 +16,7 @@ export const About = ({ isOpen, setIsOpen }: AboutProps) => {
         CIMoN Manager
       </InnerText>
       <InnerText>Based on the work of Maximiliano Canché. </InnerText>
-      <InnerText>Designed and coded by Alejandro Lumán.</InnerText>
+      <InnerText>Designed and programmed by Alejandro Lumán.</InnerText>
       <InnerText css={{ color: "$textDull", fontSize: "0.85rem" }}>2021</InnerText>
       <Button color="secondary" onClick={() => setIsOpen(false)}>
         Close

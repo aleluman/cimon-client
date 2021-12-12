@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
@@ -13,17 +14,26 @@ import {
 import { useEditor, usePreferences } from "@/shared/state/store";
 import { RoleSidebar } from "./RoleSidebar";
 import { InteractionSidebar } from "./InteractionSidebar";
-import { useGetAmbit } from "@/shared/hooks/ambit";
+import { useAmbit, useGetAmbit } from "@/shared/hooks/ambit";
+import { useDebounce } from "@/shared/hooks/debounce";
 
 export const Sidebar = () => {
+  const [description, setDescription] = useState("");
   const showSidebar = usePreferences((state) => state.showSidebar);
   const setHidden = usePreferences((state) => state.setShowSidebar);
   const activeItem = useEditor((state) => state.activeItem);
   const mockupMode = useEditor((state) => state.mockupMode);
 
-  const { ambitId } = useParams();
+  const { ambitId, processId } = useParams();
+  const { updateAmbit } = useAmbit();
 
   const { data, isError, isLoading } = useGetAmbit(ambitId as string);
+
+  useDebounce(
+    () => updateAmbit.mutate({ id: ambitId as string, description, process: processId as string }),
+    1000,
+    [description]
+  );
 
   return (
     <SidebarContainer
@@ -49,6 +59,7 @@ export const Sidebar = () => {
                   id="description"
                   placeholder="Add a description here..."
                   defaultValue={data.description}
+                  onChange={(event) => setDescription(event.target.value)}
                 />
                 <Help>Select a role or an interaction to view and edit its details.</Help>
               </>
