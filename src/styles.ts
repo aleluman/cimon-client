@@ -2,6 +2,8 @@ import { ToastContainer } from "react-toastify";
 import { styled } from "./shared/constants/stitches";
 
 export const AppContainer = styled("div", {
+  display: "flex",
+  flexDirection: "column",
   height: "100%",
   maxHeight: "100%",
   width: "100%",

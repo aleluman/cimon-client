@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
   Description,
@@ -12,18 +13,21 @@ import {
 import { useEditor, usePreferences } from "@/shared/state/store";
 import { RoleSidebar } from "./RoleSidebar";
 import { InteractionSidebar } from "./InteractionSidebar";
-import { useGetGraph } from "@/shared/hooks/graph";
+import { useGetAmbit } from "@/shared/hooks/ambit";
 
 export const Sidebar = () => {
-  const hidden = usePreferences((state) => state.showSidebar);
+  const showSidebar = usePreferences((state) => state.showSidebar);
   const setHidden = usePreferences((state) => state.setShowSidebar);
   const activeItem = useEditor((state) => state.activeItem);
   const mockupMode = useEditor((state) => state.mockupMode);
-  const { data, isError, isLoading } = useGetGraph();
+
+  const { ambitId } = useParams();
+
+  const { data, isError, isLoading } = useGetAmbit(ambitId as string);
 
   return (
     <SidebarContainer
-      hidden={hidden}
+      hidden={!showSidebar}
       mockup={mockupMode && activeItem.type !== "none"}
       css={{ paddingTop: activeItem.type === "role" ? "0.4rem" : "1rem" }}
     >
@@ -49,8 +53,12 @@ export const Sidebar = () => {
                 <Help>Select a role or an interaction to view and edit its details.</Help>
               </>
             )}
-            <HideButton onClick={() => setHidden(!hidden)}>
-              <Icon type={hidden ? "arrow-left" : "arrow-right"} color="var(--white)" size={12} />
+            <HideButton onClick={() => setHidden(!showSidebar)}>
+              <Icon
+                type={showSidebar ? "arrow-right" : "arrow-left"}
+                color="var(--white)"
+                size={12}
+              />
             </HideButton>
           </>
         )}

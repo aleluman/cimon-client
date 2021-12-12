@@ -1,39 +1,56 @@
-import axios from "axios";
 import { useMutation } from "react-query";
-import { queryClient } from "../state/store";
-import { Graph, InteractionType } from "../types/editor";
+import { queryClient, useEditor } from "../state/store";
+import { InteractionType } from "../types/editor";
+import { urls } from "../constants/urls";
+import { AmbitType } from "../types/process";
+import axios from "../constants/axios";
 
 export const useInteraction = (ambitId: string) => {
+  const setActiveItem = useEditor((state) => state.setActiveItem);
+  const setNetworkError = useEditor((state) => state.setNetworkError);
+
   const createInteraction = useMutation(
     (newInteraction: InteractionType) => {
       return axios.post<InteractionType>(
-        `http://localhost:8080/graph/${ambitId}/interactions/`,
+        `${urls.API_URL}/ambits/${ambitId}/interactions/${newInteraction.id}/`,
         newInteraction
       );
     },
     {
       onMutate: async (newInteraction) => {
-        const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
-        queryClient.setQueryData(["graph", ambitId], {
-          ...graph,
-          interactions: [...graph.interactions, newInteraction],
+        const ambit = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
+        queryClient.setQueryData(["ambit", ambitId], {
+          ...ambit,
+          graph: {
+            roles: ambit.graph.roles,
+            interactions: [...ambit.graph.interactions, newInteraction],
+          },
         });
+      },
+      onError: () => {
+        setNetworkError(true);
       },
     }
   );
   const deleteInteraction = useMutation(
     (interactionId: string) =>
-      axios.delete<InteractionType>(`http://localhost:8080/interactions/${interactionId}`),
+      axios.delete<InteractionType>(
+        `${urls.API_URL}/ambits/${ambitId}/interactions/${interactionId}/`
+      ),
     {
       onMutate: async (interactionId) => {
-        const graph = queryClient.getQueryData(["graph", ambitId]) as Graph;
-        const filteredInteractions = graph.interactions.filter(
+        const ambit = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
+        const filteredInteractions = ambit.graph.interactions.filter(
           (interaction) => interaction.id !== interactionId
         );
-        queryClient.setQueryData(["graph", ambitId], {
-          ...graph,
-          interactions: filteredInteractions,
+        setActiveItem({ id: "", type: "none" });
+        queryClient.setQueryData(["ambit", ambitId], {
+          ...ambit,
+          graph: { ...ambit.graph, interactions: filteredInteractions },
         });
+      },
+      onError: () => {
+        setNetworkError(true);
       },
     }
   );

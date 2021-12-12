@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Menu } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { AmbitButton, AmbitItem, AmbitMenu } from "./styles";
@@ -18,9 +18,11 @@ export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
 
   const navigate = useNavigate();
 
+  const { processId } = useParams();
+
   const handleChangeAmbit = (ambitId: string) => {
     setActiveItem({ type: "none", id: "" });
-    navigate(`/ambits/${ambitId}/editor`);
+    navigate(`/processes/${processId}/${ambitId}/`);
   };
 
   return (
@@ -30,14 +32,14 @@ export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
         <Icon type="arrow-down" />
       </Menu.Button>
       <Menu.Items className={css(AmbitMenu)}>
-        {ambits.map((ambit) => (
+        {ambits.map((ambit, index) => (
           <Menu.Item
             key={ambit.id}
             className={css(AmbitItem)({ selected: selected?.id === ambit.id })}
             as="a"
             onClick={() => handleChangeAmbit(ambit.id)}
           >
-            {`${ambit.id}. ${ambit.name}`}
+            {`${index + 1}. ${ambit.name}`}
             {selected?.id === ambit.id && <Icon type="check" size={12} />}
           </Menu.Item>
         ))}

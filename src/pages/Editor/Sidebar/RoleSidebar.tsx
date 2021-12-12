@@ -11,6 +11,7 @@ import {
   MockupContainer,
   TabContainer,
   TabButton,
+  Help,
 } from "./styles";
 import { Toggle } from "@/shared/components/Toggle/Toggle";
 import { ToggleOption } from "@/shared/components/ToggleOption/ToggleOption";
@@ -18,8 +19,6 @@ import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleType } from "@/shared/types/editor";
 import { EditorRouteParams } from "@/shared/types/routes";
 import { useEditor } from "@/shared/state/store";
-import { Select } from "@/shared/components/Select/Select";
-import { categories } from "@/shared/constants/categories";
 
 type RoleSidebarProps = {
   roleId: string;
@@ -27,21 +26,21 @@ type RoleSidebarProps = {
 
 export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
   const { ambitId } = useParams<EditorRouteParams>();
-  const role = getRole(roleId, ambitId);
-  const { updateRole } = useRole();
+  const role = getRole(roleId, ambitId as string);
+  const { updateRole } = useRole(ambitId as string);
   const mockupMode = useEditor((state) => state.mockupMode);
   const setMockupMode = useEditor((state) => state.setMockupMode);
 
   const updateRoleType = (value: string) => {
-    updateRole.mutate({ id: roleId, role: value as RoleType["role"] });
+    updateRole.mutate({ ...role, role: value as RoleType["role"] });
   };
 
   const updateRoleActors = (value: string) => {
-    updateRole.mutate({ id: roleId, numberOfActors: value as RoleType["numberOfActors"] });
+    updateRole.mutate({ ...role, numberOfActors: value as RoleType["numberOfActors"] });
   };
 
   const updateRoleUse = (value: string) => {
-    updateRole.mutate({ id: roleId, solutionUse: value as RoleType["solutionUse"] });
+    updateRole.mutate({ ...role, solutionUse: value as RoleType["solutionUse"] });
   };
 
   const handleTab = (index: number) => {
@@ -98,9 +97,11 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
           <Description placeholder="Add a description here..." defaultValue={role.description} />
         </Tab.Panel>
         <Tab.Panel as={MockupContainer}>
-          <SubTitle css={{ margin: 0 }}>Type</SubTitle>
-          <Select options={categories} handler={() => {}} selectedValue="generic" />
-          <PhoneContainer />
+          {role.role === "human" ? (
+            <PhoneContainer />
+          ) : (
+            <Help css={{ margin: 0 }}> Only human roles can have a mockup.</Help>
+          )}
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

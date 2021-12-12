@@ -8,7 +8,6 @@ import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
 import { useInteraction } from "@/shared/hooks/interaction";
 import { Marker } from "../Marker/Marker";
-import { EditorRouteParams } from "@/shared/types/routes";
 
 type InteractionProps = {
   interaction: InteractionType;
@@ -16,12 +15,16 @@ type InteractionProps = {
 
 export const Interaction = ({ interaction }: InteractionProps) => {
   const [angle, setAngle] = useState(0);
-  const { ambitId } = useParams<EditorRouteParams>();
-  const startPosition = useEditor((state) => state.rolePositions[ambitId][interaction.source]);
-  const endPosition = useEditor((state) => state.rolePositions[ambitId][interaction.target]);
+  const { ambitId } = useParams();
+  const startPosition = useEditor(
+    (state) => state.rolePositions[ambitId as string][interaction.source]
+  );
+  const endPosition = useEditor(
+    (state) => state.rolePositions[ambitId as string][interaction.target]
+  );
   const activeItem = useEditor((state) => state.activeItem);
   const setActiveItem = useEditor((state) => state.setActiveItem);
-  const { deleteInteraction } = useInteraction();
+  const { deleteInteraction } = useInteraction(ambitId as string);
   const pathRef = useRef<SVGPathElement>(null);
 
   const isActive = activeItem.type === "interaction" && activeItem.id === interaction.id;

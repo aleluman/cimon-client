@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import { useParams } from "react-router-dom";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { memo, useState } from "react";
@@ -26,7 +27,8 @@ type RoleMenuProps = {
 };
 
 export const RoleMenu = memo(({ parentRef, role, setEditing }: RoleMenuProps) => {
-  const { deleteRole, updateRole } = useRole();
+  const { ambitId } = useParams();
+  const { deleteRole, updateRole } = useRole(ambitId as string);
 
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(parentRef.current, popperElement, {
@@ -34,15 +36,15 @@ export const RoleMenu = memo(({ parentRef, role, setEditing }: RoleMenuProps) =>
   });
 
   const updateRoleType = (type: RoleType["role"]) => {
-    updateRole.mutate({ id: role.id, role: type });
+    updateRole.mutate({ ...role, role: type });
   };
 
   const updateRoleUse = (solutionUse: RoleType["solutionUse"]) => {
-    updateRole.mutate({ id: role.id, solutionUse });
+    updateRole.mutate({ ...role, solutionUse });
   };
 
   const updateRoleActors = (numberOfActors: RoleType["numberOfActors"]) => {
-    updateRole.mutate({ id: role.id, numberOfActors });
+    updateRole.mutate({ ...role, numberOfActors });
   };
 
   return (

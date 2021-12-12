@@ -1,5 +1,5 @@
 import { iconPaths } from "../constants/Icons";
-import { RoleType } from "./editor";
+import { InteractionType, RoleType } from "./editor";
 
 export type ProcessCategory = {
   id: string;
@@ -11,7 +11,7 @@ export type ProcessCategory = {
 export type ProcessRoleType = {
   id: string;
   name: string;
-  type: RoleType["role"];
+  role: RoleType["role"];
 };
 
 export type NewPhaseType = {
@@ -33,7 +33,10 @@ export type AmbitType = {
   id: string;
   name: string;
   description: string;
-  graph: any;
+  graph: {
+    roles: RoleType[];
+    interactions: InteractionType[];
+  };
   phases: string[];
   last_edited: Date;
 };

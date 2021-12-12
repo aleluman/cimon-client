@@ -8,7 +8,7 @@ export const Zoombar = () => {
   const activeItem = useEditor((state) => state.activeItem);
 
   return (
-    <ZoomBarContainer tilted={isSidebarPresent} mockup={mockupMode && activeItem.type !== "none"}>
+    <ZoomBarContainer tilted={!isSidebarPresent} mockup={mockupMode && activeItem.type !== "none"}>
       <IconOnlyButton
         icon="minus"
         text="Zoom out"

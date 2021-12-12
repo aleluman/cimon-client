@@ -1,3 +1,3 @@
 export const InteractionSidebar = () => {
-  return <></>;
+  return null;
 };

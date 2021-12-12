@@ -1,9 +1,9 @@
 import { queryClient } from "../state/store";
-import { Graph } from "../types/editor";
+import { AmbitType } from "../types/process";
 
-export const getConnectedNodesIds = (roleId: string, graphId: string) => {
-  const graph = queryClient.getQueryData(["graph", graphId]) as Graph;
-  return graph.interactions
+export const getConnectedNodesIds = (roleId: string, ambitId: string) => {
+  const ambitData = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
+  return ambitData.graph.interactions
     .filter((interaction) => roleId === interaction.source || roleId === interaction.target)
     .map((interaction) => {
       return interaction.source === roleId

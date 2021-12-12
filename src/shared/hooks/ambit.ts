@@ -1,10 +1,35 @@
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { urls } from "../constants/urls";
 import { AmbitType, NewAmbitType, ProcessType } from "../types/process";
 import { queryClient, useEditor } from "../state/store";
 import axios from "../constants/axios";
+
+export const useGetAmbit = (ambitId: string) => {
+  const addAmbit = useEditor((state) => state.addAmbit);
+  const setPosition = useEditor((state) => state.setPosition);
+  const setSelectedAmbit = useEditor((state) => state.setSelectedAmbit);
+
+  const queryData = useQuery(
+    ["ambit", ambitId],
+    async () => {
+      const ambit = await axios.get<AmbitType>(`${urls.API_URL}/ambits/${ambitId}`);
+      return ambit.data;
+    },
+    {
+      onSuccess: (data) => {
+        const { roles } = data.graph;
+        addAmbit(ambitId);
+        roles.forEach((role) => setPosition({ id: role.id, x: role.x, y: role.y }, ambitId));
+        setSelectedAmbit(data);
+      },
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  return queryData;
+};
 
 export const useAmbit = () => {
   const setNetworkError = useEditor((state) => state.setNetworkError);

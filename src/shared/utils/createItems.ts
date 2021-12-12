@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { queryClient } from "../state/store";
-import { Graph, InteractionType, RoleType } from "../types/editor";
+import { InteractionType, RoleType } from "../types/editor";
+import { AmbitType } from "../types/process";
 
 export const createNewInteraction = ({
   source,
@@ -34,10 +35,10 @@ export const createNewRole = (
   };
 };
 
-export const createName = (type: string, graphId: string) => {
+export const createName = (type: string, ambitId: string) => {
   const capType = type.charAt(0).toUpperCase() + type.slice(1);
-  const graph = queryClient.getQueryData<Graph>(["graph", graphId]) as Graph;
-  const roleNames = graph.roles.map((role) => role.name);
+  const data = queryClient.getQueryData<AmbitType>(["ambit", ambitId]) as AmbitType;
+  const roleNames = data?.graph.roles.map((role) => role.name);
 
   const getName = (number: number): string => {
     const name = `${capType} ${number}`;

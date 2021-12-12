@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { useGesture } from "@use-gesture/react";
 import { useParams } from "react-router-dom";
 import { Abstract, Body, Container, Name, NameInput, Title } from "./styles";
-import { Graph, RoleType } from "@/shared/types/editor";
+import { RoleType } from "@/shared/types/editor";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleMenu } from "../RoleMenu/RoleMenu";
 import { useRole } from "@/shared/hooks/role";
 import { queryClient, useEditor } from "@/shared/state/store";
 import { RoleConnector } from "../RoleConnector/RoleConnector";
 import { EditorRouteParams } from "@/shared/types/routes";
+import { AmbitType } from "@/shared/types/process";
 
 type RoleProps = {
   role: RoleType;
@@ -18,7 +19,7 @@ type RoleProps = {
 export const Role = ({ role }: RoleProps) => {
   const { ambitId } = useParams<EditorRouteParams>();
   const [isHovering, setIsHovering] = useState(false);
-  const { x, y } = useEditor((state) => state.rolePositions[ambitId][role.id]);
+  const { x, y } = useEditor((state) => state.rolePositions[ambitId as string][role.id]);
   const zoom = useEditor((state) => state.zoom);
   const activeItem = useEditor((state) => state.activeItem);
   const [isEditingName, setIsEditingName] = useState(activeItem.new);
@@ -27,7 +28,7 @@ export const Role = ({ role }: RoleProps) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const setPosition = useEditor((state) => state.setPosition);
   const setDoingAction = useEditor((state) => state.setDoingAction);
-  const { updateRole, deleteRole } = useRole();
+  const { updateRole, deleteRole } = useRole(ambitId as string);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -45,9 +46,9 @@ export const Role = ({ role }: RoleProps) => {
       setActiveItem({ id: role.id, type: "role" });
     },
     onDrag: ({ delta: [dx, dy] }) =>
-      setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }, ambitId),
+      setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }, ambitId as string),
     onDragEnd: ({ tap }) => {
-      if (!tap) updateRole.mutate({ id: role.id, x, y });
+      if (!tap) updateRole.mutate({ ...role, x, y });
       setDoingAction(false);
     },
     onHover: ({ active }) => setIsHovering(active),
@@ -73,12 +74,13 @@ export const Role = ({ role }: RoleProps) => {
       const target = event.target as HTMLInputElement;
       setIsEditingName(false);
       if (target.value !== "") {
-        const roles = queryClient.getQueryData<Graph>(["graph", ambitId])?.roles as RoleType[];
+        const roles = queryClient.getQueryData<AmbitType>(["ambit", ambitId])?.graph
+          .roles as RoleType[];
         const isNameUsed = roles.some((item) => item.id !== role.id && item.name === target.value);
         if (isNameUsed) {
           toast.warning("There is already another role with that name.");
         } else if (target.value !== role.name) {
-          updateRole.mutate({ id: role.id, name: target.value });
+          updateRole.mutate({ ...role, name: target.value });
         }
       } else {
         toast.warning("Nodes can't have an empty name.");

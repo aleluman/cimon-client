@@ -1,6 +1,6 @@
-import { Fragment, memo } from "react";
-import { useGesture } from "@use-gesture/react";
 import { useParams } from "react-router-dom";
+import { memo } from "react";
+import { useGesture } from "@use-gesture/react";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
   DragIconContainer,
@@ -19,20 +19,19 @@ import { getMousePositionInCanvas } from "@/shared/utils/mousePosition";
 import { createName, createNewRole } from "@/shared/utils/createItems";
 import { PlaceholderRoleType } from "@/shared/types/editor";
 import { useRole } from "@/shared/hooks/role";
-import { EditorRouteParams } from "@/shared/types/routes";
-import { useGetGraph } from "@/shared/hooks/graph";
+import { useGetAmbit } from "@/shared/hooks/ambit";
 
 export const RoleBar = memo(() => {
   const setPlaceholderRole = useEditor((state) => state.setPlaceholderRole);
-  const { ambitId } = useParams<EditorRouteParams>();
-  const { createRole } = useRole();
+  const { ambitId, processId } = useParams();
+  const { createRole } = useRole(ambitId as string);
 
-  const { data } = useGetProcess();
+  const { data } = useGetProcess(processId as string);
 
-  const { data: graph } = useGetGraph();
-  const names = graph?.roles.map((role) => role.name);
+  const { data: ambitData } = useGetAmbit(ambitId as string);
+  const names = ambitData?.graph.roles.map((role) => role.name);
   const isNameAvailable = !data?.roles.every((role) =>
-    graph?.roles.some((node) => node.name === role.name)
+    ambitData?.graph.roles.some((node) => node.name === role.name)
   );
 
   const handlers = useGesture({
@@ -54,7 +53,7 @@ export const RoleBar = memo(() => {
     onDragEnd: ({ args: [role, name] }) => {
       const { placeholderRole } = useEditor.getState();
       const { x, y } = placeholderRole as PlaceholderRoleType;
-      const newName = createName(role, ambitId);
+      const newName = createName(role, ambitId as string);
       const newRole = createNewRole(name === "" ? newName : name, role, x, y);
       createRole.mutate({ newRole, newName: name === "" });
       setPlaceholderRole(null);
@@ -85,17 +84,14 @@ export const RoleBar = memo(() => {
         <>
           <Subtitle>Existing roles</Subtitle>
           <ListContainer>
-            {data.roles.map((role) => {
-              if (!names?.includes(role.name)) {
-                return (
-                  <ListItem key={role.id} {...handlers(role.type, role.name)}>
-                    <Icon type={`${role.type}-internal`} size={12} />
-                    <ListItemText>{role.name}</ListItemText>
-                  </ListItem>
-                );
-              }
-              return null;
-            })}
+            {data.roles
+              .filter((role) => !names?.includes(role.name))
+              .map((role) => (
+                <ListItem key={role.id} {...handlers(role.role, role.name)}>
+                  <Icon type={`${role.role}-internal`} size={12} />
+                  <ListItemText>{role.name}</ListItemText>
+                </ListItem>
+              ))}
           </ListContainer>
         </>
       )}

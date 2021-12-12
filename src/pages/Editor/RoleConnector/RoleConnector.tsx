@@ -10,7 +10,6 @@ import { getConnectedNodesIds } from "@/shared/utils/connectedNodes";
 import { useInteraction } from "@/shared/hooks/interaction";
 import { createNewInteraction } from "@/shared/utils/createItems";
 import { theme } from "@/shared/constants/stitches";
-import { EditorRouteParams } from "@/shared/types/routes";
 
 const calculateHoverNode = (update: Position, ambitId: string) => {
   const rolesPositionsRecord = useEditor.getState().rolePositions;
@@ -45,10 +44,10 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
   const hoveringNodeId = useEditor((state) => state.roleBeingHovered);
   const setRoleBeingHovered = useEditor((state) => state.setRoleBeingHovered);
   const setPlaceholderInteraction = useEditor((state) => state.setPlaceholderInteraction);
-  const { createInteraction } = useInteraction();
-  const { ambitId } = useParams<EditorRouteParams>();
+  const { ambitId } = useParams();
+  const { createInteraction } = useInteraction(ambitId as string);
 
-  const connectedNodes = getConnectedNodesIds(roleId, ambitId).map((item) => item.roleId);
+  const connectedNodes = getConnectedNodesIds(roleId, ambitId as string).map((item) => item.roleId);
 
   const handlers = useGesture({
     onDrag: ({ event, delta: [dx, dy] }) => {
@@ -68,7 +67,7 @@ export const RoleConnector = ({ active, roleId, nodeX, nodeY }: RoleConnectorPro
       });
       calculateHoverNode(
         { x: position.x + nodeX + 16 * 8, y: position.y + nodeY + 16 * 2.5 },
-        ambitId
+        ambitId as string
       );
     },
     onDragStart: () => {

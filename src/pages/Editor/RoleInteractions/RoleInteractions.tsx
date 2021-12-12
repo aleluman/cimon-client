@@ -27,7 +27,7 @@ export const RoleInteractions = () => {
 
   return (
     <InteractionsContainer
-      extended={showSidebar}
+      extended={!showSidebar}
       hidden={hidden}
       mockup={mockupMode && activeItem.type !== "none"}
     >

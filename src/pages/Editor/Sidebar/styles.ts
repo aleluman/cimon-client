@@ -126,7 +126,6 @@ export const PhoneContainer = styled("div", {
   background: "$neutralDarker",
   boxShadow: "inset $subtleShadow",
   borderRadius: "8px",
-  marginTop: "0.8rem",
 });
 
 export const MockupContainer = styled("div", {
