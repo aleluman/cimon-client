@@ -12,6 +12,7 @@ export const Container = styled("div", {
   padding: "0.3rem",
   borderRadius: "8px",
   boxShadow: "$subtleShadow",
+  zIndex: 9,
 });
 
 export const Divider = styled("span", {

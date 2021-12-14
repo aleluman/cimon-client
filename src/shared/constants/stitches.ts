@@ -25,6 +25,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         border: "#2e2e2e",
         borderLight: "#363636",
         borderDark: "#242424",
+        borderPhone: "#242424",
         iconNormal: "#acacac",
         iconGray: "#d3d3d3",
         iconDisabled: "#585858",

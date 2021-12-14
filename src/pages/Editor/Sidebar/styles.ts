@@ -121,6 +121,7 @@ export const Divider = styled("hr", {
 });
 
 export const PhoneContainer = styled("div", {
+  position: "relative",
   width: "100%",
   height: "42rem",
   background: "$neutralDarker",

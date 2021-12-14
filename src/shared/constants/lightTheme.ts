@@ -23,6 +23,7 @@ export const lightTheme = createTheme({
     border: "#d8e5f5",
     borderLight: "#d8e5f5",
     borderDark: "#d8e5f5",
+    borderPhone: "#86a1c9",
     iconNormal: "#86a1c9",
     iconGray: "#7E96B9",
     iconDisabled: "#d0dde9",

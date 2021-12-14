@@ -19,6 +19,7 @@ export const SectionContainer = styled("div", {
   gap: "1rem",
   flexDirection: "column",
   flex: 1,
+  overflow: "auto",
 });
 
 export const Label = styled("label", {

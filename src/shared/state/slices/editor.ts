@@ -8,12 +8,18 @@ export type EditorSlice = {
   doingAction: boolean;
   selectedAmbit: AmbitType | null;
   mockupMode: boolean;
+  showContact: boolean;
+  showCall: "none" | "audio" | "video";
+  selectedActor: { id: number; name: string; role: string } | null;
   setZoom: (newZoom: number) => void;
   setTranslations: (newTranslations: Position) => void;
   setActiveItem: (newActiveItem: ActiveItem) => void;
   setDoingAction: (value: boolean) => void;
   setSelectedAmbit: (ambit: AmbitType) => void;
   setMockupMode: (value: boolean) => void;
+  setShowContact: (value: boolean) => void;
+  setShowCall: (value: "none" | "audio" | "video") => void;
+  setSelectedActor: (value: { id: number; name: string; role: string } | null) => void;
 };
 
 export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
@@ -23,10 +29,16 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
   doingAction: false,
   selectedAmbit: null,
   mockupMode: false,
+  showContact: false,
+  showCall: "none",
+  selectedActor: null,
   setZoom: (newZoom) => set(() => ({ zoom: newZoom })),
   setTranslations: (newTranslations) => set(() => ({ translations: newTranslations })),
   setActiveItem: (newActiveItem) => set(() => ({ activeItem: newActiveItem })),
   setDoingAction: (value) => set(() => ({ doingAction: value })),
   setSelectedAmbit: (ambit) => set(() => ({ selectedAmbit: ambit })),
   setMockupMode: (value) => set(() => ({ mockupMode: value })),
+  setShowContact: (value) => set(() => ({ showContact: value })),
+  setShowCall: (value) => set(() => ({ showCall: value })),
+  setSelectedActor: (value) => set(() => ({ selectedActor: value })),
 });

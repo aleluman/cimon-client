@@ -21,6 +21,7 @@ import { RoleType } from "@/shared/types/editor";
 import { EditorRouteParams } from "@/shared/types/routes";
 import { useEditor } from "@/shared/state/store";
 import { useDebounce } from "@/shared/hooks/debounce";
+import { Phone } from "@/pages/Phone/Phone";
 
 type RoleSidebarProps = {
   roleId: string;
@@ -108,7 +109,9 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
         </Tab.Panel>
         <Tab.Panel as={MockupContainer}>
           {role.role === "human" ? (
-            <PhoneContainer />
+            <PhoneContainer>
+              <Phone />
+            </PhoneContainer>
           ) : (
             <Help css={{ margin: 0 }}> Only human roles can have a mockup.</Help>
           )}
