@@ -59,7 +59,7 @@ export const RoleInteractions = () => {
                   <Tr key={item}>
                     <Td>{item}</Td>
                     <Td>
-                      <Checkbox checked size="small" handler={() => {}} />
+                      <Checkbox checked={false} size="small" handler={() => {}} />
                     </Td>
                     <Td>
                       <Checkbox checked={false} size="small" handler={() => {}} />

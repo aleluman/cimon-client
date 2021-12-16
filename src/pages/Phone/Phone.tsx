@@ -8,6 +8,7 @@ import { useEditor } from "@/shared/state/store";
 import { Contact } from "./Contact/Contact";
 import { Call } from "./Call/Call";
 import { getActors } from "@/shared/constants/actors";
+import { Notifications } from "./Notifications/Notifications";
 
 export const Phone = () => {
   const showContact = useEditor((state) => state.showContact);
@@ -23,7 +24,9 @@ export const Phone = () => {
           <Tab.Panel as={Fragment}>
             <Users roles={roles} />
           </Tab.Panel>
-          <Tab.Panel>Notifications</Tab.Panel>
+          <Tab.Panel as={Fragment}>
+            <Notifications roles={roles} />
+          </Tab.Panel>
         </Tab.Panels>
         <Tab.List as={TabList}>
           <Tab as={Fragment}>

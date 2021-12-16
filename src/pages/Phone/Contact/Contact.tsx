@@ -72,6 +72,29 @@ export const Contact = () => {
       </CallContainer>
       <DateContainer>Yesterday</DateContainer>
       <MessageLog>
+        <Message time="12:10" flipped>
+          <Icon type="contact" />
+          Contact
+        </Message>
+        <Message time="11:54" flipped>
+          <Icon type="image" />
+          Image (570kb)
+        </Message>
+        <Message time="11:45" flipped>
+          <Icon type="video" />
+          Video (0:26)
+        </Message>
+        <Message time="11:34" flipped>
+          <Icon type="mic" />
+          Audio (0:17)
+        </Message>
+        <Message time="11:32" flipped>
+          <Icon type="kanban" />
+          File (44kb)
+        </Message>
+        <Message time="11:28" flipped>
+          I&apos;m sending mine!
+        </Message>
         <Message time="11:20">
           <Icon type="contact" />
           Contact

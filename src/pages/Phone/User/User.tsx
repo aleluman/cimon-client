@@ -42,7 +42,7 @@ export const User = ({ name, role, id, context }: UserProps) => {
               <Icon type="location" size={12} /> Located {(Math.random() * 10).toFixed(2)} km away
             </>
           ) : (
-            { role }
+            <div>{role}</div>
           )}
         </Location>
       </UserData>

@@ -14,6 +14,19 @@ export const MessageContainer = styled("div", {
   "&:first-child": {
     borderRadius: "10px 10px 0 10px",
   },
+
+  variants: {
+    flipped: {
+      true: {
+        alignItems: "flex-start",
+        alignSelf: "flex-start",
+
+        "&:first-child": {
+          borderRadius: "10px 10px 10px 0",
+        },
+      },
+    },
+  },
 });
 
 export const InnerContainer = styled("div", {

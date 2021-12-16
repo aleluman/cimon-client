@@ -5,13 +5,14 @@ import { InnerContainer, MessageContainer, TimeContainer } from "./styles";
 type MessageProps = {
   time: string;
   children: ReactNode;
+  flipped?: boolean;
 };
 
-export const Message = ({ time, children }: MessageProps) => {
+export const Message = ({ time, children, flipped }: MessageProps) => {
   return (
-    <MessageContainer>
+    <MessageContainer flipped={flipped}>
       <InnerContainer>
-        {children} <Icon type="doublecheck" color="$primary" />
+        {children} {!flipped && <Icon type="doublecheck" color="$primary" />}
       </InnerContainer>
       <TimeContainer>{time}</TimeContainer>
     </MessageContainer>
