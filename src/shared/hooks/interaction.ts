@@ -1,13 +1,23 @@
 import { useMutation } from "react-query";
+import { useParams } from "react-router-dom";
 import { queryClient, useEditor } from "../state/store";
 import { InteractionType } from "../types/editor";
 import { urls } from "../constants/urls";
 import { AmbitType } from "../types/process";
 import axios from "../constants/axios";
 
+export const getInteraction = (id: string, ambitId: string) => {
+  const ambitData = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
+  const currentInteraction = ambitData.graph.interactions.find(
+    (interaction) => interaction.id === id
+  ) as InteractionType;
+  return currentInteraction;
+};
+
 export const useInteraction = (ambitId: string) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const setNetworkError = useEditor((state) => state.setNetworkError);
+  const { processId } = useParams();
 
   const createInteraction = useMutation(
     (newInteraction: InteractionType) => {
@@ -26,12 +36,40 @@ export const useInteraction = (ambitId: string) => {
             interactions: [...ambit.graph.interactions, newInteraction],
           },
         });
+        setActiveItem({ id: newInteraction.id, type: "interaction" });
       },
       onError: () => {
         setNetworkError(true);
       },
     }
   );
+
+  const updateInteraction = useMutation(
+    (updatedInteraction: InteractionType) =>
+      axios.put<InteractionType>(
+        `${urls.API_URL}/ambits/${ambitId}/interactions/${updatedInteraction.id}/`,
+        updatedInteraction
+      ),
+    {
+      onMutate: async (updatedInteraction) => {
+        const ambit = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
+        const filteredInteractions = ambit.graph.interactions.filter(
+          (interaction) => interaction.id !== updatedInteraction.id
+        );
+        queryClient.setQueryData(["ambit", ambitId], {
+          ...ambit,
+          graph: { ...ambit.graph, interactions: [...filteredInteractions, updatedInteraction] },
+        });
+      },
+      onError: () => {
+        setNetworkError(true);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries(["process", processId]);
+      },
+    }
+  );
+
   const deleteInteraction = useMutation(
     (interactionId: string) =>
       axios.delete<InteractionType>(
@@ -54,5 +92,5 @@ export const useInteraction = (ambitId: string) => {
       },
     }
   );
-  return { createInteraction, deleteInteraction };
+  return { createInteraction, deleteInteraction, updateInteraction };
 };

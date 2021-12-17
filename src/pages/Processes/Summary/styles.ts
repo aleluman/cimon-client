@@ -6,7 +6,7 @@ export const SummaryContainer = styled("div", {
   flexDirection: "column",
   position: "absolute",
   width: "24rem",
-  maxHeight: "17rem",
+  maxHeight: "27rem",
   background: "$popoverBackground",
   backdropFilter: "blur(12px)",
   borderRadius: "8px",
@@ -14,6 +14,16 @@ export const SummaryContainer = styled("div", {
   boxShadow: "$hoverShadowLarge",
   padding: "0.6rem",
   color: "$textNormal",
+
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
+});
+
+export const RolesDiv = styled("div", {
+  display: "flex",
+  gap: "0.8rem",
+  flexDirection: "column",
 });
 
 export const Description = styled("div", {

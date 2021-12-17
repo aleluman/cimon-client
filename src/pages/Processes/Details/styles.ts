@@ -19,7 +19,6 @@ export const SectionContainer = styled("div", {
   gap: "1rem",
   flexDirection: "column",
   flex: 1,
-  overflow: "auto",
 });
 
 export const Label = styled("label", {
@@ -29,29 +28,6 @@ export const Label = styled("label", {
   fontSize: "0.8rem",
   flexDirection: "column",
   color: "$textNormal",
-});
-
-export const Textarea = styled("textarea", {
-  flex: 1,
-  appearance: "none",
-  background: "$neutralFull",
-  height: "100%",
-  border: "1px solid $borderDark",
-  borderRadius: "8px",
-  padding: "0.4rem",
-  resize: "none",
-  fontSize: "0.85rem",
-  color: "$textNormal",
-
-  "&:focus": {
-    border: "1px solid $primary",
-    boxShadow: "$borderedPrimarySmall",
-    outline: "none",
-  },
-
-  "&::placeholder": {
-    color: "$textDull",
-  },
 });
 
 export const TagContainer = styled("div", {

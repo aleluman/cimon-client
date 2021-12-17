@@ -13,6 +13,10 @@ export const Container = styled("div", {
   borderRadius: "8px",
   boxShadow: "$subtleShadow",
   zIndex: 9,
+
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
 });
 
 export const Divider = styled("span", {

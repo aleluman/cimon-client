@@ -2,7 +2,7 @@ import { styled } from "@/shared/constants/stitches";
 
 export const NavContainer = styled("nav", {
   height: "2.4rem",
-  zIndex: 2,
+  zIndex: 11,
   display: "flex",
   background: "$neutralLightest",
   alignItems: "center",

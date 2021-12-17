@@ -5,6 +5,7 @@ export const AppContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   height: "100%",
+  minHeight: "550px",
   maxHeight: "100%",
   width: "100%",
 });

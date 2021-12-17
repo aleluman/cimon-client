@@ -31,6 +31,7 @@ export const lightTheme = createTheme({
     toastBackground: "#ffffff33",
     dialogBackground: "#ffffff59",
     popoverBackground: "#ffffffb6",
+    popoverNSBackground: "#f4f7fd",
     popoverSelect: "#ccd6f09c",
     popoverBorder: "#ccdcff",
     subtleShadow: "#0b0b0c66",

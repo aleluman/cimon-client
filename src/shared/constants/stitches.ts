@@ -33,6 +33,7 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
         toastBackground: "#44444477",
         dialogBackground: "#44444493",
         popoverBackground: "#4e4e4e9c",
+        popoverNSBackground: "#393939",
         popoverSelect: "#66666652",
         popoverBorder: "#313131",
         subtleShadow: "#0b0b0c66",

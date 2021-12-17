@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { Select } from "@/shared/components/Select/Select";
 import { Tag } from "@/shared/components/Tag/Tag";
 import { categories } from "@/shared/constants/categories";
@@ -6,14 +6,8 @@ import { useDebounce } from "@/shared/hooks/debounce";
 import { useProcess } from "@/shared/hooks/process";
 import { RoleType } from "@/shared/types/editor";
 import { ProcessType } from "@/shared/types/process";
-import {
-  DetailsContainer,
-  Label,
-  SectionContainer,
-  Textarea,
-  TagContainer,
-  RolesContainer,
-} from "./styles";
+import { DetailsContainer, Label, SectionContainer, TagContainer, RolesContainer } from "./styles";
+import { Input } from "@/shared/components/Input/Input";
 
 type DetailsProps = {
   process: ProcessType;
@@ -49,26 +43,30 @@ export const Details = ({ process }: DetailsProps) => {
         </div>
         <Label css={{ height: "7rem" }}>
           Objective
-          <Textarea
+          <Input
             placeholder="Write an objective for the process..."
             defaultValue={process.objective}
-            onChange={(event) => setObjective(event.target.value)}
+            onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setObjective(event.target.value)}
             maxLength={199}
+            as="textarea"
           />
         </Label>
       </SectionContainer>
       <SectionContainer>
         <Label css={{ height: "12rem" }}>
           Description
-          <Textarea
+          <Input
             placeholder="Write a description for the process..."
             defaultValue={process.description}
-            onChange={(event) => setDescription(event.target.value)}
+            onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+              setDescription(event.target.value)
+            }
             maxLength={399}
+            as="textarea"
           />
         </Label>
       </SectionContainer>
-      <SectionContainer>
+      <SectionContainer css={{ overflow: "auto" }}>
         <Label>Roles </Label>
         <TagContainer>
           <Tag text="Human" icon="human-internal" />

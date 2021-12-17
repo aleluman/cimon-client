@@ -47,7 +47,9 @@ export const Sidebar = () => {
         {data && (
           <>
             {activeItem.type === "role" && <RoleSidebar roleId={activeItem.id} />}
-            {activeItem.type === "interaction" && <InteractionSidebar />}
+            {activeItem.type === "interaction" && (
+              <InteractionSidebar interactionId={activeItem.id} />
+            )}
             {activeItem.type === "none" && (
               <>
                 <Title>

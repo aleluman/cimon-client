@@ -17,6 +17,10 @@ export const ZoomBarContainer = styled("div", {
   transition: "right ease 0.5s",
   userSelect: "none",
 
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
+
   variants: {
     tilted: {
       true: {

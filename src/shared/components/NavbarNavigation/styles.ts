@@ -5,4 +5,9 @@ export const ProjectName = styled("div", {
   textOverflow: "ellipsis",
   overflow: "hidden",
   whiteSpace: "nowrap",
+  cursor: "pointer",
+
+  "&:hover": {
+    color: "$textImportant",
+  },
 });

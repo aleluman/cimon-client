@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { memo } from "react";
 import { useGesture } from "@use-gesture/react";
+import { toast } from "react-toastify";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
   DragIconContainer,
@@ -35,28 +36,35 @@ export const RoleBar = memo(() => {
   );
 
   const handlers = useGesture({
-    onDragStart: ({ args: [role, name], values: [x, y] }) => {
+    onDragStart: ({ args: [role, name], values: [x, y], tap }) => {
       const { translations, zoom } = useEditor.getState();
       const position = getMousePositionInCanvas(zoom, translations, { x, y });
       setPlaceholderRole({ name, role, x: position.x, y: position.y });
     },
-    onDrag: ({ args: [role, name], delta: [dx, dy] }) => {
-      const { placeholderRole, zoom } = useEditor.getState();
-      if (placeholderRole) {
-        const position = {
-          x: placeholderRole.x + dx / zoom,
-          y: placeholderRole.y + dy / zoom,
-        };
-        setPlaceholderRole({ name, role, x: position.x, y: position.y });
+    onDrag: ({ args: [role, name], delta: [dx, dy], tap }) => {
+      if (tap) {
+        toast("To add a role click the icon and drag it into the canvas.", { type: "warning" });
+        setPlaceholderRole(null);
+      } else {
+        const { placeholderRole, zoom } = useEditor.getState();
+        if (placeholderRole) {
+          const position = {
+            x: placeholderRole.x + dx / zoom,
+            y: placeholderRole.y + dy / zoom,
+          };
+          setPlaceholderRole({ name, role, x: position.x, y: position.y });
+        }
       }
     },
-    onDragEnd: ({ args: [role, name] }) => {
-      const { placeholderRole } = useEditor.getState();
-      const { x, y } = placeholderRole as PlaceholderRoleType;
-      const newName = createName(role, ambitId as string);
-      const newRole = createNewRole(name === "" ? newName : name, role, x, y);
-      createRole.mutate({ newRole, newName: name === "" });
-      setPlaceholderRole(null);
+    onDragEnd: ({ args: [role, name], tap }) => {
+      if (!tap) {
+        const { placeholderRole } = useEditor.getState();
+        const { x, y } = placeholderRole as PlaceholderRoleType;
+        const newName = createName(role, ambitId as string);
+        const newRole = createNewRole(name === "" ? newName : name, role, x, y);
+        createRole.mutate({ newRole, newName: name === "" });
+        setPlaceholderRole(null);
+      }
     },
   });
 

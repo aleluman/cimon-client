@@ -31,6 +31,7 @@ export const SidebarContainer = styled("aside", {
 
 export const SidebarWrapper = styled("div", {
   height: "100%",
+  overflow: "auto",
 });
 
 export const HideButton = styled("button", {
@@ -156,4 +157,17 @@ export const TabButton = styled("button", {
       },
     },
   },
+});
+
+export const CheckboxList = styled("div", {
+  padding: "0.2rem",
+  background: "$neutralFull",
+  border: "1px solid $borderLight",
+  borderRadius: "8px",
+  marginBottom: "0.8rem",
+});
+
+export const Bold = styled("span", {
+  fontWeight: 700,
+  color: "$textNormal",
 });

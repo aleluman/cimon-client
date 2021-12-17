@@ -49,8 +49,11 @@ export const useProcess = () => {
         await queryClient.cancelQueries(["process", mutation.id]);
         const process = queryClient.getQueryData<ProcessType>(["process", mutation.id]);
         queryClient.setQueryData(["process", mutation.id], { ...process, ...mutation });
+        return { process };
       },
-      onError: (error: AxiosError) => {
+      onError: (error: AxiosError, _, context) => {
+        const oldContext = context as { process: ProcessType };
+        queryClient.setQueryData(["process", oldContext.process.id], oldContext.process);
         if (error.response?.data.name)
           toast("There is already a process using this name.", { type: "error" });
         else setNetworkError(true);

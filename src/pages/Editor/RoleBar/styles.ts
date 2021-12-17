@@ -4,6 +4,7 @@ export const RoleBarContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   width: "7.7rem",
+  maxHeight: "25rem",
   background: "$popoverBackground",
   backdropFilter: "blur(10px)",
   padding: "0.3rem",
@@ -15,6 +16,10 @@ export const RoleBarContainer = styled("div", {
   top: "3.3rem",
   left: "0.4rem",
   userSelect: "none",
+
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
 });
 
 export const Title = styled("h1", {
@@ -69,6 +74,8 @@ export const RoleDragIcon = styled("button", {
 export const ListContainer = styled("ul", {
   margin: 0,
   padding: 0,
+  paddingTop: "0.2rem",
+  overflow: "auto",
 });
 
 export const ListItem = styled("li", {

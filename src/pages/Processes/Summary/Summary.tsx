@@ -5,6 +5,7 @@ import {
   Description,
   LastEditedText,
   RolesContainer,
+  RolesDiv,
   SummaryContainer,
   TagContainer,
 } from "./styles";
@@ -26,7 +27,7 @@ export const Summary = ({ parentRef, process }: SummaryProps) => {
   });
 
   const getRolesByType = (type: RoleType["role"]) => {
-    const filteredRoles = process.roles.filter((role) => role.type === type);
+    const filteredRoles = process.roles.filter((role) => role.role === type);
     if (filteredRoles.length === 0) return "no roles";
     return filteredRoles.map((role) => role.name).join(", ");
   };
@@ -40,18 +41,20 @@ export const Summary = ({ parentRef, process }: SummaryProps) => {
               ? process.description
               : "This process doesn't have a description."}
           </Description>
-          <TagContainer>
-            <Tag text="Human" icon="human-internal" />
-            <RolesContainer>{getRolesByType("human")}</RolesContainer>
-          </TagContainer>
-          <TagContainer>
-            <Tag text="Service" icon="service-internal" />
-            <RolesContainer>{getRolesByType("service")}</RolesContainer>
-          </TagContainer>
-          <TagContainer>
-            <Tag text="Repository" icon="repository-internal" />
-            <RolesContainer>{getRolesByType("repository")}</RolesContainer>
-          </TagContainer>
+          <RolesDiv>
+            <TagContainer>
+              <Tag text="Human" icon="human-internal" />
+              <RolesContainer>{getRolesByType("human")}</RolesContainer>
+            </TagContainer>
+            <TagContainer>
+              <Tag text="Service" icon="service-internal" />
+              <RolesContainer>{getRolesByType("service")}</RolesContainer>
+            </TagContainer>
+            <TagContainer>
+              <Tag text="Repository" icon="repository-internal" />
+              <RolesContainer>{getRolesByType("repository")}</RolesContainer>
+            </TagContainer>
+          </RolesDiv>
           <LastEditedText>
             Last edited {getRelativeTime(new Date(process.lastEdited))}
           </LastEditedText>

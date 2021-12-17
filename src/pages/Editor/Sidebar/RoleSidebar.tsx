@@ -18,7 +18,6 @@ import { Toggle } from "@/shared/components/Toggle/Toggle";
 import { ToggleOption } from "@/shared/components/ToggleOption/ToggleOption";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleType } from "@/shared/types/editor";
-import { EditorRouteParams } from "@/shared/types/routes";
 import { useEditor } from "@/shared/state/store";
 import { useDebounce } from "@/shared/hooks/debounce";
 import { Phone } from "@/pages/Phone/Phone";
@@ -28,7 +27,7 @@ type RoleSidebarProps = {
 };
 
 export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
-  const { ambitId } = useParams<EditorRouteParams>();
+  const { ambitId } = useParams();
   const role = getRole(roleId, ambitId as string);
   const [description, setDescription] = useState(role.description);
   const { updateRole } = useRole(ambitId as string);

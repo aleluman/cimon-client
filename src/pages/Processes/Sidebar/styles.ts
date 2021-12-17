@@ -7,7 +7,7 @@ export const SidebarContainer = styled("aside", {
   width: "22rem",
   minWidth: "22rem",
   padding: "1rem",
-  height: "calc(100% - 2.4rem)",
+  height: "100%",
   background: "$neutralLight",
   boxShadow: "$subtleShadow",
   userSelect: "none",

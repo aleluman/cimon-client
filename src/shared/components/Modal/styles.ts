@@ -43,6 +43,10 @@ export const ModalContainer = styled("div", {
   color: "$textNormal",
   border: "1px solid $popoverBorder",
   willChange: "transform, opacity",
+
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
 });
 
 export const ModalTitle = styled("h1", {

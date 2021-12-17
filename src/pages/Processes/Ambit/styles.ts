@@ -41,6 +41,10 @@ export const MenuContainer = styled("div", {
   boxShadow: "$hoverShadowLarge",
   background: "$popoverBackground",
   zIndex: 9,
+
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
 });
 
 export const MenuItem = styled("button", {

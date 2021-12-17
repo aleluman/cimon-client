@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllProcesses } from "@/shared/hooks/processes";
 import { Button } from "@/shared/components/Button/Button";
 import { Process } from "../Process/Process";
@@ -7,15 +7,19 @@ import { HelpText, ProcessesContainer, SidebarContainer, Title } from "./styles"
 import { Icon } from "@/shared/components/Icon/Icon";
 import { NewProcessModal } from "../NewProcessModal/NewProcessModal";
 import { Spinner } from "@/shared/components/Spinner/Spinner";
+import { useEditor } from "@/shared/state/store";
 
 export const Sidebar = () => {
   const [search, setSearch] = useState("");
   const [showProcessModal, setShowProcessModal] = useState(false);
   const { data, isLoading, isError } = useGetAllProcesses();
+  const resetEditor = useEditor((state) => state.reset);
 
   const filteredProcesses = data?.filter((process) =>
     process.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  useEffect(() => resetEditor(), [resetEditor]);
 
   return (
     <SidebarContainer>

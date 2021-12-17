@@ -1,4 +1,5 @@
 import { useMutation } from "react-query";
+import { useParams } from "react-router-dom";
 import axios from "../constants/axios";
 import { urls } from "../constants/urls";
 import { queryClient, useEditor } from "../state/store";
@@ -14,6 +15,7 @@ export const getRole = (id: string, ambitId: string) => {
 export const useRole = (ambitId: string) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const setNetworkError = useEditor((state) => state.setNetworkError);
+  const { processId } = useParams();
 
   const createRole = useMutation(
     ({ newRole }: { newRole: RoleType; newName: boolean }) =>
@@ -51,6 +53,9 @@ export const useRole = (ambitId: string) => {
       onError: () => {
         setNetworkError(true);
       },
+      onSuccess: () => {
+        queryClient.invalidateQueries(["process", processId]);
+      },
     }
   );
 
@@ -75,6 +80,9 @@ export const useRole = (ambitId: string) => {
       },
       onError: () => {
         setNetworkError(true);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries(["process", processId]);
       },
     }
   );

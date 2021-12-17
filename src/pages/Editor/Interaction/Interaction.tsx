@@ -8,6 +8,7 @@ import { InteractionType } from "@/shared/types/editor";
 import { useEditor } from "@/shared/state/store";
 import { useInteraction } from "@/shared/hooks/interaction";
 import { Marker } from "../Marker/Marker";
+import { InteractionMenu } from "../InteractionMenu/InteractionMenu";
 
 type InteractionProps = {
   interaction: InteractionType;
@@ -26,6 +27,7 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const { deleteInteraction } = useInteraction(ambitId as string);
   const pathRef = useRef<SVGPathElement>(null);
+  const isDoingAction = useEditor((state) => state.doingAction);
 
   const isActive = activeItem.type === "interaction" && activeItem.id === interaction.id;
 
@@ -62,17 +64,22 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const curve = getPath(roleDimentions.width, roleDimentions.height, startPosition, endPosition);
 
   return (
-    <PathContainer tabIndex={0} {...pathHandlers()}>
-      <Marker id={interaction.id} active={isActive} inherit={interaction.inherit} angle={angle} />
-      <Path
-        d={curve}
-        active={activeItem.id === interaction.id}
-        dashed={interaction.inherit}
-        ref={pathRef}
-        markerEnd={endArrow ? `url(#endMarkerInherit${interaction.id})` : "none"}
-        markerStart={startArrow ? `url(#startMarker${interaction.id})` : "none"}
-      />
-      <ClickPath d={curve} />
-    </PathContainer>
+    <>
+      <PathContainer tabIndex={0} {...pathHandlers()}>
+        <Marker id={interaction.id} active={isActive} inherit={interaction.inherit} angle={angle} />
+        <Path
+          d={curve}
+          active={activeItem.id === interaction.id}
+          dashed={interaction.inherit}
+          ref={pathRef}
+          markerEnd={endArrow ? `url(#endMarkerInherit${interaction.id})` : "none"}
+          markerStart={startArrow ? `url(#startMarker${interaction.id})` : "none"}
+        />
+        <ClickPath d={curve} />
+      </PathContainer>
+      {isActive && !isDoingAction && (
+        <InteractionMenu parentRef={pathRef} interaction={interaction} />
+      )}
+    </>
   );
 };

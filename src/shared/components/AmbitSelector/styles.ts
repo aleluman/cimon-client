@@ -11,6 +11,7 @@ export const AmbitButton = styled("button", {
   color: "$textImportant",
   cursor: "pointer",
   transition: "box-shadow ease 0.25s",
+  zIndex: 11,
 
   "&:hover": {
     boxShadow: "$hoverShadowSmall",
@@ -39,7 +40,11 @@ export const AmbitMenu = styled("div", {
   border: "1px solid $popoverBorder",
   boxShadow: "$hoverShadowLarge",
   overflow: "auto",
-  zIndex: 1,
+  zIndex: 11,
+
+  "@supports not (backdrop-filter: blur(12px))": {
+    background: "$popoverNSBackground",
+  },
 });
 
 export const AmbitItem = styled("button", {

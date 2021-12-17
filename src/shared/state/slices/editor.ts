@@ -20,6 +20,7 @@ export type EditorSlice = {
   setShowContact: (value: boolean) => void;
   setShowCall: (value: "none" | "audio" | "video") => void;
   setSelectedActor: (value: { id: number; name: string; role: string } | null) => void;
+  reset: () => void;
 };
 
 export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
@@ -41,4 +42,16 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
   setShowContact: (value) => set(() => ({ showContact: value })),
   setShowCall: (value) => set(() => ({ showCall: value })),
   setSelectedActor: (value) => set(() => ({ selectedActor: value })),
+  reset: () => {
+    set(() => ({
+      zoom: 1,
+      translations: { x: 0, y: 0 },
+      activeItem: { id: "", type: "none" },
+      doingAction: false,
+      selectedAmbit: null,
+      showContact: false,
+      showCall: "none",
+      selectedActor: null,
+    }));
+  },
 });
