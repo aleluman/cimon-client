@@ -1,4 +1,5 @@
 import { SetState } from "zustand";
+import { FlattenedService } from "@/shared/utils/allInteractions";
 import { ActiveItem, AmbitType, Position } from "../../types/editor";
 
 export type EditorSlice = {
@@ -11,6 +12,8 @@ export type EditorSlice = {
   showContact: boolean;
   showCall: "none" | "audio" | "video";
   selectedActor: { id: number; name: string; role: string } | null;
+  stakeholderMode: boolean;
+  allRoleInteractions: FlattenedService[] | null;
   setZoom: (newZoom: number) => void;
   setTranslations: (newTranslations: Position) => void;
   setActiveItem: (newActiveItem: ActiveItem) => void;
@@ -21,6 +24,8 @@ export type EditorSlice = {
   setShowCall: (value: "none" | "audio" | "video") => void;
   setSelectedActor: (value: { id: number; name: string; role: string } | null) => void;
   reset: () => void;
+  setStakeholderMode: (value: boolean) => void;
+  setAllRoleInteractions: (value: FlattenedService[] | null) => void;
 };
 
 export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
@@ -33,6 +38,8 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
   showContact: false,
   showCall: "none",
   selectedActor: null,
+  stakeholderMode: false,
+  allRoleInteractions: null,
   setZoom: (newZoom) => set(() => ({ zoom: newZoom })),
   setTranslations: (newTranslations) => set(() => ({ translations: newTranslations })),
   setActiveItem: (newActiveItem) => set(() => ({ activeItem: newActiveItem })),
@@ -42,6 +49,8 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
   setShowContact: (value) => set(() => ({ showContact: value })),
   setShowCall: (value) => set(() => ({ showCall: value })),
   setSelectedActor: (value) => set(() => ({ selectedActor: value })),
+  setStakeholderMode: (value) => set(() => ({ stakeholderMode: value })),
+  setAllRoleInteractions: (value) => set(() => ({ allRoleInteractions: value })),
   reset: () => {
     set(() => ({
       zoom: 1,

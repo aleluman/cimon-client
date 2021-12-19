@@ -76,9 +76,11 @@ export const InteractionSidebar = ({ interactionId }: InteractionSidebarProps) =
               <Tab as={TabButton} active={activeTab === 0}>
                 {role1.name}
               </Tab>
-              <Tab as={TabButton} active={activeTab === 1}>
-                {role2.name}
-              </Tab>
+              {interaction.source !== interaction.target && (
+                <Tab as={TabButton} active={activeTab === 1}>
+                  {role2.name}
+                </Tab>
+              )}
             </Tab.List>
             <Tab.Panels>
               <Tab.Panel>

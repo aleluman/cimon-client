@@ -11,6 +11,7 @@ import { queryClient, useEditor } from "@/shared/state/store";
 import { RoleConnector } from "../RoleConnector/RoleConnector";
 import { EditorRouteParams } from "@/shared/types/routes";
 import { AmbitType } from "@/shared/types/process";
+import { getAllInteractions } from "@/shared/utils/allInteractions";
 
 type RoleProps = {
   role: RoleType;
@@ -26,6 +27,7 @@ export const Role = ({ role }: RoleProps) => {
   const hoveringRoleId = useEditor((state) => state.roleBeingHovered);
   const doingAction = useEditor((state) => state.doingAction);
   const setActiveItem = useEditor((state) => state.setActiveItem);
+  const setAllRoleInteractions = useEditor((state) => state.setAllRoleInteractions);
   const setPosition = useEditor((state) => state.setPosition);
   const setDoingAction = useEditor((state) => state.setDoingAction);
   const { updateRole, deleteRole } = useRole(ambitId as string);
@@ -44,6 +46,7 @@ export const Role = ({ role }: RoleProps) => {
     onDragStart: () => {
       setDoingAction(true);
       setActiveItem({ id: role.id, type: "role" });
+      setAllRoleInteractions(getAllInteractions(ambitId as string));
     },
     onDrag: ({ delta: [dx, dy] }) =>
       setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }, ambitId as string),

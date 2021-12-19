@@ -5,7 +5,7 @@ export const InteractionsContainer = styled("div", {
   position: "absolute",
   bottom: 0,
   width: "calc(100% - 20.8rem)",
-  height: "17rem",
+  height: "18.8rem",
   margin: "0.4rem",
   background: "$neutralLight",
   boxShadow: "$subtleShadow",
@@ -53,7 +53,7 @@ export const HideButton = styled("button", {
   borderRadius: "4px 4px 0 0",
   boxShadow: "$subtleShadow",
   top: "-0.8rem",
-  left: "50%",
+  left: "calc(50% - 2rem)",
   background: "$primary",
   border: "none",
   borderRight: "1px solid $borderDark",
@@ -83,6 +83,9 @@ export const TabTitle = styled("h1", {
   fontWeight: 550,
   fontSize: "1rem",
   marginBottom: "0.4rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
 
 export const TabItem = styled("button", {
@@ -116,11 +119,18 @@ export const TabItem = styled("button", {
   },
 });
 
-export const Table = styled("table", {
+export const TableContainer = styled("div", {
+  overflowX: "auto",
   width: "100%",
+});
+
+export const Table = styled("table", {
+  minWidth: "100%",
+  width: "max-content",
   background: "$neutralLightest",
   borderRadius: "8px",
   border: "1px solid $borderDark",
+  tableLayout: "fixed",
   borderSpacing: 0,
 });
 
@@ -156,9 +166,16 @@ export const Th = styled("th", {
   fontSize: "0.85rem",
   padding: "0.2rem",
   width: "8rem",
+
   "&:first-of-type": {
     width: "14rem",
   },
+});
+
+export const THContained = styled("div", {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
 
 export const Td = styled("td", {
@@ -170,4 +187,18 @@ export const Td = styled("td", {
   "&:first-of-type": {
     width: "14rem",
   },
+});
+
+export const NoSelection = styled("div", {
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "$textNormal",
+});
+
+export const FromGroup = styled("div", {
+  color: "$textDull",
+  fontWeight: 500,
+  fontSize: "0.8rem",
 });

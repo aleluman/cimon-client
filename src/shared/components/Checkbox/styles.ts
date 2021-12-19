@@ -20,6 +20,12 @@ export const Container = styled("span", {
   },
 
   variants: {
+    disabled: {
+      true: {
+        pointerEvents: "none",
+      },
+    },
+
     checked: {
       true: {
         "& path": {

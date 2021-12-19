@@ -7,6 +7,7 @@ import { Divider, RoleMenuContainer } from "./styles";
 import { IconOnlyButton } from "@/shared/components/IconOnlyButton/IconOnlyButton";
 import { InteractionType } from "@/shared/types/editor";
 import { useInteraction } from "@/shared/hooks/interaction";
+import { getRole } from "@/shared/hooks/role";
 
 export type OffsetsFunction = {
   popper: Rect;
@@ -26,6 +27,8 @@ type RoleMenuProps = {
 export const InteractionMenu = memo(({ parentRef, interaction }: RoleMenuProps) => {
   const { ambitId } = useParams();
   const { deleteInteraction, updateInteraction } = useInteraction(ambitId as string);
+  const role1 = getRole(interaction.source, ambitId as string);
+  const role2 = getRole(interaction.target, ambitId as string);
 
   const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   const { styles, attributes } = usePopper(parentRef.current, popperElement, {
@@ -40,22 +43,26 @@ export const InteractionMenu = memo(({ parentRef, interaction }: RoleMenuProps) 
     <>
       {ReactDOM.createPortal(
         <RoleMenuContainer ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-          {interaction.inherit ? (
-            <IconOnlyButton
-              icon="line"
-              text="Change to interaction"
-              handler={() => changeHandler()}
-              tooltipPlacement="top"
-            />
-          ) : (
-            <IconOnlyButton
-              icon="dash"
-              text="Change to group"
-              handler={() => changeHandler()}
-              tooltipPlacement="top"
-            />
+          {interaction.source !== interaction.target && role1.role === role2.role && (
+            <>
+              {interaction.inherit ? (
+                <IconOnlyButton
+                  icon="line"
+                  text="Change to interaction"
+                  handler={() => changeHandler()}
+                  tooltipPlacement="top"
+                />
+              ) : (
+                <IconOnlyButton
+                  icon="dash"
+                  text="Change to group"
+                  handler={() => changeHandler()}
+                  tooltipPlacement="top"
+                />
+              )}
+              <Divider />
+            </>
           )}
-          <Divider />
           <IconOnlyButton
             icon="delete"
             text="Delete"

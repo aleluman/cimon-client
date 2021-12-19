@@ -5,6 +5,7 @@ import { InteractionType } from "../types/editor";
 import { urls } from "../constants/urls";
 import { AmbitType } from "../types/process";
 import axios from "../constants/axios";
+import { getAllInteractions } from "../utils/allInteractions";
 
 export const getInteraction = (id: string, ambitId: string) => {
   const ambitData = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
@@ -17,6 +18,8 @@ export const getInteraction = (id: string, ambitId: string) => {
 export const useInteraction = (ambitId: string) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const setNetworkError = useEditor((state) => state.setNetworkError);
+  const setAllRoleInteractions = useEditor((state) => state.setAllRoleInteractions);
+
   const { processId } = useParams();
 
   const createInteraction = useMutation(
@@ -60,6 +63,7 @@ export const useInteraction = (ambitId: string) => {
           ...ambit,
           graph: { ...ambit.graph, interactions: [...filteredInteractions, updatedInteraction] },
         });
+        setAllRoleInteractions(getAllInteractions(ambitId));
       },
       onError: () => {
         setNetworkError(true);

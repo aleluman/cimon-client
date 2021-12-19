@@ -148,6 +148,10 @@ export const TabButton = styled("button", {
   padding: "0.4rem",
   cursor: "pointer",
   color: "$textDull",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  maxWidth: "8rem",
 
   variants: {
     active: {

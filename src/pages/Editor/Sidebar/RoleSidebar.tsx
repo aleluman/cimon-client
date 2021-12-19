@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import { getRole, useRole } from "@/shared/hooks/role";
@@ -18,9 +18,10 @@ import { Toggle } from "@/shared/components/Toggle/Toggle";
 import { ToggleOption } from "@/shared/components/ToggleOption/ToggleOption";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { RoleType } from "@/shared/types/editor";
-import { useEditor } from "@/shared/state/store";
+import { queryClient, useEditor } from "@/shared/state/store";
 import { useDebounce } from "@/shared/hooks/debounce";
 import { Phone } from "@/pages/Phone/Phone";
+import { AmbitType } from "@/shared/types/process";
 
 type RoleSidebarProps = {
   roleId: string;
@@ -52,6 +53,15 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
     setMockupMode(index !== 0);
   };
 
+  const isInGroup = useMemo(() => {
+    const ambit = queryClient.getQueryData<AmbitType>(["ambit", ambitId]) as AmbitType;
+    const { interactions } = ambit.graph;
+    return interactions.some(
+      (interaction) =>
+        interaction.inherit && (interaction.source === roleId || interaction.target === roleId)
+    );
+  }, [ambitId, roleId]);
+
   return (
     <Tab.Group onChange={handleTab} defaultIndex={mockupMode ? 1 : 0}>
       <Tab.List as={TabContainer}>
@@ -68,15 +78,24 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
       <Tab.Panels>
         <Tab.Panel>
           <Toggle value={role.role} label="Role" onChange={updateRoleType}>
-            <ToggleOption value="human">
-              <Icon type={`human-${role.solutionUse}`} /> Human
-            </ToggleOption>
-            <ToggleOption value="service">
-              <Icon type={`service-${role.solutionUse}`} /> Service
-            </ToggleOption>
-            <ToggleOption value="repository">
-              <Icon type={`repository-${role.solutionUse}`} /> Repository
-            </ToggleOption>
+            {isInGroup && (
+              <Help css={{ padding: "0.35rem", margin: 0 }}>
+                Can&apos;t change role type for a role in a group.
+              </Help>
+            )}
+            {!isInGroup && (
+              <>
+                <ToggleOption value="human">
+                  <Icon type={`human-${role.solutionUse}`} /> Human
+                </ToggleOption>
+                <ToggleOption value="service">
+                  <Icon type={`service-${role.solutionUse}`} /> Service
+                </ToggleOption>
+                <ToggleOption value="repository">
+                  <Icon type={`repository-${role.solutionUse}`} /> Repository
+                </ToggleOption>{" "}
+              </>
+            )}
           </Toggle>
           <Toggle value={role.numberOfActors} label="Number of actors" onChange={updateRoleActors}>
             <ToggleOption value="0..N">0..N</ToggleOption>

@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import { useParams } from "react-router-dom";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
-import { memo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import {
   ActorsButton,
   Divider,
@@ -19,6 +19,8 @@ import { useRole } from "@/shared/hooks/role";
 import { css } from "@/shared/constants/stitches";
 import { RoleType } from "@/shared/types/editor";
 import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
+import { queryClient } from "@/shared/state/store";
+import { AmbitType } from "@/shared/types/process";
 
 type RoleMenuProps = {
   parentRef: React.RefObject<HTMLDivElement>;
@@ -47,6 +49,15 @@ export const RoleMenu = memo(({ parentRef, role, setEditing }: RoleMenuProps) =>
     updateRole.mutate({ ...role, numberOfActors });
   };
 
+  const isInGroup = useMemo(() => {
+    const ambit = queryClient.getQueryData<AmbitType>(["ambit", ambitId]) as AmbitType;
+    const { interactions } = ambit.graph;
+    return interactions.some(
+      (interaction) =>
+        interaction.inherit && (interaction.source === role.id || interaction.target === role.id)
+    );
+  }, [ambitId, role.id]);
+
   return (
     <>
       {ReactDOM.createPortal(
@@ -64,58 +75,60 @@ export const RoleMenu = memo(({ parentRef, role, setEditing }: RoleMenuProps) =>
             tooltipPlacement="top"
           />
           <Divider />
-          <Popover as="div">
-            <Tooltip text="Change role or use" tooltipPlacement="top">
-              <Popover.Button className={css(IconSelect)}>
-                <Icon type={`${role.role}-${role.solutionUse}`} />
-              </Popover.Button>
-            </Tooltip>
-            <Popover.Panel className={css(SelectMenu)}>
-              <SelectMenuText>Role</SelectMenuText>
-              <IconContainer>
-                <IconOnlyButton
-                  text="Human"
-                  icon={`human-${role.solutionUse}`}
-                  handler={() => updateRoleType("human")}
-                  working={role.role === "human"}
-                />
-                <IconOnlyButton
-                  text="Service"
-                  icon={`service-${role.solutionUse}`}
-                  handler={() => updateRoleType("service")}
-                  working={role.role === "service"}
-                />
-                <IconOnlyButton
-                  text="Repository"
-                  icon={`repository-${role.solutionUse}`}
-                  handler={() => updateRoleType("repository")}
-                  working={role.role === "repository"}
-                />
-              </IconContainer>
-              <MenuDivider />
-              <SelectMenuText>Solution use</SelectMenuText>
-              <IconContainer>
-                <IconOnlyButton
-                  text="Internal"
-                  icon={`${role.role}-internal`}
-                  handler={() => updateRoleUse("internal")}
-                  working={role.solutionUse === "internal"}
-                />
-                <IconOnlyButton
-                  text="External"
-                  icon={`${role.role}-external`}
-                  handler={() => updateRoleUse("external")}
-                  working={role.solutionUse === "external"}
-                />
-                <IconOnlyButton
-                  text="Both"
-                  icon={`${role.role}-both`}
-                  handler={() => updateRoleUse("both")}
-                  working={role.solutionUse === "both"}
-                />
-              </IconContainer>
-            </Popover.Panel>
-          </Popover>
+          {!isInGroup && (
+            <Popover as="div">
+              <Tooltip text="Change role or use" tooltipPlacement="top">
+                <Popover.Button className={css(IconSelect)}>
+                  <Icon type={`${role.role}-${role.solutionUse}`} />
+                </Popover.Button>
+              </Tooltip>
+              <Popover.Panel className={css(SelectMenu)}>
+                <SelectMenuText>Role</SelectMenuText>
+                <IconContainer>
+                  <IconOnlyButton
+                    text="Human"
+                    icon={`human-${role.solutionUse}`}
+                    handler={() => updateRoleType("human")}
+                    working={role.role === "human"}
+                  />
+                  <IconOnlyButton
+                    text="Service"
+                    icon={`service-${role.solutionUse}`}
+                    handler={() => updateRoleType("service")}
+                    working={role.role === "service"}
+                  />
+                  <IconOnlyButton
+                    text="Repository"
+                    icon={`repository-${role.solutionUse}`}
+                    handler={() => updateRoleType("repository")}
+                    working={role.role === "repository"}
+                  />
+                </IconContainer>
+                <MenuDivider />
+                <SelectMenuText>Solution use</SelectMenuText>
+                <IconContainer>
+                  <IconOnlyButton
+                    text="Internal"
+                    icon={`${role.role}-internal`}
+                    handler={() => updateRoleUse("internal")}
+                    working={role.solutionUse === "internal"}
+                  />
+                  <IconOnlyButton
+                    text="External"
+                    icon={`${role.role}-external`}
+                    handler={() => updateRoleUse("external")}
+                    working={role.solutionUse === "external"}
+                  />
+                  <IconOnlyButton
+                    text="Both"
+                    icon={`${role.role}-both`}
+                    handler={() => updateRoleUse("both")}
+                    working={role.solutionUse === "both"}
+                  />
+                </IconContainer>
+              </Popover.Panel>
+            </Popover>
+          )}
           <Popover as="div">
             <Tooltip text="Change actors" tooltipPlacement="top">
               <Popover.Button className={css(IconSelect)}>{role.numberOfActors}</Popover.Button>
