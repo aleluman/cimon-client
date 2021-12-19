@@ -22,6 +22,7 @@ import { queryClient, useEditor } from "@/shared/state/store";
 import { useDebounce } from "@/shared/hooks/debounce";
 import { Phone } from "@/pages/Phone/Phone";
 import { AmbitType } from "@/shared/types/process";
+import { LineCheck } from "@/shared/components/LineCheck/LineCheck";
 
 type RoleSidebarProps = {
   roleId: string;
@@ -47,6 +48,16 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
 
   const updateRoleUse = (value: string) => {
     updateRole.mutate({ ...role, solutionUse: value as RoleType["solutionUse"] });
+  };
+
+  const updateRoleAbstract = () => {
+    updateRole.mutate({ ...role, abstract: !role.abstract });
+  };
+
+  const checkAbstract = () => {
+    const ambit = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
+    const { interactions } = ambit.graph;
+    return interactions.some((interaction) => interaction.target === roleId && interaction.inherit);
   };
 
   const handleTab = (index: number) => {
@@ -117,6 +128,16 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
             </ToggleOption>
           </Toggle>
           <Divider />
+          {(role.abstract || checkAbstract()) && (
+            <>
+              <LineCheck
+                checked={role.abstract}
+                label="Abstract"
+                handler={() => updateRoleAbstract()}
+              />
+              <Divider css={{ marginTop: "0.6rem" }} />
+            </>
+          )}
           <SubTitle>Description</SubTitle>
           <Description
             placeholder="Add a description here..."

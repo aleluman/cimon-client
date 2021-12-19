@@ -31,6 +31,12 @@ export const Container = styled("div", {
         zIndex: 99,
       },
     },
+    disabled: {
+      true: {
+        pointerEvents: "none",
+        opacity: 0.35,
+      },
+    },
   },
 });
 
@@ -46,6 +52,8 @@ export const Title = styled("span", {
 
 export const Body = styled("div", {
   display: "flex",
+  flexDirection: "column",
+  gap: "0.4rem",
   justifyContent: "center",
   alignItems: "center",
   padding: "0.2rem",
@@ -62,6 +70,14 @@ export const Name = styled("span", {
   display: "-webkit-box",
   "-webkit-box-orient": "vertical",
   wordWrap: "break-word",
+
+  variants: {
+    stakeholder: {
+      true: {
+        "-webkit-line-clamp": 2,
+      },
+    },
+  },
 });
 
 export const Abstract = styled("p", {

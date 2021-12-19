@@ -1,6 +1,15 @@
 import { styled } from "@/shared/constants/stitches";
 
 export const PathContainer = styled("g", {
+  variants: {
+    disabled: {
+      true: {
+        pointerEvents: "none",
+        opacity: 0.2,
+      },
+    },
+  },
+
   "&:focus": {
     outline: "none",
   },

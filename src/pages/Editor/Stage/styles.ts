@@ -14,6 +14,7 @@ export const Background = styled("div", {
   height: "100%",
   touchAction: "none",
   background: "$neutralDarker",
+  userSelect: "none",
 });
 
 export const ChildContainer = styled("div", {

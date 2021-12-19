@@ -14,14 +14,14 @@ type AmbitSelectorProps = {
 
 export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
   const selected = useEditor((state) => state.selectedAmbit);
-  const setActiveItem = useEditor((state) => state.setActiveItem);
+  const resetState = useEditor((state) => state.reset);
 
   const navigate = useNavigate();
 
   const { processId } = useParams();
 
   const handleChangeAmbit = (ambitId: string) => {
-    setActiveItem({ type: "none", id: "" });
+    resetState();
     navigate(`/processes/${processId}/${ambitId}/`);
   };
 

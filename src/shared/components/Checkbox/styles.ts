@@ -14,6 +14,7 @@ export const Container = styled("span", {
   color: "$textDull",
   cursor: "pointer",
   transition: "all ease 0.25s",
+  userSelect: "none",
 
   "&:hover": {
     background: "$primaryLight",

@@ -17,6 +17,7 @@ export const Stage = ({ children }: StageProps) => {
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const setDoingAction = useEditor((state) => state.setDoingAction);
+  const focusMode = useEditor((state) => state.focusMode);
 
   const stageHandlers = useGesture({
     onDragStart: () => setDoingAction(true),
@@ -26,7 +27,7 @@ export const Stage = ({ children }: StageProps) => {
       }
     },
     onDragEnd: ({ event, tap }) => {
-      if (event.currentTarget === event.target && tap) {
+      if (event.currentTarget === event.target && tap && !focusMode) {
         setActiveItem({ id: "", type: "none" });
       }
       setDoingAction(false);

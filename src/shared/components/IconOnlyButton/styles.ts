@@ -23,7 +23,7 @@ export const IconButton = styled("div", {
       true: {
         cursor: "default",
         pointerEvents: "none",
-        "&:path": {
+        "& path": {
           fill: "$iconDisabled",
         },
       },

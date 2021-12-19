@@ -26,9 +26,10 @@ type RoleMenuProps = {
   parentRef: React.RefObject<HTMLDivElement>;
   role: RoleType;
   setEditing: (value: boolean) => void;
+  stakeholder: boolean;
 };
 
-export const RoleMenu = memo(({ parentRef, role, setEditing }: RoleMenuProps) => {
+export const RoleMenu = memo(({ parentRef, role, setEditing, stakeholder }: RoleMenuProps) => {
   const { ambitId } = useParams();
   const { deleteRole, updateRole } = useRole(ambitId as string);
 
@@ -74,101 +75,105 @@ export const RoleMenu = memo(({ parentRef, role, setEditing }: RoleMenuProps) =>
             handler={() => deleteRole.mutate(role.id)}
             tooltipPlacement="top"
           />
-          <Divider />
-          {!isInGroup && (
-            <Popover as="div">
-              <Tooltip text="Change role or use" tooltipPlacement="top">
-                <Popover.Button className={css(IconSelect)}>
-                  <Icon type={`${role.role}-${role.solutionUse}`} />
-                </Popover.Button>
-              </Tooltip>
-              <Popover.Panel className={css(SelectMenu)}>
-                <SelectMenuText>Role</SelectMenuText>
-                <IconContainer>
-                  <IconOnlyButton
-                    text="Human"
-                    icon={`human-${role.solutionUse}`}
-                    handler={() => updateRoleType("human")}
-                    working={role.role === "human"}
-                  />
-                  <IconOnlyButton
-                    text="Service"
-                    icon={`service-${role.solutionUse}`}
-                    handler={() => updateRoleType("service")}
-                    working={role.role === "service"}
-                  />
-                  <IconOnlyButton
-                    text="Repository"
-                    icon={`repository-${role.solutionUse}`}
-                    handler={() => updateRoleType("repository")}
-                    working={role.role === "repository"}
-                  />
-                </IconContainer>
-                <MenuDivider />
-                <SelectMenuText>Solution use</SelectMenuText>
-                <IconContainer>
-                  <IconOnlyButton
-                    text="Internal"
-                    icon={`${role.role}-internal`}
-                    handler={() => updateRoleUse("internal")}
-                    working={role.solutionUse === "internal"}
-                  />
-                  <IconOnlyButton
-                    text="External"
-                    icon={`${role.role}-external`}
-                    handler={() => updateRoleUse("external")}
-                    working={role.solutionUse === "external"}
-                  />
-                  <IconOnlyButton
-                    text="Both"
-                    icon={`${role.role}-both`}
-                    handler={() => updateRoleUse("both")}
-                    working={role.solutionUse === "both"}
-                  />
-                </IconContainer>
-              </Popover.Panel>
-            </Popover>
+          {!stakeholder && (
+            <>
+              <Divider />
+              {!isInGroup && (
+                <Popover as="div">
+                  <Tooltip text="Change role or use" tooltipPlacement="top">
+                    <Popover.Button className={css(IconSelect)}>
+                      <Icon type={`${role.role}-${role.solutionUse}`} />
+                    </Popover.Button>
+                  </Tooltip>
+                  <Popover.Panel className={css(SelectMenu)}>
+                    <SelectMenuText>Role</SelectMenuText>
+                    <IconContainer>
+                      <IconOnlyButton
+                        text="Human"
+                        icon={`human-${role.solutionUse}`}
+                        handler={() => updateRoleType("human")}
+                        working={role.role === "human"}
+                      />
+                      <IconOnlyButton
+                        text="Service"
+                        icon={`service-${role.solutionUse}`}
+                        handler={() => updateRoleType("service")}
+                        working={role.role === "service"}
+                      />
+                      <IconOnlyButton
+                        text="Repository"
+                        icon={`repository-${role.solutionUse}`}
+                        handler={() => updateRoleType("repository")}
+                        working={role.role === "repository"}
+                      />
+                    </IconContainer>
+                    <MenuDivider />
+                    <SelectMenuText>Solution use</SelectMenuText>
+                    <IconContainer>
+                      <IconOnlyButton
+                        text="Internal"
+                        icon={`${role.role}-internal`}
+                        handler={() => updateRoleUse("internal")}
+                        working={role.solutionUse === "internal"}
+                      />
+                      <IconOnlyButton
+                        text="External"
+                        icon={`${role.role}-external`}
+                        handler={() => updateRoleUse("external")}
+                        working={role.solutionUse === "external"}
+                      />
+                      <IconOnlyButton
+                        text="Both"
+                        icon={`${role.role}-both`}
+                        handler={() => updateRoleUse("both")}
+                        working={role.solutionUse === "both"}
+                      />
+                    </IconContainer>
+                  </Popover.Panel>
+                </Popover>
+              )}
+              <Popover as="div">
+                <Tooltip text="Change actors" tooltipPlacement="top">
+                  <Popover.Button className={css(IconSelect)}>{role.numberOfActors}</Popover.Button>
+                </Tooltip>
+                <Popover.Panel className={css(SelectMenu)}>
+                  <SelectMenuText>Number of Actors</SelectMenuText>
+                  <IconContainer>
+                    <ActorsButton
+                      onClick={() => updateRoleActors("0..N")}
+                      working={role.numberOfActors === "0..N"}
+                    >
+                      0..N
+                    </ActorsButton>
+                    <ActorsButton
+                      onClick={() => updateRoleActors("1..N")}
+                      working={role.numberOfActors === "1..N"}
+                    >
+                      1..N
+                    </ActorsButton>
+                    <ActorsButton
+                      onClick={() => updateRoleActors("0..1")}
+                      working={role.numberOfActors === "0..1"}
+                    >
+                      0..1
+                    </ActorsButton>
+                    <ActorsButton
+                      onClick={() => updateRoleActors("1")}
+                      working={role.numberOfActors === "1"}
+                    >
+                      1
+                    </ActorsButton>
+                    <ActorsButton
+                      onClick={() => updateRoleActors("?")}
+                      working={role.numberOfActors === "?"}
+                    >
+                      ?
+                    </ActorsButton>
+                  </IconContainer>
+                </Popover.Panel>
+              </Popover>
+            </>
           )}
-          <Popover as="div">
-            <Tooltip text="Change actors" tooltipPlacement="top">
-              <Popover.Button className={css(IconSelect)}>{role.numberOfActors}</Popover.Button>
-            </Tooltip>
-            <Popover.Panel className={css(SelectMenu)}>
-              <SelectMenuText>Number of Actors</SelectMenuText>
-              <IconContainer>
-                <ActorsButton
-                  onClick={() => updateRoleActors("0..N")}
-                  working={role.numberOfActors === "0..N"}
-                >
-                  0..N
-                </ActorsButton>
-                <ActorsButton
-                  onClick={() => updateRoleActors("1..N")}
-                  working={role.numberOfActors === "1..N"}
-                >
-                  1..N
-                </ActorsButton>
-                <ActorsButton
-                  onClick={() => updateRoleActors("0..1")}
-                  working={role.numberOfActors === "0..1"}
-                >
-                  0..1
-                </ActorsButton>
-                <ActorsButton
-                  onClick={() => updateRoleActors("1")}
-                  working={role.numberOfActors === "1"}
-                >
-                  1
-                </ActorsButton>
-                <ActorsButton
-                  onClick={() => updateRoleActors("?")}
-                  working={role.numberOfActors === "?"}
-                >
-                  ?
-                </ActorsButton>
-              </IconContainer>
-            </Popover.Panel>
-          </Popover>
         </RoleMenuContainer>,
         document.getElementById("tooltips") as HTMLDivElement
       )}

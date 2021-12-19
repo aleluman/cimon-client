@@ -30,6 +30,9 @@ export const Role = ({ role }: RoleProps) => {
   const setAllRoleInteractions = useEditor((state) => state.setAllRoleInteractions);
   const setPosition = useEditor((state) => state.setPosition);
   const setDoingAction = useEditor((state) => state.setDoingAction);
+  const stakeholderMode = useEditor((state) => state.stakeholderMode);
+  const focusMode = useEditor((state) => state.focusMode);
+  const focused = useEditor((state) => state.focusedRoles.includes(role.id));
   const { updateRole, deleteRole } = useRole(ambitId as string);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,31 +101,43 @@ export const Role = ({ role }: RoleProps) => {
         ref={containerRef}
         active={isActive}
         beingHovered={isBeingHovered}
+        disabled={focusMode && !focused}
         tabIndex={0}
         css={{ transform: `translate3d(${x}px,${y}px,0)` }}
       >
-        <Title>
-          <Icon type={`${role.role}-${role.solutionUse}`} />
-          {role.abstract && <Abstract />}
-          {role.numberOfActors}
-        </Title>
+        {!stakeholderMode && (
+          <Title>
+            <Icon type={`${role.role}-${role.solutionUse}`} />
+            {role.abstract && <Abstract />}
+            {role.numberOfActors}
+          </Title>
+        )}
         <Body onDoubleClick={() => setIsEditingName(true)}>
           {isEditingName ? (
             <NameInput
+              maxLength={50}
               autoFocus
               defaultValue={activeItem.new ? "" : role.name}
               {...inputHandlers()}
             />
           ) : (
-            <Name>{role.name}</Name>
+            <>
+              {stakeholderMode && <Icon type={`${role.role}-internal`} size={32} />}
+              <Name stakeholder={stakeholderMode}>{role.name}</Name>
+            </>
           )}
         </Body>
-        {(isHovering || isActive) && (
+        {(isHovering || isActive) && !focusMode && (
           <RoleConnector active={isActive} roleId={role.id} nodeX={x} nodeY={y} />
         )}
       </Container>
       {isActive && !doingAction && (
-        <RoleMenu parentRef={containerRef} role={role} setEditing={setIsEditingName} />
+        <RoleMenu
+          parentRef={containerRef}
+          role={role}
+          setEditing={setIsEditingName}
+          stakeholder={stakeholderMode}
+        />
       )}
     </>
   );

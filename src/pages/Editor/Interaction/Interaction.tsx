@@ -28,6 +28,8 @@ export const Interaction = ({ interaction }: InteractionProps) => {
   const { deleteInteraction } = useInteraction(ambitId as string);
   const pathRef = useRef<SVGPathElement>(null);
   const isDoingAction = useEditor((state) => state.doingAction);
+  const focusMode = useEditor((state) => state.focusMode);
+  const focused = useEditor((state) => state.focusedInteractions.includes(interaction.id));
 
   const isActive = activeItem.type === "interaction" && activeItem.id === interaction.id;
 
@@ -65,14 +67,14 @@ export const Interaction = ({ interaction }: InteractionProps) => {
 
   return (
     <>
-      <PathContainer tabIndex={0} {...pathHandlers()}>
+      <PathContainer tabIndex={0} {...pathHandlers()} disabled={focusMode && !focused}>
         <Marker id={interaction.id} active={isActive} inherit={interaction.inherit} angle={angle} />
         <Path
           d={curve}
           active={activeItem.id === interaction.id}
           dashed={interaction.inherit}
           ref={pathRef}
-          markerEnd={endArrow ? `url(#endMarkerInherit${interaction.id})` : "none"}
+          markerEnd={endArrow ? `url(#endMarker${interaction.id})` : "none"}
           markerStart={startArrow ? `url(#startMarker${interaction.id})` : "none"}
         />
         <ClickPath d={curve} />
