@@ -9,12 +9,25 @@ import { Contact } from "./Contact/Contact";
 import { Call } from "./Call/Call";
 import { getActors } from "@/shared/constants/actors";
 import { Notifications } from "./Notifications/Notifications";
+import { FlattenedService } from "@/shared/utils/allInteractions";
 
 export const Phone = () => {
   const showContact = useEditor((state) => state.showContact);
   const showCall = useEditor((state) => state.showCall);
+  const allInteractions = useEditor((state) => state.allRoleInteractions) as FlattenedService[];
 
-  const roles = useMemo(() => getActors(["Role 1", "Role 2", "Role 3"]), []);
+  const roles = useMemo(
+    () =>
+      getActors(
+        allInteractions.map((inter) => ({
+          role: inter.roleName,
+          n: inter.roleN,
+          type: inter.roleType,
+          services: inter.services.map((service) => service.service),
+        }))
+      ),
+    [allInteractions]
+  );
 
   return (
     <>

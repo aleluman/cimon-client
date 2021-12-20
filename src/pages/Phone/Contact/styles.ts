@@ -19,6 +19,7 @@ export const ContactHeader = styled("div", {
   background: "$neutralLightest",
   padding: "0.4rem",
   gap: "0.3rem",
+  maxWidth: "100%",
 });
 
 export const ImageContainer = styled("div", {
@@ -37,6 +38,7 @@ export const UserContainer = styled("div", {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  overflow: "hidden",
 });
 
 export const HeaderButton = styled("button", {
@@ -148,6 +150,9 @@ export const CallButton = styled("div", {
 });
 
 export const UserPhoto = styled("img", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   width: "2.2rem",
   height: "2.2rem",
   borderRadius: "100px",

@@ -49,8 +49,8 @@ export const Stage = ({ children }: StageProps) => {
   });
 
   return (
-    <Container>
-      <Background ref={backgroundRef} {...stageHandlers()} />
+    <Container id="stage">
+      <Background ref={backgroundRef} {...stageHandlers()} id="background" />
       <ChildContainer css={{ transform: `translate3d(${x}px,${y}px,0) scale(${zoom})` }}>
         {children}
       </ChildContainer>

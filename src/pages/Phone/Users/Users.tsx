@@ -13,6 +13,8 @@ import {
 type UsersProps = {
   roles: {
     role: string;
+    type: string;
+    services: string[];
     actors: {
       role: string;
       name: string;
@@ -43,6 +45,8 @@ export const Users = ({ roles }: UsersProps) => {
                   name={user.name}
                   role={user.role}
                   id={user.id}
+                  type={role.type}
+                  services={role.services}
                   context="users"
                 />
               ))}

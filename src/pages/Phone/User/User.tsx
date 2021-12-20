@@ -7,6 +7,7 @@ import {
   UserName,
   UserPhoto,
   UserPhotoContainer,
+  UserRoleContainer,
   UserStatus,
 } from "./styles";
 
@@ -17,32 +18,40 @@ type UserProps = {
   role: string;
   id: number;
   context: "notifications" | "users";
+  type?: string;
+  services: string[];
 };
 
-export const User = ({ name, role, id, context }: UserProps) => {
+export const User = ({ name, role, id, context, services, type = "human" }: UserProps) => {
   const showContactHandler = useEditor((state) => state.setShowContact);
   const setSelectedActor = useEditor((state) => state.setSelectedActor);
 
   const clickHandler = () => {
     showContactHandler(true);
-    setSelectedActor({ id, name, role });
+    setSelectedActor({ id, name, role, type, services });
   };
 
   return (
     <UserContainer onClick={() => clickHandler()}>
       <UserPhotoContainer>
-        <UserPhoto src={`/src/assets/photos/f${id < 10 ? "0" : ""}${id}.webp`} alt="user" />
+        {type === "human" ? (
+          <UserPhoto src={`/src/assets/photos/f${id < 10 ? "0" : ""}${id}.webp`} alt="user" />
+        ) : (
+          <UserPhoto as="div">
+            <Icon type={`${type as "service" | "repository"}-internal`} size={22} />
+          </UserPhoto>
+        )}
         <UserStatus presence status={status[Math.floor(3 * Math.random())]} />
       </UserPhotoContainer>
       <UserData>
-        <UserName>{name}</UserName>
+        <UserName>{type === "human" ? name : type}</UserName>
         <Location>
-          {context === "users" ? (
+          {context === "users" && type === "human" ? (
             <>
               <Icon type="location" size={12} /> Located {(Math.random() * 10).toFixed(2)} km away
             </>
           ) : (
-            <div>{role}</div>
+            <UserRoleContainer>{role}</UserRoleContainer>
           )}
         </Location>
       </UserData>

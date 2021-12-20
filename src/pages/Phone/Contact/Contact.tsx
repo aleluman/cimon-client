@@ -20,17 +20,6 @@ import {
   UserPhoto,
 } from "./styles";
 
-// type ContactProps = {
-//   actors: {
-//     role: string;
-//     actors: {
-//       role: string;
-//       name: string;
-//       id: number;
-//     }[];
-//   }[];
-// };
-
 export const Contact = () => {
   const showContactHandler = useEditor((state) => state.setShowContact);
   const showCallHandler = useEditor((state) => state.setShowCall);
@@ -43,14 +32,20 @@ export const Contact = () => {
           <Icon type="arrow-left" size={24} />
         </HeaderButton>
         <ImageContainer>
-          <UserPhoto
-            src={`/src/assets/photos/f${(actor?.id as number) < 10 ? "0" : ""}${actor?.id}.webp`}
-            alt="user"
-          />
+          {actor?.type === "human" ? (
+            <UserPhoto
+              src={`/src/assets/photos/f${(actor?.id as number) < 10 ? "0" : ""}${actor?.id}.webp`}
+              alt="user"
+            />
+          ) : (
+            <UserPhoto as="div">
+              <Icon type={`${actor?.type as "service" | "repository"}-internal`} size={22} />
+            </UserPhoto>
+          )}
         </ImageContainer>
         <UserContainer>
           <UserNameContainer>
-            {actor?.name}
+            {actor?.type === "human" ? actor.name : actor?.type}
             <Icon type="clock" color="limeGreen" />
             <Icon type="lock" />
           </UserNameContainer>

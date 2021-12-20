@@ -101,7 +101,9 @@ export const actorNames = [
   "Leonnel",
 ];
 
-export const getActors = (roles: string[]) => {
+export const getActors = (
+  roles: { role: string; n: string; type: string; services: string[] }[]
+) => {
   const actorsWithId = actorNames.map((actor) => ({
     name: actor,
     id: actorNames.indexOf(actor) + 1,
@@ -110,12 +112,17 @@ export const getActors = (roles: string[]) => {
   const selected = shuffled.slice(0, roles.length * 3);
   return roles.map((role, index) => {
     return {
-      role,
-      actors: [
-        { ...selected[index * 3], role },
-        { ...selected[index * 3 + 1], role },
-        { ...selected[index * 3 + 2], role },
-      ],
+      role: role.role,
+      type: role.type,
+      services: role.services,
+      actors:
+        role.n === "1" || role.type !== "human"
+          ? [{ ...selected[index * 3], role: role.role }]
+          : [
+              { ...selected[index * 3], role: role.role },
+              { ...selected[index * 3 + 1], role: role.role },
+              { ...selected[index * 3 + 2], role: role.role },
+            ],
     };
   });
 };

@@ -1,10 +1,13 @@
 import { queryClient, useEditor } from "../state/store";
+import { RoleType } from "../types/editor";
 import { AmbitType } from "../types/process";
 
 export type FlattenedService = {
   roleId: string;
   roleName: string;
   direct: boolean;
+  roleType: string;
+  roleN: string;
   services: {
     depth: number;
     service: string;
@@ -54,9 +57,13 @@ const flatten = (unflattenedServices: UnflattenedServices, ambitId: string, role
       );
     });
 
+    const thisRole = roles.find((role) => role.id === service.roleId) as RoleType;
+
     const flattened = {
       roleId: service.roleId,
-      roleName: roles.find((role) => role.id === service.roleId)?.name as string,
+      roleName: thisRole.name,
+      roleType: thisRole.role,
+      roleN: thisRole.numberOfActors,
       direct: interactions.some(
         (interaction) =>
           (interaction.source === service.roleId && interaction.target === roleId) ||

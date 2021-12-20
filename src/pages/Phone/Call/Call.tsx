@@ -26,7 +26,8 @@ export const Call = ({ whiteboard }: CallProps) => {
   return (
     <CallContainer>
       <HeaderContainer>
-        {showCall === "audio" ? "Call with " : "Video call with "} {actor?.name}
+        {showCall === "audio" ? "Call with " : "Video call with "}{" "}
+        {actor?.type === "human" ? actor.name : actor?.type}
       </HeaderContainer>
       <ProgressContainer>
         {showCall === "audio" ? (

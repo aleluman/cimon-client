@@ -22,6 +22,9 @@ export const UserPhotoContainer = styled("div", {
 });
 
 export const UserPhoto = styled("img", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   width: "2.2rem",
   height: "2.2rem",
   borderRadius: "100px",
@@ -76,4 +79,10 @@ export const Location = styled("div", {
   color: "$textDull",
   fontSize: "0.8rem",
   gap: "0.3rem",
+});
+
+export const UserRoleContainer = styled("div", {
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });

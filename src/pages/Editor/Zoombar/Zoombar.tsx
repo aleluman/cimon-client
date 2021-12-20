@@ -86,7 +86,10 @@ export const Zoombar = () => {
         icon="stakeholder"
         text="Stakeholder mode"
         tooltipPlacement="top"
-        handler={() => setStakeholderMode(!stakeholderMode)}
+        handler={() => {
+          setStakeholderMode(!stakeholderMode);
+          useEditor.setState({ doingAction: true });
+        }}
         color="$iconGray"
         working={stakeholderMode}
       />

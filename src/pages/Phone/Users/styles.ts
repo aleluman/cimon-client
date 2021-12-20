@@ -55,4 +55,7 @@ export const DisclosureButton = styled("button", {
   height: "1.8rem",
   color: "$textImportant",
   fontSize: "0.9rem",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
