@@ -1,5 +1,5 @@
 const prod = {
-  API_URL: "https://cimon.herokuapp.com/",
+  API_URL: "https://cimon.herokuapp.com",
 };
 
 const dev = {
