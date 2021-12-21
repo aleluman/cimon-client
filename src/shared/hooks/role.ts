@@ -5,6 +5,7 @@ import { urls } from "../constants/urls";
 import { queryClient, useEditor } from "../state/store";
 import { RoleType } from "../types/editor";
 import { AmbitType } from "../types/process";
+import { useUndo } from "./undo";
 
 export const getRole = (id: string, ambitId: string) => {
   const ambitData = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
@@ -17,6 +18,8 @@ export const useRole = (ambitId: string) => {
   const setNetworkError = useEditor((state) => state.setNetworkError);
   const { processId } = useParams();
 
+  const { createVersion } = useUndo();
+
   const createRole = useMutation(
     ({ newRole }: { newRole: RoleType; newName: boolean }) =>
       axios.post<RoleType>(`${urls.API_URL}/ambits/${ambitId}/roles/${newRole.id}/`, newRole),
@@ -28,6 +31,7 @@ export const useRole = (ambitId: string) => {
           graph: { ...ambit.graph, roles: [...ambit.graph.roles, variables.newRole] },
         });
         setActiveItem({ id: variables.newRole.id, type: "role", new: variables.newName });
+        createVersion(ambitId);
       },
       onError: () => {
         setNetworkError(true);
@@ -49,6 +53,7 @@ export const useRole = (ambitId: string) => {
           ...ambit,
           graph: { ...ambit.graph, roles: [...filteredRoles, updatedRole] },
         });
+        createVersion(ambitId);
       },
       onError: () => {
         setNetworkError(true);
@@ -77,6 +82,7 @@ export const useRole = (ambitId: string) => {
             interactions: filteredInteractions,
           },
         });
+        createVersion(ambitId);
       },
       onError: () => {
         setNetworkError(true);

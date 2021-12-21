@@ -9,12 +9,14 @@ import { Container, Divider, ExportButton, ExportItem, ExportMenu } from "./styl
 import { Help } from "../Help/Help";
 import { queryClient, useEditor } from "@/shared/state/store";
 import { AmbitType } from "@/shared/types/process";
+import { useUndo } from "@/shared/hooks/undo";
 
 export const ActionsToolbar = () => {
   const { ambitId } = useParams();
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const setAciveItem = useEditor((state) => state.setActiveItem);
   const setFocusMode = useEditor((state) => state.setFocusMode);
+  const { undo, redo, canUndo, canRedo, mutation } = useUndo();
 
   const downloadJSON = () => {
     const ambit = queryClient.getQueryData<AmbitType>(["ambit", ambitId as string]);
@@ -55,15 +57,15 @@ export const ActionsToolbar = () => {
         <IconOnlyButton
           icon="undo"
           text="Undo"
-          handler={() => {}}
-          disabled={false}
+          handler={() => undo()}
+          disabled={!canUndo || mutation.isLoading}
           color="$iconGray"
         />
         <IconOnlyButton
           icon="redo"
           text="Redo"
-          handler={() => {}}
-          disabled={false}
+          handler={() => redo()}
+          disabled={!canRedo || mutation.isLoading}
           color="$iconGray"
         />
         <Divider />

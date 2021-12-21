@@ -9,7 +9,6 @@ export type ProcessCategory = {
 };
 
 export type ProcessRoleType = {
-  id: string;
   name: string;
   role: RoleType["role"];
 };

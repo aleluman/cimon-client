@@ -1,6 +1,7 @@
 import { SetState } from "zustand";
 import { FlattenedService } from "@/shared/utils/allInteractions";
-import { ActiveItem, AmbitType, Position } from "../../types/editor";
+import { ActiveItem, Position } from "../../types/editor";
+import { AmbitType } from "@/shared/types/process";
 
 export type EditorSlice = {
   zoom: number;
@@ -23,6 +24,8 @@ export type EditorSlice = {
   allRoleInteractions: FlattenedService[] | null;
   focusedRoles: string[];
   focusedInteractions: string[];
+  versions: AmbitType["graph"][];
+  currentVersion: number;
   setFocused: (value: { roles: string[]; interactions: string[] }) => void;
   setZoom: (newZoom: number) => void;
   setTranslations: (newTranslations: Position) => void;
@@ -39,6 +42,8 @@ export type EditorSlice = {
   setStakeholderMode: (value: boolean) => void;
   setFocusMode: (value: boolean) => void;
   setAllRoleInteractions: (value: FlattenedService[] | null) => void;
+  setVersions: (value: AmbitType["graph"][]) => void;
+  setCurrentVersion: (value: number) => void;
 };
 
 export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
@@ -56,6 +61,8 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
   focusMode: false,
   focusedRoles: [],
   focusedInteractions: [],
+  versions: [],
+  currentVersion: 0,
   setZoom: (newZoom) => set(() => ({ zoom: newZoom })),
   setTranslations: (newTranslations) => set(() => ({ translations: newTranslations })),
   setActiveItem: (newActiveItem) =>
@@ -71,6 +78,8 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
   setFocusMode: (value) => set(() => ({ focusMode: value })),
   setFocused: ({ roles, interactions }) =>
     set(() => ({ focusedRoles: roles, focusedInteractions: interactions })),
+  setVersions: (value) => set(() => ({ versions: value })),
+  setCurrentVersion: (value) => set(() => ({ currentVersion: value })),
   reset: () => {
     set(() => ({
       zoom: 1,
@@ -84,6 +93,8 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
       focusMode: false,
       focusedRoles: [],
       focusedInteractions: [],
+      versions: [],
+      currentVersion: 0,
     }));
   },
 });

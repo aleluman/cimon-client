@@ -6,7 +6,7 @@ type CheckboxProps = {
   checked?: boolean | string;
   handler: () => void;
   size?: "small" | "large";
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export const Checkbox = ({ checked, handler, size = "large", disabled }: CheckboxProps) => {

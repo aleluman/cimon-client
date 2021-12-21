@@ -95,7 +95,7 @@ export const RoleBar = memo(() => {
             {data.roles
               .filter((role) => !names?.includes(role.name))
               .map((role) => (
-                <ListItem key={role.id} {...handlers(role.role, role.name)}>
+                <ListItem key={`${role.name}${role.role}`} {...handlers(role.role, role.name)}>
                   <Icon type={`${role.role}-internal`} size={12} />
                   <ListItemText>{role.name}</ListItemText>
                 </ListItem>

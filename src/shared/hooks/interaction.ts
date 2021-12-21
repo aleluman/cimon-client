@@ -6,6 +6,7 @@ import { urls } from "../constants/urls";
 import { AmbitType } from "../types/process";
 import axios from "../constants/axios";
 import { getAllInteractions } from "../utils/allInteractions";
+import { useUndo } from "./undo";
 
 export const getInteraction = (id: string, ambitId: string) => {
   const ambitData = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
@@ -16,6 +17,7 @@ export const getInteraction = (id: string, ambitId: string) => {
 };
 
 export const useInteraction = (ambitId: string) => {
+  const { createVersion } = useUndo();
   const setActiveItem = useEditor((state) => state.setActiveItem);
   const setNetworkError = useEditor((state) => state.setNetworkError);
   const setAllRoleInteractions = useEditor((state) => state.setAllRoleInteractions);
@@ -40,6 +42,7 @@ export const useInteraction = (ambitId: string) => {
           },
         });
         setActiveItem({ id: newInteraction.id, type: "interaction" });
+        createVersion(ambitId);
       },
       onError: () => {
         setNetworkError(true);
@@ -64,6 +67,7 @@ export const useInteraction = (ambitId: string) => {
           graph: { ...ambit.graph, interactions: [...filteredInteractions, updatedInteraction] },
         });
         setAllRoleInteractions(getAllInteractions(ambitId));
+        createVersion(ambitId);
       },
       onError: () => {
         setNetworkError(true);
@@ -90,6 +94,7 @@ export const useInteraction = (ambitId: string) => {
           ...ambit,
           graph: { ...ambit.graph, interactions: filteredInteractions },
         });
+        createVersion(ambitId);
       },
       onError: () => {
         setNetworkError(true);

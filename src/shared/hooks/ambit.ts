@@ -23,6 +23,8 @@ export const useGetAmbit = (ambitId: string) => {
         addAmbit(ambitId);
         roles.forEach((role) => setPosition({ id: role.id, x: role.x, y: role.y }, ambitId));
         setSelectedAmbit(data);
+        const { versions, setVersions } = useEditor.getState();
+        if (versions.length === 0) setVersions([data.graph]);
       },
       refetchOnWindowFocus: false,
     }
@@ -59,6 +61,26 @@ export const useAmbit = () => {
       },
       onError: () => {
         setNetworkError(true);
+      },
+    }
+  );
+
+  const setGraph = useMutation(
+    (updatedAmbit: Pick<AmbitType, "id"> & Pick<AmbitType, "graph"> & { process: string }) =>
+      axios.patch<AmbitType>(`${urls.API_URL}/ambits/${updatedAmbit.id}/`, updatedAmbit),
+    {
+      onMutate: (updatedAmbit) => {
+        const ambit = queryClient.getQueryData(["ambit", updatedAmbit.id]) as AmbitType;
+        queryClient.setQueryData<AmbitType>(["ambit", updatedAmbit.id], {
+          ...ambit,
+          graph: updatedAmbit.graph,
+        });
+      },
+      onError: () => {
+        setNetworkError(true);
+      },
+      onSettled: (_res, _, request) => {
+        queryClient.invalidateQueries(["process", request.process]);
       },
     }
   );
@@ -146,5 +168,5 @@ export const useAmbit = () => {
     }
   );
 
-  return { createAmbit, updateAmbit, updateAmbitPhases, updateAmbitName, deleteAmbit };
+  return { createAmbit, updateAmbit, updateAmbitPhases, updateAmbitName, deleteAmbit, setGraph };
 };
