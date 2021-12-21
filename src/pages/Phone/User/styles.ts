@@ -38,6 +38,7 @@ export const UserStatus = styled("div", {
   borderRadius: "100px",
   width: "0.6rem",
   height: "0.6rem",
+  background: "transparent",
 
   variants: {
     presence: {
@@ -50,7 +51,7 @@ export const UserStatus = styled("div", {
       online: { background: "lime" },
       offline: { background: "red" },
       busy: { background: "gold" },
-      noStatus: { background: "$neutralLightest" },
+      noStatus: {},
     },
   },
 });

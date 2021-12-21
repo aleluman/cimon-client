@@ -28,6 +28,8 @@ type InnerMatrixProps = {
 export const InnerMatrix = ({ services, roleId }: InnerMatrixProps) => {
   const { ambitId } = useParams();
   const allInteractions = useEditor((state) => state.allRoleInteractions);
+  const selectedActor = useEditor((state) => state.selectedActor);
+  const setSelectedActor = useEditor((state) => state.setSelectedActor);
 
   const { updateInteraction } = useInteraction(ambitId as string);
 
@@ -41,6 +43,19 @@ export const InnerMatrix = ({ services, roleId }: InnerMatrixProps) => {
   };
 
   const clickHandler = (service: string, targetRoleId: string) => {
+    const targetRole = getRole(targetRoleId, ambitId as string);
+    if (selectedActor?.role === targetRole.name) {
+      setSelectedActor(
+        selectedActor === null
+          ? null
+          : {
+              ...selectedActor,
+              services: !selectedActor.services.includes(service)
+                ? selectedActor.services.concat(service)
+                : selectedActor.services.filter((item) => item !== service),
+            }
+      );
+    }
     const ambit = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
     const { interactions } = ambit.graph;
     const interaction = interactions.find(

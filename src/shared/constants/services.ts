@@ -17,6 +17,7 @@ export const transmission = [
   "Recipients can reply to sender",
   "Recipients can reply to all",
   "Priority",
+  "Encryption",
 ];
 
 export const awareness = [

@@ -52,3 +52,13 @@ export const TabButton = styled("button", {
     },
   },
 });
+
+export const NotificationCircle = styled("div", {
+  position: "absolute",
+  top: "0.4rem",
+  right: "2.6rem",
+  width: "0.5rem",
+  height: "0.5rem",
+  borderRadius: "100px",
+  background: "limeGreen",
+});

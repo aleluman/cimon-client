@@ -18,17 +18,19 @@ export const Notifications = ({ roles }: NotificationsProps) => {
   return (
     <NotificationsTabContainer>
       <InnerContainer>
-        {roles.map((role) => (
-          <User
-            key={role.actors[0].id}
-            id={role.actors[0].id}
-            name={role.actors[0].name}
-            role={role.actors[0].role}
-            type={role.type}
-            services={role.services}
-            context="notifications"
-          />
-        ))}
+        {roles
+          .filter((role) => role.services.includes("Incomming messages"))
+          .map((role) => (
+            <User
+              key={role.actors[0].id}
+              id={role.actors[0].id}
+              name={role.actors[0].name}
+              role={role.actors[0].role}
+              type={role.type}
+              services={role.services}
+              context="notifications"
+            />
+          ))}
       </InnerContainer>
     </NotificationsTabContainer>
   );

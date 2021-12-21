@@ -59,3 +59,7 @@ export const DisclosureButton = styled("button", {
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
 });
+
+export const GroupContainer = styled("div", {
+  cursor: "pointer",
+});

@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from "react";
 import { Tab } from "@headlessui/react";
 import { Icon } from "@/shared/components/Icon/Icon";
-import { MainContent, MainPhone, TabButton, TabList } from "./styles";
+import { MainContent, MainPhone, NotificationCircle, TabButton, TabList } from "./styles";
 import { Home } from "./Home/Home";
 import { Users } from "./Users/Users";
 import { useEditor } from "@/shared/state/store";
@@ -29,6 +29,10 @@ export const Phone = () => {
     [allInteractions]
   );
 
+  const hasNotifications = useMemo(() => {
+    return roles.some((role) => role.services.includes("Incomming messages"));
+  }, [roles]);
+
   return (
     <>
       <Tab.Group as={MainPhone}>
@@ -54,22 +58,23 @@ export const Phone = () => {
             {({ selected }) => (
               <TabButton selected={selected}>
                 <Icon type="human-internal" size={20} />
-                Users
+                Contacts
               </TabButton>
             )}
           </Tab>
           <Tab as={Fragment}>
             {({ selected }) => (
-              <TabButton selected={selected}>
+              <TabButton selected={selected} css={{ position: "relative" }}>
                 <Icon type="notification" size={20} />
                 Notifications
+                {hasNotifications && <NotificationCircle />}
               </TabButton>
             )}
           </Tab>
         </Tab.List>
       </Tab.Group>
       {showContact && <Contact />}
-      {showCall !== "none" && <Call whiteboard />}
+      {showCall !== "none" && <Call />}
     </>
   );
 };

@@ -121,10 +121,10 @@ export const IconContainer = styled("div", {
 });
 
 export const CallContainer = styled("div", {
-  padding: "1rem",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-around",
+  padding: "0 1rem",
 });
 
 export const CallButton = styled("div", {
@@ -142,6 +142,7 @@ export const CallButton = styled("div", {
   width: "8rem",
   cursor: "pointer",
   boxShadow: "$subtleShadow",
+  margin: "1rem 0",
   border: "1px solid $borderPhone",
 
   "& path": {

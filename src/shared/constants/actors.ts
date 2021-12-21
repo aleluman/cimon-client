@@ -101,6 +101,10 @@ export const actorNames = [
   "Leonnel",
 ];
 
+const hashCode = (s: string) =>
+  // eslint-disable-next-line no-bitwise
+  s.split("").reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0);
+
 export const getActors = (
   roles: { role: string; n: string; type: string; services: string[] }[]
 ) => {
@@ -108,9 +112,11 @@ export const getActors = (
     name: actor,
     id: actorNames.indexOf(actor) + 1,
   }));
-  const shuffled = actorsWithId.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, roles.length * 3);
   return roles.map((role, index) => {
+    const shuffled = actorsWithId.sort(
+      (a, b) => hashCode(`${a.name}${role.role}`) - hashCode(b.name)
+    );
+    const selected = shuffled.slice(0, roles.length * 3);
     return {
       role: role.role,
       type: role.type,

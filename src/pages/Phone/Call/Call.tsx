@@ -13,12 +13,8 @@ import {
   WhiteBoardIcons,
 } from "./styles";
 
-type CallProps = {
-  whiteboard: boolean;
-};
-
-export const Call = ({ whiteboard }: CallProps) => {
-  const [showWhiteboard, setShowWhiteboard] = useState(whiteboard);
+export const Call = () => {
+  const [showWhiteboard, setShowWhiteboard] = useState(true);
   const showCall = useEditor((state) => state.showCall);
   const setShowCall = useEditor((state) => state.setShowCall);
   const actor = useEditor((state) => state.selectedActor);
@@ -45,7 +41,7 @@ export const Call = ({ whiteboard }: CallProps) => {
         )}
         <div>In Progress</div>
       </ProgressContainer>
-      {showWhiteboard && (
+      {actor?.services.includes("Open whiteboard") && showWhiteboard && (
         <WhiteBoard>
           <WhiteBoardIcons>
             <Icon type="pencil" />
@@ -57,14 +53,16 @@ export const Call = ({ whiteboard }: CallProps) => {
         </WhiteBoard>
       )}
       <ButtonsContainer>
-        <CallButton
-          type="button"
-          onClick={() => setShowWhiteboard((prev) => !prev)}
-          active={showWhiteboard}
-        >
-          <Icon type="whiteboard" />
-        </CallButton>
-        {showCall === "audio" && (
+        {actor?.services.includes("Open whiteboard") && (
+          <CallButton
+            type="button"
+            onClick={() => setShowWhiteboard((prev) => !prev)}
+            active={showWhiteboard}
+          >
+            <Icon type="whiteboard" />
+          </CallButton>
+        )}
+        {actor?.services.includes("Start videoconference") && showCall === "audio" && (
           <CallButton type="button" onClick={() => setShowCall("video")}>
             <Icon type="video" />
           </CallButton>
