@@ -25,7 +25,7 @@ export const Details = ({ process }: DetailsProps) => {
 
   const { updateProcess } = useProcess();
 
-  useDebounce(() => updateProcess.mutate({ id: process.id, objective, description }), 1000, [
+  useDebounce(() => updateProcess.mutate({ id: process.id, objective, description }), 500, [
     objective,
     description,
   ]);

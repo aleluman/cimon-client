@@ -40,7 +40,7 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
     setDescription(role.description);
   }, [roleId, role]);
 
-  useDebounce(() => updateRole.mutate({ ...role, description }), 1000, [description]);
+  useDebounce(() => updateRole.mutate({ ...role, description }), 500, [description]);
 
   const updateRoleType = (value: string) => {
     updateRole.mutate({ ...role, role: value as RoleType["role"] });

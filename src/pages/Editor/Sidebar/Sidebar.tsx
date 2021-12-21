@@ -31,7 +31,7 @@ export const Sidebar = () => {
 
   useDebounce(
     () => updateAmbit.mutate({ id: ambitId as string, description, process: processId as string }),
-    1000,
+    500,
     [description]
   );
 
