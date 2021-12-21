@@ -31,12 +31,10 @@ export const Call = () => {
         ) : (
           <VideoContainer>
             <img
-              src={`/src/assets/photos/f${(actor?.id as number) < 10 ? "0" : ""}${
-                actor?.id as number
-              }.webp`}
+              src={`/photos/f${(actor?.id as number) < 10 ? "0" : ""}${actor?.id as number}.webp`}
               alt="videocall"
             />
-            <MeImage src="/src/assets/photos/me.webp" alt="videocall" />
+            <MeImage src="/photos/me.webp" alt="videocall" />
           </VideoContainer>
         )}
         <div>In Progress</div>

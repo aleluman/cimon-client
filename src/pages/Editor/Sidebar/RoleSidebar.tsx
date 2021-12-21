@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import { getRole, useRole } from "@/shared/hooks/role";
@@ -36,6 +36,10 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
   const mockupMode = useEditor((state) => state.mockupMode);
   const setMockupMode = useEditor((state) => state.setMockupMode);
 
+  useEffect(() => {
+    setDescription(role.description);
+  }, [roleId, role]);
+
   useDebounce(() => updateRole.mutate({ ...role, description }), 1000, [description]);
 
   const updateRoleType = (value: string) => {
@@ -72,6 +76,10 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
         interaction.inherit && (interaction.source === roleId || interaction.target === roleId)
     );
   }, [ambitId, roleId]);
+
+  const descriptionHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(event.target.value);
+  };
 
   return (
     <Tab.Group onChange={handleTab} defaultIndex={mockupMode ? 1 : 0}>
@@ -141,8 +149,8 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
           <SubTitle>Description</SubTitle>
           <Description
             placeholder="Add a description here..."
-            defaultValue={role.description}
-            onChange={(event) => setDescription(event.target.value)}
+            value={description}
+            onChange={descriptionHandler}
             maxLength={250}
           />
         </Tab.Panel>

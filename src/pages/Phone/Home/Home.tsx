@@ -11,13 +11,11 @@ export const Home = ({ processType }: HomeProps) => {
         {(processType === "generic" || processType === "lodging") && (
           <div>Shared workspace / Actions</div>
         )}
-        {processType === "todo/kanban" && (
-          <Image src="/src/assets/mockups/todo.webp" alt="mockup" />
-        )}
+        {processType === "todo/kanban" && <Image src="/mockups/todo.webp" alt="mockup" />}
         {processType !== "generic" &&
           processType !== "lodging" &&
           processType !== "todo/kanban" && (
-            <Image src={`/src/assets/mockups/${processType}.webp`} alt="mockup" />
+            <Image src={`/mockups/${processType}.webp`} alt="mockup" />
           )}
       </SharedWorkspace>
     </HomeContainer>

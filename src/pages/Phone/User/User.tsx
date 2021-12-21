@@ -38,7 +38,7 @@ export const User = ({ name, role, id, context, services, type = "human" }: User
     >
       <UserPhotoContainer>
         {type === "human" ? (
-          <UserPhoto src={`/src/assets/photos/f${id < 10 ? "0" : ""}${id}.webp`} alt="user" />
+          <UserPhoto src={`/photos/f${id < 10 ? "0" : ""}${id}.webp`} alt="user" />
         ) : (
           <UserPhoto as="div">
             <Icon type={`${type as "service" | "repository"}-internal`} size={22} />

@@ -55,7 +55,7 @@ export const Contact = () => {
         <ImageContainer>
           {actor?.type === "human" ? (
             <UserPhoto
-              src={`/src/assets/photos/f${(actor?.id as number) < 10 ? "0" : ""}${actor?.id}.webp`}
+              src={`/photos/f${(actor?.id as number) < 10 ? "0" : ""}${actor?.id}.webp`}
               alt="user"
             />
           ) : (
