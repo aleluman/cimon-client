@@ -9,6 +9,7 @@ import { LastEditedText, ContentTitle, ContentTitleContainer, ProcessName } from
 import { Modal } from "@/shared/components/Modal/Modal";
 import { ModalFooterContainer, ModalText, ModalTitle } from "@/shared/components/Modal/styles";
 import { Input } from "@/shared/components/Input/Input";
+import { iconPaths, processIcons } from "@/shared/constants/Icons";
 
 type MainHeaderProps = {
   process: ProcessType;
@@ -45,7 +46,11 @@ export const MainHeader = ({ process }: MainHeaderProps) => {
   return (
     <ContentTitleContainer>
       <ContentTitle>
-        <Icon type={process.category} size={24} color="$primary" />
+        <Icon
+          type={processIcons[process.category] as keyof typeof iconPaths}
+          size={24}
+          color="$primary"
+        />
         {!isRenaming && (
           <>
             <ProcessName>{process.name}</ProcessName>

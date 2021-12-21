@@ -10,6 +10,10 @@ export const IconButton = styled("div", {
   padding: "0.4rem",
   background: "transparent",
 
+  "& path": {
+    transition: "fill 0.3s ease",
+  },
+
   "&:hover": {
     background: "$neutralDarker",
   },

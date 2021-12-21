@@ -87,13 +87,13 @@ type UnflattenedServices = {
   sourceServices: string[];
 }[];
 
-export const getAllInteractions = (ambitId: string) => {
+export const getAllInteractions = (ambitId: string, role?: string) => {
   const ambit = queryClient.getQueryData<AmbitType>(["ambit", ambitId]) as AmbitType;
   const { interactions } = ambit.graph;
 
   const { activeItem } = useEditor.getState();
 
-  const roleId = activeItem.id;
+  const roleId = role || activeItem.id;
 
   const visitedRoles: string[] = [];
   const unflattenedServices: UnflattenedServices = [];
@@ -124,8 +124,8 @@ export const getAllInteractions = (ambitId: string) => {
       (interaction) => interaction.inherit && interaction.source === currentRoleId
     );
     const nextNodesIds = groupInteractions.map((interaction) => interaction.target);
-    nextNodesIds.forEach((role) => {
-      traverse(role, depth + 1);
+    nextNodesIds.forEach((currentRole) => {
+      traverse(currentRole, depth + 1);
     });
   };
 

@@ -124,7 +124,7 @@ export const Divider = styled("hr", {
 export const PhoneContainer = styled("div", {
   position: "relative",
   width: "100%",
-  height: "42rem",
+  height: "41.5rem",
   background: "$neutralDarker",
   boxShadow: "inset $subtleShadow",
   borderRadius: "8px",

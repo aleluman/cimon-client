@@ -44,7 +44,14 @@ export type NewProcessType = {
   name: string;
   description: string;
   objective: string;
-  category: "generic" | "health" | "travel" | "shopping";
+  category:
+    | "generic"
+    | "delivery"
+    | "restaurant"
+    | "ridesharing"
+    | "lodging"
+    | "todo/kanban"
+    | "package management";
 };
 
 export type ProcessType = {
@@ -53,7 +60,14 @@ export type ProcessType = {
   description: string;
   objective: string;
   roles: ProcessRoleType[];
-  category: "generic" | "health" | "travel" | "shopping";
+  category:
+    | "generic"
+    | "delivery"
+    | "restaurant"
+    | "ridesharing"
+    | "lodging"
+    | "todo/kanban"
+    | "package management";
   ambits: { id: string; name: string; phases: string[] }[];
   phases: { id: string; name: string }[];
   lastEdited: string;

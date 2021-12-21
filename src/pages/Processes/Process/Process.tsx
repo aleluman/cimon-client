@@ -8,6 +8,7 @@ import { ProcessContainer, ProcessName, RoleCounter } from "./styles";
 import { Summary } from "../Summary/Summary";
 import axios from "@/shared/constants/axios";
 import { urls } from "@/shared/constants/urls";
+import { iconPaths, processIcons } from "@/shared/constants/Icons";
 
 type ProcessProps = {
   process: ProcessType;
@@ -39,7 +40,7 @@ export const Process = ({ process }: ProcessProps) => {
         as={Link}
         to={`/processes/${process.id}`}
       >
-        <Icon type={process.category} color="$primary" />
+        <Icon type={processIcons[process.category] as keyof typeof iconPaths} color="$primary" />
         <ProcessName>{process.name}</ProcessName>
         <RoleCounter>{process.roles.length}</RoleCounter>
       </ProcessContainer>

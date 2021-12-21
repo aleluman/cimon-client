@@ -1,20 +1,24 @@
 import { Fragment, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import { Icon } from "@/shared/components/Icon/Icon";
 import { MainContent, MainPhone, NotificationCircle, TabButton, TabList } from "./styles";
 import { Home } from "./Home/Home";
 import { Users } from "./Users/Users";
-import { useEditor } from "@/shared/state/store";
+import { queryClient, useEditor } from "@/shared/state/store";
 import { Contact } from "./Contact/Contact";
 import { Call } from "./Call/Call";
 import { getActors } from "@/shared/constants/actors";
 import { Notifications } from "./Notifications/Notifications";
 import { FlattenedService } from "@/shared/utils/allInteractions";
+import { ProcessType } from "@/shared/types/process";
 
 export const Phone = () => {
   const showContact = useEditor((state) => state.showContact);
   const showCall = useEditor((state) => state.showCall);
   const allInteractions = useEditor((state) => state.allRoleInteractions) as FlattenedService[];
+
+  const { processId } = useParams();
 
   const roles = useMemo(
     () =>
@@ -33,11 +37,18 @@ export const Phone = () => {
     return roles.some((role) => role.services.includes("Incomming messages"));
   }, [roles]);
 
+  const processType = useMemo(() => {
+    const currentProcess = queryClient.getQueryData(["process", processId]) as ProcessType;
+    return currentProcess.category;
+  }, [processId]);
+
   return (
     <>
       <Tab.Group as={MainPhone}>
         <Tab.Panels as={MainContent}>
-          <Tab.Panel as={Home} />
+          <Tab.Panel>
+            <Home processType={processType} />
+          </Tab.Panel>
           <Tab.Panel as={Fragment}>
             <Users roles={roles} />
           </Tab.Panel>

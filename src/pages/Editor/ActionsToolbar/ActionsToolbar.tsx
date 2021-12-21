@@ -85,7 +85,7 @@ export const ActionsToolbar = () => {
             </Menu.Item>
           </Menu.Items>
         </Menu>
-        <IconOnlyButton icon="upload" text="Upload JSON" handler={() => {}} color="$iconGray" />
+        {/* <IconOnlyButton icon="upload" text="Upload JSON" handler={() => {}} color="$iconGray" /> */}
         <Divider />
         <IconOnlyButton
           icon="help"

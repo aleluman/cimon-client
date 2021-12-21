@@ -17,8 +17,13 @@ export const SharedWorkspace = styled("div", {
   borderRadius: "8px",
   height: "100%",
   width: "100%",
-  padding: "1rem",
   display: "flex",
   fontSize: "1rem",
   color: "$textNormal",
+  overflow: "hidden",
+});
+
+export const Image = styled("img", {
+  width: "100%",
+  height: "100%",
 });
