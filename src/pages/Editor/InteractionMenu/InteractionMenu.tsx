@@ -70,7 +70,7 @@ export const InteractionMenu = memo(({ parentRef, interaction }: RoleMenuProps) 
             tooltipPlacement="top"
           />
         </RoleMenuContainer>,
-        document.getElementById("tooltips") as HTMLDivElement
+        document.getElementById("canvasTooltips") as HTMLDivElement
       )}
     </>
   );

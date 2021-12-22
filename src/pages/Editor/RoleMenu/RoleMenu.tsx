@@ -175,7 +175,7 @@ export const RoleMenu = memo(({ parentRef, role, setEditing, stakeholder }: Role
             </>
           )}
         </RoleMenuContainer>,
-        document.getElementById("tooltips") as HTMLDivElement
+        document.getElementById("canvasTooltips") as HTMLDivElement
       )}
     </>
   );

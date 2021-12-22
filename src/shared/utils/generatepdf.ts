@@ -1,12 +1,12 @@
-import pdfMake from "pdfmake/build/pdfmake";
+import "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { awareness, communication, transmission } from "../constants/services";
-
 import { queryClient } from "../state/store";
 import { AmbitType } from "../types/process";
 import { getAllInteractions } from "./allInteractions";
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+const { pdfMake } = window;
+pdfMake.vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : pdfMake.vfs;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const document: { content: any[]; styles: any } = {

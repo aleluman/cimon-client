@@ -77,6 +77,7 @@ export const Stage = ({ children }: StageProps) => {
       <ChildContainer css={{ transform: `translate3d(${x}px,${y}px,0) scale(${zoom})` }}>
         {children}
       </ChildContainer>
+      <div id="canvasTooltips" />
     </Container>
   );
 };
