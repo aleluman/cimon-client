@@ -8,32 +8,31 @@ import { getAllInteractions } from "./allInteractions";
 const { pdfMake } = window;
 pdfMake.vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : pdfMake.vfs;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const document: { content: any[]; styles: any } = {
-  content: [],
-  styles: {
-    header: {
-      fontSize: 18,
-      bold: true,
-      margin: [0, 0, 0, 10],
-    },
-    subheader: {
-      fontSize: 16,
-      bold: true,
-      margin: [0, 10, 0, 5],
-    },
-    tableExample: {
-      margin: [0, 5, 0, 15],
-    },
-    tableHeader: {
-      bold: true,
-      fontSize: 13,
-      color: "black",
-    },
-  },
-};
-
 export const generatePdf = (ambitId: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const document: { content: any[]; styles: any } = {
+    content: [],
+    styles: {
+      header: {
+        fontSize: 18,
+        bold: true,
+        margin: [0, 0, 0, 10],
+      },
+      subheader: {
+        fontSize: 16,
+        bold: true,
+        margin: [0, 10, 0, 5],
+      },
+      tableExample: {
+        margin: [0, 5, 0, 15],
+      },
+      tableHeader: {
+        bold: true,
+        fontSize: 13,
+        color: "black",
+      },
+    },
+  };
   const ambit = queryClient.getQueryData(["ambit", ambitId]) as AmbitType;
   document.content.push({ text: `Requirements for ambit ${ambit.name}`, style: "header" });
 
