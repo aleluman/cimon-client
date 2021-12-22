@@ -4,6 +4,9 @@ import { queryClient, useEditor, usePreferences } from "@/shared/state/store";
 import { AmbitType } from "@/shared/types/process";
 import { Divider, ZoomBarContainer } from "./styles";
 import { calcZoom, setFit } from "@/shared/utils/zoom";
+import { autoLayout } from "@/shared/utils/autolayout";
+import { useAmbit } from "@/shared/hooks/ambit";
+import { useUndo } from "@/shared/hooks/undo";
 
 export const Zoombar = () => {
   const isSidebarPresent = usePreferences((state) => state.showSidebar);
@@ -15,7 +18,11 @@ export const Zoombar = () => {
   const setFocused = useEditor((state) => state.setFocused);
   const focusMode = useEditor((state) => state.focusMode);
 
-  const { ambitId } = useParams();
+  const { ambitId, processId } = useParams();
+
+  const { createVersion } = useUndo();
+
+  const { setGraph } = useAmbit();
 
   const setZoom = (update: "minus" | "plus") => {
     const store = useEditor.getState();
@@ -51,6 +58,17 @@ export const Zoombar = () => {
     setFocusMode(!focusMode);
   };
 
+  const setLayout = async () => {
+    const newGraph = autoLayout(ambitId as string);
+    await setGraph.mutateAsync({
+      id: ambitId as string,
+      process: processId as string,
+      graph: newGraph,
+    });
+    createVersion(ambitId as string);
+    setFit(ambitId as string);
+  };
+
   return (
     <ZoomBarContainer tilted={!isSidebarPresent} mockup={mockupMode && activeItem.type !== "none"}>
       <IconOnlyButton
@@ -75,13 +93,13 @@ export const Zoombar = () => {
         color="$iconGray"
       />
       <Divider />
-      {/* <IconOnlyButton
+      <IconOnlyButton
         icon="layout"
         text="Auto layout"
         tooltipPlacement="top"
-        handler={() => {}}
+        handler={() => setLayout()}
         color="$iconGray"
-      /> */}
+      />
       <IconOnlyButton
         icon="stakeholder"
         text="Stakeholder mode"
