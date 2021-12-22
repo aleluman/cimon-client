@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Stage } from "../Stage/Stage";
 import { Interaction } from "../Interaction/Interaction";
@@ -7,12 +8,15 @@ import { PlaceHolderInteraction } from "../PlaceholderInteraction/PlaceholderInt
 import { useEditor } from "@/shared/state/store";
 import { PlaceholderRole } from "../PlaceholderRole/PlaceHolderRode";
 import { useGetAmbit } from "@/shared/hooks/ambit";
+import { setFit } from "@/shared/utils/zoom";
 
 export const Canvas = () => {
   const { ambitId } = useParams();
   const showPlaceholderInteraction = useEditor((state) => state.placeholderInteraction !== null);
   const showPlaceholderRole = useEditor((state) => state.placeholderRole !== null);
   const { data, error, isLoading } = useGetAmbit(ambitId as string);
+
+  useEffect(() => setFit(ambitId as string), [ambitId]);
 
   if (error) return <div>Error</div>;
 

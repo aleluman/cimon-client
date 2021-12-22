@@ -5,9 +5,11 @@ import { urls } from "../constants/urls";
 import { NewPhaseType, PhaseType, ProcessType } from "../types/process";
 import { queryClient, useEditor } from "../state/store";
 import axios from "../constants/axios";
+import { useAmbit } from "./ambit";
 
 export const usePhase = () => {
   const setNetworkError = useEditor((state) => state.setNetworkError);
+  const { updateAmbitPhases } = useAmbit();
 
   const createPhase = useMutation(
     (newPhase: NewPhaseType) => axios.post<PhaseType>(`${urls.API_URL}/phases/`, newPhase),
@@ -69,6 +71,10 @@ export const usePhase = () => {
           phases: process.phases.filter((phase) => phase.id !== mutation.id),
         };
         queryClient.setQueryData(["process", mutation.processId], updatedProcess);
+        process.ambits.forEach((ambit) => {
+          const newPhases = ambit.phases.filter((phase) => phase !== mutation.id);
+          updateAmbitPhases.mutate({ id: ambit.id, process: process.id, phases: newPhases });
+        });
       },
       onSuccess: (_, request) => {
         queryClient.invalidateQueries(["process", request.processId]);

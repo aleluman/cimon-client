@@ -84,6 +84,9 @@ export const Matrix = ({ process }: MatrixProps) => {
                           <Checkbox
                             checked={ambit.phases.includes(phase.id)}
                             handler={() => checkerHandler(ambit.id, phase.id, ambit.phases)}
+                            tooltipText={`Click to ${
+                              ambit.phases.includes(phase.id) ? "remove from" : "add to"
+                            } ${phase.name}`}
                           />
                         </TableData>
                       ))}

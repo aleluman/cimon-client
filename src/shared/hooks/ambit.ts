@@ -5,7 +5,6 @@ import { urls } from "../constants/urls";
 import { AmbitType, NewAmbitType, ProcessType } from "../types/process";
 import { queryClient, useEditor } from "../state/store";
 import axios from "../constants/axios";
-import { setFit } from "../utils/zoom";
 
 export const useGetAmbit = (ambitId: string) => {
   const addAmbit = useEditor((state) => state.addAmbit);
@@ -26,7 +25,6 @@ export const useGetAmbit = (ambitId: string) => {
         setSelectedAmbit(data);
         const { versions, setVersions } = useEditor.getState();
         if (versions.length === 0) setVersions([data.graph]);
-        setFit(ambitId);
       },
       refetchOnWindowFocus: false,
       cacheTime: 0,

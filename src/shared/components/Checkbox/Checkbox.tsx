@@ -7,11 +7,21 @@ type CheckboxProps = {
   handler: () => void;
   size?: "small" | "large";
   disabled?: boolean;
+  tooltipText?: string;
 };
 
-export const Checkbox = ({ checked, handler, size = "large", disabled }: CheckboxProps) => {
-  return typeof checked === "string" ? (
-    <Tooltip text={`Inherited from ${checked}.\n Click to add Directly.`} tooltipPlacement="top">
+export const Checkbox = ({
+  checked,
+  handler,
+  size = "large",
+  disabled,
+  tooltipText,
+}: CheckboxProps) => {
+  return typeof checked === "string" || tooltipText ? (
+    <Tooltip
+      text={tooltipText || `Inherited from ${checked}.\n Click to add Directly.`}
+      tooltipPlacement="top"
+    >
       <Container
         checked={!!checked}
         size={size}
