@@ -50,7 +50,9 @@ export const Sidebar = () => {
         {isError && <Title>Error</Title>}
         {data && (
           <>
-            {activeItem.type === "role" && <RoleSidebar roleId={activeItem.id} />}
+            {activeItem.type === "role" && (
+              <RoleSidebar roleId={activeItem.id} key={activeItem.id} />
+            )}
             {activeItem.type === "interaction" && (
               <InteractionSidebar interactionId={activeItem.id} />
             )}
