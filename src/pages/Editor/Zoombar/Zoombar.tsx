@@ -75,13 +75,13 @@ export const Zoombar = () => {
         color="$iconGray"
       />
       <Divider />
-      <IconOnlyButton
+      {/* <IconOnlyButton
         icon="layout"
         text="Auto layout"
         tooltipPlacement="top"
         handler={() => {}}
         color="$iconGray"
-      />
+      /> */}
       <IconOnlyButton
         icon="stakeholder"
         text="Stakeholder mode"

@@ -80,7 +80,15 @@ export const ActionsToolbar = () => {
             <Menu.Item as="button" className={css(ExportItem)} onClick={() => downloadImage()}>
               <Icon type="image" /> As image
             </Menu.Item>
-            <Menu.Item as="button" className={css(ExportItem)}>
+            <Menu.Item
+              as="button"
+              className={css(ExportItem)}
+              onClick={() =>
+                import("@/shared/utils/generatepdf").then((imp) =>
+                  imp.generatePdf(ambitId as string)
+                )
+              }
+            >
               <Icon type="pdf" /> As PDF
             </Menu.Item>
           </Menu.Items>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Icon } from "@/shared/components/Icon/Icon";
 import {
@@ -28,6 +28,10 @@ export const Sidebar = () => {
   const { updateAmbit } = useAmbit();
 
   const { data, isError, isLoading } = useGetAmbit(ambitId as string);
+
+  useEffect(() => {
+    if (!isLoading && data) setDescription(data.description);
+  }, [isLoading, data]);
 
   useDebounce(
     () => updateAmbit.mutate({ id: ambitId as string, description, process: processId as string }),
@@ -61,7 +65,7 @@ export const Sidebar = () => {
                   name="description"
                   id="description"
                   placeholder="Add a description here..."
-                  defaultValue={data.description}
+                  value={description}
                   onChange={(event) => setDescription(event.target.value)}
                   onBlur={() =>
                     updateAmbit.mutate({

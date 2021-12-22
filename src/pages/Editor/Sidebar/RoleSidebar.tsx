@@ -1,4 +1,4 @@
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tab } from "@headlessui/react";
 import { getRole, useRole } from "@/shared/hooks/role";
@@ -35,6 +35,10 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
   const { updateRole } = useRole(ambitId as string);
   const mockupMode = useEditor((state) => state.mockupMode);
   const setMockupMode = useEditor((state) => state.setMockupMode);
+
+  useEffect(() => {
+    setDescription(role.description);
+  }, [role]);
 
   useDebounce(() => updateRole.mutate({ ...role, description }), 200, [description]);
 
@@ -146,7 +150,7 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
           <Description
             key={roleId}
             placeholder="Add a description here..."
-            defaultValue={role.description}
+            value={description}
             onChange={descriptionHandler}
             maxLength={250}
             onBlur={() => updateRole.mutate({ ...role, description })}
