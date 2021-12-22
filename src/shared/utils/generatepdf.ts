@@ -1,5 +1,5 @@
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { awareness, communication, transmission } from "../constants/services";
 
 import { queryClient } from "../state/store";
