@@ -21,8 +21,10 @@ export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
   const { processId } = useParams();
 
   const handleChangeAmbit = (ambitId: string) => {
-    resetState();
-    navigate(`/processes/${processId}/${ambitId}/`);
+    if (ambitId !== selected?.id) {
+      resetState();
+      navigate(`/processes/${processId}/${ambitId}/`);
+    }
   };
 
   return (
