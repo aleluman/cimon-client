@@ -36,7 +36,7 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
   const mockupMode = useEditor((state) => state.mockupMode);
   const setMockupMode = useEditor((state) => state.setMockupMode);
 
-  useDebounce(() => updateRole.mutate({ ...role, description }), 500, [description]);
+  useDebounce(() => updateRole.mutate({ ...role, description }), 200, [description]);
 
   const updateRoleType = (value: string) => {
     updateRole.mutate({ ...role, role: value as RoleType["role"] });
@@ -149,6 +149,7 @@ export const RoleSidebar = ({ roleId }: RoleSidebarProps) => {
             defaultValue={role.description}
             onChange={descriptionHandler}
             maxLength={250}
+            onBlur={() => updateRole.mutate({ ...role, description })}
           />
         </Tab.Panel>
         <Tab.Panel as={MockupContainer}>

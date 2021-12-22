@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { useGesture } from "@use-gesture/react";
 import { Container, Background, ChildContainer } from "./styles";
 import { calcZoom, getMousePosition } from "@/shared/utils/zoom";
@@ -18,39 +18,54 @@ export const Stage = ({ children }: StageProps) => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const setDoingAction = useEditor((state) => state.setDoingAction);
   const focusMode = useEditor((state) => state.focusMode);
+  const [cursor, setCursor] = useState("default");
 
-  const stageHandlers = useGesture({
-    onDragStart: () => setDoingAction(true),
-    onDrag: ({ event, delta: [dx, dy] }) => {
-      if (event.currentTarget === event.target) {
-        setTranslations({ x: x + dx, y: y + dy });
-      }
-    },
-    onDragEnd: ({ event, tap }) => {
-      if (event.currentTarget === event.target && tap && !focusMode) {
-        setActiveItem({ id: "", type: "none" });
-      }
-      setDoingAction(false);
-    },
-    onWheel: ({ event, active }) => {
-      const { deltaY, deltaMode } = event;
-      const mouseCoords = getMousePosition(event, backgroundRef.current);
-      const { newZoom, newX, newY } = calcZoom(mouseCoords, { x, y }, zoom, deltaY, deltaMode);
-      if (!active) setDoingAction(false);
-      if (active && newZoom >= zoomLimits.min && newZoom <= zoomLimits.max) {
-        setTranslations({ x: newX, y: newY });
+  useGesture(
+    {
+      onDragStart: () => {
         setDoingAction(true);
-        setZoom(newZoom);
-      }
+        setCursor("grabbing");
+      },
+      onDrag: ({ event, delta: [dx, dy] }) => {
+        if (event.currentTarget === event.target) {
+          setTranslations({ x: x + dx, y: y + dy });
+        }
+      },
+      onDragEnd: ({ event, tap }) => {
+        if (event.currentTarget === event.target && tap && !focusMode) {
+          setActiveItem({ id: "", type: "none" });
+        }
+        setDoingAction(false);
+        setCursor("default");
+      },
+      onWheel: ({ event, active, ctrlKey }) => {
+        event.preventDefault();
+        const { deltaY, deltaMode } = event;
+        const mouseCoords = getMousePosition(event, backgroundRef.current);
+        const { newZoom, newX, newY } = calcZoom(
+          mouseCoords,
+          { x, y },
+          zoom,
+          deltaY * (ctrlKey ? 5 : 1),
+          deltaMode
+        );
+        if (!active) setDoingAction(false);
+        if (active && newZoom >= zoomLimits.min && newZoom <= zoomLimits.max) {
+          setTranslations({ x: newX, y: newY });
+          setDoingAction(true);
+          setZoom(newZoom);
+        }
+      },
+      onContextMenu: ({ event }) => {
+        event.preventDefault();
+      },
     },
-    onContextMenu: ({ event }) => {
-      event.preventDefault();
-    },
-  });
+    { target: backgroundRef, eventOptions: { passive: false } }
+  );
 
   return (
-    <Container id="stage">
-      <Background ref={backgroundRef} {...stageHandlers()} id="background" />
+    <Container id="stage" css={{ cursor }}>
+      <Background ref={backgroundRef} id="background" />
       <ChildContainer css={{ transform: `translate3d(${x}px,${y}px,0) scale(${zoom})` }}>
         {children}
       </ChildContainer>

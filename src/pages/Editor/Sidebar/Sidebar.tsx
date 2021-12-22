@@ -31,7 +31,7 @@ export const Sidebar = () => {
 
   useDebounce(
     () => updateAmbit.mutate({ id: ambitId as string, description, process: processId as string }),
-    500,
+    200,
     [description]
   );
 
@@ -41,7 +41,7 @@ export const Sidebar = () => {
       mockup={mockupMode && activeItem.type !== "none"}
       css={{ paddingTop: activeItem.type === "role" ? "0.4rem" : "1rem" }}
     >
-      <SidebarWrapper>
+      <SidebarWrapper key={ambitId}>
         {isLoading && <Title>Loading...</Title>}
         {isError && <Title>Error</Title>}
         {data && (
@@ -57,11 +57,19 @@ export const Sidebar = () => {
                 </Title>
                 <SubTitle>Description:</SubTitle>
                 <Description
+                  key={ambitId}
                   name="description"
                   id="description"
                   placeholder="Add a description here..."
                   defaultValue={data.description}
                   onChange={(event) => setDescription(event.target.value)}
+                  onBlur={() =>
+                    updateAmbit.mutate({
+                      id: ambitId as string,
+                      description,
+                      process: processId as string,
+                    })
+                  }
                 />
                 <Help>Select a role or an interaction to view and edit its details.</Help>
               </>

@@ -17,7 +17,7 @@ export const MainContent = () => {
       {!isLoading && !isError && data && (
         <Container>
           <MainHeader process={data} />
-          <Details process={data} />
+          <Details process={data} key={processId} />
           <Matrix process={data} />
         </Container>
       )}

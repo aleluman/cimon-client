@@ -44,9 +44,11 @@ export const Details = ({ process }: DetailsProps) => {
         <Label css={{ height: "7rem" }}>
           Objective
           <Input
+            key={process.id}
             placeholder="Write an objective for the process..."
             defaultValue={process.objective}
             onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setObjective(event.target.value)}
+            onBlur={() => updateProcess.mutate({ id: process.id, objective, description })}
             maxLength={199}
             as="textarea"
           />
@@ -56,11 +58,13 @@ export const Details = ({ process }: DetailsProps) => {
         <Label css={{ height: "12rem" }}>
           Description
           <Input
+            key={process.id}
             placeholder="Write a description for the process..."
             defaultValue={process.description}
             onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
               setDescription(event.target.value)
             }
+            onBlur={() => updateProcess.mutate({ id: process.id, objective, description })}
             maxLength={399}
             as="textarea"
           />

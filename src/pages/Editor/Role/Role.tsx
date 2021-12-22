@@ -32,6 +32,7 @@ export const Role = ({ role }: RoleProps) => {
   const setDoingAction = useEditor((state) => state.setDoingAction);
   const stakeholderMode = useEditor((state) => state.stakeholderMode);
   const focusMode = useEditor((state) => state.focusMode);
+  const [cursor, setCursor] = useState("default");
   const focused = useEditor((state) => state.focusedRoles.includes(role.id));
   const { updateRole, deleteRole } = useRole(ambitId as string);
 
@@ -50,12 +51,14 @@ export const Role = ({ role }: RoleProps) => {
       setDoingAction(true);
       setActiveItem({ id: role.id, type: "role" });
       setAllRoleInteractions(getAllInteractions(ambitId as string));
+      setCursor("grabbing");
     },
     onDrag: ({ delta: [dx, dy] }) =>
       setPosition({ id: role.id, x: x + dx / zoom, y: y + dy / zoom }, ambitId as string),
     onDragEnd: ({ tap }) => {
       if (!tap) updateRole.mutate({ ...role, x, y });
       setDoingAction(false);
+      setCursor("default");
     },
     onHover: ({ active }) => setIsHovering(active),
     onKeyDown: ({ event }) => {
@@ -103,7 +106,7 @@ export const Role = ({ role }: RoleProps) => {
         beingHovered={isBeingHovered}
         disabled={focusMode && !focused}
         tabIndex={0}
-        css={{ transform: `translate3d(${x}px,${y}px,0)` }}
+        css={{ transform: `translate3d(${x}px,${y}px,0)`, cursor }}
       >
         {!stakeholderMode && (
           <Title>
