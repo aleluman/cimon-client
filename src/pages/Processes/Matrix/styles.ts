@@ -68,7 +68,7 @@ export const AmbitsContainer = styled("span", {
   gap: "0.4rem",
   zIndex: 2,
   paddingRight: "1rem",
-  borderRight: "1px solid $popoverBorder",
+  borderRight: "1px solid $borderDark",
 });
 
 export const HelpText = styled("div", {
