@@ -23,7 +23,9 @@ export const autoLayout = (ambitId: string): AmbitType["graph"] => {
   });
   roles.forEach((role) => graph.addNode(role.id));
   interactions.forEach((inter) => graph.addLink(inter.source, inter.target));
-  unlinkedRoles.forEach((role) => graph.addLink(role.id, interactions[0].source));
+  unlinkedRoles.forEach((role) =>
+    graph.addLink(role.id, interactions.length === 0 ? roles[0].id : interactions[0].source)
+  );
   const layout = createLayout(graph, physicsSettings);
   for (let i = 0; i < 1000; i++) {
     layout.step();
