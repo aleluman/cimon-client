@@ -16,7 +16,9 @@ export const Canvas = () => {
   const showPlaceholderRole = useEditor((state) => state.placeholderRole !== null);
   const { data, error, isLoading } = useGetAmbit(ambitId as string);
 
-  useEffect(() => setFit(ambitId as string), [ambitId]);
+  useEffect(() => {
+    if (data && data.graph.roles.length > 0) setFit(ambitId as string);
+  }, [ambitId, data]);
 
   if (error) return <div>Error</div>;
 

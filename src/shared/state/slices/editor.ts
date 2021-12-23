@@ -93,6 +93,7 @@ export const createEditorSlice = (set: SetState<EditorSlice>): EditorSlice => ({
       focusMode: false,
       focusedRoles: [],
       focusedInteractions: [],
+      allRoleInteractions: null,
       versions: [],
       currentVersion: 0,
     }));
