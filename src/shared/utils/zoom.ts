@@ -39,23 +39,25 @@ export const calcZoom = (
 export const setFit = (ambitId: string) => {
   const sideBarHidden = !usePreferences.getState().showSidebar;
   const nodes = Object.values(useEditor.getState().rolePositions[ambitId]);
-  const positionSum = nodes.reduce(
-    (prev, curr) => {
-      return { x: curr.x + prev.x, y: curr.y + prev.y };
-    },
-    { x: 0, y: 0 }
-  );
-  const stageTranslations = useEditor.getState().translations;
-  const xAvg = positionSum.x / nodes.length + stageTranslations.x;
-  const yAvg = positionSum.y / nodes.length + stageTranslations.y;
-  const { innerHeight, innerWidth } = window;
-  const trueWidth = innerWidth - (sideBarHidden ? 0 : 20 * 16);
-  useEditor.setState({ doingAction: true });
-  useEditor.setState({ zoom: 1 });
-  useEditor.setState({
-    translations: {
-      x: trueWidth / 2 - xAvg + stageTranslations.x - 16 * 4,
-      y: innerHeight / 2 - yAvg + stageTranslations.y - 16 * 2.5 - 38,
-    },
-  });
+  if (nodes.length !== 0) {
+    const positionSum = nodes.reduce(
+      (prev, curr) => {
+        return { x: curr.x + prev.x, y: curr.y + prev.y };
+      },
+      { x: 0, y: 0 }
+    );
+    const stageTranslations = useEditor.getState().translations;
+    const xAvg = positionSum.x / nodes.length + stageTranslations.x;
+    const yAvg = positionSum.y / nodes.length + stageTranslations.y;
+    const { innerHeight, innerWidth } = window;
+    const trueWidth = innerWidth - (sideBarHidden ? 0 : 20 * 16);
+    useEditor.setState({ doingAction: true });
+    useEditor.setState({ zoom: 1 });
+    useEditor.setState({
+      translations: {
+        x: trueWidth / 2 - xAvg + stageTranslations.x - 16 * 4,
+        y: innerHeight / 2 - yAvg + stageTranslations.y - 16 * 2.5 - 38,
+      },
+    });
+  }
 };
