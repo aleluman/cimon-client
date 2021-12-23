@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import { Draggable } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 import { useState, KeyboardEvent, FocusEvent, useRef, useEffect } from "react";
 import { usePopper } from "react-popper";
@@ -24,9 +25,10 @@ type AmbitProps = {
   id: string;
   name: string;
   processId: string;
+  index: number;
 };
 
-export const Ambit = ({ id, name, processId }: AmbitProps) => {
+export const Ambit = ({ id, name, processId, index }: AmbitProps) => {
   const [hovering, setHovering] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -65,82 +67,100 @@ export const Ambit = ({ id, name, processId }: AmbitProps) => {
   return (
     <>
       {isEditing && (
-        <EditingContainer>
-          <Input
-            defaultValue={name}
-            autoFocus
-            maxLength={60}
-            onBlur={changeNameHandler}
-            onKeyDown={keyboardHandler}
-            css={{
-              width: "100%",
-              height: "2rem",
-              borderRadius: "4px 0 0 4px",
-              marginLeft: "2px",
-            }}
-          />
-          <Button css={{ height: "2.2rem", marginLeft: "-2px" }}>OK</Button>
-        </EditingContainer>
+        <Draggable draggableId={id} index={index}>
+          {(provided) => (
+            <EditingContainer
+              {...handlers()}
+              {...provided.dragHandleProps}
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+            >
+              <Input
+                defaultValue={name}
+                autoFocus
+                maxLength={60}
+                onBlur={changeNameHandler}
+                onKeyDown={keyboardHandler}
+                css={{
+                  width: "100%",
+                  height: "2rem",
+                  borderRadius: "4px 0 0 4px",
+                  marginLeft: "2px",
+                }}
+              />
+              <Button css={{ height: "2.2rem", marginLeft: "-2px" }}>OK</Button>
+            </EditingContainer>
+          )}
+        </Draggable>
       )}
       {!isEditing && (
-        <AmbitContainer {...handlers()}>
-          {isOverflowed ? (
-            <Tooltip text={name} tooltipPlacement="top">
-              <AmbitText as={Link} to={`/processes/${processId}/${id}`}>
-                {name}
-              </AmbitText>
-            </Tooltip>
-          ) : (
-            <AmbitText as={Link} to={`/processes/${processId}/${id}`} ref={textRef}>
-              {name}
-            </AmbitText>
-          )}
-          <Menu as={MenuButtonContainer}>
-            {({ open }) => (
-              <>
-                <Menu.Button
-                  as={Button}
-                  color="secondary"
-                  css={{
-                    padding: "0.25rem",
-                    visibility: hovering || open ? "visible" : "hidden",
-                    marginRight: "0.2rem",
-                    marginTop: "0.2rem",
-                  }}
-                  ref={setReferenceElement}
-                >
-                  <Icon type="dots" />
-                </Menu.Button>
-                {ReactDOM.createPortal(
-                  <Menu.Items
-                    as={MenuContainer}
-                    ref={setPopperElement}
-                    style={styles.popper}
-                    {...attributes.popper}
-                  >
-                    <Menu.Item>
-                      <MenuItem as={Link} to={`/processes/${processId}/${id}`}>
-                        <Icon type="generic" /> Edit graph
-                      </MenuItem>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <MenuItem onClick={() => setIsEditing(true)}>
-                        <Icon type="edit" /> Rename
-                      </MenuItem>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <MenuItem onClick={() => setShowDeleteModal(true)}>
-                        <Icon type="delete" />
-                        Delete
-                      </MenuItem>
-                    </Menu.Item>
-                  </Menu.Items>,
-                  document.getElementById("tooltips") as HTMLElement
+        <Draggable draggableId={id} index={index}>
+          {(provided) => (
+            <AmbitContainer
+              {...handlers()}
+              {...provided.dragHandleProps}
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+            >
+              {isOverflowed ? (
+                <Tooltip text={name} tooltipPlacement="top">
+                  <AmbitText as={Link} to={`/processes/${processId}/${id}`}>
+                    {name}
+                  </AmbitText>
+                </Tooltip>
+              ) : (
+                <AmbitText as={Link} to={`/processes/${processId}/${id}`} ref={textRef}>
+                  {name}
+                </AmbitText>
+              )}
+              <Menu as={MenuButtonContainer}>
+                {({ open }) => (
+                  <>
+                    <Menu.Button
+                      as={Button}
+                      color="secondary"
+                      css={{
+                        padding: "0.25rem",
+                        visibility: hovering || open ? "visible" : "hidden",
+                        marginRight: "0.2rem",
+                        marginTop: "0.2rem",
+                      }}
+                      ref={setReferenceElement}
+                    >
+                      <Icon type="dots" />
+                    </Menu.Button>
+                    {ReactDOM.createPortal(
+                      <Menu.Items
+                        as={MenuContainer}
+                        ref={setPopperElement}
+                        style={styles.popper}
+                        {...attributes.popper}
+                      >
+                        <Menu.Item>
+                          <MenuItem as={Link} to={`/processes/${processId}/${id}`}>
+                            <Icon type="generic" /> Edit graph
+                          </MenuItem>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <MenuItem onClick={() => setIsEditing(true)}>
+                            <Icon type="edit" /> Rename
+                          </MenuItem>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <MenuItem onClick={() => setShowDeleteModal(true)}>
+                            <Icon type="delete" />
+                            Delete
+                          </MenuItem>
+                        </Menu.Item>
+                      </Menu.Items>,
+                      document.getElementById("tooltips") as HTMLElement
+                    )}
+                  </>
                 )}
-              </>
-            )}
-          </Menu>
-        </AmbitContainer>
+              </Menu>
+            </AmbitContainer>
+          )}
+        </Draggable>
       )}
       <DeleteModal
         showModal={showDeleteModal}

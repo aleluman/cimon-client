@@ -65,6 +65,7 @@ export const AmbitsContainer = styled("span", {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  background: "$neutralLight",
   gap: "0.4rem",
   zIndex: 2,
   paddingRight: "1rem",

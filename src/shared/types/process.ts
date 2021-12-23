@@ -71,4 +71,5 @@ export type ProcessType = {
   ambits: { id: string; name: string; phases: string[] }[];
   phases: { id: string; name: string }[];
   lastEdited: string;
+  ambitOrders: string[];
 };

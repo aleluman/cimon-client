@@ -11,10 +11,6 @@ export const AmbitText = styled("a", {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-
-  "&:hover": {
-    boxShadow: "$subtleShadow",
-  },
 });
 
 export const AmbitContainer = styled("div", {

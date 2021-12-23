@@ -5,6 +5,7 @@ import { urls } from "../constants/urls";
 import { AmbitType, NewAmbitType, ProcessType } from "../types/process";
 import { queryClient, useEditor } from "../state/store";
 import axios from "../constants/axios";
+import { useProcess } from "./process";
 
 export const useGetAmbit = (ambitId: string) => {
   const addAmbit = useEditor((state) => state.addAmbit);
@@ -36,12 +37,23 @@ export const useGetAmbit = (ambitId: string) => {
 
 export const useAmbit = () => {
   const setNetworkError = useEditor((state) => state.setNetworkError);
+  const { updateProcess } = useProcess();
 
   const createAmbit = useMutation(
     (newAmbit: NewAmbitType) => axios.post<AmbitType>(`${urls.API_URL}/ambits/`, newAmbit),
     {
+      onMutate: (newAmbit) => {
+        const process = queryClient.getQueryData(["process", newAmbit.process]) as ProcessType;
+        queryClient.setQueriesData<ProcessType>(["process", newAmbit.process], {
+          ...process,
+          ambitOrders: process.ambitOrders.includes(newAmbit.name)
+            ? process.ambitOrders
+            : process.ambitOrders.concat(newAmbit.name),
+        });
+      },
       onSuccess: (response, request) => {
-        queryClient.invalidateQueries(["process", request.process]);
+        const process = queryClient.getQueryData(["process", request.process]) as ProcessType;
+        updateProcess.mutate({ id: process.id, ambitOrders: process.ambitOrders });
         toast(`Ambit ${response.data.name} created.`, { type: "success" });
       },
       onError: (error: AxiosError) => {
@@ -92,14 +104,20 @@ export const useAmbit = () => {
     {
       onMutate: async (mutation) => {
         await queryClient.cancelQueries(["process", mutation.process]);
-        const process = queryClient.getQueryData<ProcessType>([
-          "process",
-          mutation.process,
-        ]) as ProcessType;
+        const process = queryClient.getQueryData(["process", mutation.process]) as ProcessType;
         const newAmbits = process?.ambits.map((ambit) =>
           ambit.id !== mutation.id ? ambit : { ...ambit, name: mutation.name }
         );
-        queryClient.setQueryData(["process", mutation.process], { ...process, ambits: newAmbits });
+        const ambit = process.ambits.find((currentAmbit) => currentAmbit.id === mutation.id)
+          ?.name as string;
+        const orders = [...process.ambitOrders];
+        const ambitIndex = orders.indexOf(ambit);
+        orders[ambitIndex] = mutation.name;
+        queryClient.setQueryData(["process", mutation.process], {
+          ...process,
+          ambits: newAmbits,
+          ambitOrders: orders,
+        });
         return { process };
       },
       onError: (error: AxiosError, mutation, context) => {
@@ -109,8 +127,9 @@ export const useAmbit = () => {
           queryClient.setQueryData(["process", mutation.process], oldContext.process);
         } else setNetworkError(true);
       },
-      onSettled: (response) => {
-        queryClient.invalidateQueries(["process", response?.data.id]);
+      onSuccess: (response, request) => {
+        const process = queryClient.getQueryData(["process", request.process]) as ProcessType;
+        updateProcess.mutate({ id: process.id, ambitOrders: process.ambitOrders });
       },
     }
   );
@@ -153,14 +172,18 @@ export const useAmbit = () => {
           "process",
           mutation.processId,
         ]) as ProcessType;
+        const ambit = process.ambits.find((currentAmbit) => currentAmbit.id === mutation.id)
+          ?.name as string;
         const updatedProcess = {
           ...process,
-          ambits: process.ambits.filter((ambit) => ambit.id !== mutation.id),
+          ambits: process.ambits.filter((currentAmbit) => currentAmbit.id !== mutation.id),
+          ambitOrders: process.ambitOrders.filter((currentAmbit) => currentAmbit !== ambit),
         };
         queryClient.setQueryData(["process", mutation.processId], updatedProcess);
       },
       onSuccess: (_, request) => {
-        queryClient.invalidateQueries(["process", request.processId]);
+        const process = queryClient.getQueryData(["process", request.processId]) as ProcessType;
+        updateProcess.mutate({ id: process.id, ambitOrders: process.ambitOrders });
         toast(`Ambit deleted correctly`, { type: "info" });
       },
       onError: () => {
