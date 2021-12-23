@@ -3,7 +3,8 @@ import { Menu } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 import { AmbitButton, AmbitItem, AmbitMenu } from "./styles";
 import { css } from "@/shared/constants/stitches";
-import { useEditor } from "@/shared/state/store";
+import { queryClient, useEditor } from "@/shared/state/store";
+import { ProcessType } from "@/shared/types/process";
 
 type AmbitSelectorProps = {
   ambits: {
@@ -27,6 +28,22 @@ export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
     }
   };
 
+  const ambitSort = (
+    a: {
+      id: string;
+      name: string;
+    },
+    b: {
+      id: string;
+      name: string;
+    }
+  ) => {
+    const process = queryClient.getQueryData(["process", processId as string]) as ProcessType;
+    const orders = process.ambitOrders;
+    if (orders.indexOf(a.name) < orders.indexOf(b.name)) return -1;
+    return 1;
+  };
+
   return (
     <Menu as="div">
       <Menu.Button className={css(AmbitButton)}>
@@ -34,7 +51,7 @@ export const AmbitSelector = ({ ambits }: AmbitSelectorProps) => {
         <Icon type="arrow-down" />
       </Menu.Button>
       <Menu.Items className={css(AmbitMenu)}>
-        {ambits.map((ambit, index) => (
+        {ambits.sort(ambitSort).map((ambit, index) => (
           <Menu.Item
             key={ambit.id}
             className={css(AmbitItem)({ selected: selected?.id === ambit.id })}
