@@ -112,7 +112,7 @@ export const Matrix = ({ process }: MatrixProps) => {
           <Button
             onClick={() => setIsAmbitModalOpen((prev) => !prev)}
             color="secondary"
-            css={{ width: "13rem", position: "absolute", bottom: "1rem" }}
+            css={{ width: "12rem", position: "absolute", bottom: "1rem" }}
           >
             <Icon type="plus" /> Add Ambit
           </Button>

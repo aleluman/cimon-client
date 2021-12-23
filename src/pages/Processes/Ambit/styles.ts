@@ -21,7 +21,7 @@ export const AmbitContainer = styled("div", {
   display: "flex",
   width: "100%",
   position: "relative",
-  alignItems: "center",
+  alignItems: "flex-start",
   background: "$neutralFull",
   transition: "box-shadow 0.25s ease",
   border: "1px solid $popoverBorder",

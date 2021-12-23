@@ -67,6 +67,8 @@ export const AmbitsContainer = styled("span", {
   alignItems: "center",
   gap: "0.4rem",
   zIndex: 2,
+  paddingRight: "1rem",
+  borderRight: "1px solid $popoverBorder",
 });
 
 export const HelpText = styled("div", {

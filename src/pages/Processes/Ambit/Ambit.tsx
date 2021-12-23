@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import { toast } from "react-toastify";
-import { useState, KeyboardEvent, FocusEvent } from "react";
+import { useState, KeyboardEvent, FocusEvent, useRef, useEffect } from "react";
 import { usePopper } from "react-popper";
 import { useGesture } from "@use-gesture/react";
 import { Menu } from "@headlessui/react";
@@ -18,6 +18,7 @@ import {
 import { DeleteModal } from "../DeleteModal/DeleteModal";
 import { useAmbit } from "@/shared/hooks/ambit";
 import { Input } from "@/shared/components/Input/Input";
+import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 
 type AmbitProps = {
   id: string;
@@ -29,10 +30,17 @@ export const Ambit = ({ id, name, processId }: AmbitProps) => {
   const [hovering, setHovering] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isOverflowed, setIsOverflow] = useState(false);
 
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement, { strategy: "fixed" });
+
+  const textRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) setIsOverflow(textRef.current.scrollWidth > textRef.current.clientWidth);
+  }, [name]);
 
   const handlers = useGesture({
     onHover: async ({ active }) => {
@@ -61,7 +69,7 @@ export const Ambit = ({ id, name, processId }: AmbitProps) => {
           <Input
             defaultValue={name}
             autoFocus
-            maxLength={40}
+            maxLength={60}
             onBlur={changeNameHandler}
             onKeyDown={keyboardHandler}
             css={{
@@ -76,9 +84,17 @@ export const Ambit = ({ id, name, processId }: AmbitProps) => {
       )}
       {!isEditing && (
         <AmbitContainer {...handlers()}>
-          <AmbitText as={Link} to={`/processes/${processId}/${id}`}>
-            {name}
-          </AmbitText>
+          {isOverflowed ? (
+            <Tooltip text={name} tooltipPlacement="top">
+              <AmbitText as={Link} to={`/processes/${processId}/${id}`}>
+                {name}
+              </AmbitText>
+            </Tooltip>
+          ) : (
+            <AmbitText as={Link} to={`/processes/${processId}/${id}`} ref={textRef}>
+              {name}
+            </AmbitText>
+          )}
           <Menu as={MenuButtonContainer}>
             {({ open }) => (
               <>
@@ -89,6 +105,7 @@ export const Ambit = ({ id, name, processId }: AmbitProps) => {
                     padding: "0.25rem",
                     visibility: hovering || open ? "visible" : "hidden",
                     marginRight: "0.2rem",
+                    marginTop: "0.2rem",
                   }}
                   ref={setReferenceElement}
                 >

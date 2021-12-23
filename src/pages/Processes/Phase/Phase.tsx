@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { FocusEvent, KeyboardEvent, useState } from "react";
+import { FocusEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { usePopper } from "react-popper";
 import { useGesture } from "@use-gesture/react";
@@ -17,6 +17,7 @@ import {
 import { DeleteModal } from "../DeleteModal/DeleteModal";
 import { Input } from "@/shared/components/Input/Input";
 import { usePhase } from "@/shared/hooks/phase";
+import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 
 type PhaseProps = {
   name: string;
@@ -28,10 +29,17 @@ export const Phase = ({ name, id, processId }: PhaseProps) => {
   const [hovering, setHovering] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isOverflowed, setIsOverflow] = useState(false);
 
   const [referenceElement, setReferenceElement] = useState<HTMLElement | null>(null);
   const [popperElement, setPopperElement] = useState<HTMLElement | null>(null);
   const { styles, attributes } = usePopper(referenceElement, popperElement);
+
+  const textRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) setIsOverflow(textRef.current.scrollWidth > textRef.current.clientWidth);
+  }, [name]);
 
   const { updatePhase } = usePhase();
 
@@ -60,7 +68,7 @@ export const Phase = ({ name, id, processId }: PhaseProps) => {
           <Input
             defaultValue={name}
             autoFocus
-            maxLength={40}
+            maxLength={60}
             onBlur={changeNameHandler}
             onKeyDown={keyboardHandler}
             css={{
@@ -76,7 +84,13 @@ export const Phase = ({ name, id, processId }: PhaseProps) => {
       {!isEditing && (
         <>
           <PhaseContainer {...handlers()} hovering={hovering}>
-            <PhaseName>{name}</PhaseName>
+            {isOverflowed ? (
+              <Tooltip text={name} tooltipPlacement="top">
+                <PhaseName>{name}</PhaseName>
+              </Tooltip>
+            ) : (
+              <PhaseName ref={textRef}>{name}</PhaseName>
+            )}
             <Menu as={MenuButtonContainer}>
               {({ open }) => (
                 <>

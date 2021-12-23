@@ -42,7 +42,7 @@ export const App = () => {
           />
           <Route path="*" element={<Navigate to="/processes" />} />
         </Routes>
-        <Toast position="top-center" transition={Slide} autoClose={3000} />
+        <Toast position="top-center" transition={Slide} autoClose={5000} hideProgressBar />
       </BrowserRouter>
       <div id="tooltips" />
       {networkError && (
