@@ -16,6 +16,7 @@ import {
 import { Icon } from "@/shared/components/Icon/Icon";
 import { InnerMatrix } from "./InnerMatrix";
 import { getRole } from "@/shared/hooks/role";
+import { Tooltip } from "@/shared/components/Tooltip/Tooltip";
 
 export const RoleInteractions = () => {
   const [hidden, setHidden] = useState(true);
@@ -61,9 +62,11 @@ export const RoleInteractions = () => {
           <NoSelection>Select a role to see all its interactions.</NoSelection>
         )}
       </>
-      <HideButton onClick={() => setHidden(!hidden)}>
-        <Icon type={hidden ? "arrow-up" : "arrow-down"} size={12} />
-      </HideButton>
+      <Tooltip text={`${hidden ? "Show" : "Hide"} role interactions`}>
+        <HideButton onClick={() => setHidden(!hidden)}>
+          <Icon type={hidden ? "arrow-up" : "arrow-down"} size={12} />
+        </HideButton>
+      </Tooltip>
     </InteractionsContainer>
   );
 };
