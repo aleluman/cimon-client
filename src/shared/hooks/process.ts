@@ -30,9 +30,10 @@ export const useProcess = () => {
         navigate(`/processes/${response.data.id}`);
       },
       onError: (error: AxiosError) => {
-        const message = error.response?.data.name
-          ? "There is already a process using this name."
-          : "Can't connect to the server. Check your connection.";
+        const message =
+          error.response?.data.name || error.response?.status === 500
+            ? "There is already a process using this name."
+            : "Can't connect to the server. Check your connection.";
         toast(message, { type: "error" });
       },
     }
