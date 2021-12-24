@@ -66,8 +66,12 @@ const flatten = (unflattenedServices: UnflattenedServices, ambitId: string, role
       roleN: thisRole.numberOfActors,
       direct: interactions.some(
         (interaction) =>
-          (interaction.source === service.roleId && interaction.target === roleId) ||
-          (interaction.source === roleId && interaction.target === service.roleId)
+          (interaction.source === service.roleId &&
+            interaction.target === roleId &&
+            !interaction.inherit) ||
+          (interaction.source === roleId &&
+            interaction.target === service.roleId &&
+            !interaction.inherit)
       ),
       services: filteredServices,
     };
